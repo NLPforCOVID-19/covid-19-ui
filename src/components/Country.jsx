@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import Spinner from 'react-bootstrap/Spinner'
 import Page from './Page';
 
 export default ({ title, entries, topic, url, loading, stats, last_update }) => {
@@ -20,7 +21,11 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             <li>累計死亡者数: {stats.death_total} (+{stats.death_today}人)</li>
           </ul>
           <h6>関連情報</h6>
-          {loading && <div>読み込み中…</div>}
+          {loading && (
+            <Spinner animation="border" role="status" variant="primary">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          )}
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
             <ul>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import CardColumns from 'react-bootstrap/CardColumns';
 
 import { fetchNewsByClass, fetchMeta, fetchStats } from '../api';
 import Country from './Country';
 import TopicList from './TopicList';
+import Spinner from 'react-bootstrap/Spinner';
 
 const CountryList = () => {
   const ALL = 'all';
@@ -45,7 +45,9 @@ const CountryList = () => {
       <h4 className="mb-3">各国の情報</h4>
       <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
       {!isMetaFetched ? (
-        <div>読み込み中…</div>
+        <Spinner animation="border" role="status"  variant="primary">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
       ) : (
         <Container>
           <Row>
