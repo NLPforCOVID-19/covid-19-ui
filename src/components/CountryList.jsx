@@ -46,7 +46,7 @@ const CountryList = () => {
       <h4 className="mb-3">各国の情報</h4>
       <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
       {!isMetaFetched ? (
-        <Loading />
+        <div className="text-center"><Loading /></div>
       ) : (
         <Container>
           <Row>
