@@ -21,7 +21,6 @@ const CountryList = () => {
 
   useEffect(() => {
     Promise.all([fetchMeta(), fetchNewsByClass(ALL), fetchStats()]).then((responses) => {
-      console.log(responses);
       const [meta, news, stats] = responses;
       setClasses(meta.classes);
       setCoutries(meta.countries);
