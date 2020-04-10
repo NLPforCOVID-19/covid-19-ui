@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Spinner from 'react-bootstrap/Spinner'
 import Page from './Page';
+import Loading from './Loading'
 
 export default ({ title, entries, topic, url, loading, stats, last_update }) => {
   return (
@@ -22,9 +22,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           </ul>
           <h6>関連情報</h6>
           {loading && (
-            <Spinner animation="border" role="status" variant="primary">
-              <span className="sr-only">Loading...</span>
-            </Spinner>
+            <Loading />
           )}
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
