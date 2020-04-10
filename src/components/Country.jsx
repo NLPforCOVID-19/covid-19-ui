@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Page from './Page';
+import Loading from './Loading'
 
 export default ({ title, entries, topic, url, loading, stats, last_update }) => {
   return (
@@ -20,9 +21,11 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             <li>累計死亡者数: {stats.death_total} (+{stats.death_today}人)</li>
           </ul>
           <h6>関連情報</h6>
-          {loading && <div>読み込み中…</div>}
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
+            {loading && (
+              <div className="loading"><Loading /></div>
+            )}
             <ul>
               {entries.map((entry, i) => (
                 <Page key={i} entry={entry} topic={topic} />
@@ -45,9 +48,13 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           flex: 1 1 auto;
         }
         .scroll {
+          display: flex;
           margin: 10px 0;
           height: 300px;
           overflow-y: auto;
+        }
+        .loading {
+          margin: auto;
         }
       `}</style>
     </div>
