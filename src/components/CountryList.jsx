@@ -34,6 +34,9 @@ const CountryList = () => {
   }, []);
 
   useEffect(() => {
+    if (!isNewsFetched) {
+      return;
+    }
     setNewsFetched(false);
     fetchNewsByClass(selectedClass).then((news) => {
       setNews(news);
