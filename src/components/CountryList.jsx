@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import { fetchNewsByClass, fetchNewsByClassAndCountry, fetchMeta, fetchStats } from '../api';
 import Country from './Country';
 import TopicList from './TopicList';
-import Spinner from 'react-bootstrap/Spinner';
 import Loading from './Loading';
 
 const CountryList = () => {
