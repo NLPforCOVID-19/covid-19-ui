@@ -51,7 +51,6 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
         }
         .card-title {
           margin: 0;
-          flex: 1 1 auto;
         }
         .scroll {
           display: flex;
