@@ -6,8 +6,8 @@ import Loading from './Loading'
 export default ({ title, entries, topic, url, loading, stats, last_update }) => {
   return (
     <div className="col-xl-4 col-lg-6 mb-3">
-      <Card>
-        <Card.Body>
+      <Card body>
+        <div className="card-inner">
           <h5 className="card-title">
             {title}
             &nbsp;
@@ -15,12 +15,12 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
               <span className="material-icons">open_in_new</span>
             </a>
           </h5>
-          <h6>{ last_update }時点での統計</h6>
-          <ul>
-            <li>累計感染者数: {stats.confirmation_total} (+{stats.confirmation_today}人)</li>
-            <li>累計死亡者数: {stats.death_total} (+{stats.death_today}人)</li>
-          </ul>
-          <h6>関連情報</h6>
+          <div className="text-muted">
+            感染者: {stats.confirmation_total}{' '}
+            <span className="small">(+{stats.confirmation_today})</span>
+            {' '}/ 死亡者: {stats.death_total}{' '}
+            <span className="small">(+{stats.death_today})</span>
+          </div>
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
             <ul>
@@ -32,7 +32,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
               <div className="loading"><Loading /></div>
             )}
           </div>
-        </Card.Body>
+        </div>
       </Card>
       <style jsx>{`
         .material-icons {
@@ -41,18 +41,26 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           vertical-align: middle;
           font-size: 1em;
         }
+        .card-inner {
+          height: 360px;
+          display: flex;
+          flex-flow: column nowrap;
+        }
         .header {
           display: flex;
         }
         .card-title {
+          margin: 0;
           flex: 1 1 auto;
         }
         .scroll {
           display: flex;
           flex-flow: column nowrap;
           margin: 10px 0;
-          height: 300px;
           overflow-y: auto;
+        }
+        .scroll > ul {
+          padding-left: 20px;
         }
         .loading {
           margin: auto;

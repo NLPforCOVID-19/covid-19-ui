@@ -16,7 +16,7 @@ const CountryList = () => {
   const [countries, setCountries] = useState([]);
   const [news, setNews] = useState({});
   const [stats, setStats] = useState({});
-  const [lastUpdate, setLastUpdate] = useState({});
+  const [lastUpdate, setLastUpdate] = useState('');
   const [selectedClass, setSelectedClass] = useState(ALL);
 
   const [isFetchingMeta, setIsFetchingMeta] = useState(false);
