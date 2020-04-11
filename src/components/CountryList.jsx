@@ -43,11 +43,7 @@ const CountryList = () => {
 
   return (
     <Container className="mt-3 p-3 border rounded">
-      <h4 className="mb-3">
-        各国の情報
-        &nbsp;
-        {isMetaFetched && <span className="text-muted small">{ lastUpdate }時点での統計</span>}
-      </h4>
+      <h4 className="mb-3">各国の情報</h4>
       <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
       {!isMetaFetched ? (
         <div className="text-center"><Loading /></div>
