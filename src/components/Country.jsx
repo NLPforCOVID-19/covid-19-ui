@@ -23,14 +23,14 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           <h6>関連情報</h6>
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
-            {loading && (
-              <div className="loading"><Loading /></div>
-            )}
             <ul>
               {entries.map((entry, i) => (
                 <Page key={i} entry={entry} topic={topic} />
               ))}
             </ul>
+            {loading && (
+              <div className="loading"><Loading /></div>
+            )}
           </div>
         </Card.Body>
       </Card>
@@ -49,6 +49,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
         }
         .scroll {
           display: flex;
+          flex-flow: column nowrap;
           margin: 10px 0;
           height: 300px;
           overflow-y: auto;
