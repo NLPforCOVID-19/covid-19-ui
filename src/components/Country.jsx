@@ -19,7 +19,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             {' '}/
             死亡者: {stats.death_total.toLocaleString()}{' '}(+{stats.death_today.toLocaleString()})
           </div>
-          {!loading && entries.length === 0 && <div>情報はありません。</div>}
+          {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
           <div className="scroll mt-1 mb-1">
             <ul>
               {entries.map((entry, i) => (
@@ -55,6 +55,9 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
         }
         .scroll > ul {
           padding-left: 20px;
+        }
+        .no-data {
+          margin: auto;
         }
         .loading {
           margin: auto;
