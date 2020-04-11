@@ -107,7 +107,7 @@ const CountryList = () => {
         setNews({
           ...news,
           ...mergedNews
-        })
+        });
         setIsFetchingNews(false);
       })
 
@@ -115,8 +115,8 @@ const CountryList = () => {
   }, [selectedClass]);
 
   return (
-    <Container className="mt-3 p-3 border rounded">
-      <h4 className="mb-3">各国の情報</h4>
+    <Container className="mt-3 p-2">
+      <h5 className="mb-2">各国の情報</h5>
       <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
       {isFetchingMeta ? (
         <div className="text-center">
