@@ -15,8 +15,12 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
               <span className="material-icons">open_in_new</span>
             </a>
           </h5>
-          <p className="stats text-muted">感染者: {stats.confirmation_total} (+{stats.confirmation_today}) 死亡者: {stats.death_total} (+{stats.death_today})</p>
-          <h6>関連情報</h6>
+          <p className="text-muted">
+            感染者: {stats.confirmation_total}{' '}
+            <span className="small">(+{stats.confirmation_today})</span>
+            {' '}/ 死亡者: {stats.death_total}{' '}
+            <span className="small">(+{stats.death_today})</span>
+          </p>
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
             {loading && (
@@ -46,10 +50,8 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           display: flex;
         }
         .card-title {
+          margin: 0;
           flex: 1 1 auto;
-        }
-        .stats {
-          font-size: 0.9em;
         }
         .scroll {
           display: flex;
