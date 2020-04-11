@@ -5,10 +5,14 @@ import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 const Map = ({ map }) => (
   <Container className="mt-3 p-2 border rounded">
     <h5 className="mb-2" >発生状況</h5>
-    <ResponsiveEmbed aspectRatio='21by9' className="rounded">
-      <embed type="text/html" src={map.url} />
-    </ResponsiveEmbed>
+    <iframe src={map.url} className="rounded embeddedMap"/>
     <p className="text-right text-dark mb-0"><small>提供：{map.source}</small></p>
+    <style jsx>{`
+      .embeddedMap {
+        height: 240px;
+        width: 100%;
+      }
+    `}</style>
   </Container>
 );
 
