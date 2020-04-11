@@ -40,7 +40,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           font-size: 1em;
         }
         .inner {
-          height: 360px;
+          height: 400px;
           display: flex;
           flex-flow: column nowrap;
         }
