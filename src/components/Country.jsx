@@ -15,12 +15,12 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
               <span className="material-icons">open_in_new</span>
             </a>
           </h5>
-          <p className="text-muted">
+          <div className="text-muted">
             感染者: {stats.confirmation_total}{' '}
             <span className="small">(+{stats.confirmation_today})</span>
             {' '}/ 死亡者: {stats.death_total}{' '}
             <span className="small">(+{stats.death_today})</span>
-          </p>
+          </div>
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll">
             {loading && (
