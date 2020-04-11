@@ -13,6 +13,17 @@ export async function fetchNewsByClass(klass, limit) {
   return response.data;
 }
 
+export async function fetchNewsByClassAndCountry(klass, country, offset, limit) {
+  const path= `/classes/${klass}/${country}`;
+  const response = await axios.get(baseUrl + path, {
+    params: {
+      start: offset,
+      limit: limit || 10
+    }
+  })
+  return response.data
+}
+
 export async function fetchMeta() {
   const path = '/meta';
   const response = await axios.get(baseUrl + path);
