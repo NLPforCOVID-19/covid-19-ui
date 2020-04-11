@@ -15,9 +15,9 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             </a>
           </h5>
           <div className="text-muted small">
-            感染者: {stats.confirmation_total}{' '}(+{stats.confirmation_today})
+            感染者: {stats.confirmation_total.toLocaleString()}{' '}(+{stats.confirmation_today.toLocaleString()})
             {' '}/
-            死亡者: {stats.death_total}{' '}(+{stats.death_today})
+            死亡者: {stats.death_total.toLocaleString()}{' '}(+{stats.death_today.toLocaleString()})
           </div>
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
           <div className="scroll mt-1 mb-1">

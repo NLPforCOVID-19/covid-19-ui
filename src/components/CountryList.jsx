@@ -115,7 +115,7 @@ const CountryList = () => {
   }, [selectedClass]);
 
   return (
-    <Container className="mt-3 p-2 border rounded">
+    <Container className="mt-3 p-2">
       <h5 className="mb-2">各国の情報</h5>
       <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
       {isFetchingMeta ? (
