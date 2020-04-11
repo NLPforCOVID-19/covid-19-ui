@@ -7,6 +7,9 @@ import Country from './Country';
 import TopicList from './TopicList';
 import Loading from './Loading';
 
+const NEWS_INITIAL = 30;
+const LOAD_MORE_THRESHOLD = 15;
+
 const CountryList = () => {
   const ALL = 'all';
   const [classes, setClasses] = useState([]);
@@ -48,7 +51,7 @@ const CountryList = () => {
 
   function fetchInitialNews() {
     setIsFetchingNews(true);
-    fetchNewsByClass(ALL, 20)
+    fetchNewsByClass(ALL, NEWS_INITIAL)
       .then((news) => {
         setNews(news);
       })
@@ -77,11 +80,11 @@ const CountryList = () => {
     }
     setIsFetchingNews(true)
     const promises = countries
-      .filter((c) => filteredNews[c.country].length < 10)
+      .filter((c) => filteredNews[c.country].length < LOAD_MORE_THRESHOLD)
       .map((c) => {
         const country = c.country;
         const len = filteredNews[country].length;
-        return fetchNewsByClassAndCountry(selectedClass, country, len, 10 - len);
+        return fetchNewsByClassAndCountry(selectedClass, country, len, LOAD_MORE_THRESHOLD - len);
     });
 
     Promise.allSettled(promises)
