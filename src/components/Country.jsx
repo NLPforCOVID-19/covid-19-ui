@@ -1,28 +1,26 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 import Page from './Page';
 import Loading from './Loading'
 
 export default ({ title, entries, topic, url, loading, stats, last_update }) => {
   return (
-    <div className="col-xl-4 col-lg-6 mb-3">
-      <Card body>
-        <div className="card-inner">
-          <h5 className="card-title">
+    <div className="col-xl-4 col-lg-6 p-1">
+      <div className="p-2 border rounded">
+        <div className="inner">
+          <h5 className="m-0">
             {title}
             &nbsp;
             <a href={url} title="公的機関のウェブサイトを確認する">
               <span className="material-icons">open_in_new</span>
             </a>
           </h5>
-          <div className="text-muted">
-            感染者: {stats.confirmation_total}{' '}
-            <span className="small">(+{stats.confirmation_today})</span>
-            {' '}/ 死亡者: {stats.death_total}{' '}
-            <span className="small">(+{stats.death_today})</span>
+          <div className="text-muted small">
+            感染者: {stats.confirmation_total}{' '}(+{stats.confirmation_today})
+            {' '}/
+            死亡者: {stats.death_total}{' '}(+{stats.death_today})
           </div>
           {!loading && entries.length === 0 && <div>情報はありません。</div>}
-          <div className="scroll">
+          <div className="scroll mt-1 mb-1">
             <ul>
               {entries.map((entry, i) => (
                 <Page key={i} entry={entry} topic={topic} />
@@ -33,7 +31,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             )}
           </div>
         </div>
-      </Card>
+      </div>
       <style jsx>{`
         .material-icons {
           color: rgba(0, 0, 0, 0.5);
@@ -41,16 +39,13 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           vertical-align: middle;
           font-size: 1em;
         }
-        .card-inner {
+        .inner {
           height: 360px;
           display: flex;
           flex-flow: column nowrap;
         }
         .header {
           display: flex;
-        }
-        .card-title {
-          margin: 0;
         }
         .scroll {
           display: flex;

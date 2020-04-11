@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 
 export default ({ selectedTopic, topics, changeTopic }) => (
-  <div className="mb-4">
+  <div className="mb-2">
     <Button variant="outline-info" onClick={() => changeTopic('all')} size="sm" active={selectedTopic === 'all'}>
       すべて表示
     </Button>
