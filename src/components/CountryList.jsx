@@ -11,22 +11,20 @@ const NEWS_INITIAL = 30;
 const LOAD_MORE_THRESHOLD = 15;
 
 const CountryList = () => {
-  const ALL = 'all';
   const [classes, setClasses] = useState([]);
   const [countries, setCountries] = useState([]);
   const [news, setNews] = useState({});
   const [stats, setStats] = useState({});
   const [lastUpdate, setLastUpdate] = useState('');
-  const [selectedClass, setSelectedClass] = useState(ALL);
+  const [selectedClass, setSelectedClass] = useState('');
 
   const [isFetchingMeta, setIsFetchingMeta] = useState(false);
   const [isFetchingNews, setIsFetchingNews] = useState(false);
 
+  const [initialLoadEnded, setInitialLoadEnded] = useState(false);
+
   // computed value: filter news by currently selected class.
   const filteredNews = useMemo(() => {
-    if (selectedClass === ALL) {
-      return news;
-    }
     let result = {};
     for (const country of Object.keys(news)) {
       result[country] = news[country].filter((entry) => entry.classes[selectedClass] === 1);
@@ -36,34 +34,43 @@ const CountryList = () => {
 
   function fetchCountriesAndStats() {
     setIsFetchingMeta(true);
-    Promise.all([fetchMeta(), fetchStats()])
+    return new Promise((resolve) => {
+      Promise.all([fetchMeta(), fetchStats()])
       .then((values) => {
         const [meta, stats] = values;
         setCountries(meta.countries);
-      setClasses(meta.classes);
-      setStats(stats.stats);
-      setLastUpdate(stats.last_update);
+        setClasses(meta.classes);
+        setStats(stats.stats);
+        setLastUpdate(stats.last_update);
+        setSelectedClass(meta.classes[0])
+        resolve(meta.classes[0]);
       })
       .finally(() => {
         setIsFetchingMeta(false);
       });
+    })
   }
 
-  function fetchInitialNews() {
+  // fetch news of initial class passed by
+  // fetchCountriesAndStats
+  function fetchInitialNews(initialClass) {
     setIsFetchingNews(true);
-    fetchNewsByClass(ALL, NEWS_INITIAL)
+    fetchNewsByClass(initialClass, NEWS_INITIAL)
       .then((news) => {
         setNews(news);
       })
       .finally(() => {
         setIsFetchingNews(false);
+        setInitialLoadEnded(true);
     });
   }
 
   // Run only ones
   useEffect(() => {
-    fetchCountriesAndStats();
-    fetchInitialNews();
+    fetchCountriesAndStats()
+      .then(initialClass => {
+        fetchInitialNews(initialClass);
+      })
   }, []);
 
   function sortEntriesByTimestamp(entries) {
@@ -75,7 +82,7 @@ const CountryList = () => {
   // When change class tab, request more news
   // if the number of filtered news is fewer than 10.
   useEffect(() => {
-    if(selectedClass === ALL) {
+    if(!initialLoadEnded) {
       return;
     }
     setIsFetchingNews(true)
