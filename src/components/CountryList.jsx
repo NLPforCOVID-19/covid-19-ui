@@ -35,42 +35,57 @@ const CountryList = () => {
   function fetchCountriesAndStats() {
     setIsFetchingMeta(true);
     return new Promise((resolve) => {
-      Promise.all([fetchMeta(), fetchStats()])
+      Promise.all([fetchMeta(), fetchStats(), fetchNewsByClass('all')])
       .then((values) => {
-        const [meta, stats] = values;
+        const [meta, stats, initialNews] = values;
         setCountries(meta.countries);
         setClasses(meta.classes);
         setStats(stats.stats);
         setLastUpdate(stats.last_update);
-        setSelectedClass(meta.classes[0])
-        resolve(meta.classes[0]);
+        setSelectedClass(meta.classes[0]);
+        setNews(initialNews);
+        resolve(meta.classes);
       })
       .finally(() => {
         setIsFetchingMeta(false);
+        setInitialLoadEnded(true)
       });
     })
   }
 
-  // fetch news of initial class passed by
-  // fetchCountriesAndStats
-  function fetchInitialNews(initialClass) {
-    setIsFetchingNews(true);
-    fetchNewsByClass(initialClass, NEWS_INITIAL)
-      .then((news) => {
-        setNews(news);
+  async function chainNews() {
+    setIsFetchingNews(true)
+    const topics = await fetchCountriesAndStats()
+    const promises = topics.map(t => fetchNewsByClass(t))
+    Promise.all(promises)
+      .then(results => {
+        let merged = {...news}
+        for(const result of results) {
+          for (const key of Object.keys(result)) {
+            const concatted = filterUniqueNews(merged[key] || [], result[key])
+            const sorted = sortEntriesByTimestamp(concatted)
+            merged[key] = sorted
+          }
+        }
+        setNews(merged)
+        setIsFetchingNews(false)
       })
-      .finally(() => {
-        setIsFetchingNews(false);
-        setInitialLoadEnded(true);
-    });
+  }
+
+  function filterUniqueNews(news1, news2) {
+    let result = [...news1]
+    for (const news of news2) {
+      if (news1.filter(n => n.url === news.url).length > 0) {
+        continue
+      }
+      result.push(news);
+    }
+    return result
   }
 
   // Run only ones
   useEffect(() => {
-    fetchCountriesAndStats()
-      .then(initialClass => {
-        fetchInitialNews(initialClass);
-      })
+    chainNews()
   }, []);
 
   function sortEntriesByTimestamp(entries) {
@@ -78,48 +93,6 @@ const CountryList = () => {
       return Date.parse(b.orig.timestamp) - Date.parse(a.orig.timestamp);
     });
   }
-
-  // When change class tab, request more news
-  // if the number of filtered news is fewer than 10.
-  useEffect(() => {
-    if(!initialLoadEnded) {
-      return;
-    }
-    setIsFetchingNews(true)
-    const promises = countries
-      .filter((c) => filteredNews[c.country].length < LOAD_MORE_THRESHOLD)
-      .map((c) => {
-        const country = c.country;
-        const len = filteredNews[country].length;
-        return fetchNewsByClassAndCountry(selectedClass, country, len, LOAD_MORE_THRESHOLD - len);
-    });
-
-    Promise.allSettled(promises)
-      .then(results => {
-        let mergedNews = {}
-
-        for (const res of results) {
-          if (res.status === 'rejected') {
-            continue;
-          }
-          const newEntries = res.value;
-          if (newEntries.length === 0) {
-            continue;
-          }
-          const country = newEntries[0].country;
-          const sorted = sortEntriesByTimestamp([...news[country], ...newEntries]);
-          mergedNews[country] = sorted;
-        }
-
-        setNews({
-          ...news,
-          ...mergedNews
-        });
-        setIsFetchingNews(false);
-      })
-
-
-  }, [selectedClass]);
 
   return (
     <Container className="mt-3">
