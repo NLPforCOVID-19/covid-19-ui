@@ -48,7 +48,7 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
             {loading && (
               <div className="loading"><Loading /></div>
             )}
-            <div ref={observeEl}>observer</div>
+            <div ref={observeEl}></div>
           </div>
         </div>
       </div>
