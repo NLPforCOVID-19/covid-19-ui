@@ -18,6 +18,8 @@ const CountryList = () => {
   const [lastUpdate, setLastUpdate] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
 
+  const [allFetchedFlags, setAllFetchedFlags] = useState({});
+
   const [isFetchingMeta, setIsFetchingMeta] = useState(false);
   const [isFetchingNews, setIsFetchingNews] = useState(false);
 
@@ -94,6 +96,27 @@ const CountryList = () => {
     });
   }
 
+  async function loadMore(c) {
+    if (!initialLoadEnded || isFetchingNews || allFetchedFlags[c]?.[selectedClass]) {
+      return;
+    }
+    setIsFetchingNews(true)
+    const offset = filteredNews[c].length;
+    const newEntries = await fetchNewsByClassAndCountry(selectedClass, c, offset, 10);
+    if (newEntries.length < 10) {
+      setAllFetchedFlags({
+        ...allFetchedFlags,
+        [c]: {
+          ...allFetchedFlags[c],
+          [selectedClass]: true
+        }
+      })
+    }
+
+    setNews({...news, [c]: [...news[c], ...newEntries]})
+    setIsFetchingNews(false);
+  }
+
   return (
     <Container className="mt-3">
       <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
@@ -108,12 +131,12 @@ const CountryList = () => {
               <Country
                 key={c.country}
                 stats={stats[c.country]}
-                last_update={lastUpdate}
                 title={c.name.ja}
                 url={c.representativeSiteUrl}
                 loading={isFetchingNews}
                 entries={filteredNews[c.country] || []}
                 topic={selectedClass}
+                loadMore={() => loadMore(c.country)}
               />
             ))}
           </Row>
