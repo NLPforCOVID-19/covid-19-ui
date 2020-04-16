@@ -48,7 +48,7 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
             {loading && (
               <div className="loading"><Loading /></div>
             )}
-            <div ref={observeEl}></div>
+            <div ref={observeEl} className="observe"></div>
           </div>
         </div>
       </div>
@@ -80,7 +80,11 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
           margin: auto;
         }
         .loading {
-          margin: auto;
+          margin: 
+          auto;
+        }
+        .observe {
+          flex: 0 0 1px;
         }
       `}</style>
     </div>
