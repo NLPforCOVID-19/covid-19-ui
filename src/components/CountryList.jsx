@@ -13,18 +13,38 @@ const CountryList = () => {
   const [news, setNews] = useState({});
   const [stats, setStats] = useState({});
   const [selectedClass, setSelectedClass] = useState('');
-
-  const [allFetchedFlags, setAllFetchedFlags] = useState({});
-
+  
   const [isFetchingMeta, setIsFetchingMeta] = useState(false);
-  const [isFetchingNews, setIsFetchingNews] = useState(false);
-
-  const [initialLoadEnded, setInitialLoadEnded] = useState(false);
+  // { country: { loading: boolean, noMore: { class: boolean } } }
+  const [countriesFetchState, setCountriesFetchedState] = useState({});
 
   // computed value: filter news by currently selected class.
   const filteredNews = useMemo(() => {
     return filterNewsByClass(selectedClass);
   }, [news, selectedClass]);
+
+  function setLoading(country, bool) {
+    setCountriesFetchedState(prev => ({
+      ...prev,
+      [country]: {
+        ...prev[country],
+        loading: bool
+      }
+    }))
+  }
+
+  function setAllCountriesLoading(bool) {
+    setCountriesFetchedState(prev => {
+      let newState = {...prev};
+      for (const country of Object.keys(prev)) {
+        newState[country] = {
+          ...newState[country],
+          loading: bool
+        }
+      }
+      return newState;
+    })
+  }
 
   function filterNewsByClass(class_) {
     let result = {};
@@ -54,8 +74,9 @@ const CountryList = () => {
   function setNewsWithSortUniq(newEntries) {
     setNews(prevNews => {
       let merged = {};
-      for (const country of Object.keys(newEntries)) {
-        const uniq = filterUniqueNews(prevNews[country] || [], newEntries[country]);
+      const keys = [...Object.keys(prevNews), ...Object.keys(newEntries)];
+      for (const country of keys) {
+        const uniq = filterUniqueNews(prevNews[country] || [], newEntries[country] || []);
         const sorted = sortEntriesByTimestamp(uniq);
         merged[country] = sorted;
       }
@@ -65,45 +86,50 @@ const CountryList = () => {
 
   async function initialLoad() {
     setIsFetchingMeta(true);
-    setIsFetchingNews(true);
     const [metaRes, statsRes] = await Promise.all([fetchMeta(), fetchStats()]);
     setCountries(metaRes.countries);
+    for (const c of metaRes.countries) {
+      setLoading(c.country, true);
+    }
     setClasses(metaRes.classes);
     setStats(statsRes.stats);
     setSelectedClass(metaRes.classes[0]);
     setIsFetchingMeta(false);
     const firstClassNews = await fetchNewsByClass(metaRes.classes[0]);
-    console.log('loaded first topic news');
     setNews(firstClassNews);
     const classesLen = metaRes.classes.length;
+    // fetch other class news
+    for (const class_ of metaRes.classes.slice(1, classesLen)) {
+      fetchNewsByClass(class_)
+        .then(res => {
+          setNewsWithSortUniq(res);
+        })
+    }
     const otherClassNews = await Promise.all(metaRes.classes.slice(1, classesLen).map(c => fetchNewsByClass(c)));
     otherClassNews.forEach((e, i) => {
-      console.log('otherClassNews', metaRes.classes[i + 1]);
       setNewsWithSortUniq(e);
     })
-    setIsFetchingNews(false);
-    setInitialLoadEnded(true);
+    setAllCountriesLoading(false);
   }
 
   async function loadMore(c) {
-    if (!initialLoadEnded || isFetchingNews || allFetchedFlags[c]?.[selectedClass]) {
+    if (countriesFetchState[c]?.loading || countriesFetchState[c]?.[selectedClass]) {
       return;
     }
-    setIsFetchingNews(true)
+    setLoading(c, true);
     const offset = filteredNews[c].length;
     const newEntries = await fetchNewsByClassAndCountry(selectedClass, c, offset, 10);
     if (newEntries.length < 10) {
-      setAllFetchedFlags({
-        ...allFetchedFlags,
+      setCountriesFetchedState({
+        ...countriesFetchState,
         [c]: {
-          ...allFetchedFlags[c],
+          ...countriesFetchState[c],
           [selectedClass]: true
         }
       })
     }
-
-    setNews({...news, [c]: [...news[c], ...newEntries]})
-    setIsFetchingNews(false);
+    setNewsWithSortUniq({[c]: newEntries});
+    setLoading(c, false);
   }
 
     // Run only ones
@@ -127,7 +153,7 @@ const CountryList = () => {
                 stats={stats[c.country]}
                 title={c.name.ja}
                 url={c.representativeSiteUrl}
-                loading={isFetchingNews}
+                loading={countriesFetchState[c.country]?.loading}
                 entries={filteredNews[c.country] || []}
                 topic={selectedClass}
                 loadMore={() => loadMore(c.country)}
