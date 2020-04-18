@@ -7,15 +7,11 @@ import Country from './Country';
 import TopicList from './TopicList';
 import Loading from './Loading';
 
-const NEWS_INITIAL = 30;
-const LOAD_MORE_THRESHOLD = 15;
-
 const CountryList = () => {
   const [classes, setClasses] = useState([]);
   const [countries, setCountries] = useState([]);
   const [news, setNews] = useState({});
   const [stats, setStats] = useState({});
-  const [lastUpdate, setLastUpdate] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
 
   const [allFetchedFlags, setAllFetchedFlags] = useState({});
@@ -27,51 +23,15 @@ const CountryList = () => {
 
   // computed value: filter news by currently selected class.
   const filteredNews = useMemo(() => {
-    let result = {};
-    for (const country of Object.keys(news)) {
-      result[country] = news[country].filter((entry) => entry.classes[selectedClass] === 1);
-    }
-    return result;
+    return filterNewsByClass(selectedClass);
   }, [news, selectedClass]);
 
-  function fetchCountriesAndStats() {
-    setIsFetchingMeta(true);
-    return new Promise((resolve) => {
-      Promise.all([fetchMeta(), fetchStats(), fetchNewsByClass('all')])
-      .then((values) => {
-        const [meta, stats, initialNews] = values;
-        setCountries(meta.countries);
-        setClasses(meta.classes);
-        setStats(stats.stats);
-        setLastUpdate(stats.last_update);
-        setSelectedClass(meta.classes[0]);
-        setNews(initialNews);
-        resolve(meta.classes);
-      })
-      .finally(() => {
-        setIsFetchingMeta(false);
-        setInitialLoadEnded(true)
-      });
-    })
-  }
-
-  async function chainNews() {
-    setIsFetchingNews(true)
-    const topics = await fetchCountriesAndStats()
-    const promises = topics.map(t => fetchNewsByClass(t))
-    Promise.all(promises)
-      .then(results => {
-        let merged = {...news}
-        for(const result of results) {
-          for (const key of Object.keys(result)) {
-            const concatted = filterUniqueNews(merged[key] || [], result[key])
-            const sorted = sortEntriesByTimestamp(concatted)
-            merged[key] = sorted
-          }
-        }
-        setNews(merged)
-        setIsFetchingNews(false)
-      })
+  function filterNewsByClass(class_) {
+    let result = {};
+    for (const country of Object.keys(news)) {
+      result[country] = news[country].filter((entry) => entry.classes[class_] === 1);
+    }
+    return result;
   }
 
   function filterUniqueNews(news1, news2) {
@@ -85,15 +45,44 @@ const CountryList = () => {
     return result
   }
 
-  // Run only ones
-  useEffect(() => {
-    chainNews()
-  }, []);
-
   function sortEntriesByTimestamp(entries) {
     return entries.sort((a, b) => {
       return Date.parse(b.orig.timestamp) - Date.parse(a.orig.timestamp);
     });
+  }
+
+  function setNewsWithSortUniq(newEntries) {
+    setNews(prevNews => {
+      let merged = {};
+      for (const country of Object.keys(newEntries)) {
+        const uniq = filterUniqueNews(prevNews[country] || [], newEntries[country]);
+        const sorted = sortEntriesByTimestamp(uniq);
+        merged[country] = sorted;
+      }
+      return merged;
+    });
+  }
+
+  async function initialLoad() {
+    setIsFetchingMeta(true);
+    setIsFetchingNews(true);
+    const [metaRes, statsRes] = await Promise.all([fetchMeta(), fetchStats()]);
+    setCountries(metaRes.countries);
+    setClasses(metaRes.classes);
+    setStats(statsRes.stats);
+    setSelectedClass(metaRes.classes[0]);
+    setIsFetchingMeta(false);
+    const firstClassNews = await fetchNewsByClass(metaRes.classes[0]);
+    console.log('loaded first topic news');
+    setNews(firstClassNews);
+    const classesLen = metaRes.classes.length;
+    const otherClassNews = await Promise.all(metaRes.classes.slice(1, classesLen).map(c => fetchNewsByClass(c)));
+    otherClassNews.forEach((e, i) => {
+      console.log('otherClassNews', metaRes.classes[i + 1]);
+      setNewsWithSortUniq(e);
+    })
+    setIsFetchingNews(false);
+    setInitialLoadEnded(true);
   }
 
   async function loadMore(c) {
@@ -116,6 +105,11 @@ const CountryList = () => {
     setNews({...news, [c]: [...news[c], ...newEntries]})
     setIsFetchingNews(false);
   }
+
+    // Run only ones
+    useEffect(() => {
+      initialLoad();
+    }, []);  
 
   return (
     <Container className="mt-3">
