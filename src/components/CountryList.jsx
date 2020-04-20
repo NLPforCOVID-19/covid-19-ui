@@ -33,6 +33,26 @@ const CountryList = () => {
     }))
   }
 
+  function setNoMoreNews(country, class_) {
+    setCountriesFetchedState(prev => {
+      let newCountryState = {
+        loading: false,
+        noMore: {}
+      }
+      if (prev[country]) {
+        newCountryState = {...prev[country]}
+      }
+      newCountryState.noMore = {
+        ...newCountryState.noMore,
+        [class_]: true
+      }
+      return {
+        ...prev,
+        [country]: newCountryState
+      }
+    })
+  }
+
   function setAllCountriesLoading(bool) {
     setCountriesFetchedState(prev => {
       let newState = {...prev};
@@ -95,38 +115,38 @@ const CountryList = () => {
     setStats(statsRes.stats);
     setSelectedClass(metaRes.classes[0]);
     setIsFetchingMeta(false);
-    const firstClassNews = await fetchNewsByClass(metaRes.classes[0]);
+    const firstClassNews = await fetchNewsByClass(metaRes.classes[0], 20);
+    for (const c of metaRes.countries) {
+      const country = c.country
+      if (!firstClassNews[country] || firstClassNews[country].length < 20) {
+        setNoMoreNews(country, metaRes.classes[0]);
+      }
+    }
     setNews(firstClassNews);
     const classesLen = metaRes.classes.length;
     // fetch other class news
-    for (const class_ of metaRes.classes.slice(1, classesLen)) {
-      fetchNewsByClass(class_)
-        .then(res => {
-          setNewsWithSortUniq(res);
-        })
-    }
-    const otherClassNews = await Promise.all(metaRes.classes.slice(1, classesLen).map(c => fetchNewsByClass(c)));
+    const otherClassNews = await Promise.all(metaRes.classes.slice(1, classesLen).map(c => fetchNewsByClass(c, 20)));
     otherClassNews.forEach((e, i) => {
+      for (const c of metaRes.countries) {
+        const country = c.country;
+        if (!e[country] || e[country].length < 20) {
+          setNoMoreNews(country, metaRes.classes[i + 1]);
+        }
+      }
       setNewsWithSortUniq(e);
     })
     setAllCountriesLoading(false);
   }
 
   async function loadMore(c) {
-    if (countriesFetchState[c]?.loading || countriesFetchState[c]?.[selectedClass]) {
+    if (countriesFetchState[c]?.loading || countriesFetchState[c]?.noMore?.[selectedClass]) {
       return;
     }
     setLoading(c, true);
-    const offset = filteredNews[c].length;
+    const offset = filteredNews[c] ? filteredNews[c].length : 0;
     const newEntries = await fetchNewsByClassAndCountry(selectedClass, c, offset, 10);
     if (newEntries.length < 10) {
-      setCountriesFetchedState({
-        ...countriesFetchState,
-        [c]: {
-          ...countriesFetchState[c],
-          [selectedClass]: true
-        }
-      })
+      setNoMoreNews(c, selectedClass)
     }
     setNewsWithSortUniq({[c]: newEntries});
     setLoading(c, false);
