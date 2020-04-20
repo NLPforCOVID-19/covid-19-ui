@@ -2,8 +2,9 @@ import React from 'react';
 import dayjs from 'dayjs';
 
 function makeTranslatedUrl(url) {
+  const source_lang = 'auto'
   const target_lang = 'ja';
-  return `https://translate.google.com/translate?tl=${target_lang}&u=${url}`;
+  return `https://translate.google.com/translate?sl=${source_lang}&tl=${target_lang}&u=${url}`;
 }
 
 const Page = ({ entry, topic }) => {
