@@ -26,8 +26,9 @@ const CountryList = () => {
   // computed value: filter news by currently selected class.
   const filteredNews = useMemo(() => {
     let result = {};
-    for (const country of Object.keys(news)) {
-      result[country] = news[country].filter((entry) => entry.classes[selectedClass] === 1);
+    for (const c of countries) {
+      const country = c.country
+      result[country] = (news[country] || []).filter((entry) => entry.classes[selectedClass] === 1);
     }
     return result;
   }, [news, selectedClass]);
