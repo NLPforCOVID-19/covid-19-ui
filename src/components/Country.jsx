@@ -74,14 +74,15 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
           overflow-y: auto;
         }
         .scroll > ul {
-          padding-left: 20px;
+          padding-left: 10px;
+          list-style-type: none;
         }
         .no-data {
           margin: auto;
         }
         .loading {
-          margin: 
-          auto;
+          margin: auto;
+          flex: 0 0 100px;
         }
         .observe {
           flex: 0 0 1px;
