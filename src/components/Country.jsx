@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import Page from './Page';
 import Loading from './Loading'
 
-export default ({ title, entries, topic, url, loading, stats, last_update }) => {
+export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
+  const observeEl = useRef(null);
+  const wrapEl = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver((e) => {
+      if (e[0].isIntersecting && !loading) {
+        loadMore()
+      }
+    }, {
+      root: wrapEl.current
+    });
+    observer.observe(observeEl.current);
+
+    function unobserve() {
+      observer.unobserve(observeEl.current);
+    }
+
+    return unobserve;
+  })
+
   return (
     <div className="col-xl-4 col-lg-6 p-1">
       <div className="p-2 border rounded">
@@ -20,7 +39,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             死亡者: {stats.death_total.toLocaleString()}{' '}(+{stats.death_today.toLocaleString()})
           </div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
-          <div className="scroll mt-1 mb-1">
+          <div ref={wrapEl} className="scroll mt-1 mb-1">
             <ul>
               {entries.map((entry, i) => (
                 <Page key={i} entry={entry} topic={topic} />
@@ -29,6 +48,7 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
             {loading && (
               <div className="loading"><Loading /></div>
             )}
+            <div ref={observeEl} className="observe"></div>
           </div>
         </div>
       </div>
@@ -54,13 +74,18 @@ export default ({ title, entries, topic, url, loading, stats, last_update }) => 
           overflow-y: auto;
         }
         .scroll > ul {
-          padding-left: 20px;
+          padding-left: 10px;
+          list-style-type: none;
         }
         .no-data {
           margin: auto;
         }
         .loading {
           margin: auto;
+          flex: 0 0 100px;
+        }
+        .observe {
+          flex: 0 0 1px;
         }
       `}</style>
     </div>

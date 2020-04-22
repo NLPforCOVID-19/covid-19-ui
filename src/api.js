@@ -7,7 +7,7 @@ export async function fetchNewsByClass(klass, limit) {
   const response = await axios.get(baseUrl + path, {
     params: {
       start: 0,
-      limit: limit || 100,
+      limit: limit || 20,
     },
   });
   return response.data;
