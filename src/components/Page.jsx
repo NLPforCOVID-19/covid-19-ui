@@ -8,6 +8,8 @@ function makeTranslatedUrl(url) {
 
 const Page = ({ entry, topic }) => {
   const isJp = entry.country === 'jp';
+  const topicData = entry.topics.find(t => t.name === topic);
+  const snippet = topicData ? topicData.snippet : '';
   return (
     <li>
       <div>
@@ -29,7 +31,7 @@ const Page = ({ entry, topic }) => {
           </>
         )}
       </div>
-      {topic !== 'all' && <Snippet text={entry.snippets[topic][0]} />}
+      <Snippet text={snippet} />
       <style jsx>{`
         .material-icons {
           color: rgba(0, 0, 0, 0.5);

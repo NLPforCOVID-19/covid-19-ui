@@ -2,26 +2,26 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import { fetchNewsByClass, fetchNewsByClassAndCountry, fetchMeta, fetchStats } from '../api';
+import { fetchNewsByClass, fetchNewsByClassAndCountry, fetchMeta } from '../api';
 import Country from './Country';
 import TopicList from './TopicList';
 import Loading from './Loading';
 
 const CountryList = () => {
-  const [classes, setClasses] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [countries, setCountries] = useState([]);
   const [news, setNews] = useState({});
-  const [stats, setStats] = useState({});
-  const [selectedClass, setSelectedClass] = useState('');
+  // const [stats, setStats] = useState({});
+  const [selectedTopic, setSelectedTopic] = useState('');
   
   const [isFetchingMeta, setIsFetchingMeta] = useState(false);
-  // { country: { loading: boolean, noMore: { class: boolean } } }
+  // { [country]: { loading: boolean, noMore: { [topic]: boolean } } }
   const [countriesFetchState, setCountriesFetchedState] = useState({});
 
   // computed value: filter news by currently selected class.
   const filteredNews = useMemo(() => {
-    return filterNewsByClass(selectedClass);
-  }, [news, selectedClass]);
+    return filterNewsByClass(selectedTopic);
+  }, [news, selectedTopic]);
 
   function setLoading(country, bool) {
     setCountriesFetchedState(prev => ({
@@ -33,7 +33,7 @@ const CountryList = () => {
     }))
   }
 
-  function setNoMoreNews(country, class_) {
+  function setNoMoreNews(country, topic) {
     setCountriesFetchedState(prev => {
       let newCountryState = {
         loading: false,
@@ -44,7 +44,7 @@ const CountryList = () => {
       }
       newCountryState.noMore = {
         ...newCountryState.noMore,
-        [class_]: true
+        [topic]: true
       }
       return {
         ...prev,
@@ -66,10 +66,12 @@ const CountryList = () => {
     })
   }
 
-  function filterNewsByClass(class_) {
+  function filterNewsByClass(topic) {
     let result = {};
     for (const country of Object.keys(news)) {
-      result[country] = news[country].filter((entry) => entry.classes[class_] === 1);
+      result[country] = news[country].filter((entry) => {
+        return !!entry.topics.find(t => t.name === topic)
+      });
     }
     return result;
   }
@@ -106,31 +108,30 @@ const CountryList = () => {
 
   async function initialLoad() {
     setIsFetchingMeta(true);
-    const [metaRes, statsRes] = await Promise.all([fetchMeta(), fetchStats()]);
+    const metaRes = await fetchMeta();
     setCountries(metaRes.countries);
     for (const c of metaRes.countries) {
       setLoading(c.country, true);
     }
-    setClasses(metaRes.classes);
-    setStats(statsRes.stats);
-    setSelectedClass(metaRes.classes[0]);
+    setTopics(metaRes.topics);
+    setSelectedTopic(metaRes.topics[0]);
     setIsFetchingMeta(false);
-    const firstClassNews = await fetchNewsByClass(metaRes.classes[0], 20);
+    const firstClassNews = await fetchNewsByClass(metaRes.topics[0], 20);
     for (const c of metaRes.countries) {
       const country = c.country
       if (!firstClassNews[country] || firstClassNews[country].length < 20) {
-        setNoMoreNews(country, metaRes.classes[0]);
+        setNoMoreNews(country, metaRes.topics[0]);
       }
     }
     setNews(firstClassNews);
-    const classesLen = metaRes.classes.length;
-    // fetch other class news
-    const otherClassNews = await Promise.all(metaRes.classes.slice(1, classesLen).map(c => fetchNewsByClass(c, 20)));
+    const topicsNum = metaRes.topics.length;
+    // fetch other topic news
+    const otherClassNews = await Promise.all(metaRes.topics.slice(1, topicsNum).map(c => fetchNewsByClass(c, 20)));
     otherClassNews.forEach((e, i) => {
       for (const c of metaRes.countries) {
         const country = c.country;
         if (!e[country] || e[country].length < 20) {
-          setNoMoreNews(country, metaRes.classes[i + 1]);
+          setNoMoreNews(country, metaRes.topics[i + 1]);
         }
       }
       setNewsWithSortUniq(e);
@@ -139,14 +140,14 @@ const CountryList = () => {
   }
 
   async function loadMore(c) {
-    if (countriesFetchState[c]?.loading || countriesFetchState[c]?.noMore?.[selectedClass]) {
+    if (countriesFetchState[c]?.loading || countriesFetchState[c]?.noMore?.[selectedTopic]) {
       return;
     }
     setLoading(c, true);
     const offset = filteredNews[c] ? filteredNews[c].length : 0;
-    const newEntries = await fetchNewsByClassAndCountry(selectedClass, c, offset, 10);
+    const newEntries = await fetchNewsByClassAndCountry(selectedTopic, c, offset, 10);
     if (newEntries.length < 10) {
-      setNoMoreNews(c, selectedClass)
+      setNoMoreNews(c, selectedTopic)
     }
     setNewsWithSortUniq({[c]: newEntries});
     setLoading(c, false);
@@ -159,7 +160,7 @@ const CountryList = () => {
 
   return (
     <Container className="mt-3">
-      <TopicList selectedTopic={selectedClass} topics={classes} changeTopic={setSelectedClass} />
+      <TopicList selectedTopic={selectedTopic} topics={topics} changeTopic={setSelectedTopic} />
       {isFetchingMeta ? (
         <div className="text-center">
           <Loading />
@@ -170,12 +171,12 @@ const CountryList = () => {
             {countries.map((c) => (
               <Country
                 key={c.country}
-                stats={stats[c.country]}
+                stats={c.stats}
                 title={c.name.ja}
                 url={c.representativeSiteUrl}
                 loading={countriesFetchState[c.country]?.loading}
                 entries={filteredNews[c.country] || []}
-                topic={selectedClass}
+                topic={selectedTopic}
                 loadMore={() => loadMore(c.country)}
               />
             ))}
