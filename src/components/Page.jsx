@@ -12,9 +12,9 @@ const Page = ({ entry, topic }) => {
   const isJp = entry.country === 'jp';
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
-  const isVerified = entry.is_useful !== -1;
+  const isVerified = entry.is_checked === 1;
   const isAboutFalseRumor = entry.is_about_false_rumor === 1;
-  const isUseful = entry.is_useful === 1 && isAboutFalseRumor !== 1;
+  const isUseful = entry.is_useful === 1 && !isAboutFalseRumor;
   return (
     <li>
       <div>
