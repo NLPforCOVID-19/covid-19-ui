@@ -1,18 +1,18 @@
 import React from 'react';
 
 export const description = {
-  verified: "クラウドソーシングでカテゴリを検証済",
-  useful: "クラウドソーシングで役に立つとマークされました",
-  rumor: "クラウドソーシングでデマに関する情報であるとマークされました"
+  verified: "人手で検証済みの記事",
+  useful: "役立つ記事",
+  rumor: "デマに関する記事"
 }
 
-export const Verified = ({size, color}) => (
+export const Verified = ({size, active}) => (
   <>
-    <i className="material-icons" title={description.verified}>check_circle</i>
+    <i className="material-icons" title={active ? description.verified : ""}>check_circle</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
-        color: ${color || "green"};
+        color: ${active ? "green" : "#ccc"};
         font-size: ${size || "1em"};
       }
     `}</style>

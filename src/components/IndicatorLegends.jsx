@@ -8,7 +8,7 @@ import * as Icons from "./Icons";
 export default () => (
   <ul>
     <li>
-      <Icons.Verified />
+      <Icons.Verified active={true} />
       <div className="text-secondary">{Icons.description.verified}</div>
     </li>
     <li>
@@ -23,11 +23,13 @@ export default () => (
       ul {
         list-style-type: none;
         padding: 0;
-        margin: 0;
+        margin: 0 0 5px;
+        display: flex;
       }
       li {
         display: flex;
         align-items: center;
+        margin: 0 10px;
       }
       div {
         font-size: 14px;

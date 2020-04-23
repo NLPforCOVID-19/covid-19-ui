@@ -24,8 +24,8 @@ const Page = ({ entry, topic }) => {
           rel="noreferrer noopener"
           className="text-info"
         >
-          <Icons.Verified color={isVerified ? "green" : "#ccc"} />
-          <span className="small date">{dayjs(entry.orig.timestamp).format('MM/DD')}</span>
+          <Icons.Verified active={isVerified} />
+          <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
           {entry.ja_translated.title}{" "}
           {isAboutFalseRumor && <Icons.Rumor />}
           {isUseful && <Icons.Useful />}{" "}
@@ -40,11 +40,6 @@ const Page = ({ entry, topic }) => {
       </div>
       <Snippet text={snippet} />
       <style jsx>{`
-        //.text-info {
-          //display: flex;
-          //flex-flow: row nowrap;
-          //align-items: center;
-        //}
         .date {
           margin: 0 5px;
         }
