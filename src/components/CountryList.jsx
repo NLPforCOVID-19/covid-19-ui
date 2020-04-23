@@ -145,7 +145,7 @@ const CountryList = () => {
 
   if (isFetchingMeta) {
     return (
-      <Container className="mt-3">
+      <Container className="mt-3 text-center">
         <Loading />
       </Container>
     )
