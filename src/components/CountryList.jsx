@@ -130,8 +130,9 @@ const CountryList = () => {
     }
     setLoading(c, true);
     const offset = filteredNews[c] ? filteredNews[c].length : 0;
-    const newEntries = await fetchNewsByClassAndCountry(topic, c, offset, 10);
-    if (newEntries.length < 10) {
+    const limit = 20;
+    const newEntries = await fetchNewsByClassAndCountry(topic, c, offset, limit);
+    if (newEntries.length < limit) {
       setNoMoreNews(c, topic)
     }
     addNewsByTopicAndCountry(newEntries, topic, c);
