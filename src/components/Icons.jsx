@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const description = {
-  verified: "人手で検証済みの記事",
+  verified: "人手でカテゴリを検証済みの記事",
   useful: "役立つ記事",
   rumor: "デマに関する記事"
 }
