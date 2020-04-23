@@ -1,6 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import Badge from 'react-bootstrap/Badge'
+
+import * as Icons from './Icons';
 
 function makeTranslatedUrl(url) {
   const target_lang = 'ja';
@@ -11,8 +12,9 @@ const Page = ({ entry, topic }) => {
   const isJp = entry.country === 'jp';
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
-  const isUseful = entry.is_useful === 1;
+  const isVerified = entry.is_useful !== -1;
   const isAboutFalseRumor = entry.is_about_false_rumor === 1;
+  const isUseful = entry.is_useful === 1 && isAboutFalseRumor !== 1;
   return (
     <li>
       <div>
@@ -22,27 +24,36 @@ const Page = ({ entry, topic }) => {
           rel="noreferrer noopener"
           className="text-info"
         >
-          {isUseful && <><Badge variant="warning">役に立つ</Badge>&nbsp;</>}
-          {isAboutFalseRumor && <><Badge variant="primary">デマに関する情報</Badge>&nbsp;</>}
-          {entry.ja_translated.title}&ensp;
-          <span className="small">({dayjs(entry.orig.timestamp).format('YYYY-MM-DD')})</span>
+          <Icons.Verified color={isVerified ? "green" : "#ccc"} />
+          <span className="small date">{dayjs(entry.orig.timestamp).format('MM/DD')}</span>
+          {entry.ja_translated.title}{" "}
+          {isAboutFalseRumor && <Icons.Rumor />}
+          {isUseful && <Icons.Useful />}{" "}
         </a>
         {isJp || (
           <>
-            &nbsp;
             <a href={entry.url} title="元の言語で表示する">
-              <span className="material-icons">open_in_new</span>
+              <span className="material-icons open-in-new">open_in_new</span>
             </a>
           </>
         )}
       </div>
       <Snippet text={snippet} />
       <style jsx>{`
+        //.text-info {
+          //display: flex;
+          //flex-flow: row nowrap;
+          //align-items: center;
+        //}
+        .date {
+          margin: 0 5px;
+        }
         .material-icons {
-          color: rgba(0, 0, 0, 0.5);
           font-size: 1em;
           vertical-align: middle;
-          font-size: 1em;
+        }
+        .open-in-new {
+          color: rgba(0, 0, 0, 0.5);
         }
       `}</style>
     </li>
