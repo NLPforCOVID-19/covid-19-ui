@@ -24,11 +24,19 @@ const Page = ({ entry, topic }) => {
           rel="noreferrer noopener"
           className="text-info"
         >
-          <Icons.Verified active={isVerified} />
+          {
+            (() => {
+              if (isAboutFalseRumor) {
+                return (<Icons.Rumor />);
+              } else if (isUseful) {
+                return (<Icons.Useful />);
+              } else {
+                return (<Icons.Verified active={isVerified} />);
+              }
+            })()
+          }
           <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
           {entry.ja_translated.title}{" "}
-          {isAboutFalseRumor && <Icons.Rumor />}
-          {isUseful && <Icons.Useful />}{" "}
         </a>
         {isJp || (
           <>
