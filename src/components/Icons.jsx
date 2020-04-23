@@ -1,8 +1,14 @@
 import React from 'react';
 
+export const description = {
+  verified: "クラウドソーシングでカテゴリを検証済",
+  useful: "クラウドソーシングで役に立つとマークされました",
+  rumor: "クラウドソーシングでデマに関する情報であるとマークされました"
+}
+
 export const Verified = ({size, color}) => (
   <>
-    <i className="material-icons" title="クラウドソーシングでカテゴリを検証済">check_circle</i>
+    <i className="material-icons" title={description.verified}>check_circle</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
@@ -16,7 +22,7 @@ export const Verified = ({size, color}) => (
 
 export const Useful = ({size}) => (
   <>
-    <i className="material-icons" title="クラウドソーシングで役に立つとマークされました">star</i>
+    <i className="material-icons" title={description.useful}>star</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
@@ -30,7 +36,7 @@ export const Useful = ({size}) => (
 
 export const Rumor = ({size}) => (
   <>
-    <i className="material-icons" title="クラウドソーシングでデマに関する情報であるとマークされました">check_circle</i>
+    <i className="material-icons" title={description.rumor}>error</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;

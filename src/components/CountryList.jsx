@@ -6,6 +6,7 @@ import { fetchNewsByClass, fetchNewsByClassAndCountry, fetchMeta } from '../api'
 import Country from './Country';
 import TopicList from './TopicList';
 import Loading from './Loading';
+import IndicatorLegends from './IndicatorLegends';
 
 const CountryList = () => {
   const [topics, setTopics] = useState([]);
@@ -142,31 +143,34 @@ const CountryList = () => {
       initialLoad();
     }, []);  
 
+  if (isFetchingMeta) {
+    return (
+      <Container className="mt-3">
+        <Loading />
+      </Container>
+    )
+  };
+
   return (
     <Container className="mt-3">
       <TopicList selectedTopic={selectedTopic} topics={topics} changeTopic={setSelectedTopic} />
-      {isFetchingMeta ? (
-        <div className="text-center">
-          <Loading />
-        </div>
-      ) : (
-        <Container>
-          <Row>
-            {countries.map((c) => (
-              <Country
-                key={c.country}
-                stats={c.stats}
-                title={c.name.ja}
-                url={c.representativeSiteUrl}
-                loading={countriesFetchState[c.country]?.loading}
-                entries={filteredNews[c.country] || []}
-                topic={selectedTopic}
-                loadMore={() => loadMore(c.country)}
-              />
-            ))}
-          </Row>
-        </Container>
-      )}
+      <IndicatorLegends />
+      <Container>
+        <Row>
+          {countries.map((c) => (
+            <Country
+              key={c.country}
+              stats={c.stats}
+              title={c.name.ja}
+              url={c.representativeSiteUrl}
+              loading={countriesFetchState[c.country]?.loading}
+              entries={filteredNews[c.country] || []}
+              topic={selectedTopic}
+              loadMore={() => loadMore(c.country)}
+            />
+          ))}
+        </Row>
+      </Container>
     </Container>
   );
 };
