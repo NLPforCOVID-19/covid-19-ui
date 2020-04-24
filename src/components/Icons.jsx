@@ -2,9 +2,9 @@ import React from 'react';
 
 export const description = {
   verified: "人手でカテゴリを検証済みの記事",
-  useful: "役立つ記事",
-  rumor: "デマに関する記事"
-}
+  useful: "役立つ記事（かつ人手でカテゴリを検証済み）",
+  rumor: "デマに関する記事（かつ人手でカテゴリを検証済み）"
+};
 
 export const Verified = ({size, active}) => (
   <>
@@ -22,7 +22,7 @@ export const Verified = ({size, active}) => (
 
 export const Useful = ({size}) => (
   <>
-    <i className="material-icons" title={description.useful}>star</i>
+    <i className="material-icons" title={description.useful}>check_circle</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
@@ -36,11 +36,11 @@ export const Useful = ({size}) => (
 
 export const Rumor = ({size}) => (
   <>
-    <i className="material-icons" title={description.rumor}>error</i>
+    <i className="material-icons" title={description.rumor}>check_circle</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
-        color: orange;
+        color: #0079c1;
         font-size: ${size || "1em"};
       }
     `}</style>
