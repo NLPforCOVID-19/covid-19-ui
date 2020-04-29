@@ -1,16 +1,9 @@
 import React from "react";
-// import ListGroup from "react-bootstrap/ListGroup";
 
 import * as Icons from "./Icons";
 
-// const div = ({ children }) => <div className="text-secondary">{children}</div>;
-
 export default () => (
   <ul>
-    <li>
-      <Icons.Verified active={true} />
-      <div className="text-secondary">{Icons.description.verified}</div>
-    </li>
     <li>
       <Icons.Useful />
       <div className="text-secondary">{Icons.description.useful}</div>
@@ -18,6 +11,10 @@ export default () => (
     <li>
       <Icons.Rumor />
       <div className="text-secondary">{Icons.description.rumor}</div>
+    </li>
+    <li>
+      <Icons.NotVerified />
+      <div className="text-secondary">{Icons.description.notVerified}</div>
     </li>
     <style jsx>{`
       ul {
