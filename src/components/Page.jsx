@@ -31,7 +31,7 @@ const Page = ({ entry, topic }) => {
               } else if (isUseful) {
                 return (<Icons.Useful />);
               } else {
-                return (<Icons.Verified active={isVerified} />);
+                return (<Icons.NotVerified active={isVerified} />);
               }
             })()
           }
