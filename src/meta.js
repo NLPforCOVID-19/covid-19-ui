@@ -1,5 +1,5 @@
 export default {
-  title: '新型コロナウイルス情報サイト',
+  title: '新型コロナウイルス世界情報集約サイト',
   map: {
     source: 'Johns Hopkins University',
     url:
