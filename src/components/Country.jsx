@@ -2,6 +2,17 @@ import React, { useRef, useEffect } from 'react';
 import Page from './Page';
 import Loading from './Loading'
 
+function numberWithPlusMinus(num) {
+  const abs_str = Math.abs(num).toLocaleString()
+  if (num === 0) {
+    return '±0'
+  }
+  if (num > 0) {
+    return `+${abs_str}`
+  }
+  return `-${abs_str}`
+}
+
 export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
   const observeEl = useRef(null);
   const wrapEl = useRef(null);
@@ -34,9 +45,9 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
             </a>
           </h5>
           <div className="text-muted small">
-            感染者: {stats.confirmation_total.toLocaleString()}{' '}(+{stats.confirmation_today.toLocaleString()})
+            感染者: {stats.confirmation_total.toLocaleString()}{' '}({numberWithPlusMinus(stats.confirmation_today)})
             {' '}/
-            死亡者: {stats.death_total.toLocaleString()}{' '}(+{stats.death_today.toLocaleString()})
+            死亡者: {stats.death_total.toLocaleString()}{' '}({numberWithPlusMinus(stats.death_today)})
           </div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
           <div ref={wrapEl} className="scroll mt-1 mb-1">
