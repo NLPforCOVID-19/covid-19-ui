@@ -14,7 +14,7 @@ const Index = () => {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
       </Head>
-      <Header title={meta.title} />
+      <Header title={meta.title} desc={meta.desc} />
       <Map map={meta.map} />
       <CountryList />
       <Footer />
