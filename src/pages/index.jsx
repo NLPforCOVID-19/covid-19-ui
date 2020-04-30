@@ -1,6 +1,7 @@
 import React from "react";
 import Head from 'next/head';
 import Header from '../components/Header';
+import Description from "../components/Description";
 import Map from '../components/Map';
 import CountryList from '../components/CountryList';
 import meta from '../meta';
@@ -15,6 +16,7 @@ const Index = () => {
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
       </Head>
       <Header title={meta.title} desc={meta.desc} />
+      <Description desc={ meta.desc } />
       <Map map={meta.map} />
       <CountryList />
       <Footer />

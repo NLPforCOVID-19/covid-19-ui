@@ -17,13 +17,6 @@ const Header = ({ title, desc }) => (
         </div>
       </Container>
     </div>
-    <div className="mt-3">
-      <Container>
-        <div className="text-dark">
-          {desc}
-        </div>
-      </Container>
-    </div>
   </div>
 );
 
