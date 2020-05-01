@@ -8,13 +8,23 @@ function makeTranslatedUrl(url) {
   return `https://translate.google.com/translate?tl=${target_lang}&u=${url}`;
 }
 
+function EntryIcon({entry}) {
+  if (entry.is_about_false_rumor === 1) {
+    return <Icons.Rumor />
+  }
+  if (entry.is_useful === 2) {
+    return <Icons.Useful/>
+  }
+  if (entry.is_useful === 1) {
+    return null
+  }
+  return <Icons.NotVerified />
+}
+
 const Page = ({ entry, topic }) => {
   const isJp = entry.country === 'jp';
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
-  const isVerified = entry.is_checked === 1;
-  const isAboutFalseRumor = entry.is_about_false_rumor === 1;
-  const isUseful = entry.is_useful === 1 && !isAboutFalseRumor;
   return (
     <li>
       <div>
@@ -24,17 +34,9 @@ const Page = ({ entry, topic }) => {
           rel="noreferrer noopener"
           className="text-info"
         >
-          {
-            (() => {
-              if (isAboutFalseRumor) {
-                return (<Icons.Rumor />);
-              } else if (isUseful) {
-                return (<Icons.Useful />);
-              } else {
-                return (<Icons.NotVerified active={isVerified} />);
-              }
-            })()
-          }
+          <span className="icon">
+            <EntryIcon entry={entry} />
+          </span>
           <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
           {entry.ja_translated.title}{" "}
         </a>
@@ -48,6 +50,10 @@ const Page = ({ entry, topic }) => {
       </div>
       <Snippet text={snippet} />
       <style jsx>{`
+        .icon {
+          display: inline-block;
+          width: 16px;
+        }
         .date {
           margin: 0 5px;
         }
