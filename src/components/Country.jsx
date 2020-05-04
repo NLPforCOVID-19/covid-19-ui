@@ -40,7 +40,11 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
           <h5 className="m-0">
             {title}
             &nbsp;
-            <a href={url} title="公的機関のウェブサイトを確認する">
+            <a
+              href={url}
+              target="_blank"
+              title="公的機関のウェブサイトを確認する"
+            >
               <span className="material-icons">open_in_new</span>
             </a>
           </h5>
