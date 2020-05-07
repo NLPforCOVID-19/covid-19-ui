@@ -12,7 +12,8 @@ const Header = ({ title, desc }) => (
           <a href="http://www.tkl.iis.u-tokyo.ac.jp/new/" className="text-white">東京大学 喜連川・豊田研</a>,{' '}
           <a href="https://mynlp.is.s.u-tokyo.ac.jp/ja/index" className="text-white">東京大学 宮尾研</a>,{' '}
           <a href="http://www-al.nii.ac.jp/ja/" className="text-white">NII 相澤研</a>,{' '}
-          <a href="https://www.nlp.ecei.tohoku.ac.jp/" className="text-white">東北大学 乾研</a>.{' '}
+          <a href="https://www.nlp.ecei.tohoku.ac.jp/" className="text-white">東北大学 乾研</a>,{' '}
+          <a href="http://fusioncomplab.org/" className="text-white">筑波大学 森嶋研</a>.{' '}
           <a href="https://mt-auto-minhon-mlt.ucri.jgn-x.jp" className="text-white">Powered by みんなの自動翻訳 (NICT). </a>
         </div>
       </Container>
