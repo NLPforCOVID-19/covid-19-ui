@@ -27,39 +27,39 @@ const Page = ({ entry, topic }) => {
   const snippet = topicData ? topicData.snippet : '';
   return (
     <li>
-      <div>
-        <a
-          href={isJp ? entry.url : makeTranslatedUrl(entry.url)}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="text-info"
-        >
-          <span className="icon">
-            <EntryIcon entry={entry} />
-          </span>
-          <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
-          {entry.ja_translated.title}{" "}
-        </a>
-        {isJp || (
-          <>
-            <a
-              href={entry.url}
-              target="_blank"
-              title="元の言語で表示する"
-            >
-              <span className="material-icons open-in-new">open_in_new</span>
-            </a>
-          </>
-        )}
+      <div className="icon"><EntryIcon entry={entry} /></div>
+      <div className="news">
+        <div className="title-wrap">
+          <a
+            href={isJp ? entry.url : makeTranslatedUrl(entry.url)}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-info"
+          >
+            <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
+            {" "}{entry.ja_translated.title}{" "}
+          </a>
+          {isJp || (
+            <>
+              <a
+                href={entry.url}
+                target="_blank"
+                title="元の言語で表示する"
+              >
+                <span className="material-icons open-in-new">open_in_new</span>
+              </a>
+            </>
+          )}
+        </div>
+        <Snippet text={snippet} />
       </div>
-      <Snippet text={snippet} />
       <style jsx>{`
-        .icon {
-          display: inline-block;
-          width: 16px;
+        li {
+          display: flex;
         }
-        .date {
-          margin: 0 5px;
+        .icon {
+          flex: 0 0 16px;
+          margin-right: 3px;
         }
         .material-icons {
           font-size: 1em;
