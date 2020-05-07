@@ -89,7 +89,7 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
           overflow-y: auto;
         }
         .scroll > ul {
-          padding-left: 10px;
+          padding-left: 0;
           list-style-type: none;
         }
         .no-data {
