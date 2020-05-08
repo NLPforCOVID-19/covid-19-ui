@@ -50,7 +50,7 @@ const Country = ({ countryId, topic }) => {
       <div className="p-2 border rounded">
         <div className="inner">
           <h5 className="m-0">
-            <Link href="/country/[country]" as={`/country/${countryId}`}>
+            <Link href="/country/[countryId]" as={`/country/${countryId}`}>
               <a>{countryName}</a>
             </Link>
             &nbsp;
