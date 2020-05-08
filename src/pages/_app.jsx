@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Provider, fetchMeta, StoreContext } from '../store'
+import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
 
 const AppWithDispach = ({ Component, pageProps }) => {
-  const [_, metaDispatch] = useContext(StoreContext)
+  const [state, dispatch] = useContext(StoreContext)
   useEffect(() => {
-    metaDispatch(fetchMeta())
+    console.log('effect!!!')
+    dispatch(fetchMeta())
   }, [])
+  useEffect(() => {
+    if (state.metaLoaded) {
+      dispatch(loadAllTopicsNews())
+    }
+  }, [state.metaLoaded])
   return <Component {...pageProps} />
 }
 

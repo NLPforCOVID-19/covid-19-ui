@@ -25,6 +25,7 @@ import * as api from '../api'
 //   news: {
 //     [topic]: { [country]: News[] }
 //   }
+//   topicLoaded: { [topic]: boolean }
 //   newsStates: {
 //     [topic]: {
 //       [country]: {
@@ -39,6 +40,7 @@ const initialState = {
   metaLoaded: false,
   meta: {},
   news: {},
+  topicLoaded: {},
   newsStates: {}
 }
 
@@ -49,7 +51,7 @@ const actions = {
   RECEIVE_META: 'RECEIVE_META',
   REQUEST_NEWS: 'REQUEST_NEWS',
   RECEIVE_NEWS: 'RECEIVE_NEWS',
-  SET_NOMORE: 'SET_NOMORE'
+  SET_TOPIC_LOADED: 'SET_TOPIC_LOADED',
 }
 
 // reducer is only synchronous
@@ -58,17 +60,17 @@ function reducer(state, action) {
     // case actions.REQUEST_META:
     //   return state
 
-    case actions.RECEIVE_META:
+    case actions.RECEIVE_META: {
       const { countries, topics } = action.payload
       let news = {}
-      let newsState = {}
+      let newsStates = {}
       for (const topic of topics) {
         news[topic] = {}
-        newsState[topic] = {}
+        newsStates[topic] = {}
         for (const c of countries) {
           news[topic][c.country] = []
-          news[topic][c.country] = {
-            loading: false,
+          newsStates[topic][c.country] = {
+            loading: true,
             noMore: false
           }
         }
@@ -78,25 +80,28 @@ function reducer(state, action) {
         metaLoaded: true,
         meta: action.payload,
         news: news,
-        newsState: newsState
+        newsStates: newsStates
       }
+    }
 
-    case actions.REQUEST_NEWS:
+    case actions.REQUEST_NEWS: {
+      const { country, topic } = action.target
       return {
         ...state,
-        newsState: {
-          ...state.newsState,
-          [country]: {
-            ...state.newsState[country],
-            [topic]: {
+        newsStates: {
+          ...state.newsStates,
+          [topic]: {
+            ...state.newsStates[topic],
+            [country]: {
               loading: true,
               noMore: false
             }
           }
         }
       }
+    }
 
-    case actions.RECEIVE_NEWS:
+    case actions.RECEIVE_NEWS: {
       const { country, topic, isNoMore } = action.target
       const prevEntries = state.news[topic][country]
       const nextEntries = [...prevEntries, ...action.payload]
@@ -109,10 +114,10 @@ function reducer(state, action) {
             [country]: nextEntries
           }
         },
-        newsState: {
-          ...state.newsState,
+        newsStates: {
+          ...state.newsStates,
           [topic]: {
-            ...state.newsState[topic],
+            ...state.newsStates[topic],
             [country]: {
               loading: false,
               noMore: isNoMore
@@ -120,6 +125,18 @@ function reducer(state, action) {
           }
         }
       }
+    }
+    
+    case actions.SET_TOPIC_LOADED: {
+      const topic = action.target
+      return {
+        ...state,
+        topicLoaded: {
+          ...state.topicLoaded,
+          [topic]: true
+        }
+      }
+    }
   }
 }
 function receiveMeta(meta) {
@@ -141,11 +158,18 @@ function receiveNews(topic, country, news, isNoMore) {
     payload: news
   }
 }
+function setTopicLoaded(topic) {
+  return {
+    type: actions.SET_TOPIC_LOADED,
+    target: topic
+  }
+}
 
 const asyncActions = {
   FETCH_META: 'FETCH_META',
   FETCH_NEWS_BY_TOPIC: 'FETCH_NEWS_BY_TOPIC',
-  LOAD_MORE_NEWS: 'LOAD_MORE_NEWS'
+  LOAD_MORE_NEWS: 'LOAD_MORE_NEWS',
+  LOAD_ALL_TOPICS_NEWS: 'LOAD_ALL_TOPICS_NEWS'
 }
 
 
@@ -162,16 +186,23 @@ export function fetchNewsByTopic(topic) {
   }
 }
 
-export function loadMore(country) {
+export function loadMore(country, topic) {
   return {
     type: asyncActions.LOAD_MORE_NEWS,
-    target: country
+    target: { country, topic }
+  }
+}
+
+export function loadAllTopicsNews() {
+  return {
+    type: asyncActions.LOAD_ALL_TOPICS_NEWS
   }
 }
 
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   async function asyncDispatch(action) {
+    console.log('asyncdispatch', action)
     switch (action.type) {
       case asyncActions.FETCH_META: {
         // dispatch({ type: actions.REQUEST_META })
@@ -186,28 +217,40 @@ export const Provider = ({ children }) => {
           console.log('meta not loaded')
           return
         }
-        if (Object.keys(state.news[topic]).length > 0) {
+        if (state.topicLoaded[topic]) {
           console.log('already loaded some news')
           return
         }
         const limit = 20
         for (const country of state.meta.countries) {
-          dispatch(requestNews(topic, country))
+          const countryId = country.country
+          dispatch(requestNews(topic, countryId))
         }
         const res = await api.fetchNewsByClass(topic, limit)
-        for (const c of state.meta.countries) {
-          if (!res[c]) {
-            dispatch(receiveNews(topic, c, [], true))
+        for (const country of state.meta.countries) {
+          const countryId = country.country
+          if (!res[countryId]) {
+            dispatch(receiveNews(topic, countryId, [], true))
             continue
           }
-          dispatch(receiveNews(topic, c, res[c], res[c].length < limit))
+          dispatch(receiveNews(topic, countryId, res[countryId], res[countryId].length < limit))
+          dispatch(setTopicLoaded(topic))
+        }
+        break
+      }
+
+      case asyncActions.LOAD_ALL_TOPICS_NEWS: {
+        const topics = state.meta.topics.filter(t => !state.topicLoaded[t])
+        await asyncDispatch(fetchNewsByTopic(topics[0]))
+        for (const topic of topics.slice(1)) {
+          asyncDispatch(fetchNewsByTopic(topic))
         }
         break
       }
       
       case asyncActions.LOAD_MORE_NEWS: {
         const { topic, country } = action.target
-        const { noMore, loading } = state.newsState[topic][country]
+        const { noMore, loading } = state.newsStates[topic][country]
         if (noMore || loading) {
           console.log('abort load more', noMore, loading)
           return

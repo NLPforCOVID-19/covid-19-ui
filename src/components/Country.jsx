@@ -1,6 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types'
+import Link from 'next/link'
 import Page from './Page';
 import Loading from './Loading'
+import { StoreContext, loadMore } from '../store';
 
 function numberWithPlusMinus(num) {
   const abs_str = Math.abs(num).toLocaleString()
@@ -13,13 +16,22 @@ function numberWithPlusMinus(num) {
   return `-${abs_str}`
 }
 
-export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
+const Country = ({ countryId, topic }) => {
+  const [state, dispatch] = useContext(StoreContext)
+
+  const country = state.meta.countries.find(c => c.country === countryId)
+  const countryName = country.name.ja
+  const url = country.representiveSiteUrl
+  const stats = country.stats
+  const entries = state.news[topic][countryId]
+  const { loading } = state.newsStates[topic][countryId]
+
   const observeEl = useRef(null);
   const wrapEl = useRef(null);
   useEffect(() => {
     const observer = new IntersectionObserver((e) => {
       if (e[0].isIntersecting && !loading) {
-        loadMore()
+        dispatch(loadMore(countryId, topic))
       }
     }, {
       root: wrapEl.current
@@ -38,7 +50,9 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
       <div className="p-2 border rounded">
         <div className="inner">
           <h5 className="m-0">
-            {title}
+            <Link href="/country/[country]" as={`/country/${countryId}`}>
+              <a>{countryName}</a>
+            </Link>
             &nbsp;
             <a
               href={url}
@@ -106,3 +120,10 @@ export default ({ title, entries, topic, url, loading, stats, loadMore }) => {
     </div>
   );
 };
+
+Country.propTypes = {
+  countryId: PropTypes.string,
+  topic: PropTypes.string
+}
+
+export default Country
