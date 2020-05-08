@@ -17,7 +17,7 @@ const Index = () => {
       </Head>
       <Header title={meta.title} desc={meta.desc} />
       <Description desc={ meta.desc } />
-      <Map map={meta.map} />
+      <Map />
       <CountryList />
       <Footer />
       <style jsx>{`
