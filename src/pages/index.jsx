@@ -16,8 +16,8 @@ const Index = () => {
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
       </Head>
-      <Header title={meta.title} />
-      <Description desc={ meta.desc } />
+      <Header />
+      <Description />
       <Map />
       <CountryList />
       <Footer />

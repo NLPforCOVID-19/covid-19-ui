@@ -1,11 +1,13 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 
-const Header = ({ title, desc }) => (
+import meta from '../meta'
+
+const Header = () => (
   <div>
     <div className="bg-info pt-1 pb-1">
       <Container>
-        <h3 className="mb-0"><a href="#" className="text-white">{title}</a></h3>
+        <h3 className="mb-0"><a href="#" className="text-white">{meta.title}</a></h3>
         <div className="small mt-0 text-white">
           <a href="http://nlp.ist.i.kyoto-u.ac.jp/" className="text-white">京都大学 黒橋・村脇研</a>,{' '}
           <a href="http://nlp-waseda.jp/" className="text-white">早稲田大学 河原研</a>,{' '}
