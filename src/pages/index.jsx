@@ -12,13 +12,12 @@ const Index = () => {
     <div className="wrapper">
       <Head>
         <title>{meta.title}</title>
-        <meta name="description" content={meta.desc} />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
       </Head>
-      <Header title={meta.title} />
+      <Header title={meta.title} desc={meta.desc} />
       <Description desc={ meta.desc } />
-      <Map />
+      <Map map={meta.map} />
       <CountryList />
       <Footer />
       <style jsx>{`

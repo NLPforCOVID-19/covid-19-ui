@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 
-const Header = ({ title }) => (
+const Header = ({ title, desc }) => (
   <div>
     <div className="bg-info pt-1 pb-1">
       <Container>
