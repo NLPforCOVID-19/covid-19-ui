@@ -42,7 +42,7 @@ const initialState = {
   newsStates: {}
 }
 
-export const NewsContext = createContext([initialState, () => {}])
+export const StoreContext = createContext([initialState, () => {}])
 
 const actions = {
   // REQUEST_META: 'REQUEST_META',
@@ -222,8 +222,8 @@ export const Provider = ({ children }) => {
     }
   }
   return (
-    <NewsContext.Provider value={[state, asyncDispatch]}>
+    <StoreContext.Provider value={[state, asyncDispatch]}>
       {children}
-    </NewsContext.Provider>
+    </StoreContext.Provider>
   )
 }
