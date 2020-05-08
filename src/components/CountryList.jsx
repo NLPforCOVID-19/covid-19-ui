@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
@@ -7,14 +7,13 @@ import Country from './Country';
 import TopicList from './TopicList';
 import Loading from './Loading';
 import IndicatorLegends from './IndicatorLegends';
+import { MetaContext } from '../store/meta';
 
 const CountryList = () => {
-  const [topics, setTopics] = useState([]);
-  const [countries, setCountries] = useState([]);
+  const [meta] = useContext(MetaContext);
   const [news, setNews] = useState({});
   const [selectedTopic, setSelectedTopic] = useState('');
   
-  const [isFetchingMeta, setIsFetchingMeta] = useState(false);
   // { [country]: { loading: boolean, noMore: { [topic]: boolean } } }
   const [countriesFetchState, setCountriesFetchedState] = useState({});
 
@@ -89,30 +88,26 @@ const CountryList = () => {
   }
 
   async function initialLoad() {
-    setIsFetchingMeta(true);
-    const metaRes = await fetchMeta();
-    setCountries(metaRes.countries);
-    for (const c of metaRes.countries) {
-      setLoading(c.country, true);
+    if (!meta.loaded) {
+      return
     }
-    setTopics(metaRes.topics);
-    const firstTopic = metaRes.topics[0];
+    const { topics, countries } = meta.data
+    const firstTopic = topics[0];
     setSelectedTopic(firstTopic);
-    setIsFetchingMeta(false);
     const firstTopicNews = await fetchNewsByClass(firstTopic, 20);
-    for (const c of metaRes.countries) {
+    for (const c of countries) {
       const country = c.country
       if (!firstTopicNews[country] || firstTopicNews[country].length < 20) {
         setNoMoreNews(country, firstTopic);
       }
     }
     setNews({[firstTopic]: firstTopicNews});
-    const topicsNum = metaRes.topics.length;
+    const topicsNum = topics.length;
     // fetch other topic news
-    const otherClassNews = await Promise.all(metaRes.topics.slice(1, topicsNum).map(c => fetchNewsByClass(c, 20)));
+    const otherClassNews = await Promise.all(topics.slice(1, topicsNum).map(c => fetchNewsByClass(c, 20)));
     otherClassNews.forEach((e, i) => {
-      const topic = metaRes.topics[i + 1];
-      for (const c of metaRes.countries) {
+      const topic = topics[i + 1];
+      for (const c of countries) {
         const country = c.country;
         if (!e[country] || e[country].length < 20) {
           setNoMoreNews(country, topic);
@@ -142,9 +137,9 @@ const CountryList = () => {
     // Run only ones
     useEffect(() => {
       initialLoad();
-    }, []);  
+    }, [meta.loaded]);  
 
-  if (isFetchingMeta) {
+  if (!meta.loaded) {
     return (
       <Container className="mt-3 text-center">
         <Loading />
@@ -154,11 +149,11 @@ const CountryList = () => {
 
   return (
     <Container className="mt-3">
-      <TopicList selectedTopic={selectedTopic} topics={topics} changeTopic={setSelectedTopic} />
+      <TopicList selectedTopic={selectedTopic} topics={meta.data.topics} changeTopic={setSelectedTopic} />
       <IndicatorLegends />
       <Container>
         <Row>
-          {countries.map((c) => (
+          {meta.data.countries.map((c) => (
             <Country
               key={c.country}
               stats={c.stats}
