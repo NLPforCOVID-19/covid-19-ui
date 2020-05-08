@@ -12,6 +12,7 @@ const Index = () => {
     <div className="wrapper">
       <Head>
         <title>{meta.title}</title>
+        <meta name="description" content={meta.desc} />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
       </Head>
