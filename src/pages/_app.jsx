@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/global.css';
 
 import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
 

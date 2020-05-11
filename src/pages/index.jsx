@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-    <div className="wrapper">
+    <div>
       <Head>
         <title>{meta.title}</title>
         <meta name="description" content={meta.desc} />
@@ -21,11 +21,6 @@ const Index = () => {
       <Map />
       <CountryList />
       <Footer />
-      <style jsx>{`
-        .wrapper {
-          font-family: "Noto Sans JP", sans-serif;
-        }
-      `}</style>
     </div>
   );
 };
