@@ -28,9 +28,7 @@ const Page = ({ entry, topic }) => {
     <li>
       <div className="icon"><EntryIcon entry={entry} /></div>
       <div className="news">
-        <div className="title-wrap">
-          <Title entry={entry} />
-        </div>
+        <Title entry={entry} />
         <Snippet text={snippet} />
       </div>
       <style jsx>{`
@@ -47,19 +45,17 @@ const Page = ({ entry, topic }) => {
 };
 
 const Title = ({ entry }) => {
-  const MAX_LEN = 36;
   const isJp = entry.country === 'jp';
   const url = isJp ? entry.url : makeTranslatedUrl(entry.url);
   const day = dayjs(entry.orig.timestamp).format('MM/DD');
-  const full_title = entry.ja_translated.title;
-  const title = full_title.length < MAX_LEN ? full_title : full_title.slice(0, MAX_LEN).concat("...");
+  const title = entry.ja_translated.title;
   return (
     <>
       <a
         href={url}
         target="_blank"
         rel="noreferrer noopener"
-        className="text-info"
+        className="text-info title"
       >
         <span className="small date">[{day}]</span>
         {" "}{title}{" "}
@@ -76,6 +72,12 @@ const Title = ({ entry }) => {
         </>
       )}
       <style jsx>{`
+        .title {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
         .material-icons {
           font-size: 1em;
           vertical-align: middle;
