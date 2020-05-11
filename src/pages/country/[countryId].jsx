@@ -1,34 +1,52 @@
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { StoreContext } from '../../store'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
-const CountryPage = (props) => {
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import Loading from '../../components/Loading'
+import TopicCard from '../../components/TopicCard'
+
+const CountryPage = () => {
   const router = useRouter()
   const { countryId } = router.query
   const [state, dispatch] = useContext(StoreContext)
 
   if (!state.metaLoaded) {
-    return <div>NOOOO</div>
+    return (
+      <Container className="mt-3 text-center">
+        <Loading />
+      </Container>
+    )
   }
 
   const { topics } = state.meta
-  const country = state.meta.countries.find(c => c.country === countryId)
+  const country = state.meta.countries.find((c) => c.country === countryId)
 
   return (
     <div>
-      <h1>{country.name.ja}</h1>
-      <ul>
-        {topics.map((t, i) => (
-          <li key={i}>
-            <h2>{t}</h2>
-            <ul>
-              {state.news[t][countryId].map(e => (
-                <li key={e.url}>{e.ja_translated.title}</li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+      <Header />
+      <Container className="mt-3">
+        <Row>
+          <div className="p-1">
+            <Link href="/">
+              <a className="text-secondary">戻る</a>
+            </Link>
+          </div>
+        </Row>
+        <Row>
+          <h2>{country.name.ja}</h2>
+        </Row>
+        <Row>
+          {topics.map((topic, i) => (
+            <TopicCard key={i} topic={topic} countryId={countryId} />
+          ))}
+        </Row>
+      </Container>
+      <Footer />
     </div>
   )
 }
