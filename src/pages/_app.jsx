@@ -6,7 +6,6 @@ import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
 const AppWithDispach = ({ Component, pageProps }) => {
   const [state, dispatch] = useContext(StoreContext)
   useEffect(() => {
-    console.log('effect!!!')
     dispatch(fetchMeta())
   }, [])
   useEffect(() => {
