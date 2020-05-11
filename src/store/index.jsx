@@ -202,7 +202,6 @@ export function loadAllTopicsNews() {
 export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   async function asyncDispatch(action) {
-    console.log('asyncdispatch', action)
     switch (action.type) {
       case asyncActions.FETCH_META: {
         // dispatch({ type: actions.REQUEST_META })
@@ -214,11 +213,9 @@ export const Provider = ({ children }) => {
       case asyncActions.FETCH_NEWS_BY_TOPIC: {
         const topic = action.target
         if (!state.metaLoaded) {
-          console.log('meta not loaded')
           return
         }
         if (state.topicLoaded[topic]) {
-          console.log('already loaded some news')
           return
         }
         const limit = 20
@@ -252,7 +249,6 @@ export const Provider = ({ children }) => {
         const { topic, country } = action.target
         const { noMore, loading } = state.newsStates[topic][country]
         if (noMore || loading) {
-          console.log('abort load more', noMore, loading)
           return
         }
         const offset = state.news[topic][country].length
