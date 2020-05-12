@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { StoreContext } from '../../store'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import Loading from '../../components/Loading'
-import TopicCard from '../../components/TopicCard'
+import { StoreContext } from '@src/store'
+import Header from '@src/components/Header'
+import Footer from '@src/components/Footer'
+import Loading from '@src/components/Loading'
+import TopicCard from '@src/components/TopicCard'
 
 const CountryPage = () => {
   const router = useRouter()
@@ -32,7 +32,7 @@ const CountryPage = () => {
       <Container className="mt-3">
         <Row>
           <div className="p-1">
-            <Link href="/">
+            <Link href={`${process.env.BASE_PATH}/`}>
               <a className="text-secondary">戻る</a>
             </Link>
           </div>

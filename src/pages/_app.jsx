@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import Head from 'next/head'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../styles/global.css'
+import '@src/styles/global.css'
 
 import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
 

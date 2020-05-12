@@ -1,11 +1,11 @@
 import React from "react";
 import Head from 'next/head';
-import Header from '../components/Header';
-import Description from "../components/Description";
-import Map from '../components/Map';
-import CountryList from '../components/CountryList';
-import meta from '../meta';
-import Footer from '../components/Footer';
+import Header from '@src/components/Header';
+import Description from "@src/components/Description";
+import Map from '@src/components/Map';
+import CountryList from '@src/components/CountryList';
+import meta from '@src/meta';
+import Footer from '@src/components/Footer';
 
 const Index = () => {
   return (
