@@ -50,7 +50,7 @@ const Title = ({ entry }) => {
   const day = dayjs(entry.orig.timestamp).format('MM/DD');
   const title = entry.ja_translated.title;
   return (
-    <>
+    <div className="wrap">
       <a
         href={url}
         target="_blank"
@@ -72,6 +72,9 @@ const Title = ({ entry }) => {
         </>
       )}
       <style jsx>{`
+        .wrap {
+          display: flex;
+        }
         .title {
           display: -webkit-box;
           overflow: hidden;
@@ -86,7 +89,7 @@ const Title = ({ entry }) => {
           color: rgba(0, 0, 0, 0.5);
         }
       `}</style>
-    </>
+    </div>
   )
 };
 
