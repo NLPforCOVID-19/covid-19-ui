@@ -22,35 +22,13 @@ function EntryIcon({entry}) {
 }
 
 const Page = ({ entry, topic }) => {
-  const isJp = entry.country === 'jp';
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
   return (
     <li>
       <div className="icon"><EntryIcon entry={entry} /></div>
       <div className="news">
-        <div className="title-wrap">
-          <a
-            href={isJp ? entry.url : makeTranslatedUrl(entry.url)}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="text-info"
-          >
-            <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
-            {" "}{entry.ja_translated.title}{" "}
-          </a>
-          {isJp || (
-            <>
-              <a
-                href={entry.url}
-                target="_blank"
-                title="元の言語で表示する"
-              >
-                <span className="material-icons open-in-new">open_in_new</span>
-              </a>
-            </>
-          )}
-        </div>
+        <Title entry={entry} />
         <Snippet text={snippet} />
       </div>
       <style jsx>{`
@@ -61,6 +39,48 @@ const Page = ({ entry, topic }) => {
           flex: 0 0 16px;
           margin-right: 3px;
         }
+      `}</style>
+    </li>
+  );
+};
+
+const Title = ({ entry }) => {
+  const isJp = entry.country === 'jp';
+  const url = isJp ? entry.url : makeTranslatedUrl(entry.url);
+  const day = dayjs(entry.orig.timestamp).format('MM/DD');
+  const title = entry.ja_translated.title;
+  return (
+    <div className="wrap">
+      <a
+        href={url}
+        target="_blank"
+        rel="noreferrer noopener"
+        className="text-info title"
+      >
+        <span className="small date">[{day}]</span>
+        {" "}{title}{" "}
+      </a>
+      {isJp || (
+        <>
+          <a
+            href={entry.url}
+            target="_blank"
+            title="元の言語で表示する"
+          >
+            <span className="material-icons open-in-new">open_in_new</span>
+          </a>
+        </>
+      )}
+      <style jsx>{`
+        .wrap {
+          display: flex;
+        }
+        .title {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
         .material-icons {
           font-size: 1em;
           vertical-align: middle;
@@ -69,8 +89,8 @@ const Page = ({ entry, topic }) => {
           color: rgba(0, 0, 0, 0.5);
         }
       `}</style>
-    </li>
-  );
+    </div>
+  )
 };
 
 const Snippet = ({ text }) => <div className="mb-2 small text-secondary">{text}</div>;
