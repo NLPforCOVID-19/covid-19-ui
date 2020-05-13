@@ -6,8 +6,6 @@ import Row from 'react-bootstrap/Row'
 
 import Layout from '@src/components/Layout'
 import { StoreContext } from '@src/store'
-import Header from '@src/components/Header'
-import Footer from '@src/components/Footer'
 import Loading from '@src/components/Loading'
 import TopicCard from '@src/components/TopicCard'
 import IndicatorLegends from '@src/components/IndicatorLegends'
