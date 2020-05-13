@@ -1,8 +1,32 @@
-import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useContext, useEffect } from 'react'
+import Head from 'next/head'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '@src/styles/global.css'
+
+import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
+
+const AppWithDispach = ({ Component, pageProps }) => {
+  const [state, dispatch] = useContext(StoreContext)
+  useEffect(() => {
+    dispatch(fetchMeta())
+  }, [])
+  useEffect(() => {
+    if (state.metaLoaded) {
+      dispatch(loadAllTopicsNews())
+    }
+  }, [state.metaLoaded])
+  return (
+    <Component {...pageProps} />
+  )
 }
 
-export default MyApp;
+function App({ Component, pageProps }) {
+  return (
+    <Provider>
+      <AppWithDispach Component={Component} pageProps={pageProps} />
+    </Provider>
+  )
+}
+
+export default App

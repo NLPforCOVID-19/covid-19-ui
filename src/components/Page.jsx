@@ -54,22 +54,21 @@ const Title = ({ entry }) => {
       <a
         href={url}
         target="_blank"
-        rel="noreferrer noopener"
+        rel="noopener"
         className="text-info title"
       >
         <span className="small date">[{day}]</span>
         {" "}{title}{" "}
       </a>
       {isJp || (
-        <>
-          <a
-            href={entry.url}
-            target="_blank"
-            title="元の言語で表示する"
-          >
-            <span className="material-icons open-in-new">open_in_new</span>
-          </a>
-        </>
+        <a
+          href={entry.url}
+          target="_blank"
+          rel="noopener"
+          title="元の言語で表示する"
+        >
+          <span className="material-icons open-in-new">open_in_new</span>
+        </a>
       )}
       <style jsx>{`
         .wrap {
