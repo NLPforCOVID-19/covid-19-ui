@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
+import Layout from '@src/components/Layout'
 import { StoreContext } from '@src/store'
 import Header from '@src/components/Header'
 import Footer from '@src/components/Footer'
@@ -19,9 +20,9 @@ const CountryPage = () => {
 
   if (!state.metaLoaded) {
     return (
-      <Container className="mt-3 text-center">
-        <Loading />
-      </Container>
+      <Layout>
+        <div className="mt-3 text-center"><Loading /></div>
+      </Layout>
     )
   }
 
@@ -30,13 +31,17 @@ const CountryPage = () => {
 
   if (!country) {
     return (
-      <div>NOT FOUND</div>
+      <Layout>
+        <div className="m-3">
+          <p>このページは表示できません</p>
+          <Link href={`${process.env.BASE_PATH}/`}><a>トップページ</a></Link>
+        </div>
+      </Layout>
     )
   }
 
   return (
-    <div>
-      <Header />
+    <Layout>
       <Container className="mt-3">
         <Row>
           <div className="p-1">
@@ -63,7 +68,6 @@ const CountryPage = () => {
           ))}
         </Row>
       </Container>
-      <Footer />
       <style jsx>{`
         .country-names {
           padding: 10px 0;
@@ -77,7 +81,7 @@ const CountryPage = () => {
           margin: 0 10px;
         }
       `}</style>
-    </div>
+    </Layout>
   )
 }
 

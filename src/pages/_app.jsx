@@ -17,13 +17,7 @@ const AppWithDispach = ({ Component, pageProps }) => {
     }
   }, [state.metaLoaded])
   return (
-    <>
-      <Head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
-      </Head>
-      <Component {...pageProps} />
-    </>
+    <Component {...pageProps} />
   )
 }
 
