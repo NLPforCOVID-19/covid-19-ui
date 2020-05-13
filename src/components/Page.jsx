@@ -33,7 +33,7 @@ const Page = ({ entry, topic }) => {
           <a
             href={isJp ? entry.url : makeTranslatedUrl(entry.url)}
             target="_blank"
-            rel="noreferrer noopener"
+            rel="noopener"
             className="text-info"
           >
             <span className="small date">[{dayjs(entry.orig.timestamp).format('MM/DD')}]</span>
@@ -44,6 +44,7 @@ const Page = ({ entry, topic }) => {
               <a
                 href={entry.url}
                 target="_blank"
+                rel="noopener"
                 title="元の言語で表示する"
               >
                 <span className="material-icons open-in-new">open_in_new</span>

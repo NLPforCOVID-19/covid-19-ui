@@ -45,7 +45,7 @@ const Country = ({ countryId, topic }) => {
                 <a>{countryName}</a>
               </Link>
             </h5>
-            <a href={url} target="_blank" className="text-muted small public-link">
+            <a href={url} target="_blank" rel="noopener" className="text-muted small public-link">
               公的機関のウェブサイトを確認する <span className="material-icons">open_in_new</span>
             </a>
           </div>
