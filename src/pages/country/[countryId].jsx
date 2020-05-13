@@ -11,7 +11,7 @@ import Footer from '@src/components/Footer'
 import Loading from '@src/components/Loading'
 import TopicCard from '@src/components/TopicCard'
 import IndicatorLegends from '@src/components/IndicatorLegends'
-import Stats from '../../components/Stats'
+import Stats from '@src/components/Stats'
 
 const CountryPage = () => {
   const router = useRouter()
