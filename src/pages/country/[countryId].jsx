@@ -9,6 +9,7 @@ import Header from '@src/components/Header'
 import Footer from '@src/components/Footer'
 import Loading from '@src/components/Loading'
 import TopicCard from '@src/components/TopicCard'
+import IndicatorLegends from '@src/components/IndicatorLegends'
 
 const CountryPage = () => {
   const router = useRouter()
@@ -39,6 +40,9 @@ const CountryPage = () => {
         </Row>
         <Row>
           <h2>{country.name.ja}</h2>
+        </Row>
+        <Row>
+          <IndicatorLegends />
         </Row>
         <Row>
           {topics.map((topic, i) => (
