@@ -11,7 +11,7 @@ const Country = ({ countryId, topic }) => {
 
   const country = state.meta.countries.find(c => c.country === countryId)
   const countryName = country.name.ja
-  const url = country.representiveSiteUrl
+  const url = country.representativeSiteUrl
   const stats = country.stats
   const entries = state.news[topic][countryId]
   const { loading } = state.newsStates[topic][countryId]
@@ -39,19 +39,16 @@ const Country = ({ countryId, topic }) => {
     <div className="col-xl-4 col-lg-6 p-1">
       <div className="p-2 border rounded">
         <div className="inner">
-          <h5 className="m-0">
-            <Link href={`./country/[countryId]`} as={`./country/${countryId}`}>
-              <a>{countryName}</a>
-            </Link>
-            &nbsp;
-            <a
-              href={url}
-              target="_blank"
-              title="公的機関のウェブサイトを確認する"
-            >
-              <span className="material-icons">open_in_new</span>
+          <div className="header">
+            <h5 className="m-0">
+              <Link href={`./country/[countryId]`} as={`./country/${countryId}`}>
+                <a>{countryName}</a>
+              </Link>
+            </h5>
+            <a href={url} target="_blank" className="text-muted small public-link">
+              公的機関のウェブサイトを確認する <span className="material-icons">open_in_new</span>
             </a>
-          </h5>
+          </div>
           <div className="text-muted small"><Stats stats={stats} /></div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
           <div ref={wrapEl} className="scroll mt-1 mb-1">
@@ -81,6 +78,11 @@ const Country = ({ countryId, topic }) => {
         }
         .header {
           display: flex;
+          align-items: flex-end;
+          margin-bottom: 5px;
+        }
+        .public-link {
+          margin-left: 10px;
         }
         .scroll {
           display: flex;

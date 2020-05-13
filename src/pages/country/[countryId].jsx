@@ -49,7 +49,7 @@ const CountryPage = () => {
           <div className="country-names">
             <h2>{country.name.ja}</h2>
             <div className="stats text-muted"><Stats stats={country.stats} /></div>
-            <div className="public-link small"><a href={country.representativeSiteUrl} target="_blank">公的機関のサイトを確認する</a></div>
+            <div className="public-link small"><a href={country.representativeSiteUrl} target="_blank">公的機関のウェブサイトを確認する</a></div>
           </div>
         </Row>
         <Row>
