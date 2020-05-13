@@ -61,16 +61,14 @@ const Title = ({ entry }) => {
         {" "}{title}{" "}
       </a>
       {isJp || (
-        <>
-          <a
-            href={entry.url}
-            target="_blank"
-            rel="noopener"
-            title="元の言語で表示する"
-          >
-            <span className="material-icons open-in-new">open_in_new</span>
-          </a>
-        </>
+        <a
+          href={entry.url}
+          target="_blank"
+          rel="noopener"
+          title="元の言語で表示する"
+        >
+          <span className="material-icons open-in-new">open_in_new</span>
+        </a>
       )}
       <style jsx>{`
         .wrap {
