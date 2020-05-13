@@ -10,6 +10,7 @@ import Footer from '@src/components/Footer'
 import Loading from '@src/components/Loading'
 import TopicCard from '@src/components/TopicCard'
 import IndicatorLegends from '@src/components/IndicatorLegends'
+import Stats from '../../components/Stats'
 
 const CountryPage = () => {
   const router = useRouter()
@@ -27,6 +28,12 @@ const CountryPage = () => {
   const { topics } = state.meta
   const country = state.meta.countries.find((c) => c.country === countryId)
 
+  if (!country) {
+    return (
+      <div>NOT FOUND</div>
+    )
+  }
+
   return (
     <div>
       <Header />
@@ -39,7 +46,11 @@ const CountryPage = () => {
           </div>
         </Row>
         <Row>
-          <h2>{country.name.ja}</h2>
+          <div className="country-names">
+            <h2>{country.name.ja}</h2>
+            <div className="stats text-muted"><Stats stats={country.stats} /></div>
+            <div className="public-link small"><a href={country.representativeSiteUrl} target="_blank">公的機関のサイトを確認する</a></div>
+          </div>
         </Row>
         <Row>
           <IndicatorLegends />
@@ -51,6 +62,19 @@ const CountryPage = () => {
         </Row>
       </Container>
       <Footer />
+      <style jsx>{`
+        .country-names {
+          padding: 10px 0;
+          display: flex;
+          align-items: flex-end;
+        }
+        h2 {
+          margin: 0;
+        }
+        .stats, .public-link {
+          margin: 0 10px;
+        }
+      `}</style>
     </div>
   )
 }

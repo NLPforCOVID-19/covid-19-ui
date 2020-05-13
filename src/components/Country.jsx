@@ -4,17 +4,7 @@ import Link from 'next/link'
 import Page from './Page';
 import Loading from './Loading'
 import { StoreContext, loadMore } from '../store';
-
-function numberWithPlusMinus(num) {
-  const abs_str = Math.abs(num).toLocaleString()
-  if (num === 0) {
-    return '±0'
-  }
-  if (num > 0) {
-    return `+${abs_str}`
-  }
-  return `-${abs_str}`
-}
+import Stats from '../components/Stats'
 
 const Country = ({ countryId, topic }) => {
   const [state, dispatch] = useContext(StoreContext)
@@ -62,11 +52,7 @@ const Country = ({ countryId, topic }) => {
               <span className="material-icons">open_in_new</span>
             </a>
           </h5>
-          <div className="text-muted small">
-            感染者: {stats.confirmation_total.toLocaleString()}{' '}({numberWithPlusMinus(stats.confirmation_today)})
-            {' '}/
-            死亡者: {stats.death_total.toLocaleString()}{' '}({numberWithPlusMinus(stats.death_today)})
-          </div>
+          <div className="text-muted small"><Stats stats={stats} /></div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
           <div ref={wrapEl} className="scroll mt-1 mb-1">
             <ul>
