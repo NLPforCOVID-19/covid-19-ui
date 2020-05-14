@@ -10,6 +10,7 @@ import Loading from '@src/components/Loading'
 import TopicCard from '@src/components/TopicCard'
 import IndicatorLegends from '@src/components/IndicatorLegends'
 import Stats from '@src/components/Stats'
+import meta from '@src/meta'
 
 const CountryPage = () => {
   const router = useRouter()
@@ -38,6 +39,8 @@ const CountryPage = () => {
     )
   }
 
+  const domains = meta.regions[countryId] || []
+
   return (
     <Layout>
       <Container className="mt-3">
@@ -64,6 +67,16 @@ const CountryPage = () => {
           {topics.map((topic, i) => (
             <TopicCard key={i} topic={topic} countryId={countryId} />
           ))}
+        </Row>
+        <Row className="m-2">
+          <h4>ソース</h4>
+        </Row>
+        <Row>
+          <ul>
+            {domains.map((domain, i) => (
+              <li key={i}><a href={`https://${domain}`} target="_blank" rel="noopener">{domain}</a></li>
+            ))}
+          </ul>
         </Row>
       </Container>
       <style jsx>{`
