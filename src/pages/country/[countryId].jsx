@@ -68,15 +68,15 @@ const CountryPage = () => {
             <TopicCard key={i} topic={topic} countryId={countryId} />
           ))}
         </Row>
-        <Row className="m-2">
+        <Row className="mt-2">
           <h4>ソース</h4>
         </Row>
         <Row>
-          <ul>
+          <p>
             {domains.map((domain, i) => (
-              <li key={i}><a href={`https://${domain}`} target="_blank" rel="noopener">{domain}</a></li>
+              <span key={i}><a href={`https://${domain}`} target="_blank" rel="noopener">{domain}</a><br /></span>
             ))}
-          </ul>
+          </p>
         </Row>
       </Container>
       <style jsx>{`
