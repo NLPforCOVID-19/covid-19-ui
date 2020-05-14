@@ -44,7 +44,7 @@ const CountryPage = () => {
         <Row>
           <div className="p-1">
             <Link href={`${process.env.BASE_PATH}/`}>
-              <a className="text-secondary">戻る</a>
+              <a className="text-secondary">トップページに戻る</a>
             </Link>
           </div>
         </Row>
