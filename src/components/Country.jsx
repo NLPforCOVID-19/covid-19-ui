@@ -11,7 +11,6 @@ const Country = ({ countryId, topic }) => {
 
   const country = state.meta.countries.find(c => c.country === countryId)
   const countryName = country.name.ja
-  const url = country.representativeSiteUrl
   const stats = country.stats
   const entries = state.news[topic][countryId]
   const { loading } = state.newsStates[topic][countryId]
@@ -45,9 +44,6 @@ const Country = ({ countryId, topic }) => {
                 <a>{countryName}</a>
               </Link>
             </h5>
-            <a href={url} target="_blank" rel="noopener" className="text-muted small public-link">
-              公的機関のウェブサイトを確認する <span className="material-icons">open_in_new</span>
-            </a>
           </div>
           <div className="text-muted small"><Stats stats={stats} /></div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
