@@ -39,7 +39,7 @@ const CountryPage = () => {
     )
   }
 
-  const domains = meta.regions[countryId] || []
+  const urls = meta.regions[countryId] || []
 
   return (
     <Layout>
@@ -72,11 +72,11 @@ const CountryPage = () => {
           <h4>ソース</h4>
         </Row>
         <Row>
-          <p>
-            {domains.map((domain, i) => (
-              <span key={i}><a href={`https://${domain}`} target="_blank" rel="noopener">{domain}</a><br /></span>
+          <div>
+            {urls.map((url, i) => (
+              <div key={i}><a href={url} target="_blank" rel="noopener">{url}</a></div>
             ))}
-          </p>
+          </div>
         </Row>
       </Container>
       <style jsx>{`
