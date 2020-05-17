@@ -10,6 +10,7 @@ import Loading from '@src/components/Loading'
 import TopicCard from '@src/components/TopicCard'
 import IndicatorLegends from '@src/components/IndicatorLegends'
 import Stats from '@src/components/Stats'
+import meta from '@src/meta'
 
 const CountryPage = () => {
   const router = useRouter()
@@ -38,13 +39,15 @@ const CountryPage = () => {
     )
   }
 
+  const urls = meta.regions[countryId] || []
+
   return (
     <Layout>
       <Container className="mt-3">
         <Row>
           <div className="p-1">
             <Link href={`${process.env.BASE_PATH}/`}>
-              <a className="text-secondary">戻る</a>
+              <a className="text-secondary">トップページに戻る</a>
             </Link>
           </div>
         </Row>
@@ -64,6 +67,16 @@ const CountryPage = () => {
           {topics.map((topic, i) => (
             <TopicCard key={i} topic={topic} countryId={countryId} />
           ))}
+        </Row>
+        <Row className="mt-2">
+          <h4>ソース</h4>
+        </Row>
+        <Row>
+          <div>
+            {urls.map((url, i) => (
+              <div key={i}><a href={url} target="_blank" rel="noopener">{url}</a></div>
+            ))}
+          </div>
         </Row>
       </Container>
       <style jsx>{`
