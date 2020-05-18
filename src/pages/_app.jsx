@@ -1,10 +1,19 @@
 import React, { useContext, useEffect } from 'react'
-import Head from 'next/head'
+import Router from 'next/router'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@src/styles/global.css'
 
 import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
+
+Router.events.on('routeChangeComplete', (url) => {
+  if (typeof window.gtag === 'undefined') {
+    return
+  }
+  window.gtag('config', process.env.GA_TRACKING_ID, {
+    page_location: url
+  })
+})
 
 const AppWithDispach = ({ Component, pageProps }) => {
   const [state, dispatch] = useContext(StoreContext)

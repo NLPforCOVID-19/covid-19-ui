@@ -54,6 +54,7 @@ To build or develop the website, set the following variables.
 - Build
   - API_URL
   - BASE_URL (Optional; This variable is needed when the website is served from other than a domain's root.)
+  - GA_TRACKING_ID
 
 #### BASE_URL
 
