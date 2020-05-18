@@ -69,7 +69,7 @@ const CountryPage = () => {
           ))}
         </Row>
         <Row className="mt-2">
-          <h4>ソース</h4>
+          <h4>情報源のサイト</h4>
         </Row>
         <Row>
           <div>
@@ -94,6 +94,6 @@ const CountryPage = () => {
       `}</style>
     </Layout>
   )
-}
+};
 
 export default CountryPage

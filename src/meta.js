@@ -1,9 +1,14 @@
 module.exports = {
   title: '新型コロナウイルス世界情報集約サイト',
   desc:
-    'このサイトは、新型コロナウイルス感染症に関する世界の情報を集約し提示しています。 世界の各地域の公式サイトやニュースをクロール、日本語に機械翻訳し、「感染状況」「予防・緊急事態宣言」などのカテゴリに自動分類しています。 自動分類されたカテゴリは順次、クラウドソーシングによって検証しています。',
+    'このサイトは、新型コロナウイルス感染症に関する世界各地域の公式サイトやニュースをクロールし、国・地域 × カテゴリ (「感染状況」「予防・緊急事態宣言」など) で集約、提示しています。',
   regions: {
-    fr: ['http://fr.reuters.com/', 'http://www.france24.com/', 'http://www.gouvernement.fr/', 'http://www.lci.fr/'],
+    fr: [
+      'http://fr.reuters.com/',
+      'http://www.france24.com/',
+      'http://www.gouvernement.fr/',
+      'http://www.lci.fr/'
+    ],
     us: ['http://globalbiodefense.com/', 'http://www.cdc.gov/'],
     eu: ['http://www.ecdc.europa.eu/'],
     cn: ['http://www.gov.cn/', 'http://health.ifeng.com/'],
@@ -19,4 +24,4 @@ module.exports = {
     in: ['http://www.mygov.in/'],
     de: ['http://www.zusammengegencorona.de/']
   }
-}
+};
