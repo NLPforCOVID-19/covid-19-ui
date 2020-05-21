@@ -7,7 +7,7 @@ export default () => {
     <Layout>
       <Container className="p-3">
         <div className="back-link-wrap">
-          <Link href="./">
+          <Link href={`${process.env.BASE_PATH}/`}>
             <a className="text-secondary">トップページに戻る</a>
           </Link>
         </div>
