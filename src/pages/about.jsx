@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
 import Layout from '@src/components/Layout'
 
 export default () => {
