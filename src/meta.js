@@ -23,5 +23,13 @@ module.exports = {
     es: ['http://www.mscbs.gob.es/'],
     in: ['http://www.mygov.in/'],
     de: ['http://www.zusammengegencorona.de/']
+  },
+  countryDisplayName: {
+    fr: 'フランス',
+    es: 'スペイン',
+    de: 'ドイツ',
+    eu: 'EU',
+    kr: '韓国',
+    in: 'インド'
   }
-};
+}

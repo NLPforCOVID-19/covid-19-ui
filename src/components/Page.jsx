@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 
 import * as Icons from './Icons';
+import meta from '@src/meta'
 
 function makeTranslatedUrl(url) {
   const target_lang = 'ja';
@@ -21,14 +22,14 @@ function EntryIcon({entry}) {
   return <Icons.NotVerified />
 }
 
-const Page = ({ entry, topic }) => {
+const Page = ({ entry, topic, region }) => {
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
   return (
     <li>
       <div className="icon"><EntryIcon entry={entry} /></div>
       <div className="news">
-        <Title entry={entry} />
+        <Title entry={entry} region={region} />
         <Snippet text={snippet} />
       </div>
       <style jsx>{`
@@ -44,11 +45,12 @@ const Page = ({ entry, topic }) => {
   );
 };
 
-const Title = ({ entry }) => {
+const Title = ({ entry, region }) => {
   const isJp = entry.country === 'jp';
   const url = isJp ? entry.url : makeTranslatedUrl(entry.url);
   const day = dayjs(entry.orig.timestamp).format('MM/DD');
   const title = entry.ja_translated.title;
+  const isShowCountryName = region !== entry.country
   return (
     <div className="wrap">
       <a
@@ -57,8 +59,9 @@ const Title = ({ entry }) => {
         rel="noopener"
         className="text-info title"
       >
-        <span className="small date">[{day}]</span>
-        {" "}{title}{" "}
+        <span className="small">[{day}]</span>
+        {isShowCountryName && <span className="small">&thinsp;({meta.countryDisplayName[entry.country]})</span>}
+        &thinsp;{title}
       </a>
       {isJp || (
         <a
