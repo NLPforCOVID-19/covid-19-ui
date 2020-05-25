@@ -44,7 +44,7 @@ const Country = ({ countryId, topic }) => {
           <div ref={wrapEl} className="scroll mt-1 mb-1">
             <ul>
               {entries.map((entry, i) => (
-                <Page key={i} entry={entry} topic={topic} />
+                <Page key={i} entry={entry} topic={topic} region={countryId} />
               ))}
             </ul>
             {loading && (
