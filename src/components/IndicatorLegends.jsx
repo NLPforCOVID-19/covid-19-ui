@@ -9,8 +9,8 @@ export default () => (
       <div className="text-secondary">{Icons.description.useful}</div>
     </li>
     <li>
-      <Icons.Rumor />
-      <div className="text-secondary">{Icons.description.rumor}</div>
+      <Icons.Verified />
+      <div className="text-secondary">{Icons.description.verified}</div>
     </li>
     <li>
       <Icons.NotVerified />

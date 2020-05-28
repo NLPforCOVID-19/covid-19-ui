@@ -10,14 +10,11 @@ function makeTranslatedUrl(url) {
 }
 
 function EntryIcon({entry}) {
-  if (entry.is_about_false_rumor === 1) {
-    return <Icons.Rumor />
-  }
   if (entry.is_useful === 2) {
-    return <Icons.Useful/>
+    return <Icons.Useful />
   }
   if (entry.is_useful === 1) {
-    return null
+    return <Icons.Verified />
   }
   return <Icons.NotVerified />
 }
