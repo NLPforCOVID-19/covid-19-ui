@@ -3,10 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 import NewsCard from './NewsCard';
-import Tabs from './TopicList';
+import Tabs from './Tabs';
 import Loading from './Loading';
 import IndicatorLegends from './IndicatorLegends';
 import { StoreContext } from '../store';
+import Stats from './Stats';
 
 const NewsView = () => {
   const [state] = useContext(StoreContext);
@@ -44,8 +45,8 @@ const NewsView = () => {
     const selectedCountryName = countries.find(c => c.country === selectedCountry).name.ja
     const countryNames = countries.map(c => c.name.ja)
     return (
-      <Container className="mt-3">
-        <Tabs selectedTopic={selectedCountryName} topics={countryNames} changeTopic={(idx) => handleClickCountry(countries[idx].country)} />
+      <Container className="mt-3" id="news-view">
+        <Tabs active={selectedCountryName} choices={countryNames} onChange={(idx) => handleClickCountry(countries[idx].country)} />
         <IndicatorLegends />
         <Container>
           <Row>
@@ -65,8 +66,8 @@ const NewsView = () => {
   }
 
   return (
-    <Container className="mt-3">
-      <Tabs selectedTopic={selectedTopic} topics={topics} changeTopic={(idx) => handleClickTopic(topics[idx])} />
+    <Container className="mt-3" id="news-view">
+      <Tabs active={selectedTopic} choices={topics} onChange={(idx) => handleClickTopic(topics[idx])} />
       <IndicatorLegends />
       <Container>
         <Row>
@@ -77,7 +78,9 @@ const NewsView = () => {
               countryId={c.country}
               topic={selectedTopic}
               onClickTitle={() => handleClickCountry(c.country)}
-            />
+            >
+              <div className="text-muted small"><Stats stats={c.stats} /></div>
+            </NewsCard>
           ))}
         </Row>
       </Container>
