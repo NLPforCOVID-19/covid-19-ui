@@ -6,7 +6,7 @@ export default ({ selectedTopic, topics, changeTopic }) => (
     {topics.map((topic, i) => (
       <span key={i}>
       {' '}
-        <Button variant="outline-info" size="sm" active={selectedTopic === topic} onClick={() => changeTopic(topic)}>
+        <Button variant="outline-info" size="sm" active={selectedTopic === topic} onClick={() => changeTopic(i)}>
         {topic}
       </Button>
     </span>

@@ -3,14 +3,14 @@ import React from "react";
 import Layout from '@src/components/Layout';
 import Description from "@src/components/Description";
 import Map from '@src/components/Map';
-import CountryList from '@src/components/CountryList';
+import NewsView from '@src/components/NewsView';
 
 const Index = () => {
   return (
     <Layout>
       <Description />
       <Map />
-      <CountryList />
+      <NewsView />
     </Layout>
   );
 };

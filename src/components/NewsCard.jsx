@@ -4,13 +4,12 @@ import Link from 'next/link'
 import Page from './Page';
 import Loading from './Loading'
 import { StoreContext, loadMore } from '../store';
-import Stats from '../components/Stats'
+import Stats from './Stats'
 
-const Country = ({ countryId, topic }) => {
+const Country = ({ title, countryId, topic, onClickTitle }) => {
   const [state, dispatch] = useContext(StoreContext)
 
   const country = state.meta.countries.find(c => c.country === countryId)
-  const countryName = country.name.ja
   const stats = country.stats
   const entries = state.news[topic][countryId]
   const { loading } = state.newsStates[topic][countryId]
@@ -39,7 +38,7 @@ const Country = ({ countryId, topic }) => {
       <div className="p-2 border rounded">
         <div className="inner">
           <div className="header">
-            <h5 className="m-0">{countryName}</h5>
+            <h5 className="m-0"><a href="#" onClick={onClickTitle}>{title}</a></h5>
           </div>
           <div className="text-muted small"><Stats stats={stats} /></div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
@@ -102,8 +101,10 @@ const Country = ({ countryId, topic }) => {
 };
 
 Country.propTypes = {
-  countryId: PropTypes.string,
-  topic: PropTypes.string
+  title: PropTypes.string.isRequired,
+  countryId: PropTypes.string.isRequired,
+  topic: PropTypes.string.isRequired,
+  onClickTitle: PropTypes.func.isRequired
 }
 
 export default Country
