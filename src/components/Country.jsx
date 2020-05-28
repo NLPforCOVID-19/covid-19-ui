@@ -39,11 +39,7 @@ const Country = ({ countryId, topic }) => {
       <div className="p-2 border rounded">
         <div className="inner">
           <div className="header">
-            <h5 className="m-0">
-              <Link href={`./country/[countryId]`} as={`./country/${countryId}`}>
-                <a>{countryName}</a>
-              </Link>
-            </h5>
+            <h5 className="m-0">{countryName}</h5>
           </div>
           <div className="text-muted small"><Stats stats={stats} /></div>
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
