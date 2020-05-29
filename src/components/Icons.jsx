@@ -12,7 +12,7 @@ const BaseIcon = ({title, color, size, iconId}) => (
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
-        color: ${color || "#aaa"};
+        color: ${color || "var(--gray)"};
         font-size: ${size || "1em"};
       }
     `}</style>
@@ -25,9 +25,14 @@ export const NotVerified = ({size}) => (
 
 
 export const Useful = ({size}) => (
-  <BaseIcon title={description.useful} size={size} color="#ffca18" iconId="check_circle" />
+  <BaseIcon title={description.useful} size={size} color="var(--yellow)" iconId="check_circle" />
 );
 
 export const Verified = ({size}) => (
-  <BaseIcon title={description.useful} size={size} color="#70bf00" iconId="check_circle" />
+  <BaseIcon title={description.useful} size={size} color="#b4e063" iconId="check_circle" />
 )
+
+// #58db76
+// #8eeda4
+// #bdeb6a
+// #b4e063
