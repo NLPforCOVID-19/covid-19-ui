@@ -20,7 +20,7 @@ export default () => (
       ul {
         list-style-type: none;
         padding: 0;
-        margin: 0 0 5px;
+        margin: 0 0 10px;
         display: flex;
       }
       li {

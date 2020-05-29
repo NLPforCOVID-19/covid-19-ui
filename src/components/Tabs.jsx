@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button';
 
 const Tabs = ({ active, choices, onChange }) => (
-  <div className="mb-2">
+  <div>
     {choices.map((topic, i) => (
       <span key={i}>
       {' '}

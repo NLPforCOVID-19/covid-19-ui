@@ -10,6 +10,11 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
   const entries = state.news[topic][countryId]
   const { loading } = state.newsStates[topic][countryId]
 
+  function handleClickTitle(e) {
+    e.preventDefault()
+    onClickTitle()
+  }
+
   const observeEl = useRef(null);
   const wrapEl = useRef(null);
   useEffect(() => {
@@ -34,7 +39,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
       <div className="p-2 border rounded">
         <div className="inner">
           <div className="header">
-            <h5 className="m-0"><a href="#news-view" onClick={onClickTitle}>{title}</a></h5>
+            <h5 className="m-0"><a href="#" onClick={handleClickTitle}>{title}</a></h5>
           </div>
           { children }
           {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
