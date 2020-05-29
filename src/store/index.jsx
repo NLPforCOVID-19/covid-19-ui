@@ -238,8 +238,7 @@ export const Provider = ({ children }) => {
 
       case asyncActions.LOAD_ALL_TOPICS_NEWS: {
         const topics = state.meta.topics.filter(t => !state.topicLoaded[t])
-        await asyncDispatch(fetchNewsByTopic(topics[0]))
-        for (const topic of topics.slice(1)) {
+        for (const topic of topics) {
           asyncDispatch(fetchNewsByTopic(topic))
         }
         break
