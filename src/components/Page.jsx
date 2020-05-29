@@ -48,6 +48,7 @@ const Title = ({ entry, region }) => {
   const day = dayjs(entry.orig.timestamp).format('MM/DD');
   const title = entry.ja_translated.title;
   const isShowCountryName = region !== entry.country
+  const isRumor = entry.is_about_false_rumor === 1
   return (
     <div className="wrap">
       <a
@@ -57,6 +58,7 @@ const Title = ({ entry, region }) => {
         className="text-info title"
       >
         <span className="small">[{day}]</span>
+        {isRumor && <span>&thinsp;<mark className="small text-muted">デマに関する情報</mark></span>}
         {isShowCountryName && <span className="small">&thinsp;({meta.countryDisplayName[entry.country]})</span>}
         &thinsp;{title}
       </a>
@@ -79,6 +81,9 @@ const Title = ({ entry, region }) => {
           overflow: hidden;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
+        }
+        mark {
+          background-color: #ffee70;
         }
         .material-icons {
           font-size: 1em;
