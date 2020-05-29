@@ -24,11 +24,13 @@ const NewsView = () => {
   }
 
   function handleHashChange() {
+    console.log('hashChange', state.metaLoaded)
     if (!state.metaLoaded) {
       return
     }
     const { topics, countries } = state.meta
     const slugs = decodeURIComponent(location.hash).slice(1).split('/')
+    console.log(slugs)
     switch (slugs[0]) {
       case 'r': {
         if (!countries.find(c => c.country === slugs[1])) {
@@ -60,7 +62,7 @@ const NewsView = () => {
   useEffect(() => {
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
+  }, [state.metaLoaded])
 
   if (!state.metaLoaded || (!selectedTopic && !selectedCountry)) {
     return (
