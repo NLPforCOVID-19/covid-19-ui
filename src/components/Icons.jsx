@@ -2,17 +2,17 @@ import React from 'react';
 
 export const description = {
   useful: "役立つ記事",
-  rumor: "デマに関する記事",
+  verified: "カテゴリ検証済みの記事",
   notVerified: "カテゴリ未検証の記事"
 };
 
-const BaseIcon = ({title, color, size}) => (
+const BaseIcon = ({title, color, size, iconId}) => (
   <>
-    <i className="material-icons" title={title || ""}>check_circle</i>
+    <i className="material-icons" title={title || ""}>{iconId}</i>
     <style jsx>{`
       .material-icons {
         vertical-align: middle;
-        color: ${color || "#ccc"};
+        color: ${color || "var(--gray)"};
         font-size: ${size || "1em"};
       }
     `}</style>
@@ -20,15 +20,19 @@ const BaseIcon = ({title, color, size}) => (
 )
 
 export const NotVerified = ({size}) => (
-  <BaseIcon title={description.notVerified} size={size} />
+  <BaseIcon title={description.notVerified} size={size} iconId="help_outline" />
 );
 
 
 export const Useful = ({size}) => (
-  <BaseIcon title={description.useful} size={size} color="#ffca18" />
+  <BaseIcon title={description.useful} size={size} color="var(--yellow)" iconId="check_circle" />
 );
 
+export const Verified = ({size}) => (
+  <BaseIcon title={description.useful} size={size} color="#b4e063" iconId="check_circle" />
+)
 
-export const Rumor = ({size}) => (
-  <BaseIcon title={description.rumor} size={size} color="#0079c1" />
-);
+// #58db76
+// #8eeda4
+// #bdeb6a
+// #b4e063
