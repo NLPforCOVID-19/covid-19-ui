@@ -72,6 +72,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
           display: flex;
           align-items: flex-end;
           margin-bottom: 5px;
+          flex: 0 0 auto;
         }
         .public-link {
           margin-left: 10px;
