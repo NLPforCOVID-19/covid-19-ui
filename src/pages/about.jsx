@@ -36,6 +36,13 @@ export default () => {
             <img src={`${process.env.BASE_PATH}/images/region-view.png`} width="100%" alt="リージョンビュー" />
           </div>
         </section>
+        <section>
+          <h4>Google翻訳で翻訳できないときは</h4>
+          <p className="desc">
+            一部、Google翻訳でうまく翻訳できないサイトがあります。
+            この場合、Google Chrome等のブラウザの翻訳機能を使うと翻訳できる場合があります。
+          </p>
+        </section>
       </Container>
       <style jsx>{`
         .back-link-wrap {
