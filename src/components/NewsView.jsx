@@ -8,7 +8,6 @@ import Loading from './Loading';
 import IndicatorLegends from './IndicatorLegends';
 import { StoreContext } from '../store';
 import Stats from './Stats';
-import meta from '../meta'
 
 const NewsView = () => {
   const [state] = useContext(StoreContext);
@@ -76,7 +75,7 @@ const NewsView = () => {
     const selectedCountryData = countries.find(c => c.country === selectedCountry)
     const selectedCountryName = selectedCountryData.name.ja
     const countryNames = countries.map(c => c.name.ja)
-    const sources = meta.regions[selectedCountry]
+    const sources = selectedCountryData.sources
     return (
       <Container className="mt-3" id="news-view">
         <IndicatorLegends />
