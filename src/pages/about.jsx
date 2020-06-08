@@ -14,7 +14,7 @@ export default () => {
         </p>
         <Row>
           <Col md="12" lg="6">
-            <Card>
+            <Card className="mb-3">
               <Card.Body className="p-2">
                 <Card.Title className="mb-1">1. カテゴリビュー</Card.Title>
                 <Card.Text>
@@ -26,7 +26,7 @@ export default () => {
             </Card>
           </Col>
           <Col md="12" lg="6">
-            <Card>
+            <Card className="mb-3">
               <Card.Body className="p-2">
                 <Card.Title className="mb-1">2. 地域ビュー</Card.Title>
                 <Card.Text>
@@ -49,9 +49,6 @@ export default () => {
       <style jsx>{`  
         .back-link-wrap {
           margin-bottom: 10px;
-        }
-        section {
-          padding: 20px 0;
         }
         .question {
           padding-left: 10px;
