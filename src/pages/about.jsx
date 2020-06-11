@@ -13,8 +13,8 @@ export default () => {
           このサイトは、COVID-19（新型コロナウイルス感染症）に関する世界各地域の公式サイトやニュースをクロールし、国・地域 × カテゴリで集約、提示しています。
         </p>
         <Row>
-          <Col md="12" lg="6">
-            <Card className="mb-3">
+          <Col md="12" lg="6" className="d-flex">
+            <Card className="mb-3 flex-fill">
               <Card.Body className="p-2">
                 <Card.Title className="mb-1">1. カテゴリビュー</Card.Title>
                 <Card.Text>
@@ -25,8 +25,8 @@ export default () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col md="12" lg="6">
-            <Card className="mb-3">
+          <Col md="12" lg="6" className="d-flex">
+            <Card className="mb-3 flex-fill">
               <Card.Body className="p-2">
                 <Card.Title className="mb-1">2. 地域ビュー</Card.Title>
                 <Card.Text>
@@ -42,7 +42,7 @@ export default () => {
           <h5>よくある質問</h5>
           <h6 className="question">Q. Google 翻訳で翻訳できない</h6>
           <p className="desc">
-            一部、Google 翻訳で翻訳できないサイトがあります。Google Chrome 等のブラウザの翻訳機能を使うと翻訳できる場合があります。
+            A. 一部、Google 翻訳で翻訳できないサイトがあります。Google Chrome 等のブラウザの翻訳機能を使うと翻訳できる場合があります。
           </p>
         </section>
       </Container>
