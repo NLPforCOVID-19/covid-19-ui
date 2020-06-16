@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Layout from '@src/components/Layout'
+import React from "react";
 
 export default () => {
   return (
@@ -42,7 +43,11 @@ export default () => {
           <h5>よくある質問</h5>
           <h6 className="question">Q. Google 翻訳で翻訳できない</h6>
           <p className="desc">
-            A. 一部、Google 翻訳で翻訳できないサイトがあります。Google Chrome 等のブラウザの翻訳機能を使うと翻訳できる場合があります。
+            A. 現在の Google 翻訳の仕様上、翻訳できないサイトがあります。
+            Google Chrome を利用の方は、標準搭載の翻訳ツールを使うことで翻訳できる場合があります。
+            まず、タイトルの横にあるリンク（<span className="material-icons open-in-new">open_in_new</span>）から元のページを開いてください。
+            ページを開くと翻訳ツールのダイアログが表示されるので、日本語を選択してください。
+            ダイアログが表示されない方は、設定>詳細設定>言語から、「母国語以外のページで翻訳ツールを表示する」を有効にしてください。
           </p>
         </section>
       </Container>
@@ -55,6 +60,13 @@ export default () => {
         }
         .desc {
           padding-left: 20px;
+        }
+        .material-icons {
+          font-size: 1em;
+          vertical-align: middle;
+        }
+        .open-in-new {
+          color: rgba(0, 0, 0, 0.5);
         }
       `}</style>
     </Layout>
