@@ -27,18 +27,15 @@ jobs:
           npm run export
           mv out/_next out$BASE_PATH
           mv out/images out$BASE_PATH
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          config: ${{ secrets.SSH_CONFIG }}
       - name: Deploy to Server
         env:
-          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
-          SSH_PUBLIC: ${{ secrets.SSH_PUBLIC }}
-          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          REMOTE_1: ${{ secrets.REMOTE_1 }}
-          REMOTE_2: ${{ secrets.REMOTE_2 }}
+          REMOTE: ${{ secrets.REMOTE }}
         run: |
-          echo "$SSH_PRIVATE" > id_rsa
-          chmod 600 id_rsa
-          mkdir -p ~/.ssh
-          echo "$KNOWN_HOSTS" >> ~/.ssh/known_hosts
-          rsync -av --delete --dry-run -e "ssh -i id_rsa -o ProxyCommand=\"ssh -i id_rsa -W %h:%p $REMOTE_1\" $REMOTE_2" out$BASE_PATH/ $SSH_USER:$DEPLOY_PATH
+          rsync -av --delete --dry-run out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
