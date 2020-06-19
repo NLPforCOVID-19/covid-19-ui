@@ -37,7 +37,9 @@ jobs:
           REMOTE_1: ${{ secrets.REMOTE_1 }}
           REMOTE_2: ${{ secrets.REMOTE_2 }}
         run: |
+          mkdir -p ~/.ssh
           echo $SSH_PRIVATE > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           echo $SSH_PUBLIC > ~/.ssh/id_rsa.pub
           echo $KNOWN_HOSTS >> ~/.ssh/known_hosts
           rsync -av --delete --dry-run -e "ssh -o ProxyCommand=\"ssh -W %h:%p $REMOTE_1\" $REMOTE_2" out$BASE_PATH/ $SSH_USER:$DEPLOY_PATH
