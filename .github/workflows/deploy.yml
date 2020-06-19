@@ -38,4 +38,4 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           REMOTE: ${{ secrets.REMOTE }}
         run: |
-          rsync -av --delete --dry-run out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
+          rsync -av --delete --dry-run out$BASE_PATH/ $SSH_USER@$REMOTE:$DEPLOY_PATH
