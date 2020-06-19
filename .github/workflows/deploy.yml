@@ -42,6 +42,5 @@ jobs:
         env:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           REMOTE: ${{ secrets.REMOTE }}
-          SSH_USER: ${{ secrets.SSH_USER }}
         run: |
-          rsync -av --delete --dry-run out$BASE_PATH/ $SSH_USER@$REMOTE:$DEPLOY_PATH
+          rsync -av --delete out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
