@@ -28,11 +28,16 @@ jobs:
           mv out/_next out$BASE_PATH
           mv out/images out$BASE_PATH
       - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          config: ${{ secrets.SSH_CONFIG }}
+        env:
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
+          SSH_CONFIG: ${{ secrets.SSH_CONFIG }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_CONFIG" > ~/.ssh/config
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
       - name: Deploy to Server
         env:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
