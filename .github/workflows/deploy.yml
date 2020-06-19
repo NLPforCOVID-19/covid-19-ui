@@ -39,5 +39,6 @@ jobs:
         run: |
           echo $SSH_PRIVATE > id_rsa
           chmod 600 id_rsa
+          mkdir -p ~/.ssh
           echo $KNOWN_HOSTS >> ~/.ssh/known_hosts
           rsync -av --delete --dry-run -e "ssh -i id_rsa -o ProxyCommand=\"ssh -W %h:%p $REMOTE_1\" $REMOTE_2" out$BASE_PATH/ $SSH_USER:$DEPLOY_PATH
