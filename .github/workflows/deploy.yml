@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     env:
-      BASE_PATH: /NLPforCOVID-19
+      BASE_PATH: /NLPforCOVID-19-dev
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,4 +43,5 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           REMOTE: ${{ secrets.REMOTE }}
         run: |
+          chmod -R g+w out$BASE_PATH
           rsync -av out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
