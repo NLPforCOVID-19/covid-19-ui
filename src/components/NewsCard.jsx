@@ -1,9 +1,8 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import PropTypes from 'prop-types'
-import Modal from 'react-bootstrap/Modal'
 import Page from './Page';
 import Loading from './Loading'
-import { ModifyForm } from './ModifyForm'
+import { ModifyModal } from './ModifyModal'
 import { StoreContext, loadMore } from '../store';
 
 const Country = ({ title, countryId, topic, onClickTitle, children }) => {
@@ -118,14 +117,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
           }
         `}</style>
       </div>
-      <Modal show={showEditModal} onHide={closeEditModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>地域/カテゴリの修正</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ModifyForm entry={editingEntry} topics={topics} regions={regions} />
-        </Modal.Body>
-      </Modal>
+      <ModifyModal show={showEditModal} onHide={closeEditModal} regions={regions} entry={editingEntry} />
     </>
   );
 };

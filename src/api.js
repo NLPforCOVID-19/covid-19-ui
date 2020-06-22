@@ -35,3 +35,13 @@ export async function fetchStats() {
   const response = await axios.get(baseUrl + path);
   return response.data;
 }
+
+export async function modifyRegionCategory(url, region, topics) {
+  const path = '/update'
+  const params = new URLSearchParams({
+    url: url,
+    new_displayed_country: region,
+    // new_classes: topics
+  })
+  return axios.post(baseUrl + path, params)
+}
