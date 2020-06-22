@@ -3,12 +3,12 @@ name: Build and Deploy to Server
 on:
   push:
     branches:
-      - github-actions
+      - master
 
 jobs:
   deploy:
     env:
-      BASE_PATH: /~honai/demo/covid-19
+      BASE_PATH: /NLPforCOVID-19
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -43,4 +43,4 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           REMOTE: ${{ secrets.REMOTE }}
         run: |
-          rsync -av --delete out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
+          rsync -av out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
