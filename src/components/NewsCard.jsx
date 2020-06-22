@@ -117,7 +117,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
           }
         `}</style>
       </div>
-      <ModifyModal show={showEditModal} onHide={closeEditModal} regions={regions} entry={editingEntry} />
+      <ModifyModal show={showEditModal} onHide={closeEditModal} regions={regions} topics={topics} entry={editingEntry} />
     </>
   );
 };

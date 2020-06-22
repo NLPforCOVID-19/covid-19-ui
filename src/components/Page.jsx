@@ -3,11 +3,7 @@ import dayjs from 'dayjs';
 
 import * as Icons from './Icons';
 import meta from '@src/meta'
-
-function makeTranslatedUrl(url) {
-  const target_lang = 'ja';
-  return `https://translate.google.com/translate?tl=${target_lang}&u=${url}`;
-}
+import { makeTranslatedUrl } from '../utils'
 
 function EntryIcon({entry}) {
   if (entry.is_useful === 2) {
