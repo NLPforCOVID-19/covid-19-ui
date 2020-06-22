@@ -9,16 +9,16 @@ import { modifyRegionCategory } from '../api'
 import { makeTranslatedUrl } from '../utils'
 import Loading from './Loading'
 
-export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
+export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   if (!entry) {
     return null
   }
   const isJp = entry.country === 'jp'
 
-  const currentRegion = entry.country
+  const currentCountry = entry.country
 
   const currentTopics = entry.topics.filter(t => topics.includes(t.name))
-  const [region, setRegion] = useState(currentRegion)
+  const [selectedCounrty, setSelectedCountry] = useState(currentCountry)
   const initialTopicState = {}
   for (const topicName of topics) {
     initialTopicState[topicName] = !!currentTopics.find(t => t.name === topicName)
@@ -27,10 +27,10 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
 
   const [isRequesting, setIsRequesting] = useState(false)
   const [failed, setFailed] = useState(false)
-  const isChangedFromCurrent = !(currentRegion === region && JSON.stringify(initialTopicState) === JSON.stringify(selectedTopics))
+  const isChangedFromCurrent = !(currentCountry === selectedCounrty && JSON.stringify(initialTopicState) === JSON.stringify(selectedTopics))
 
   function handleChangeRegion(e) {
-    setRegion(e.target.value)
+    setSelectedCountry(e.target.value)
   }
   function handleChangeTopic(e) {
     const targetTopic = e.target.value
@@ -43,7 +43,7 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
   function handleSubmit(e) {
     e.preventDefault()
     setIsRequesting(true)
-    modifyRegionCategory(entry.url, region, currentTopics)
+    modifyRegionCategory(entry.url, selectedCounrty, currentTopics)
       .then(res => {
         console.log(res)
         onHide()
@@ -80,7 +80,7 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
               )
               }
             </div>
-            <div>地域: {regions.find(r => r.id === currentRegion)?.name}</div>
+            <div>地域: {countries.find(r => r.id === currentCountry)?.name}</div>
             <div>カテゴリ:</div>
             <ul>
               {currentTopics.map(t => (
@@ -115,8 +115,8 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
           </div>
           <Form.Group>
             <Form.Label>修正後の地域</Form.Label>
-            <Form.Control as="select" value={region} onChange={handleChangeRegion}>
-              {regions.map(r => (
+            <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
+              {countries.map(r => (
                 <option key={r.id} value={r.id}>{r.name}</option>
               ))}
             </Form.Control>
@@ -160,7 +160,7 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
 ModifyModal.protoTypes = {
   show: PropTypes.bool.isRequired,
   onHide: PropTypes.func.isRequired,
-  regions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.string).isRequired,
   topics: PropTypes.arrayOf(PropTypes.string).isRequired,
   entry: PropTypes.object
 }

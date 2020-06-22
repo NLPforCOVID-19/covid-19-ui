@@ -4,6 +4,7 @@ import Page from './Page';
 import Loading from './Loading'
 import { ModifyModal } from './ModifyModal'
 import { StoreContext, loadMore } from '../store';
+import meta from '../meta'
 
 const Country = ({ title, countryId, topic, onClickTitle, children }) => {
   const [state, dispatch] = useContext(StoreContext)
@@ -18,9 +19,9 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
 
   // EditModal
   const { topics } = state.meta
-  const regions = state.meta.countries.map(c => ({
-    id: c.country,
-    name: c.name.ja
+  const countries = Object.keys(meta.countryDisplayName).map(id => ({
+    id: id,
+    name: meta.countryDisplayName[id]
   }))
   const [showEditModal, setShowEditModal] = useState(false)
   const [editingEntry, setEditingEntry] = useState(null)
@@ -117,7 +118,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
           }
         `}</style>
       </div>
-      <ModifyModal show={showEditModal} onHide={closeEditModal} regions={regions} topics={topics} entry={editingEntry} />
+      <ModifyModal show={showEditModal} onHide={closeEditModal} countries={countries} topics={topics} entry={editingEntry} />
     </>
   );
 };
