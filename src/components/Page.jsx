@@ -19,12 +19,19 @@ function EntryIcon({entry}) {
   return <Icons.NotVerified />
 }
 
-const Page = ({ entry, topic, region }) => {
+const Page = ({ entry, topic, region, onClickEdit }) => {
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
+  function handleClickEdit(e) {
+    e.preventDefault()
+    onClickEdit()
+  }
   return (
     <li>
-      <div className="icon"><EntryIcon entry={entry} /></div>
+      <div className="icon">
+        <EntryIcon entry={entry} />
+        <a href="#" onClick={handleClickEdit}><Icons.Edit /></a>
+      </div>
       <div className="news">
         <Title entry={entry} region={region} />
         <Snippet text={snippet} />
