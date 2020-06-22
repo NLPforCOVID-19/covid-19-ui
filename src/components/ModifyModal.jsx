@@ -66,7 +66,7 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
         <Modal.Body>
           <div className="mb-2">
             <div className="mb-2">
-              <a href={isJp ? entry.url : makeTranslatedUrl(entry.url)}>{entry.ja_translated.title}</a>
+              <a className="title" href={isJp ? entry.url : makeTranslatedUrl(entry.url)}>{entry.ja_translated.title}</a>
               {' '}
               {isJp || (
                 <a
@@ -92,6 +92,9 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
               ))}
             </ul>
             <style jsx>{`
+              .title {
+                font-size: 1.2em;
+              }
               li {
                 margin: 3px 0;
               }
@@ -104,7 +107,10 @@ export const ModifyModal = ({ show, onHide, regions, topics, entry }) => {
               }
               .open-in-new {
                 color: rgba(0, 0, 0, 0.5);
-              }      
+              }
+              legend {
+                font-size: 1em;
+              }
             `}</style>
           </div>
           <Form.Group>
