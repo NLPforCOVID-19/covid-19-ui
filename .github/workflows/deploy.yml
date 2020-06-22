@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     env:
-      BASE_PATH: /NLPforCOVID-19-dev
+      BASE_PATH: /NLPforCOVID-19
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
