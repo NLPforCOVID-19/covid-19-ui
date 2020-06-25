@@ -27,6 +27,7 @@ const Page = ({ entry, topic, region }) => {
       <div className="icon"><EntryIcon entry={entry} /></div>
       <div className="news">
         <Title entry={entry} region={region} />
+        <Domain entry={entry} />
         <Snippet text={snippet} />
       </div>
       <style jsx>{`
@@ -47,21 +48,23 @@ const Title = ({ entry, region }) => {
   const url = isJp ? entry.url : makeTranslatedUrl(entry.url);
   const day = dayjs(entry.orig.timestamp).format('MM/DD');
   const title = entry.ja_translated.title;
-  const isShowCountryName = region !== entry.country
-  const isRumor = entry.is_about_false_rumor === 1
+  const isShowCountryName = region !== entry.country;
+  const isRumor = entry.is_about_false_rumor === 1;
   return (
     <div className="wrap">
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener"
-        className="text-info title"
-      >
-        <span className="small">[{day}]</span>
+      <span className="title">
+        <span className="small text-muted">[{day}]&thinsp;</span>
         {isRumor && <span>&thinsp;<mark className="small text-muted">デマに関する情報</mark></span>}
-        {isShowCountryName && <span className="small">&thinsp;({meta.countryDisplayName[entry.country]})</span>}
-        &thinsp;{title}
-      </a>
+        {isShowCountryName && <span className="small text-muted">&thinsp;({meta.countryDisplayName[entry.country]})</span>}
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener"
+          className="text-info"
+        >
+          &thinsp;{title}
+        </a>
+      </span>
       {isJp || (
         <a
           href={entry.url}
@@ -95,6 +98,21 @@ const Title = ({ entry, region }) => {
       `}</style>
     </div>
   )
+};
+
+const Domain = ({ entry }) => {
+  return (
+    <div className="m-0 small">
+      <a
+        href={`http://${entry.domain}`}
+        target="_blank"
+        rel="noopener"
+        className="small text-muted"
+      >
+        <u>{entry.domain_label}</u>
+      </a>
+    </div>
+  );
 };
 
 const Snippet = ({ text }) => <div className="mb-2 small text-secondary">{text}</div>;

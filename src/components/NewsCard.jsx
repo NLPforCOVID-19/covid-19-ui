@@ -5,13 +5,13 @@ import Loading from './Loading'
 import { StoreContext, loadMore } from '../store';
 
 const Country = ({ title, countryId, topic, onClickTitle, children }) => {
-  const [state, dispatch] = useContext(StoreContext)
+  const [state, dispatch] = useContext(StoreContext);
 
-  const entries = state.news[topic][countryId]
-  const { loading } = state.newsStates[topic][countryId]
+  const entries = state.news[topic][countryId];
+  const { loading } = state.newsStates[topic][countryId];
 
   function handleClickTitle(e) {
-    e.preventDefault()
+    e.preventDefault();
     onClickTitle()
   }
 
@@ -32,7 +32,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
     }
 
     return unobserve;
-  })
+  });
 
   return (
     <div className="col-xl-4 col-lg-6 p-1">
@@ -52,7 +52,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
             {loading && (
               <div className="loading"><Loading /></div>
             )}
-            <div ref={observeEl} className="observe"></div>
+            <div ref={observeEl} className="observe" />
           </div>
         </div>
       </div>
@@ -108,6 +108,6 @@ Country.propTypes = {
   topic: PropTypes.string.isRequired,
   onClickTitle: PropTypes.func.isRequired,
   children: PropTypes.element
-}
+};
 
 export default Country
