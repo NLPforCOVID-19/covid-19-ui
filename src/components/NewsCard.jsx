@@ -6,7 +6,7 @@ import { ModifyModal } from './ModifyModal'
 import { StoreContext, loadMore } from '../store';
 import meta from '../meta'
 
-const Country = ({ title, countryId, topic, onClickTitle, children }) => {
+const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
   const [state, dispatch] = useContext(StoreContext)
 
   const entries = state.news[topic][countryId]
@@ -65,7 +65,7 @@ const Country = ({ title, countryId, topic, onClickTitle, children }) => {
             <div ref={wrapEl} className="scroll mt-1 mb-1">
               <ul>
                 {entries.map((entry, i) => (
-                  <Page key={i} entry={entry} topic={topic} region={countryId} onClickEdit={() => openEditModal(entry)} />
+                  <Page key={i} entry={entry} topic={topic} region={countryId} showEditButton={showEditButton} onClickEdit={() => openEditModal(entry)} />
                 ))}
               </ul>
               {loading && (
@@ -128,6 +128,7 @@ Country.propTypes = {
   countryId: PropTypes.string.isRequired,
   topic: PropTypes.string.isRequired,
   onClickTitle: PropTypes.func.isRequired,
+  showEditButton: PropTypes.bool,
   children: PropTypes.element
 }
 

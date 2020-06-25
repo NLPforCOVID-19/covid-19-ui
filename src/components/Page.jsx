@@ -15,7 +15,7 @@ function EntryIcon({entry}) {
   return <Icons.NotVerified />
 }
 
-const Page = ({ entry, topic, region, onClickEdit }) => {
+const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
   function handleClickEdit(e) {
@@ -26,7 +26,7 @@ const Page = ({ entry, topic, region, onClickEdit }) => {
     <li>
       <div className="icon">
         <EntryIcon entry={entry} />
-        <a href="#" onClick={handleClickEdit}><Icons.Edit /></a>
+        {showEditButton && <a href="#" onClick={handleClickEdit}><Icons.Edit /></a>}
       </div>
       <div className="news">
         <Title entry={entry} region={region} />
