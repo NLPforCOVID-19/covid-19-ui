@@ -30,6 +30,7 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
     setEditingEntry(entry)
   }
   function closeEditModal() {
+    location.hash = ''
     setShowEditModal(false)
   }
 

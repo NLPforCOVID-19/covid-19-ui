@@ -45,11 +45,9 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     setIsRequesting(true)
     modifyRegionCategory(entry.url, selectedCounrty, currentTopics)
       .then(res => {
-        console.log(res)
         onHide()
       })
       .catch(err => {
-        console.log(err)
         setFailed(true)
         setTimeout(() => setFailed(false), 3000)
       })
@@ -139,6 +137,14 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                   </Form.Check.Label>
                 </Form.Check>
               ))}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>ID</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>パスワード</Form.Label>
+              <Form.Control type="password" />
             </Form.Group>
           </fieldset>
           {failed && <Alert variant="danger">修正に失敗しました。</Alert>}
