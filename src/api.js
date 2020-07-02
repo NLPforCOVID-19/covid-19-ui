@@ -36,12 +36,13 @@ export async function fetchStats() {
   return response.data;
 }
 
-export async function modifyRegionCategory(url, region, topics) {
+export async function modifyRegionCategory(url, region, topics, password) {
   const path = '/update'
-  const params = new URLSearchParams({
+  const data = {
     url: url,
     new_displayed_country: region,
-    // new_classes: topics
-  })
-  return axios.post(baseUrl + path, params)
+    new_classes: topics.join(','),
+    password: password
+  }
+  return axios.post(baseUrl + path, data)
 }

@@ -24,6 +24,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     initialTopicState[topicName] = !!currentTopics.find(t => t.name === topicName)
   }
   const [selectedTopics, setSelectedTopics] = useState(initialTopicState)
+  const [password, setPassword] = useState('')
 
   const [isRequesting, setIsRequesting] = useState(false)
   const [failed, setFailed] = useState(false)
@@ -40,10 +41,14 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
       [targetTopic]: checked
     }))
   }
+  function handleChangePassword(e) {
+    setPassword(e.target.value)
+  }
   function handleSubmit(e) {
     e.preventDefault()
     setIsRequesting(true)
-    modifyRegionCategory(entry.url, selectedCounrty, currentTopics)
+    const newTopics = topics.filter(t => selectedTopics[t])
+    modifyRegionCategory(entry.url, selectedCounrty, newTopics, password)
       .then(res => {
         onHide()
       })
@@ -139,12 +144,8 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               ))}
             </Form.Group>
             <Form.Group>
-              <Form.Label>ID</Form.Label>
-              <Form.Control type="text" />
-            </Form.Group>
-            <Form.Group>
               <Form.Label>パスワード</Form.Label>
-              <Form.Control type="password" />
+              <Form.Control type="password" required onChange={handleChangePassword} />
             </Form.Group>
           </fieldset>
           {failed && <Alert variant="danger">修正に失敗しました。</Alert>}
