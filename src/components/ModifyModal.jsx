@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
@@ -16,25 +16,38 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   const isJp = entry.country === 'jp'
 
   const currentCountry = entry.country
-
   const currentTopics = entry.topics.filter(t => topics.includes(t.name))
-  const [selectedCounrty, setSelectedCountry] = useState(currentCountry)
+
+  const [selectedCounrty, setSelectedCountry] = useState('')
+  useEffect(() => {
+    console.log('countryeffect')
+    setSelectedCountry(currentCountry)
+  }, [currentCountry])
+
   const initialTopicState = {}
   for (const topicName of topics) {
     initialTopicState[topicName] = !!currentTopics.find(t => t.name === topicName)
   }
   const [selectedTopics, setSelectedTopics] = useState(initialTopicState)
-  const [password, setPassword] = useState('')
+  useEffect(() => {
+    setSelectedTopics(initialTopicState)
+  }, [entry.topics])
 
+  const [isChangedFromCurrent, setIsChangedFromCurrent] = useState(false)
+  useEffect(() => {
+    const isEqual = currentCountry === selectedCounrty && JSON.stringify(initialTopicState) === JSON.stringify(selectedTopics)
+    setIsChangedFromCurrent(!isEqual)
+  }, [entry, selectedTopics, selectedCounrty])
+
+  const [password, setPassword] = useState('')
   const [isRequesting, setIsRequesting] = useState(false)
   const [failed, setFailed] = useState(false)
-  const isChangedFromCurrent = !(currentCountry === selectedCounrty && JSON.stringify(initialTopicState) === JSON.stringify(selectedTopics))
 
   function handleChangeRegion(e) {
     setSelectedCountry(e.target.value)
   }
   function handleChangeTopic(e) {
-    const targetTopic = e.target.value
+    const targetTopic = e.target.name
     const checked = e.target.checked
     setSelectedTopics(prev => ({
       ...prev,
@@ -134,7 +147,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                   <Form.Check.Label>
                     <Form.Check.Input
                       type="checkbox"
-                      value={t}
+                      name={t}
                       checked={selectedTopics[t]}
                       onChange={handleChangeTopic}
                     />
