@@ -20,7 +20,6 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 
   const [selectedCounrty, setSelectedCountry] = useState('')
   useEffect(() => {
-    console.log('countryeffect')
     setSelectedCountry(currentCountry)
   }, [currentCountry])
 
