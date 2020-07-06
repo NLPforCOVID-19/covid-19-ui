@@ -36,12 +36,15 @@ export async function fetchStats() {
   return response.data;
 }
 
-export async function modifyRegionCategory(url, region, topics, password) {
+export async function modifyRegionCategory(url, region, topics, useful, about_covid, notes, password) {
   const path = '/update'
   const data = {
     url: url,
     new_displayed_country: region,
     new_classes: topics.join(','),
+    is_useful: useful,
+    "is_about_COVID-19": about_covid,
+    notes: notes,
     password: password
   }
   return axios.post(baseUrl + path, data)

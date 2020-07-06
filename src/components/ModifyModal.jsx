@@ -18,6 +18,12 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   const currentCountry = entry.country
   const currentTopics = entry.topics.filter(t => topics.includes(t.name))
 
+  const [isAboutCovid, setIsAboutCovid] = useState(true)
+  const [isUseful, setIsUseful] = useState(false)
+  const [notes, setNotes] = useState('')
+  useEffect(() => {
+    setIsUseful(entry.is_useful === 1)
+  }, [entry.is_useful])
   const [selectedCounrty, setSelectedCountry] = useState('')
   useEffect(() => {
     setSelectedCountry(currentCountry)
@@ -34,9 +40,12 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 
   const [isChangedFromCurrent, setIsChangedFromCurrent] = useState(false)
   useEffect(() => {
-    const isEqual = currentCountry === selectedCounrty && JSON.stringify(initialTopicState) === JSON.stringify(selectedTopics)
-    setIsChangedFromCurrent(!isEqual)
-  }, [entry, selectedTopics, selectedCounrty])
+    const changedCountry = currentCountry !== selectedCounrty
+    const changedTopic = JSON.stringify(initialTopicState) !== JSON.stringify(selectedTopics)
+    const changedUseful = isUseful !== (entry.is_useful === 1)
+    const isChanged = changedCountry || changedTopic || changedUseful || !isAboutCovid
+    setIsChangedFromCurrent(isChanged)
+  }, [entry, selectedTopics, selectedCounrty, isUseful, isAboutCovid])
 
   const [password, setPassword] = useState('')
   const [isRequesting, setIsRequesting] = useState(false)
@@ -60,7 +69,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     e.preventDefault()
     setIsRequesting(true)
     const newTopics = topics.filter(t => selectedTopics[t])
-    modifyRegionCategory(entry.url, selectedCounrty, newTopics, password)
+    modifyRegionCategory(entry.url, selectedCounrty, newTopics, isUseful, isAboutCovid, notes, password)
       .then(res => {
         onHide()
       })
@@ -129,6 +138,10 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
             `}</style>
           </div>
           <Form.Group>
+            <Form.Check type="checkbox" label="COVID-19関連" checked={isAboutCovid} onChange={(e) => setIsAboutCovid(e.target.checked)} />
+            <Form.Check type="checkbox" label="役に立つ" checked={isUseful} onChange={(e) => setIsUseful(e.target.checked)} />
+          </Form.Group>
+          <Form.Group>
             <Form.Label>修正後の地域</Form.Label>
             <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
               {countries.map(r => (
@@ -154,6 +167,10 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                   </Form.Check.Label>
                 </Form.Check>
               ))}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>メモ欄</Form.Label>
+              <Form.Control as="textarea" value={notes} onChange={(e) => setNotes(e.target.value)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>パスワード</Form.Label>
