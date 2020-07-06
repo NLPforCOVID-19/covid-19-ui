@@ -3,11 +3,7 @@ import dayjs from 'dayjs';
 
 import * as Icons from './Icons';
 import meta from '@src/meta'
-
-function makeTranslatedUrl(url) {
-  const target_lang = 'ja';
-  return `https://translate.google.com/translate?tl=${target_lang}&u=${url}`;
-}
+import { makeTranslatedUrl } from '../utils'
 
 function EntryIcon({entry}) {
   if (entry.is_useful === 2) {
@@ -19,12 +15,19 @@ function EntryIcon({entry}) {
   return <Icons.NotVerified />
 }
 
-const Page = ({ entry, topic, region }) => {
+const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
   const topicData = entry.topics.find(t => t.name === topic);
   const snippet = topicData ? topicData.snippet : '';
+  function handleClickEdit(e) {
+    e.preventDefault()
+    onClickEdit()
+  }
   return (
     <li>
-      <div className="icon"><EntryIcon entry={entry} /></div>
+      <div className="icon">
+        <EntryIcon entry={entry} />
+        {showEditButton && <a href="#" onClick={handleClickEdit}><Icons.Edit /></a>}
+      </div>
       <div className="news">
         <Title entry={entry} region={region} />
         <Domain entry={entry} />

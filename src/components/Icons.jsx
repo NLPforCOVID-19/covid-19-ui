@@ -32,7 +32,6 @@ export const Verified = ({size}) => (
   <BaseIcon title={description.useful} size={size} color="#b4e063" iconId="check_circle" />
 )
 
-// #58db76
-// #8eeda4
-// #bdeb6a
-// #b4e063
+export const Edit = ({size}) => (
+  <BaseIcon size={size} iconId="edit" />
+)

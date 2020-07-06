@@ -9,7 +9,7 @@ import IndicatorLegends from './IndicatorLegends';
 import { StoreContext } from '../store';
 import Stats from './Stats';
 
-const NewsView = () => {
+const NewsView = ({ showEditButton }) => {
   const [state] = useContext(StoreContext);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -63,8 +63,15 @@ const NewsView = () => {
 
   if (!state.metaLoaded || (!selectedTopic && !selectedCountry)) {
     return (
-      <Container className="mt-3 text-center">
-        <Loading />
+      <Container className="mt-3">
+        <div className="text-center wrap">
+          <Loading />
+        </div>
+        <style jsx>{`
+          .wrap {
+            height: 100vh;
+          }
+        `}</style>
       </Container>
     )
   };
@@ -97,6 +104,7 @@ const NewsView = () => {
                 countryId={selectedCountry}
                 topic={t}
                 onClickTitle={() => handleClickTopic(t)}
+                showEditButton={showEditButton}
               />
             ))}
           </Row>
@@ -140,6 +148,7 @@ const NewsView = () => {
               countryId={c.country}
               topic={selectedTopic}
               onClickTitle={() => handleClickCountry(c.country)}
+              showEditButton={showEditButton}
             >
               <div className="text-muted small"><Stats stats={c.stats} /></div>
             </NewsCard>
