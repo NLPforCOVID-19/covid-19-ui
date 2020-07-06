@@ -1,0 +1,47 @@
+name: Build and Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    env:
+      BASE_PATH: /NLPforCOVID-19
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Build Project
+        env:
+          API_URL: ${{ secrets.API_URL }}
+          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+        run: |
+          mkdir -p src/pages$BASE_PATH
+          mv src/pages/[!_]*.jsx src/pages$BASE_PATH
+          npm install
+          npm run build
+          npm run export
+          mv out/_next out$BASE_PATH
+          mv out/images out$BASE_PATH
+      - name: Install SSH key
+        env:
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
+          SSH_CONFIG: ${{ secrets.SSH_CONFIG }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_CONFIG" > ~/.ssh/config
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+      - name: Deploy to Server
+        env:
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          REMOTE: ${{ secrets.REMOTE }}
+        run: |
+          chmod -R g+w out$BASE_PATH
+          rsync -av out$BASE_PATH/ $REMOTE:$DEPLOY_PATH

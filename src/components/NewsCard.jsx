@@ -9,11 +9,11 @@ import meta from '../meta'
 const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
   const [state, dispatch] = useContext(StoreContext)
 
-  const entries = state.news[topic][countryId]
-  const { loading } = state.newsStates[topic][countryId]
+  const entries = state.news[topic][countryId];
+  const { loading } = state.newsStates[topic][countryId];
 
   function handleClickTitle(e) {
-    e.preventDefault()
+    e.preventDefault();
     onClickTitle()
   }
 
@@ -51,7 +51,7 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
     }
 
     return unobserve;
-  })
+  });
 
   return (
     <>
@@ -131,6 +131,6 @@ Country.propTypes = {
   onClickTitle: PropTypes.func.isRequired,
   showEditButton: PropTypes.bool,
   children: PropTypes.element
-}
+};
 
 export default Country
