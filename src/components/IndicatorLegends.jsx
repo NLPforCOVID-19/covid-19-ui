@@ -8,14 +8,6 @@ export default () => (
       <Icons.Useful />
       <div className="text-secondary">{Icons.description.useful}</div>
     </li>
-    <li>
-      <Icons.Verified />
-      <div className="text-secondary">{Icons.description.verified}</div>
-    </li>
-    <li>
-      <Icons.NotVerified />
-      <div className="text-secondary">{Icons.description.notVerified}</div>
-    </li>
     <style jsx>{`
       ul {
         list-style-type: none;

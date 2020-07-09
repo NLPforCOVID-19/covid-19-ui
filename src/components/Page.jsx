@@ -9,10 +9,7 @@ function EntryIcon({entry}) {
   if (entry.is_useful === 2) {
     return <Icons.Useful />
   }
-  if (entry.is_useful === 1) {
-    return <Icons.Verified />
-  }
-  return <Icons.NotVerified />
+  return <span></span>
 }
 
 const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
