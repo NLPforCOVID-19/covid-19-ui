@@ -2,7 +2,7 @@ import React from 'react';
 
 export const description = {
   useful: "役立つ記事",
-  verified: "カテゴリ検証済みの記事",
+  verified: "人手で検証済みの記事",
   notVerified: "カテゴリ未検証の記事"
 };
 

@@ -6,13 +6,13 @@ import meta from '@src/meta'
 import { makeTranslatedUrl } from '../utils'
 
 function EntryIcon({entry}) {
-  if (entry.is_useful === 2) {
-    return <Icons.Useful />
-  }
-  if (entry.is_useful === 1) {
+  if (entry.is_checked) {
     return <Icons.Verified />
   }
-  return <Icons.NotVerified />
+  if (entry.is_useful) {
+    return <Icons.Useful />
+  }
+  return null
 }
 
 const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
