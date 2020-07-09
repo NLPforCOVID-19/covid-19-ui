@@ -41,7 +41,7 @@ export async function modifyRegionCategory(url, region, topics, useful, about_co
   const data = {
     url: url,
     new_displayed_country: region,
-    new_classes: topics.join(','),
+    new_classes: topics,
     is_useful: useful,
     "is_about_COVID-19": about_covid,
     notes: notes,
