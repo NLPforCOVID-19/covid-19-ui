@@ -6,9 +6,6 @@ import meta from '@src/meta'
 import { makeTranslatedUrl } from '../utils'
 
 function EntryIcon({entry}) {
-  if (entry.is_checked) {
-    return <Icons.Verified />
-  }
   if (entry.is_useful) {
     return <Icons.Useful />
   }
