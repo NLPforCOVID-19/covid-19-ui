@@ -36,7 +36,7 @@ export async function fetchStats() {
   return response.data;
 }
 
-export async function modifyRegionCategory(url, region, topics, useful, about_covid, notes, password) {
+export async function modifyRegionCategory(url, region, topics, useful, about_covid, about_rumor, notes, password) {
   const path = '/update'
   const data = {
     url: url,
@@ -44,6 +44,7 @@ export async function modifyRegionCategory(url, region, topics, useful, about_co
     new_classes: topics,
     is_useful: useful,
     "is_about_COVID-19": about_covid,
+    is_about_false_rumor: about_rumor,
     notes: notes,
     password: password
   }
