@@ -90,7 +90,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
         <Modal.Body>
           <div className="mb-2">
             <div className="mb-2">
-              <a className="title" href={isJp ? entry.url : makeTranslatedUrl(entry.url)}>{entry.ja_translated.title}</a>
+              <a className="title" href={isJp ? entry.url : makeTranslatedUrl(entry.url)} target="_blank" rel="noopener">{entry.ja_translated.title}</a>
               {' '}
               {isJp || (
                 <a
