@@ -21,6 +21,10 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   const [isAboutCovid, setIsAboutCovid] = useState(true)
   const [isUseful, setIsUseful] = useState(false)
   const [notes, setNotes] = useState('')
+  const [isAboutRumor, setIsAboutRumor] = useState(false)
+  useEffect(() => {
+    setIsAboutRumor(entry.is_about_false_rumor)
+  }, [entry.is_about_false_rumor])
   useEffect(() => {
     setIsUseful(entry.is_useful === 1)
   }, [entry.is_useful])
@@ -43,9 +47,10 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     const changedCountry = currentCountry !== selectedCounrty
     const changedTopic = JSON.stringify(initialTopicState) !== JSON.stringify(selectedTopics)
     const changedUseful = isUseful !== (entry.is_useful === 1)
-    const isChanged = changedCountry || changedTopic || changedUseful || !isAboutCovid
+    const changedAboutRumor = isAboutRumor !== entry.is_about_false_rumor
+    const isChanged = changedCountry || changedTopic || changedUseful || !isAboutCovid || changedAboutRumor
     setIsChangedFromCurrent(isChanged)
-  }, [entry, selectedTopics, selectedCounrty, isUseful, isAboutCovid])
+  }, [entry, selectedTopics, selectedCounrty, isUseful, isAboutCovid, isAboutRumor])
 
   const [password, setPassword] = useState('')
   const [isRequesting, setIsRequesting] = useState(false)
@@ -69,7 +74,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     e.preventDefault()
     setIsRequesting(true)
     const newTopics = topics.filter(t => selectedTopics[t])
-    modifyRegionCategory(entry.url, selectedCounrty, newTopics, isUseful, isAboutCovid, notes, password)
+    modifyRegionCategory(entry.url, selectedCounrty, newTopics, isUseful, isAboutCovid, isAboutRumor, notes, password)
       .then(res => {
         onHide()
       })
@@ -140,6 +145,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
           <Form.Group>
             <Form.Check type="checkbox" label="COVID-19関連" checked={isAboutCovid} onChange={(e) => setIsAboutCovid(e.target.checked)} />
             <Form.Check type="checkbox" label="役に立つ" checked={isUseful} onChange={(e) => setIsUseful(e.target.checked)} />
+            <Form.Check type="checkbox" label="デマに関する情報" checked={isAboutRumor} onChange={(e) => setIsAboutRumor(e.target.checked)} />
           </Form.Group>
           <Form.Group>
             <Form.Label>修正後の地域</Form.Label>
