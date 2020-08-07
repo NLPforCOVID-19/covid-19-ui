@@ -6,7 +6,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "dayjs": "^1.8.23",
-    "next": "^9.3.4",
+    "next": "^9.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
