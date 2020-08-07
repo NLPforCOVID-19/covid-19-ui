@@ -15,11 +15,7 @@ module.exports = {
     BASE_PATH: process.env.BASE_PATH || '',
     GA_TRACKING_ID: process.env.GA_TRACKING_ID
   },
-  // Pass envs to serve other than domain root.
-  assetPrefix: process.env.BASE_PATH || '',
-  publicRuntimeConfig: {
-    basePath: process.env.BASE_PATH || '',
-  },
+  basePath: process.env.BASE_PATH,
   exportTrailingSlash: true,
   webpack: (config) => {
     const newConfig = {

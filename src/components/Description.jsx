@@ -9,7 +9,7 @@ const Description = () => (
     <Container>
       <div className="text-dark">
         {meta.desc}
-        <Link href="./about/"><a>このサイトの使い方</a></Link>
+        <Link href="/about"><a>このサイトの使い方</a></Link>
       </div>
     </Container>
   </div>
