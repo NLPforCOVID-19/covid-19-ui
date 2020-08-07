@@ -15,7 +15,10 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
-    "export": "next export"
+    "export": "next export",
+    "upgrade-interactive": "npm-check --update"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "npm-check": "^5.9.2"
+  }
 }
