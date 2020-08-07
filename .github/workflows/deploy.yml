@@ -20,13 +20,9 @@ jobs:
           API_URL: ${{ secrets.API_URL }}
           GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
         run: |
-          mkdir -p src/pages$BASE_PATH
-          mv src/pages/[!_]*.jsx src/pages$BASE_PATH
-          npm install
+          npm ci
           npm run build
           npm run export
-          mv out/_next out$BASE_PATH
-          mv out/images out$BASE_PATH
       - name: Install SSH key
         env:
           SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
@@ -43,5 +39,5 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           REMOTE: ${{ secrets.REMOTE }}
         run: |
-          chmod -R g+w out$BASE_PATH
-          rsync -av out$BASE_PATH/ $REMOTE:$DEPLOY_PATH
+          chmod -R g+w out
+          rsync -av out/ $REMOTE:$DEPLOY_PATH
