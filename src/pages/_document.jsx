@@ -1,3 +1,4 @@
+import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 const gtagScript = `window.dataLayer = window.dataLayer || [];
@@ -15,8 +16,8 @@ class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`} />
-        <script dangerouslySetInnerHTML={{__html: gtagScript}} />
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`} />
+          <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
         </Head>
         <body>
           <Main />

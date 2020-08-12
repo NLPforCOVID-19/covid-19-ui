@@ -16,7 +16,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   const isJp = entry.country === 'jp'
 
   const currentCountry = entry.country
-  const currentTopics = entry.topics.filter(t => topics.includes(t.name))
+  const currentTopics = entry.topics.filter((t) => topics.includes(t.name))
 
   const [isAboutCovid, setIsAboutCovid] = useState(true)
   const [isUseful, setIsUseful] = useState(false)
@@ -35,7 +35,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 
   const initialTopicState = {}
   for (const topicName of topics) {
-    initialTopicState[topicName] = !!currentTopics.find(t => t.name === topicName)
+    initialTopicState[topicName] = !!currentTopics.find((t) => t.name === topicName)
   }
   const [selectedTopics, setSelectedTopics] = useState(initialTopicState)
   useEffect(() => {
@@ -62,7 +62,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   function handleChangeTopic(e) {
     const targetTopic = e.target.name
     const checked = e.target.checked
-    setSelectedTopics(prev => ({
+    setSelectedTopics((prev) => ({
       ...prev,
       [targetTopic]: checked
     }))
@@ -73,12 +73,12 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   function handleSubmit(e) {
     e.preventDefault()
     setIsRequesting(true)
-    const newTopics = topics.filter(t => selectedTopics[t])
+    const newTopics = topics.filter((t) => selectedTopics[t])
     modifyRegionCategory(entry.url, selectedCounrty, newTopics, isUseful, isAboutCovid, isAboutRumor, notes, password)
-      .then(res => {
+      .then(() => {
         onHide()
       })
-      .catch(err => {
+      .catch(() => {
         setFailed(true)
         setTimeout(() => setFailed(false), 3000)
       })
@@ -95,24 +95,24 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
         <Modal.Body>
           <div className="mb-2">
             <div className="mb-2">
-              <a className="title" href={isJp ? entry.url : makeTranslatedUrl(entry.url)} target="_blank" rel="noopener">{entry.ja_translated.title}</a>
-              {' '}
+              <a
+                className="title"
+                href={isJp ? entry.url : makeTranslatedUrl(entry.url)}
+                target="_blank"
+                rel="noopener"
+              >
+                {entry.ja_translated.title}
+              </a>{' '}
               {isJp || (
-                <a
-                  href={entry.url}
-                  target="_blank"
-                  rel="noopener"
-                  title="元の言語で表示する"
-                >
+                <a href={entry.url} target="_blank" rel="noopener" title="元の言語で表示する">
                   <span className="material-icons open-in-new">open_in_new</span>
                 </a>
-              )
-              }
+              )}
             </div>
-            <div>地域: {countries.find(r => r.id === currentCountry)?.name}</div>
+            <div>地域: {countries.find((r) => r.id === currentCountry)?.name}</div>
             <div>カテゴリ:</div>
             <ul>
-              {currentTopics.map(t => (
+              {currentTopics.map((t) => (
                 <li key={t.name}>
                   <span>{t.name}</span>
                   <br />
@@ -143,25 +143,40 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
             `}</style>
           </div>
           <Form.Group>
-            <Form.Check type="checkbox" label="COVID-19関連" checked={isAboutCovid} onChange={(e) => setIsAboutCovid(e.target.checked)} />
-            <Form.Check type="checkbox" label="役に立つ" checked={isUseful} onChange={(e) => setIsUseful(e.target.checked)} />
-            <Form.Check type="checkbox" label="デマに関する情報" checked={isAboutRumor} onChange={(e) => setIsAboutRumor(e.target.checked)} />
+            <Form.Check
+              type="checkbox"
+              label="COVID-19関連"
+              checked={isAboutCovid}
+              onChange={(e) => setIsAboutCovid(e.target.checked)}
+            />
+            <Form.Check
+              type="checkbox"
+              label="役に立つ"
+              checked={isUseful}
+              onChange={(e) => setIsUseful(e.target.checked)}
+            />
+            <Form.Check
+              type="checkbox"
+              label="デマに関する情報"
+              checked={isAboutRumor}
+              onChange={(e) => setIsAboutRumor(e.target.checked)}
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label>修正後の地域</Form.Label>
             <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
-              {countries.map(r => (
-                <option key={r.id} value={r.id}>{r.name}</option>
+              {countries.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.name}
+                </option>
               ))}
             </Form.Control>
           </Form.Group>
           <fieldset>
             <Form.Group>
               <Form.Label as="legend">修正後のカテゴリ</Form.Label>
-              {topics.map(t => (
-                <Form.Check
-                  key={t}
-                >
+              {topics.map((t) => (
+                <Form.Check key={t}>
                   <Form.Check.Label>
                     <Form.Check.Input
                       type="checkbox"
@@ -189,8 +204,12 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
           {isRequesting && <Loading />}
           {!isRequesting && (
             <>
-              <Button variant="secondary" onClick={onHide}>キャンセル</Button>
-              <Button variant="primary" type="submit" disabled={!isChangedFromCurrent}>確定</Button>
+              <Button variant="secondary" onClick={onHide}>
+                キャンセル
+              </Button>
+              <Button variant="primary" type="submit" disabled={!isChangedFromCurrent}>
+                確定
+              </Button>
             </>
           )}
         </Modal.Footer>

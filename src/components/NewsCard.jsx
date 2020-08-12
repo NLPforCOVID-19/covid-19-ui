@@ -1,25 +1,25 @@
-import React, { useRef, useEffect, useContext, useState } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
-import Page from './Page';
+import Page from './Page'
 import Loading from './Loading'
 import { ModifyModal } from './ModifyModal'
-import { StoreContext, loadMore } from '../store';
+import { StoreContext, loadMore } from '../store'
 import meta from '../meta'
 
 const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
   const [state, dispatch] = useContext(StoreContext)
 
-  const entries = state.news[topic][countryId];
-  const { loading } = state.newsStates[topic][countryId];
+  const entries = state.news[topic][countryId]
+  const { loading } = state.newsStates[topic][countryId]
 
   function handleClickTitle(e) {
-    e.preventDefault();
+    e.preventDefault()
     onClickTitle()
   }
 
   // EditModal
   const { topics } = state.meta
-  const countries = Object.keys(meta.countryDisplayName).map(id => ({
+  const countries = Object.keys(meta.countryDisplayName).map((id) => ({
     id: id,
     name: meta.countryDisplayName[id]
   }))
@@ -34,24 +34,27 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
     setShowEditModal(false)
   }
 
-  const observeEl = useRef(null);
-  const wrapEl = useRef(null);
+  const observeEl = useRef(null)
+  const wrapEl = useRef(null)
   useEffect(() => {
-    const observer = new IntersectionObserver((e) => {
-      if (e[0].isIntersecting && !loading) {
-        dispatch(loadMore(countryId, topic))
+    const observer = new IntersectionObserver(
+      (e) => {
+        if (e[0].isIntersecting && !loading) {
+          dispatch(loadMore(countryId, topic))
+        }
+      },
+      {
+        root: wrapEl.current
       }
-    }, {
-      root: wrapEl.current
-    });
-    observer.observe(observeEl.current);
+    )
+    observer.observe(observeEl.current)
 
     function unobserve() {
-      observer.unobserve(observeEl.current);
+      observer.unobserve(observeEl.current)
     }
 
-    return unobserve;
-  });
+    return unobserve
+  })
 
   return (
     <>
@@ -59,18 +62,31 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
         <div className="p-2 border rounded">
           <div className="inner">
             <div className="header">
-              <h5 className="m-0"><a href="#" onClick={handleClickTitle}>{title}</a></h5>
+              <h5 className="m-0">
+                <a href="#" onClick={handleClickTitle}>
+                  {title}
+                </a>
+              </h5>
             </div>
-            { children }
+            {children}
             {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
             <div ref={wrapEl} className="scroll mt-1 mb-1">
               <ul>
                 {entries.map((entry, i) => (
-                  <Page key={i} entry={entry} topic={topic} region={countryId} showEditButton={showEditButton} onClickEdit={() => openEditModal(entry)} />
+                  <Page
+                    key={i}
+                    entry={entry}
+                    topic={topic}
+                    region={countryId}
+                    showEditButton={showEditButton}
+                    onClickEdit={() => openEditModal(entry)}
+                  />
                 ))}
               </ul>
               {loading && (
-                <div className="loading"><Loading /></div>
+                <div className="loading">
+                  <Loading />
+                </div>
               )}
               <div ref={observeEl} className="observe"></div>
             </div>
@@ -119,10 +135,16 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
           }
         `}</style>
       </div>
-      <ModifyModal show={showEditModal} onHide={closeEditModal} countries={countries} topics={topics} entry={editingEntry} />
+      <ModifyModal
+        show={showEditModal}
+        onHide={closeEditModal}
+        countries={countries}
+        topics={topics}
+        entry={editingEntry}
+      />
     </>
-  );
-};
+  )
+}
 
 Country.propTypes = {
   title: PropTypes.string.isRequired,
@@ -131,6 +153,6 @@ Country.propTypes = {
   onClickTitle: PropTypes.func.isRequired,
   showEditButton: PropTypes.bool,
   children: PropTypes.element
-};
+}
 
 export default Country

@@ -25,9 +25,7 @@ const AppWithDispach = ({ Component, pageProps }) => {
       dispatch(loadAllTopicsNews())
     }
   }, [state.metaLoaded])
-  return (
-    <Component {...pageProps} />
-  )
+  return <Component {...pageProps} />
 }
 
 function App({ Component, pageProps }) {
