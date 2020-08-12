@@ -5,8 +5,13 @@
     },
     "extends": [
         "plugin:prettier/recommended",
-        "prettier/react"
-      ],
+        "prettier/react",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "globals": {
+        "process": false
+    },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -18,5 +23,12 @@
         "react"
     ],
     "rules": {
+        "react/prop-types": "off",
+        "react/jsx-no-target-blank": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
