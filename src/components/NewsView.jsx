@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import React, { useState, useEffect, useMemo, useContext } from 'react'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
-import NewsCard from './NewsCard';
-import Tabs from './Tabs';
-import Loading from './Loading';
-import IndicatorLegends from './IndicatorLegends';
-import { StoreContext } from '../store';
-import Stats from './Stats';
+import NewsCard from './NewsCard'
+import Tabs from './Tabs'
+import Loading from './Loading'
+import IndicatorLegends from './IndicatorLegends'
+import { StoreContext } from '../store'
+import Stats from './Stats'
 
 const NewsView = ({ showEditButton }) => {
-  const [state] = useContext(StoreContext);
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [state] = useContext(StoreContext)
+  const [selectedTopic, setSelectedTopic] = useState(null)
+  const [selectedCountry, setSelectedCountry] = useState(null)
 
   function handleClickTopic(topic) {
     location.hash = `#t/${topic}`
@@ -30,7 +30,7 @@ const NewsView = ({ showEditButton }) => {
     const slugs = decodeURIComponent(location.hash).slice(1).split('/')
     switch (slugs[0]) {
       case 'r': {
-        if (!countries.find(c => c.country === slugs[1])) {
+        if (!countries.find((c) => c.country === slugs[1])) {
           break
         }
         setSelectedTopic(null)
@@ -74,25 +74,33 @@ const NewsView = ({ showEditButton }) => {
         `}</style>
       </Container>
     )
-  };
+  }
 
   const { topics, countries } = state.meta
 
   if (selectedCountry) {
-    const selectedCountryData = countries.find(c => c.country === selectedCountry)
+    const selectedCountryData = countries.find((c) => c.country === selectedCountry)
     const selectedCountryName = selectedCountryData.name.ja
-    const countryNames = countries.map(c => c.name.ja)
+    const countryNames = countries.map((c) => c.name.ja)
     const sources = selectedCountryData.sources
     return (
       <Container className="mt-3" id="news-view">
         <IndicatorLegends />
-        <Tabs active={selectedCountryName} choices={countryNames} onChange={(idx) => handleClickCountry(countries[idx].country)} />
+        <Tabs
+          active={selectedCountryName}
+          choices={countryNames}
+          onChange={(idx) => handleClickCountry(countries[idx].country)}
+        />
         <Container>
           <Row className="mt-2">
             <div className="country-names">
-              <div className="stats text-muted">{selectedCountryName}: <Stats stats={selectedCountryData.stats} /></div>
+              <div className="stats text-muted">
+                {selectedCountryName}: <Stats stats={selectedCountryData.stats} />
+              </div>
               <div className="public-link small">
-                <a href={selectedCountryData.representativeSiteUrl} target="_blank" rel="noopener">公的機関のウェブサイトを確認する</a>
+                <a href={selectedCountryData.representativeSiteUrl} target="_blank" rel="noopener">
+                  公的機関のウェブサイトを確認する
+                </a>
               </div>
             </div>
           </Row>
@@ -114,7 +122,11 @@ const NewsView = ({ showEditButton }) => {
           <Row>
             <div>
               {sources.map((url, i) => (
-                <div key={i}><a href={url} target="_blank" rel="noopener">{url}</a></div>
+                <div key={i}>
+                  <a href={url} target="_blank" rel="noopener">
+                    {url}
+                  </a>
+                </div>
               ))}
             </div>
           </Row>
@@ -127,7 +139,8 @@ const NewsView = ({ showEditButton }) => {
           h2 {
             margin: 0;
           }
-          .stats, .public-link {
+          .stats,
+          .public-link {
             margin: 0 10px;
           }
         `}</style>
@@ -150,13 +163,15 @@ const NewsView = ({ showEditButton }) => {
               onClickTitle={() => handleClickCountry(c.country)}
               showEditButton={showEditButton}
             >
-              <div className="text-muted small"><Stats stats={c.stats} /></div>
+              <div className="text-muted small">
+                <Stats stats={c.stats} />
+              </div>
             </NewsCard>
           ))}
         </Row>
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default NewsView;
+export default NewsView

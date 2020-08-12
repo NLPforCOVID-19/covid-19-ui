@@ -1,11 +1,11 @@
-import React from 'react';
-import dayjs from 'dayjs';
+import React from 'react'
+import dayjs from 'dayjs'
 
-import * as Icons from './Icons';
+import * as Icons from './Icons'
 import meta from '@src/meta'
 import { makeTranslatedUrl } from '../utils'
 
-function EntryIcon({entry}) {
+function EntryIcon({ entry }) {
   if (entry.is_useful) {
     return <Icons.Useful />
   }
@@ -13,8 +13,8 @@ function EntryIcon({entry}) {
 }
 
 const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
-  const topicData = entry.topics.find(t => t.name === topic);
-  const snippet = topicData ? topicData.snippet : '';
+  const topicData = entry.topics.find((t) => t.name === topic)
+  const snippet = topicData ? topicData.snippet : ''
   function handleClickEdit(e) {
     e.preventDefault()
     onClickEdit()
@@ -23,7 +23,11 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
     <li>
       <div className="icon">
         <EntryIcon entry={entry} />
-        {showEditButton && <a href="#" onClick={handleClickEdit}><Icons.Edit /></a>}
+        {showEditButton && (
+          <a href="#" onClick={handleClickEdit}>
+            <Icons.Edit />
+          </a>
+        )}
       </div>
       <div className="news">
         <Title entry={entry} region={region} />
@@ -40,38 +44,34 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
         }
       `}</style>
     </li>
-  );
-};
+  )
+}
 
 const Title = ({ entry, region }) => {
-  const isJp = entry.country === 'jp';
-  const url = isJp ? entry.url : makeTranslatedUrl(entry.url);
-  const day = dayjs(entry.orig.timestamp).format('MM/DD');
-  const title = entry.ja_translated.title;
-  const isShowCountryName = region !== entry.country;
-  const isRumor = entry.is_about_false_rumor === 1;
+  const isJp = entry.country === 'jp'
+  const url = isJp ? entry.url : makeTranslatedUrl(entry.url)
+  const day = dayjs(entry.orig.timestamp).format('MM/DD')
+  const title = entry.ja_translated.title
+  const isShowCountryName = region !== entry.country
+  const isRumor = entry.is_about_false_rumor === 1
   return (
     <div className="wrap">
       <span className="title">
         <span className="small text-muted">[{day}]&thinsp;</span>
-        {isRumor && <span>&thinsp;<mark className="small text-muted">デマに関する情報</mark></span>}
-        {isShowCountryName && <span className="small text-muted">&thinsp;({meta.countryDisplayName[entry.country]})</span>}
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener"
-          className="text-info"
-        >
+        {isRumor && (
+          <span>
+            &thinsp;<mark className="small text-muted">デマに関する情報</mark>
+          </span>
+        )}
+        {isShowCountryName && (
+          <span className="small text-muted">&thinsp;({meta.countryDisplayName[entry.country]})</span>
+        )}
+        <a href={url} target="_blank" rel="noopener" className="text-info">
           &thinsp;{title}
         </a>
       </span>
       {isJp || (
-        <a
-          href={entry.url}
-          target="_blank"
-          rel="noopener"
-          title="元の言語で表示する"
-        >
+        <a href={entry.url} target="_blank" rel="noopener" title="元の言語で表示する">
           <span className="material-icons open-in-new">open_in_new</span>
         </a>
       )}
@@ -98,23 +98,18 @@ const Title = ({ entry, region }) => {
       `}</style>
     </div>
   )
-};
+}
 
 const Domain = ({ entry }) => {
   return (
     <div className="m-0 small">
-      <a
-        href={`http://${entry.domain}`}
-        target="_blank"
-        rel="noopener"
-        className="small text-muted"
-      >
+      <a href={`http://${entry.domain}`} target="_blank" rel="noopener" className="small text-muted">
         <u>{entry.domain_label}</u>
       </a>
     </div>
-  );
-};
+  )
+}
 
-const Snippet = ({ text }) => <div className="mb-2 small text-secondary">{text}</div>;
+const Snippet = ({ text }) => <div className="mb-2 small text-secondary">{text}</div>
 
-export default Page;
+export default Page

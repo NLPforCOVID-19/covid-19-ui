@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import * as Icons from "./Icons"
+import * as Icons from './Icons'
 
 const IndicatorLegends = () => (
   <ul>
@@ -26,6 +26,6 @@ const IndicatorLegends = () => (
       }
     `}</style>
   </ul>
-);
+)
 
 export default IndicatorLegends

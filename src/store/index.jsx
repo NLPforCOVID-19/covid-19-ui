@@ -51,7 +51,7 @@ const actions = {
   RECEIVE_META: 'RECEIVE_META',
   REQUEST_NEWS: 'REQUEST_NEWS',
   RECEIVE_NEWS: 'RECEIVE_NEWS',
-  SET_TOPIC_LOADED: 'SET_TOPIC_LOADED',
+  SET_TOPIC_LOADED: 'SET_TOPIC_LOADED'
 }
 
 // reducer is only synchronous
@@ -126,7 +126,7 @@ function reducer(state, action) {
         }
       }
     }
-    
+
     case actions.SET_TOPIC_LOADED: {
       const topic = action.target
       return {
@@ -171,7 +171,6 @@ const asyncActions = {
   LOAD_MORE_NEWS: 'LOAD_MORE_NEWS',
   LOAD_ALL_TOPICS_NEWS: 'LOAD_ALL_TOPICS_NEWS'
 }
-
 
 export function fetchMeta() {
   return {
@@ -237,13 +236,13 @@ export const Provider = ({ children }) => {
       }
 
       case asyncActions.LOAD_ALL_TOPICS_NEWS: {
-        const topics = state.meta.topics.filter(t => !state.topicLoaded[t])
+        const topics = state.meta.topics.filter((t) => !state.topicLoaded[t])
         for (const topic of topics) {
           asyncDispatch(fetchNewsByTopic(topic))
         }
         break
       }
-      
+
       case asyncActions.LOAD_MORE_NEWS: {
         const { topic, country } = action.target
         const { noMore, loading } = state.newsStates[topic][country]
@@ -259,9 +258,5 @@ export const Provider = ({ children }) => {
       }
     }
   }
-  return (
-    <StoreContext.Provider value={[state, asyncDispatch]}>
-      {children}
-    </StoreContext.Provider>
-  )
+  return <StoreContext.Provider value={[state, asyncDispatch]}>{children}</StoreContext.Provider>
 }

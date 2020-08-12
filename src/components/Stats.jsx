@@ -13,9 +13,8 @@ function numberWithPlusMinus(num) {
 
 const Stats = ({ stats }) => (
   <span>
-    感染者: {stats.confirmation_total.toLocaleString()} ({numberWithPlusMinus(stats.confirmation_today)})
-    /
-    死亡者: {stats.death_total.toLocaleString()} ({numberWithPlusMinus(stats.death_today)})
+    感染者: {stats.confirmation_total.toLocaleString()} ({numberWithPlusMinus(stats.confirmation_today)}) / 死亡者:{' '}
+    {stats.death_total.toLocaleString()} ({numberWithPlusMinus(stats.death_today)})
   </span>
 )
 

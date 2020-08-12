@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Footer = () => (
   <footer className="mt-3 p-3 bg-light">
@@ -6,6 +6,6 @@ const Footer = () => (
       &copy; 2020 NLPforCOVID-19. お問い合わせ: nlpforcovid-19 (at) nlp.ist.i.kyoto-u.ac.jp
     </p>
   </footer>
-);
+)
 
-export default Footer;
+export default Footer

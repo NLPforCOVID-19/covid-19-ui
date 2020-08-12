@@ -15,4 +15,4 @@ module.exports = {
     br: 'ブラジル',
     int: 'その他国際'
   }
-};
+}
