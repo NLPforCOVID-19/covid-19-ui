@@ -75,10 +75,10 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     setIsRequesting(true)
     const newTopics = topics.filter((t) => selectedTopics[t])
     modifyRegionCategory(entry.url, selectedCounrty, newTopics, isUseful, isAboutCovid, isAboutRumor, notes, password)
-      .then((res) => {
+      .then(() => {
         onHide()
       })
-      .catch((err) => {
+      .catch(() => {
         setFailed(true)
         setTimeout(() => setFailed(false), 3000)
       })
