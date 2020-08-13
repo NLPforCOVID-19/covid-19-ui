@@ -36,7 +36,6 @@ export async function getStaticProps(ctx) {
 }
 
 export async function getStaticPaths() {
-  console.log(languagePaths)
   return {
     paths: languagePaths,
     fallback: false
