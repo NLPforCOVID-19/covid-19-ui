@@ -1,5 +1,6 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { defaultLang } from '../translations'
 
 const gtagScript = `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -9,12 +10,13 @@ gtag('config', '${process.env.GA_TRACKING_ID}');`
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    const { lang } = ctx.query
+    return { ...initialProps, lang }
   }
 
   render() {
     return (
-      <Html lang="ja">
+      <Html lang={this.props.lang || defaultLang}>
         <Head>
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`} />
           <script dangerouslySetInnerHTML={{ __html: gtagScript }} />
