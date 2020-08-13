@@ -18,7 +18,7 @@ const Index = () => {
       <Container>
         <div className="small text-right">
           <a className="text-muted" href="./edit/">
-            {t('編集 (管理者向け)')}
+            {t('編集')}
           </a>
         </div>
       </Container>

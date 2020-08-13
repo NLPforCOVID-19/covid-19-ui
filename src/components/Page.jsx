@@ -71,7 +71,7 @@ const Title = ({ entry, region }) => {
         </a>
       </span>
       {isJp || (
-        <a href={entry.url} target="_blank" rel="noopener" title={t('元の言語で表示する')}>
+        <a href={entry.url} target="_blank" rel="noopener" title={t('元の言語で表示')}>
           <span className="material-icons open-in-new">open_in_new</span>
         </a>
       )}

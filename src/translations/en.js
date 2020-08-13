@@ -20,7 +20,7 @@ export const en = {
   kr: 'South Korea',
   in: 'India',
   jp: 'Japan',
-  cn: 'Chine',
+  cn: 'China',
   us: 'US',
   br: 'Brazil',
   int: 'international'

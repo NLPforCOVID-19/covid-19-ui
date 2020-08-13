@@ -12,6 +12,9 @@ export const LanguageProvider = ({ lang, children }) => {
 export function useTranslation() {
   const { lang } = React.useContext(LanguageContext)
   function t(key) {
+    if (typeof translations[lang][key] === 'undefined') {
+      console.warn(`Translation not found. lang: ${lang}, key: ${key}`)
+    }
     return translations[lang][key]
   }
   return { t, lang }
