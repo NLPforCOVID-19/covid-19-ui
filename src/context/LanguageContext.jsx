@@ -1,11 +1,14 @@
 import React from 'react'
-import { translations, defaultLang } from '../translations'
+import { translations, defaultLang, localeList } from '../translations'
 
 const LanguageContext = React.createContext({
   lang: defaultLang
 })
 
 export const LanguageProvider = ({ lang, children }) => {
+  if (!localeList.includes(lang)) {
+    lang = defaultLang
+  }
   return <LanguageContext.Provider value={{ lang }}>{children}</LanguageContext.Provider>
 }
 
