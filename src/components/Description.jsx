@@ -5,13 +5,13 @@ import Link from 'next/link'
 import { useTranslation } from '../context/LanguageContext'
 
 const Description = () => {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   return (
     <div className="mt-3">
       <Container>
         <div className="text-dark">
           {t('description')}
-          <Link href="/about">
+          <Link href="/[lang]/about" as={`/${lang}/about`}>
             <a>{t('このサイトの使い方')}</a>
           </Link>
         </div>

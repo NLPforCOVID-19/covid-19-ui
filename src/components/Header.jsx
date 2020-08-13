@@ -5,13 +5,13 @@ import Link from 'next/link'
 import { useTranslation } from '../context/LanguageContext'
 
 const Header = () => {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   return (
     <div>
       <div className="bg-info pt-1 pb-1">
         <Container>
           <h3 className="mb-0">
-            <Link href="/">
+            <Link href="/[lang]/" as={`/${lang}/`}>
               <a className="text-white">{t('title')}</a>
             </Link>
           </h3>
