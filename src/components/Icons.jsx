@@ -1,10 +1,5 @@
 import React from 'react'
-
-export const description = {
-  useful: '役立つ記事',
-  verified: '人手で検証済みの記事',
-  notVerified: 'カテゴリ未検証の記事'
-}
+import { useTranslation } from '../context/LanguageContext'
 
 const BaseIcon = ({ title, color, size, iconId }) => (
   <>
@@ -21,14 +16,9 @@ const BaseIcon = ({ title, color, size, iconId }) => (
   </>
 )
 
-export const NotVerified = ({ size }) => <BaseIcon title={description.notVerified} size={size} iconId="help_outline" />
-
-export const Useful = ({ size }) => (
-  <BaseIcon title={description.useful} size={size} color="var(--yellow)" iconId="check_circle" />
-)
-
-export const Verified = ({ size }) => (
-  <BaseIcon title={description.useful} size={size} color="#b4e063" iconId="check_circle" />
-)
+export const Useful = ({ size }) => {
+  const { t } = useTranslation()
+  return <BaseIcon title={t('useful')} size={size} color="var(--yellow)" iconId="check_circle" />
+}
 
 export const Edit = ({ size }) => <BaseIcon size={size} iconId="edit" />

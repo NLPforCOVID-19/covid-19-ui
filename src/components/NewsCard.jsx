@@ -4,9 +4,12 @@ import Page from './Page'
 import Loading from './Loading'
 import { ModifyModal } from './ModifyModal'
 import { StoreContext, loadMore } from '../store'
-import meta from '../meta'
+import { useTranslation } from '../context/LanguageContext'
+
+const countryIds = ['fr', 'es', 'de', 'eu', 'kr', 'in', 'jp', 'cn', 'us', 'br', 'int']
 
 const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
+  const { t } = useTranslation()
   const [state, dispatch] = useContext(StoreContext)
 
   const entries = state.news[topic][countryId]
@@ -19,9 +22,9 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
 
   // EditModal
   const { topics } = state.meta
-  const countries = Object.keys(meta.countryDisplayName).map((id) => ({
+  const countries = countryIds.map((id) => ({
     id: id,
-    name: meta.countryDisplayName[id]
+    name: t(id)
   }))
   const [showEditModal, setShowEditModal] = useState(false)
   const [editingEntry, setEditingEntry] = useState(null)
@@ -69,7 +72,7 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
               </h5>
             </div>
             {children}
-            {!loading && entries.length === 0 && <div className="no-data text-muted">情報はありません</div>}
+            {!loading && entries.length === 0 && <div className="no-data text-muted">{t('no_info')}</div>}
             <div ref={wrapEl} className="scroll mt-1 mb-1">
               <ul>
                 {entries.map((entry, i) => (

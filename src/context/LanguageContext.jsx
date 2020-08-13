@@ -1,7 +1,5 @@
 import React from 'react'
-import { translations } from '../translations'
-
-const defaultLang = 'en'
+import { translations, defaultLang } from '../translations'
 
 const LanguageContext = React.createContext({
   lang: defaultLang
