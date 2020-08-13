@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@src/styles/global.css'
 
 import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
+import { LanguageProvider } from '../context/LanguageContext'
 
 Router.events.on('routeChangeComplete', (url) => {
   if (typeof window.gtag === 'undefined') {
@@ -30,9 +31,11 @@ const AppWithDispach = ({ Component, pageProps }) => {
 
 function App({ Component, pageProps }) {
   return (
-    <Provider>
-      <AppWithDispach Component={Component} pageProps={pageProps} />
-    </Provider>
+    <LanguageProvider locale={pageProps.locale}>
+      <Provider>
+        <AppWithDispach Component={Component} pageProps={pageProps} />
+      </Provider>
+    </LanguageProvider>
   )
 }
 
