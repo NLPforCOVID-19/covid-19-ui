@@ -1,4 +1,4 @@
-import { localeList } from './locales/index'
+import { localeList } from './translations'
 
 export function makeTranslatedUrl(url) {
   const target_lang = 'ja'
