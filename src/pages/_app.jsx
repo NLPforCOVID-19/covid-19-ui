@@ -31,7 +31,7 @@ const AppWithDispach = ({ Component, pageProps }) => {
 
 function App({ Component, pageProps }) {
   return (
-    <LanguageProvider locale={pageProps.locale}>
+    <LanguageProvider lang={pageProps.lang}>
       <Provider>
         <AppWithDispach Component={Component} pageProps={pageProps} />
       </Provider>

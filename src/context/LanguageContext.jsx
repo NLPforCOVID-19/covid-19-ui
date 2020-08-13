@@ -4,17 +4,17 @@ import { translations } from '../locales'
 const defaultLang = 'en'
 
 const LanguageContext = React.createContext({
-  locale: defaultLang
+  lang: defaultLang
 })
 
-export const LanguageProvider = ({ locale, children }) => {
-  return <LanguageContext.Provider value={{ locale }}>{children}</LanguageContext.Provider>
+export const LanguageProvider = ({ lang, children }) => {
+  return <LanguageContext.Provider value={{ lang }}>{children}</LanguageContext.Provider>
 }
 
 export function useTranslation() {
-  const { locale } = React.useContext(LanguageContext)
+  const { lang } = React.useContext(LanguageContext)
   function t(key) {
-    return translations[locale][key]
+    return translations[lang][key]
   }
-  return { t, locale }
+  return { t, lang }
 }

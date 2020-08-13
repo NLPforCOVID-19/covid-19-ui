@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Layout from '@src/components/Layout'
 import React from 'react'
+import { languagePaths } from '../../utils'
 
 const About = () => {
   return (
@@ -73,6 +74,22 @@ const About = () => {
       `}</style>
     </Layout>
   )
+}
+
+export async function getStaticProps(ctx) {
+  const { lang } = ctx.params
+  return {
+    props: {
+      lang
+    }
+  }
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: languagePaths,
+    fallback: false
+  }
 }
 
 export default About

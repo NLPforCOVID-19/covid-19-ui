@@ -5,7 +5,8 @@ import Layout from '@src/components/Layout'
 import Description from '@src/components/Description'
 import Map from '@src/components/Map'
 import NewsView from '@src/components/NewsView'
-import { useTranslation } from '../../context/LanguageContext'
+import { useTranslation } from '@src/context/LanguageContext'
+import { languagePaths } from '../../utils'
 
 const Index = () => {
   const { t } = useTranslation()
@@ -29,14 +30,15 @@ export async function getStaticProps(ctx) {
   const { lang } = ctx.params
   return {
     props: {
-      locale: lang
+      lang
     }
   }
 }
 
 export async function getStaticPaths() {
+  console.log(languagePaths)
   return {
-    paths: ['en', 'ja'].map((lang) => ({ params: { lang } })),
+    paths: languagePaths,
     fallback: false
   }
 }
