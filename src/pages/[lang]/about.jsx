@@ -57,14 +57,22 @@ const AboutJp = () => (
 const AboutEn = () => (
   <Container className="p-3 text-dark">
     <h5>How to use this website</h5>
-    <p>This website is ...</p>
+    <p>
+      This site shows articles about COVID-19, which crawled from official websites and news sites around the world.
+      Each article is grouped by its region and category.
+    </p>
     <Row>
       <Col md="12" lg="6" className="d-flex">
         <Card className="mb-3 flex-fill">
           <Card.Body className="p-2">
             <Card.Title className="mb-1">1. Category view</Card.Title>
-            <Card.Text>By default, ...</Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view.png`} alt="カテゴリビュー" />
+            <Card.Text>
+              By default, you can choose one of the categories like &quot;感染状況&quot;, &quot;予防・緊急事態宣言&quot;
+              {/* TODO: カテゴリ名の翻訳 */}
+              with the tabs above. Articles are categorized automatically at first, then sequentially verified manually.
+              In addition, articles are checked if they are useful.
+            </Card.Text>
+            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view.png`} alt="category view" />
           </Card.Body>
         </Card>
       </Col>
@@ -72,8 +80,11 @@ const AboutEn = () => (
         <Card className="mb-3 flex-fill">
           <Card.Body className="p-2">
             <Card.Title className="mb-1">2. Region view</Card.Title>
-            <Card.Text>Click one of region names to switch to region view. ...</Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view.png`} alt="地域ビュー" />
+            <Card.Text>
+              Clicking on a region name will switch to a region-by-region view. In this view, you can list all
+              categories of articles for the region.
+            </Card.Text>
+            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view.png`} alt="region view" />
           </Card.Body>
         </Card>
       </Col>
@@ -82,11 +93,11 @@ const AboutEn = () => (
       <h5>FAQ</h5>
       <h6 className="question">Q. Cannot translate with Google Translate</h6>
       <p className="desc">
-        A. 現在の Google 翻訳の仕様上、翻訳できないサイトがあります。 Google Chrome
-        を利用の方は、標準搭載の翻訳ツールを使うことで翻訳できる場合があります。 まず、タイトルの横にあるリンク（
-        <span className="material-icons open-in-new">open_in_new</span>）から元のページを開いてください。
-        ページを開くと翻訳ツールのダイアログが表示されるので、日本語を選択してください。
-        ダイアログが表示されない方は、設定&gt;詳細設定&gt;言語から、「母国語以外のページで翻訳ツールを表示する」を有効にしてください。
+        A. Some sites cannot be translated by Google Translate. If you use Google Chrome, you may be able to translate
+        such sites by using the translation tool. First, click on the link (
+        <span className="material-icons open-in-new">open_in_new</span>) next to the title to open original website.
+        Then translation tool dialog box will appear, and you can translate the site. Make sure translation tool is
+        enabled on Settings &gt; Advanced &gt; Languages.
       </p>
     </section>
   </Container>

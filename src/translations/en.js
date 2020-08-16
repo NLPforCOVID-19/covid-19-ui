@@ -12,7 +12,8 @@ export const en = {
   感染者: 'Confirmed',
   死亡者: 'Dead',
   title: 'COVID-19 World Information Aggregation',
-  description: 'This website is ....', // TODO: 翻訳
+  description:
+    'This site shows articles about COVID-19, which crawled from official websites and news sites around the world.  Each article is grouped by its region and category.',
   fr: 'France',
   es: 'Spain',
   de: 'Germany',
