@@ -24,5 +24,12 @@ export const ja = {
   cn: '中国',
   us: 'アメリカ',
   br: 'ブラジル',
-  int: 'その他国際'
+  int: 'その他国際',
+  lab_kurohashi: '京都大学 黒橋・村脇研',
+  lab_kawahara: '早稲田大学 河原研',
+  lab_kitsuregawa: '東京大学 喜連川・豊田研',
+  lab_miyao: '東京大学 宮尾研',
+  lab_aizawa: 'NII 相澤研',
+  lab_inui: '東北大学 乾研',
+  lab_morishima: '筑波大学 森嶋研'
 }

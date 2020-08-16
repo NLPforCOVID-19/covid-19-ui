@@ -24,5 +24,12 @@ export const en = {
   cn: 'China',
   us: 'US',
   br: 'Brazil',
-  int: 'international'
+  int: 'international',
+  lab_kurohashi: 'Kyoto University Kurohashi-Chu-Murawaki Lab',
+  lab_kawahara: 'Waseda University Kawahara Lab',
+  lab_kitsuregawa: 'University of Tokyo Kitsuregawa-Toyoda Lab',
+  lab_miyao: 'University of Tokyo Miyao Lab',
+  lab_aizawa: 'NII Aizawa Lab',
+  lab_inui: 'Tohoku University Inui Lab',
+  lab_morishima: 'University of Tsukuba Morishima Lab'
 }
