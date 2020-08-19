@@ -25,11 +25,11 @@ export const en = {
   us: 'US',
   br: 'Brazil',
   int: 'international',
-  lab_kurohashi: 'Kyoto University Kurohashi-Chu-Murawaki Lab',
-  lab_kawahara: 'Waseda University Kawahara Lab',
-  lab_kitsuregawa: 'University of Tokyo Kitsuregawa-Toyoda Lab',
-  lab_miyao: 'University of Tokyo Miyao Lab',
-  lab_aizawa: 'NII Aizawa Lab',
-  lab_inui: 'Tohoku University Inui Lab',
-  lab_morishima: 'University of Tsukuba Morishima Lab'
+  lab_kurohashi: 'Kurohashi-Chu-Murawaki Lab at Kyoto University',
+  lab_kawahara: 'Kawahara Lab at Waseda University',
+  lab_kitsuregawa: 'Kitsuregawa-Toyoda Lab at the University of Tokyo',
+  lab_miyao: 'Miyao Lab at the University of Tokyo',
+  lab_aizawa: 'Aizawa Lab at NII',
+  lab_inui: 'Inui Lab at Tohoku University',
+  lab_morishima: 'Morishima Lab at University of Tsukuba'
 }
