@@ -172,29 +172,31 @@ const asyncActions = {
   LOAD_ALL_TOPICS_NEWS: 'LOAD_ALL_TOPICS_NEWS'
 }
 
-export function fetchMeta() {
+export function fetchMeta(lang) {
   return {
-    type: asyncActions.FETCH_META
+    type: asyncActions.FETCH_META,
+    target: { lang }
   }
 }
 
-export function fetchNewsByTopic(topic) {
+export function fetchNewsByTopic(topic, lang) {
   return {
     type: asyncActions.FETCH_NEWS_BY_TOPIC,
-    target: topic
+    target: { topic, lang }
   }
 }
 
-export function loadMore(country, topic) {
+export function loadMore(country, topic, lang) {
   return {
     type: asyncActions.LOAD_MORE_NEWS,
-    target: { country, topic }
+    target: { country, topic, lang }
   }
 }
 
-export function loadAllTopicsNews() {
+export function loadAllTopicsNews(lang) {
   return {
-    type: asyncActions.LOAD_ALL_TOPICS_NEWS
+    type: asyncActions.LOAD_ALL_TOPICS_NEWS,
+    target: { lang }
   }
 }
 
@@ -204,13 +206,13 @@ export const Provider = ({ children }) => {
     switch (action.type) {
       case asyncActions.FETCH_META: {
         // dispatch({ type: actions.REQUEST_META })
-        const meta = await api.fetchMeta()
+        const meta = await api.fetchMeta(action.target.lang)
         dispatch(receiveMeta(meta))
         break
       }
 
       case asyncActions.FETCH_NEWS_BY_TOPIC: {
-        const topic = action.target
+        const { topic, lang } = action.target
         if (!state.metaLoaded) {
           return
         }
@@ -222,7 +224,7 @@ export const Provider = ({ children }) => {
           const countryId = country.country
           dispatch(requestNews(topic, countryId))
         }
-        const res = await api.fetchNewsByClass(topic, limit)
+        const res = await api.fetchNewsByClass(topic, limit, lang)
         for (const country of state.meta.countries) {
           const countryId = country.country
           if (!res[countryId]) {
@@ -238,13 +240,13 @@ export const Provider = ({ children }) => {
       case asyncActions.LOAD_ALL_TOPICS_NEWS: {
         const topics = state.meta.topics.filter((t) => !state.topicLoaded[t])
         for (const topic of topics) {
-          asyncDispatch(fetchNewsByTopic(topic))
+          asyncDispatch(fetchNewsByTopic(topic, action.target.lang))
         }
         break
       }
 
       case asyncActions.LOAD_MORE_NEWS: {
-        const { topic, country } = action.target
+        const { topic, country, lang } = action.target
         const { noMore, loading } = state.newsStates[topic][country]
         if (noMore || loading) {
           return
@@ -252,7 +254,7 @@ export const Provider = ({ children }) => {
         const offset = state.news[topic][country].length
         const limit = 10
         dispatch(requestNews(topic, country))
-        const res = await api.fetchNewsByClassAndCountry(topic, country, offset, limit)
+        const res = await api.fetchNewsByClassAndCountry(topic, country, offset, limit, lang)
         dispatch(receiveNews(topic, country, res, res.length < limit))
         break
       }
