@@ -9,7 +9,7 @@ import { useTranslation } from '../context/LanguageContext'
 const countryIds = ['fr', 'es', 'de', 'eu', 'kr', 'in', 'jp', 'cn', 'us', 'br', 'int']
 
 const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const [state, dispatch] = useContext(StoreContext)
 
   const entries = state.news[topic][countryId]
@@ -43,7 +43,7 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
     const observer = new IntersectionObserver(
       (e) => {
         if (e[0].isIntersecting && !loading) {
-          dispatch(loadMore(countryId, topic))
+          dispatch(loadMore(countryId, topic, lang))
         }
       },
       {
