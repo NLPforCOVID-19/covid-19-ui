@@ -67,12 +67,11 @@ const AboutEn = () => (
           <Card.Body className="p-2">
             <Card.Title className="mb-1">1. Category view</Card.Title>
             <Card.Text>
-              By default, you can choose one of the categories like &quot;感染状況&quot;, &quot;予防・緊急事態宣言&quot;
-              {/* TODO: カテゴリ名の翻訳 */}
+              By default, you can choose one of the categories like &quot;Current state of infection&quot;, &quot;Prevention and mitigation measures&quot;
               with the tabs above. Articles are categorized automatically at first, then sequentially verified manually.
               In addition, articles are evaluated and tagged as useful.
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view.png`} alt="category view" />
+            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view_en.png`} alt="category view" />
           </Card.Body>
         </Card>
       </Col>
@@ -84,7 +83,7 @@ const AboutEn = () => (
               Clicking on a region name will switch to a region-by-region view. In this view, you can list all
               categories of articles for the region.
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view.png`} alt="region view" />
+            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view_en.png`} alt="region view" />
           </Card.Body>
         </Card>
       </Col>
