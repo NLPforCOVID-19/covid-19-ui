@@ -11,6 +11,7 @@ const Description = () => {
       <Container>
         <div className="text-dark">
           {t('description')}
+          &nbsp;
           <Link href="/[lang]/about" as={`/${lang}/about`}>
             <a>{t('このサイトの使い方')}</a>
           </Link>
