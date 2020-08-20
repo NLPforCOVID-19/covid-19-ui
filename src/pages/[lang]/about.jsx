@@ -71,7 +71,7 @@ const AboutEn = () => (
               with the tabs above. Articles are categorized automatically at first, then sequentially verified manually.
               In addition, articles are evaluated and tagged as useful.
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view.png`} alt="category view" />
+            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view_en.png`} alt="category view" />
           </Card.Body>
         </Card>
       </Col>
@@ -83,7 +83,7 @@ const AboutEn = () => (
               Clicking on a region name will switch to a region-by-region view. In this view, you can list all
               categories of articles for the region.
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view.png`} alt="region view" />
+            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view_en.png`} alt="region view" />
           </Card.Body>
         </Card>
       </Col>
