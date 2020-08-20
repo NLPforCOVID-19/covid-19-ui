@@ -8,8 +8,10 @@ import Loading from './Loading'
 import IndicatorLegends from './IndicatorLegends'
 import { StoreContext } from '../store'
 import Stats from './Stats'
+import { useTranslation } from '../context/LanguageContext'
 
 const NewsView = ({ showEditButton }) => {
+  const { t } = useTranslation()
   const [state] = useContext(StoreContext)
   const [selectedTopic, setSelectedTopic] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(null)
@@ -80,8 +82,8 @@ const NewsView = ({ showEditButton }) => {
 
   if (selectedCountry) {
     const selectedCountryData = countries.find((c) => c.country === selectedCountry)
-    const selectedCountryName = selectedCountryData.name.ja
-    const countryNames = countries.map((c) => c.name.ja)
+    const selectedCountryName = selectedCountryData.name
+    const countryNames = countries.map((c) => c.name)
     const sources = selectedCountryData.sources
     return (
       <Container className="mt-3" id="news-view">
@@ -99,7 +101,7 @@ const NewsView = ({ showEditButton }) => {
               </div>
               <div className="public-link small">
                 <a href={selectedCountryData.representativeSiteUrl} target="_blank" rel="noopener">
-                  公的機関のウェブサイトを確認する
+                  {t('check_public_website')}
                 </a>
               </div>
             </div>
@@ -117,7 +119,7 @@ const NewsView = ({ showEditButton }) => {
             ))}
           </Row>
           <Row className="mt-2">
-            <h4>情報源のサイト</h4>
+            <h4>{t('情報源のサイト')}</h4>
           </Row>
           <Row>
             <div>
@@ -157,7 +159,7 @@ const NewsView = ({ showEditButton }) => {
           {countries.map((c) => (
             <NewsCard
               key={c.country}
-              title={c.name.ja}
+              title={c.name}
               countryId={c.country}
               topic={selectedTopic}
               onClickTitle={() => handleClickCountry(c.country)}

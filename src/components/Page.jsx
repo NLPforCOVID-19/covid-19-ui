@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import * as Icons from './Icons'
 import meta from '@src/meta'
 import { makeTranslatedUrl } from '../utils'
+import { useTranslation } from '../context/LanguageContext'
 
 function EntryIcon({ entry }) {
   if (entry.is_useful) {
@@ -48,10 +49,11 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
 }
 
 const Title = ({ entry, region }) => {
+  const { t } = useTranslation()
   const isJp = entry.country === 'jp'
   const url = isJp ? entry.url : makeTranslatedUrl(entry.url)
   const day = dayjs(entry.orig.timestamp).format('MM/DD')
-  const title = entry.ja_translated.title
+  const title = entry.translated.title
   const isShowCountryName = region !== entry.country
   const isRumor = entry.is_about_false_rumor === 1
   return (
@@ -60,18 +62,16 @@ const Title = ({ entry, region }) => {
         <span className="small text-muted">[{day}]&thinsp;</span>
         {isRumor && (
           <span>
-            &thinsp;<mark className="small text-muted">デマに関する情報</mark>
+            &thinsp;<mark className="small text-muted">{t('false_rumor')}</mark>
           </span>
         )}
-        {isShowCountryName && (
-          <span className="small text-muted">&thinsp;({meta.countryDisplayName[entry.country]})</span>
-        )}
+        {isShowCountryName && <span className="small text-muted">&thinsp;({t(entry.country)})</span>}
         <a href={url} target="_blank" rel="noopener" className="text-info">
           &thinsp;{title}
         </a>
       </span>
       {isJp || (
-        <a href={entry.url} target="_blank" rel="noopener" title="元の言語で表示する">
+        <a href={entry.url} target="_blank" rel="noopener" title={t('元の言語で表示')}>
           <span className="material-icons open-in-new">open_in_new</span>
         </a>
       )}

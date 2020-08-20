@@ -1,20 +1,23 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
 
-import meta from '../meta'
 import Link from 'next/link'
+import { useTranslation } from '../context/LanguageContext'
 
-const Description = () => (
-  <div className="mt-3">
-    <Container>
-      <div className="text-dark">
-        {meta.desc}
-        <Link href="/about">
-          <a>このサイトの使い方</a>
-        </Link>
-      </div>
-    </Container>
-  </div>
-)
+const Description = () => {
+  const { t, lang } = useTranslation()
+  return (
+    <div className="mt-3">
+      <Container>
+        <div className="text-dark">
+          {t('description')}
+          <Link href="/[lang]/about" as={`/${lang}/about`}>
+            <a>{t('このサイトの使い方')}</a>
+          </Link>
+        </div>
+      </Container>
+    </div>
+  )
+}
 
 export default Description

@@ -7,7 +7,7 @@ const url =
 const Map = () => (
   <Container className="mt-3">
     <iframe src={url} className="rounded embeddedMap" />
-    <p className="text-right small text-dark mb-0 mt-0">提供：Johns Hopkins University</p>
+    <p className="text-right small text-dark mb-0 mt-0">Johns Hopkins University</p>
     <style jsx>{`
       .embeddedMap {
         height: 300px;

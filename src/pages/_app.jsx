@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import Router from 'next/router'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@src/styles/global.css'
 
-import { Provider, fetchMeta, loadAllTopicsNews, StoreContext } from '../store'
+import { Provider } from '../store'
+import { LanguageProvider } from '../context/LanguageContext'
 
 Router.events.on('routeChangeComplete', (url) => {
   if (typeof window.gtag === 'undefined') {
@@ -16,23 +17,16 @@ Router.events.on('routeChangeComplete', (url) => {
 })
 
 const AppWithDispach = ({ Component, pageProps }) => {
-  const [state, dispatch] = useContext(StoreContext)
-  useEffect(() => {
-    dispatch(fetchMeta())
-  }, [])
-  useEffect(() => {
-    if (state.metaLoaded) {
-      dispatch(loadAllTopicsNews())
-    }
-  }, [state.metaLoaded])
   return <Component {...pageProps} />
 }
 
 function App({ Component, pageProps }) {
   return (
-    <Provider>
-      <AppWithDispach Component={Component} pageProps={pageProps} />
-    </Provider>
+    <LanguageProvider lang={pageProps.lang}>
+      <Provider>
+        <AppWithDispach Component={Component} pageProps={pageProps} />
+      </Provider>
+    </LanguageProvider>
   )
 }
 
