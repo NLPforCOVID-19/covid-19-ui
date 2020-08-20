@@ -13,7 +13,7 @@ export const en = {
   死亡者: 'Dead',
   title: 'COVID-19 World Information Aggregation',
   description:
-    'This site shows articles about COVID-19, which crawled from official websites and news sites around the world.  Each article is grouped by its region and category.',
+    'This site shows articles about COVID-19, which were crawled from official websites and news sites around the world.  Articles are grouped by regions and categories.',
   fr: 'France',
   es: 'Spain',
   de: 'Germany',

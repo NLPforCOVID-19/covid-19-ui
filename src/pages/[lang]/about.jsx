@@ -58,8 +58,8 @@ const AboutEn = () => (
   <Container className="p-3 text-dark">
     <h5>How to use this website</h5>
     <p>
-      This site shows articles about COVID-19, which crawled from official websites and news sites around the world.
-      Each article is grouped by its region and category.
+      This site shows articles about COVID-19, which were crawled from official websites and news sites around the world.
+      Articles are grouped by regions and categories.
     </p>
     <Row>
       <Col md="12" lg="6" className="d-flex">
@@ -70,7 +70,7 @@ const AboutEn = () => (
               By default, you can choose one of the categories like &quot;感染状況&quot;, &quot;予防・緊急事態宣言&quot;
               {/* TODO: カテゴリ名の翻訳 */}
               with the tabs above. Articles are categorized automatically at first, then sequentially verified manually.
-              In addition, articles are checked if they are useful.
+              In addition, articles are evaluated and tagged as useful.
             </Card.Text>
             <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view.png`} alt="category view" />
           </Card.Body>
@@ -93,11 +93,13 @@ const AboutEn = () => (
       <h5>FAQ</h5>
       <h6 className="question">Q. Cannot translate with Google Translate</h6>
       <p className="desc">
-        A. Some sites cannot be translated by Google Translate. If you use Google Chrome, you may be able to translate
-        such sites by using the translation tool. First, click on the link (
-        <span className="material-icons open-in-new">open_in_new</span>) next to the title to open original website.
-        Then translation tool dialog box will appear, and you can translate the site. Make sure translation tool is
-        enabled on Settings &gt; Advanced &gt; Languages.
+        A. Some sites cannot be translated by Google Translate website. If you use Google Chrome, you may be able to translate
+        such sites by using the built-in translation tool of the browser. First, click on the link (
+        <span className="material-icons open-in-new">open_in_new</span>) next to the title of the article that you want to translate.
+        This will open the article from the original website.
+        Then a translation tool dialog box should appear automatically and ask whether Chrome can translate the page or not.
+        In case that the translation tool dialog box does not appear, make sure to enable Chrome's translation tool from the
+        Settings &gt; Advanced &gt; Languages section.
       </p>
     </section>
   </Container>
