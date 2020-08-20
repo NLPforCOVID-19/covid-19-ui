@@ -27,7 +27,7 @@ const Index = () => {
       <NewsView />
       <Container>
         <div className="small text-right">
-          <a className="text-muted" href="/edit/">
+          <a className="text-muted" href="./../edit/">
             {t('編集')}
           </a>
         </div>
