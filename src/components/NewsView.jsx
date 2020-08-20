@@ -82,8 +82,8 @@ const NewsView = ({ showEditButton }) => {
 
   if (selectedCountry) {
     const selectedCountryData = countries.find((c) => c.country === selectedCountry)
-    const selectedCountryName = selectedCountryData.name.ja
-    const countryNames = countries.map((c) => c.name.ja)
+    const selectedCountryName = selectedCountryData.name
+    const countryNames = countries.map((c) => c.name)
     const sources = selectedCountryData.sources
     return (
       <Container className="mt-3" id="news-view">
@@ -159,7 +159,7 @@ const NewsView = ({ showEditButton }) => {
           {countries.map((c) => (
             <NewsCard
               key={c.country}
-              title={c.name.ja}
+              title={c.name}
               countryId={c.country}
               topic={selectedTopic}
               onClickTitle={() => handleClickCountry(c.country)}

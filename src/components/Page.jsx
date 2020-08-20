@@ -53,7 +53,7 @@ const Title = ({ entry, region }) => {
   const isJp = entry.country === 'jp'
   const url = isJp ? entry.url : makeTranslatedUrl(entry.url)
   const day = dayjs(entry.orig.timestamp).format('MM/DD')
-  const title = entry.ja_translated.title
+  const title = entry.translated.title
   const isShowCountryName = region !== entry.country
   const isRumor = entry.is_about_false_rumor === 1
   return (

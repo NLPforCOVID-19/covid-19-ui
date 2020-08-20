@@ -101,7 +101,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                 target="_blank"
                 rel="noopener"
               >
-                {entry.ja_translated.title}
+                {entry.translated.title}
               </a>{' '}
               {isJp || (
                 <a href={entry.url} target="_blank" rel="noopener" title="元の言語で表示する">
