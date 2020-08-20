@@ -49,9 +49,9 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
 }
 
 const Title = ({ entry, region }) => {
-  const { t } = useTranslation()
-  const isJp = entry.country === 'jp'
-  const url = isJp ? entry.url : makeTranslatedUrl(entry.url)
+  const { t, lang } = useTranslation()
+  const needsTranslation = (lang === 'ja' && entry.country === 'jp') || (lang === 'en' && entry.country === 'us')
+  const url = needsTranslation ? entry.url : makeTranslatedUrl(entry.url, lang)
   const day = dayjs(entry.orig.timestamp).format('MM/DD')
   const title = entry.translated.title
   const isShowCountryName = region !== entry.country
@@ -70,7 +70,7 @@ const Title = ({ entry, region }) => {
           &thinsp;{title}
         </a>
       </span>
-      {isJp || (
+      {needsTranslation || (
         <a href={entry.url} target="_blank" rel="noopener" title={t('元の言語で表示')}>
           <span className="material-icons open-in-new">open_in_new</span>
         </a>
