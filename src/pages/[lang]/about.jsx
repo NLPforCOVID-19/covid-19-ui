@@ -67,8 +67,7 @@ const AboutEn = () => (
           <Card.Body className="p-2">
             <Card.Title className="mb-1">1. Category view</Card.Title>
             <Card.Text>
-              By default, you can choose one of the categories like &quot;感染状況&quot;, &quot;予防・緊急事態宣言&quot;
-              {/* TODO: カテゴリ名の翻訳 */}
+              By default, you can choose one of the categories like &quot;Current state of infection&quot;, &quot;Prevention and mitigation measures&quot;
               with the tabs above. Articles are categorized automatically at first, then sequentially verified manually.
               In addition, articles are evaluated and tagged as useful.
             </Card.Text>
