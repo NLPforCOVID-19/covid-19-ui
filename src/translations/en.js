@@ -7,10 +7,10 @@ export const en = {
   お問い合わせ: 'Contact:',
   useful: 'Useful article',
   no_info: 'No information available.',
-  false_rumor: 'Information about false rumor',
+  false_rumor: 'Disputable',
   元の言語で表示: 'Show in original language',
-  感染者: 'Confirmed',
-  死亡者: 'Dead',
+  感染者: 'Cases',
+  死亡者: 'Deaths',
   title: 'COVID-19 World Information Aggregation',
   description:
     'This site shows articles about COVID-19, which were crawled from official websites and news sites around the world.  Articles are grouped by regions and categories.',
