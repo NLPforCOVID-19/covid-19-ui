@@ -110,6 +110,25 @@ const Domain = ({ entry }) => {
   )
 }
 
-const Snippet = ({ text }) => <div className="mb-2 small text-secondary">{text}</div>
+const Snippet = ({ text }) => {
+  return (
+    <div className="wrap">
+      <div className="mb-2 small text-secondary">
+        <span className="snippet">{text}</span>
+      </div>
+      <style jsx>{`
+        .wrap {
+          display: flex;
+        }
+        .snippet {
+          display: -webkit-box;
+          overflow: hidden;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      `}</style>
+    </div>
+  )
+}
 
 export default Page
