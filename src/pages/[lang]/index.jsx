@@ -14,11 +14,9 @@ const Index = () => {
   const [state, dispatch] = useContext(StoreContext)
   useEffect(() => {
     if (!state.metaLoaded) {
-      console.log('fetch meta')
       dispatch(fetchMeta(lang))
     }
     if (state.metaLoaded) {
-      console.log('fetch all')
       dispatch(loadAllTopicsNews(lang))
     }
   }, [state.metaLoaded])
