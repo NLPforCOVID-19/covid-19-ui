@@ -38,7 +38,7 @@ const Header = () => {
         <Container>
           <Row>
             <Col>
-              <h3 className="mb-0">
+              <h3 className="mb-1">
                 <Link href="/[lang]/" as={`/${lang}/`}>
                   <a className="text-white">{t('title')}</a>
                 </Link>
