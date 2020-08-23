@@ -13,7 +13,7 @@ const LangLink = ({ lang, currentLang, className }) => {
   }
   if (lang !== currentLang) {
     return (
-      <a className={className} href={`/${lang}/`}>
+      <a className={className} href={`${process.env.BASE_PATH}/${lang}/`}>
         {displayLanguageNames[lang]}
       </a>
     )
