@@ -59,6 +59,10 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
     return unobserve
   })
 
+  useEffect(() => {
+    wrapEl.current.scrollTop = 0
+  }, [countryId, topic])
+
   return (
     <>
       <div className="col-xl-4 col-lg-6 p-1">

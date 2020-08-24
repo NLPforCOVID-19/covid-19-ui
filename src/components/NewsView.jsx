@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
@@ -11,6 +11,8 @@ import Stats from './Stats'
 import { useTranslation } from '../context/LanguageContext'
 
 const NewsView = ({ showEditButton }) => {
+  const regionViewRef = useRef(null)
+  const categoryViewRef = useRef(null)
   const { t } = useTranslation()
   const [state] = useContext(StoreContext)
   const [selectedTopic, setSelectedTopic] = useState(null)
@@ -37,6 +39,7 @@ const NewsView = ({ showEditButton }) => {
         }
         setSelectedTopic(null)
         setSelectedCountry(slugs[1])
+        regionViewRef.current.scrollIntoView(true)
         break
       }
       case 't': {
@@ -45,6 +48,7 @@ const NewsView = ({ showEditButton }) => {
         }
         setSelectedCountry(null)
         setSelectedTopic(slugs[1])
+        categoryViewRef.current.scrollIntoView(true)
         break
       }
     }
@@ -86,7 +90,7 @@ const NewsView = ({ showEditButton }) => {
     const countryNames = countries.map((c) => c.name)
     const sources = selectedCountryData.sources
     return (
-      <Container className="mt-3" id="news-view">
+      <Container className="mt-3" id="news-view" ref={regionViewRef}>
         <IndicatorLegends />
         <Tabs
           active={selectedCountryName}
@@ -151,7 +155,7 @@ const NewsView = ({ showEditButton }) => {
   }
 
   return (
-    <Container className="mt-3" id="news-view">
+    <Container className="mt-3" id="news-view" ref={categoryViewRef}>
       <IndicatorLegends />
       <Tabs active={selectedTopic} choices={topics} onChange={(idx) => handleClickTopic(topics[idx])} />
       <Container>
