@@ -60,7 +60,9 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
   })
 
   useEffect(() => {
-    wrapEl.current.scrollTop = 0
+    if (wrapEl.current) {
+      wrapEl.current.scrollTop = 0
+    }
   }, [countryId, topic])
 
   return (

@@ -39,7 +39,9 @@ const NewsView = ({ showEditButton }) => {
         }
         setSelectedTopic(null)
         setSelectedCountry(slugs[1])
-        regionViewRef.current.scrollIntoView(true)
+        if (regionViewRef.current) {
+          regionViewRef.current.scrollIntoView(true)
+        }
         break
       }
       case 't': {
@@ -48,7 +50,9 @@ const NewsView = ({ showEditButton }) => {
         }
         setSelectedCountry(null)
         setSelectedTopic(slugs[1])
-        categoryViewRef.current.scrollIntoView(true)
+        if (categoryViewRef.current) {
+          categoryViewRef.current.scrollIntoView(true)
+        }
         break
       }
     }
