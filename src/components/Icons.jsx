@@ -18,7 +18,12 @@ const BaseIcon = ({ title, color, size, iconId }) => (
 
 export const Useful = ({ size }) => {
   const { t } = useTranslation()
-  return <BaseIcon title={t('useful')} size={size} color="var(--yellow)" iconId="check_circle" />
+  return <BaseIcon title={t('useful')} size={size} color="var(--yellow)" iconId="fiber_manual_record" />
+}
+
+export const Default = ({ size }) => {
+  const { t } = useTranslation()
+  return <BaseIcon title={t('default')} size={size} color="#A9A9A9" iconId="fiber_manual_record" />
 }
 
 export const Edit = ({ size }) => <BaseIcon size={size} iconId="edit" />

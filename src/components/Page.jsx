@@ -9,8 +9,9 @@ import { useTranslation } from '../context/LanguageContext'
 function EntryIcon({ entry }) {
   if (entry.is_useful) {
     return <Icons.Useful />
+  } else {
+    return <Icons.Default />
   }
-  return null
 }
 
 const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
