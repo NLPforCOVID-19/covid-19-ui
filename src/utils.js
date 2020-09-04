@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { localeList, defaultLang } from './translations'
 
 export function makeTranslatedUrl(url, lang) {
-  return `https://translate.google.com/translate?tl=${lang}&u=${url}`
+  return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
 }
 
 export const languagePaths = localeList.map((lang) => ({ params: { lang } }))
