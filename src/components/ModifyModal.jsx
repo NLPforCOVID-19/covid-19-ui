@@ -15,23 +15,19 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   }
   const isJp = entry.country === 'jp'
 
-  const currentCountry = entry.country
   const currentTopics = entry.topics.filter((t) => topics.includes(t.name))
 
   const [isAboutCovid, setIsAboutCovid] = useState(true)
   const [isUseful, setIsUseful] = useState(false)
   const [notes, setNotes] = useState('')
   const [isAboutRumor, setIsAboutRumor] = useState(false)
-  useEffect(() => {
-    setIsAboutRumor(entry.is_about_false_rumor)
-  }, [entry.is_about_false_rumor])
-  useEffect(() => {
-    setIsUseful(entry.is_useful === 1)
-  }, [entry.is_useful])
   const [selectedCounrty, setSelectedCountry] = useState('')
   useEffect(() => {
-    setSelectedCountry(currentCountry)
-  }, [currentCountry])
+    setIsAboutRumor(entry.is_about_false_rumor)
+    setIsUseful(entry.is_useful === 1)
+    setIsAboutCovid(true)
+    setSelectedCountry(entry.country)
+  }, [entry.url])
 
   const initialTopicState = {}
   for (const topicName of topics) {
@@ -44,13 +40,13 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 
   const [isChangedFromCurrent, setIsChangedFromCurrent] = useState(false)
   useEffect(() => {
-    const changedCountry = currentCountry !== selectedCounrty
+    const changedCountry = entry.country !== selectedCounrty
     const changedTopic = JSON.stringify(initialTopicState) !== JSON.stringify(selectedTopics)
     const changedUseful = isUseful !== (entry.is_useful === 1)
     const changedAboutRumor = isAboutRumor !== entry.is_about_false_rumor
     const isChanged = changedCountry || changedTopic || changedUseful || !isAboutCovid || changedAboutRumor
     setIsChangedFromCurrent(isChanged)
-  }, [entry, selectedTopics, selectedCounrty, isUseful, isAboutCovid, isAboutRumor])
+  }, [entry.url, selectedTopics, selectedCounrty, isUseful, isAboutCovid, isAboutRumor])
 
   const [password, setPassword] = useState('')
   const [isRequesting, setIsRequesting] = useState(false)
@@ -109,7 +105,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                 </a>
               )}
             </div>
-            <div>地域: {countries.find((r) => r.id === currentCountry)?.name}</div>
+            <div>地域: {countries.find((r) => r.id === entry.country)?.name}</div>
             <div>カテゴリ:</div>
             <ul>
               {currentTopics.map((t) => (
