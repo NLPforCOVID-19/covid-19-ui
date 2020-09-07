@@ -9,6 +9,7 @@ const Description = () => {
   return (
     <div className="mt-3">
       <Container>
+        <div className="text-muted mb-3">{t('outage')}</div>
         <div className="text-dark">
           {t('description')}
           &nbsp;
