@@ -31,5 +31,6 @@ export const ja = {
   lab_miyao: '東京大学 宮尾研',
   lab_aizawa: 'NII 相澤研',
   lab_inui: '東北大学 乾研',
-  lab_morishima: '筑波大学 森嶋研'
+  lab_morishima: '筑波大学 森嶋研',
+  outage: '本サービスは定期停電のため9月12日（土）19時から9月13日（日）22時まで一時停止します。'
 }
