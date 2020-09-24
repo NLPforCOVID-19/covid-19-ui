@@ -25,6 +25,7 @@ export const en = {
   us: 'US',
   br: 'Brazil',
   oceania: 'Oceania',
+  au: 'Australia',
   africa: 'Africa',
   za: 'South Africa',
   int: 'international',
