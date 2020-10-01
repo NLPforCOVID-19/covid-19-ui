@@ -93,7 +93,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
             <div className="mb-2">
               <a
                 className="title"
-                href={isJp ? entry.url : makeTranslatedUrl(entry.url)}
+                href={isJp ? entry.url : makeTranslatedUrl(entry.url, 'ja')}
                 target="_blank"
                 rel="noopener"
               >
