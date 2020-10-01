@@ -105,7 +105,37 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                 </a>
               )}
             </div>
+            <Form.Group>
+              <Form.Check
+                type="checkbox"
+                label="COVID-19関連"
+                checked={isAboutCovid}
+                onChange={(e) => setIsAboutCovid(e.target.checked)}
+              />
+              <Form.Check
+                type="checkbox"
+                label="役に立つ"
+                checked={isUseful}
+                onChange={(e) => setIsUseful(e.target.checked)}
+              />
+              <Form.Check
+                type="checkbox"
+                label="デマに関する情報"
+                checked={isAboutRumor}
+                onChange={(e) => setIsAboutRumor(e.target.checked)}
+              />
+            </Form.Group>
             <div>地域: {countries.find((r) => r.id === entry.country)?.name}</div>
+            <Form.Group>
+              <Form.Label>地域を修正する</Form.Label>
+              <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
+                {countries.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
             <div>カテゴリ:</div>
             <ul>
               {currentTopics.map((t) => (
@@ -116,6 +146,22 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                 </li>
               ))}
             </ul>
+            <Form.Group>
+              <Form.Label>カテゴリを修正する</Form.Label>
+              {topics.map((t) => (
+                <Form.Check key={t}>
+                  <Form.Check.Label>
+                    <Form.Check.Input
+                      type="checkbox"
+                      name={t}
+                      checked={selectedTopics[t]}
+                      onChange={handleChangeTopic}
+                    />
+                    {t}
+                  </Form.Check.Label>
+                </Form.Check>
+              ))}
+            </Form.Group>
             <style jsx>{`
               .title {
                 font-size: 1.2em;
@@ -138,53 +184,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               }
             `}</style>
           </div>
-          <Form.Group>
-            <Form.Check
-              type="checkbox"
-              label="COVID-19関連"
-              checked={isAboutCovid}
-              onChange={(e) => setIsAboutCovid(e.target.checked)}
-            />
-            <Form.Check
-              type="checkbox"
-              label="役に立つ"
-              checked={isUseful}
-              onChange={(e) => setIsUseful(e.target.checked)}
-            />
-            <Form.Check
-              type="checkbox"
-              label="デマに関する情報"
-              checked={isAboutRumor}
-              onChange={(e) => setIsAboutRumor(e.target.checked)}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>修正後の地域</Form.Label>
-            <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
-              {countries.map((r) => (
-                <option key={r.id} value={r.id}>
-                  {r.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
           <fieldset>
-            <Form.Group>
-              <Form.Label as="legend">修正後のカテゴリ</Form.Label>
-              {topics.map((t) => (
-                <Form.Check key={t}>
-                  <Form.Check.Label>
-                    <Form.Check.Input
-                      type="checkbox"
-                      name={t}
-                      checked={selectedTopics[t]}
-                      onChange={handleChangeTopic}
-                    />
-                    {t}
-                  </Form.Check.Label>
-                </Form.Check>
-              ))}
-            </Form.Group>
             <Form.Group>
               <Form.Label>メモ欄</Form.Label>
               <Form.Control as="textarea" value={notes} onChange={(e) => setNotes(e.target.value)} />
