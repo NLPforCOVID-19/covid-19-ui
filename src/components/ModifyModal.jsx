@@ -114,7 +114,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               />
               <Form.Check
                 type="checkbox"
-                label="役に立つ"
+                label="特に役に立つ"
                 checked={isUseful}
                 onChange={(e) => setIsUseful(e.target.checked)}
               />
@@ -125,6 +125,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                 onChange={(e) => setIsAboutRumor(e.target.checked)}
               />
             </Form.Group>
+            <hr />
             <div>地域: {countries.find((r) => r.id === entry.country)?.name}</div>
             <Form.Group>
               <Form.Label>地域を修正する</Form.Label>
@@ -136,6 +137,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                 ))}
               </Form.Control>
             </Form.Group>
+            <hr />
             <div>カテゴリ:</div>
             <ul>
               {currentTopics.map((t) => (
@@ -184,16 +186,17 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               }
             `}</style>
           </div>
-          <fieldset>
-            <Form.Group>
-              <Form.Label>メモ欄</Form.Label>
-              <Form.Control as="textarea" value={notes} onChange={(e) => setNotes(e.target.value)} />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>パスワード</Form.Label>
-              <Form.Control type="password" required onChange={handleChangePassword} />
-            </Form.Group>
-          </fieldset>
+          {/* <fieldset> */}
+          <hr />
+          <Form.Group>
+            <Form.Label>メモ欄</Form.Label>
+            <Form.Control as="textarea" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>パスワード</Form.Label>
+            <Form.Control type="password" required onChange={handleChangePassword} />
+          </Form.Group>
+          {/* </fieldset> */}
           {failed && <Alert variant="danger">修正に失敗しました。</Alert>}
         </Modal.Body>
         <Modal.Footer>
