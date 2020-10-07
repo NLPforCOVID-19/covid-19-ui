@@ -5,9 +5,10 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
 
-import { modifyRegionCategory } from '../api'
+import { fetchHistory, modifyRegionCategory } from '../api'
 import { makeTranslatedUrl } from '../utils'
 import Loading from './Loading'
+import dayjs from 'dayjs'
 
 export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   if (!entry) {
@@ -22,11 +23,16 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   const [notes, setNotes] = useState('')
   const [isAboutRumor, setIsAboutRumor] = useState(false)
   const [selectedCounrty, setSelectedCountry] = useState('')
+  const [history, setHistory] = useState(null)
   useEffect(() => {
     setIsAboutRumor(entry.is_about_false_rumor)
     setIsUseful(entry.is_useful === 1)
     setIsAboutCovid(true)
     setSelectedCountry(entry.country)
+    fetchHistory(entry.url)
+      .then(res => {
+        setHistory(res)
+      })
   }, [entry.url])
 
   const initialTopicState = {}
@@ -198,6 +204,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
           </Form.Group>
           {/* </fieldset> */}
           {failed && <Alert variant="danger">修正に失敗しました。</Alert>}
+          <HistoryDiv history={history} />
         </Modal.Body>
         <Modal.Footer>
           {isRequesting && <Loading />}
@@ -214,6 +221,21 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
         </Modal.Footer>
       </Form>
     </Modal>
+  )
+}
+
+const HistoryDiv = ({history}) => {
+  if (history.is_checked === 0) {
+    return <div>編集されていません</div>
+  }
+  return (
+    <div>
+      <div>編集されました</div>
+      <ul>
+        <li>いつ: {dayjs(history.time).format('YYYY/MM/DD HH:mm:ss')}</li>
+        <li>メモ: {history.notes}</li>
+      </ul>
+    </div>
   )
 }
 
