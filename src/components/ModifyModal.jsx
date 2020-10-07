@@ -225,7 +225,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 }
 
 const HistoryDiv = ({history}) => {
-  if (history.is_checked === 0) {
+  if (history === null || history.is_checked === 0) {
     return <div>編集されていません</div>
   }
   return (
