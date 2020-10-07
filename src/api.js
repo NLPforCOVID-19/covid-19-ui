@@ -56,3 +56,13 @@ export async function modifyRegionCategory(url, region, topics, useful, about_co
   }
   return axios.post(baseUrl + path, data)
 }
+
+export async function fetchHistory(url) {
+  const path = '/history'
+  const response = await axios.get(baseUrl + path, {
+    params: {
+      url
+    }
+  })
+  return response.data
+}
