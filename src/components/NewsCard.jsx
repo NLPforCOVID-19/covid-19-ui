@@ -6,7 +6,7 @@ import { ModifyModal } from './ModifyModal'
 import { StoreContext, loadMore } from '../store'
 import { useTranslation } from '../context/LanguageContext'
 
-const countryIds = ['fr', 'es', 'de', 'eu', 'kr', 'in', 'jp', 'cn', 'us', 'br', 'int']
+const countryIds = ['fr', 'es', 'de', 'eu', 'kr', 'in', 'jp', 'cn', 'us', 'br', 'au', 'za','int']
 
 const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
   const { t, lang } = useTranslation()
