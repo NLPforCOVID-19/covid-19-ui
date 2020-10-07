@@ -29,9 +29,13 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     setIsUseful(entry.is_useful === 1)
     setIsAboutCovid(true)
     setSelectedCountry(entry.country)
+    setHistory(null)
     fetchHistory(entry.url)
       .then(res => {
         setHistory(res)
+      })
+      .catch(e => {
+        setHistory('error')
       })
   }, [entry.url])
 
@@ -225,7 +229,13 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 }
 
 const HistoryDiv = ({history}) => {
-  if (history === null || history.is_checked === 0) {
+  if (history === null) {
+    return <div>読み込み中...</div>
+  }
+  if (history === 'error') {
+    return <div>履歴を読み込めませんでした</div>
+  }
+  if (history.is_checked === 0) {
     return <div>編集されていません</div>
   }
   return (
