@@ -51,11 +51,11 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
 
 const Title = ({ entry, region }) => {
   const { t, lang } = useTranslation()
-  const needsTranslation = (lang === 'ja' && entry.country === 'jp') || (lang === 'en' && entry.country === 'us')
+  const needsTranslation = (lang === 'ja' && entry.displayed_country === 'jp') || (lang === 'en' && entry.displayed_country === 'us')
   const url = needsTranslation ? entry.url : makeTranslatedUrl(entry.url, lang)
   const day = dayjs(entry.orig.timestamp).format('MM/DD')
   const title = entry.translated.title
-  const isShowCountryName = region !== entry.country
+  const isShowCountryName = region !== entry.displayed_country
   const isRumor = entry.is_about_false_rumor === 1
   return (
     <div className="wrap">
@@ -66,7 +66,7 @@ const Title = ({ entry, region }) => {
             &thinsp;<mark className="small text-muted">{t('false_rumor')}</mark>
           </span>
         )}
-        {isShowCountryName && <span className="small text-muted">&thinsp;({t(entry.country)})</span>}
+        {isShowCountryName && <span className="small text-muted">&thinsp;({t(entry.diplayed_country)})</span>}
         <a href={url} target="_blank" rel="noopener" className="text-info">
           &thinsp;{title}
         </a>
