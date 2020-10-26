@@ -13,6 +13,6 @@ export default {
     cn: '中国',
     us: 'アメリカ',
     br: 'ブラジル',
-    int: 'その他国際'
+    int: '一般'
   }
 }

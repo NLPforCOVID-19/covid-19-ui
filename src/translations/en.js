@@ -28,7 +28,7 @@ export const en = {
   au: 'Australia',
   africa: 'Africa',
   za: 'South Africa',
-  int: 'international',
+  int: 'General',
   lab_kurohashi: 'Kurohashi-Chu-Murawaki Lab at Kyoto University',
   lab_kawahara: 'Kawahara Lab at Waseda University',
   lab_kitsuregawa: 'Kitsuregawa-Toyoda Lab at the University of Tokyo',

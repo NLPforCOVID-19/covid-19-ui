@@ -28,7 +28,7 @@ export const ja = {
   au: 'オーストラリア',
   africa: 'アフリカ',
   za: '南アフリカ',
-  int: 'その他国際',
+  int: '一般',
   lab_kurohashi: '京都大学 黒橋・村脇研',
   lab_kawahara: '早稲田大学 河原研',
   lab_kitsuregawa: '東京大学 喜連川・豊田研',
