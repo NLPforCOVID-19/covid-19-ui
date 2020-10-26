@@ -66,7 +66,7 @@ const Title = ({ entry, region }) => {
             &thinsp;<mark className="small text-muted">{t('false_rumor')}</mark>
           </span>
         )}
-        {isShowCountryName && <span className="small text-muted">&thinsp;({t(entry.diplayed_country)})</span>}
+        {isShowCountryName && <span className="small text-muted">&thinsp;({t(entry.displayed_country)})</span>}
         <a href={url} target="_blank" rel="noopener" className="text-info">
           &thinsp;{title}
         </a>
