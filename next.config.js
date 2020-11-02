@@ -16,7 +16,7 @@ module.exports = {
     GA_TRACKING_ID: process.env.GA_TRACKING_ID
   },
   basePath: process.env.BASE_PATH,
-  exportTrailingSlash: true,
+  trailingSlash: true,
   webpack: (config) => {
     const newConfig = {
       ...config,
