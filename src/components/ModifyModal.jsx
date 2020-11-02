@@ -14,7 +14,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   if (!entry) {
     return null
   }
-  const isJp = entry.country === 'jp'
+  const isJp = entry.displayed_country === 'jp'
 
   const currentTopics = entry.topics.filter((t) => topics.includes(t.name))
 
@@ -28,13 +28,13 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
     setIsAboutRumor(entry.is_about_false_rumor)
     setIsUseful(entry.is_useful === 1)
     setIsAboutCovid(true)
-    setSelectedCountry(entry.country)
+    setSelectedCountry(entry.displayed_country)
     setHistory(null)
     fetchHistory(entry.url)
-      .then(res => {
+      .then((res) => {
         setHistory(res)
       })
-      .catch(e => {
+      .catch((e) => {
         setHistory('error')
       })
   }, [entry.url])
@@ -50,7 +50,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
 
   const [isChangedFromCurrent, setIsChangedFromCurrent] = useState(false)
   useEffect(() => {
-    const changedCountry = entry.country !== selectedCounrty
+    const changedCountry = entry.displayed_country !== selectedCounrty
     const changedTopic = JSON.stringify(initialTopicState) !== JSON.stringify(selectedTopics)
     const changedUseful = isUseful !== (entry.is_useful === 1)
     const changedAboutRumor = isAboutRumor !== entry.is_about_false_rumor
@@ -136,7 +136,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               />
             </Form.Group>
             <hr />
-            <div>地域: {countries.find((r) => r.id === entry.country)?.name}</div>
+            <div>地域: {countries.find((r) => r.id === entry.displayed_country)?.name}</div>
             <Form.Group>
               <Form.Label>地域を修正する</Form.Label>
               <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
@@ -228,7 +228,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   )
 }
 
-const HistoryDiv = ({history}) => {
+const HistoryDiv = ({ history }) => {
   if (history === null) {
     return <div>読み込み中...</div>
   }
