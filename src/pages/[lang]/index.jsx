@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 
 import Layout from '@src/components/Layout'
@@ -8,10 +8,12 @@ import NewsView from '@src/components/NewsView'
 import { useTranslation } from '@src/context/LanguageContext'
 import { languagePaths } from '../../utils'
 import { fetchMeta, loadAllTopicsNews, StoreContext } from '@src/store'
+import { SurveyToast } from '@src/components/SurveyToast'
 
 const Index = () => {
   const { t, lang } = useTranslation()
   const [state, dispatch] = useContext(StoreContext)
+  const [showToast, setShowToast] = useState(false)
   useEffect(() => {
     if (!state.metaLoaded) {
       dispatch(fetchMeta(lang))
@@ -20,8 +22,16 @@ const Index = () => {
       dispatch(loadAllTopicsNews(lang))
     }
   }, [state.metaLoaded])
+  useEffect(() => {
+    if (state.metaLoaded) {
+      setTimeout(() => {
+        setShowToast(true)
+      }, 5000)
+    }
+  }, [state.metaLoaded])
   return (
     <Layout>
+      <SurveyToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
       <Map />
       <NewsView />
