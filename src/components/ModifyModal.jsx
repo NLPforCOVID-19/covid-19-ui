@@ -35,7 +35,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
       .then((res) => {
         setHistory(res)
       })
-      .catch((e) => {
+      .catch(() => {
         setHistory('error')
       })
   }, [entry.url])

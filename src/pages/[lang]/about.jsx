@@ -98,7 +98,7 @@ const AboutEn = () => (
         <span className="material-icons open-in-new">open_in_new</span>) next to the title of the article that you want
         to translate. This will open the article from the original website. Then a translation tool dialog box should
         appear automatically and ask whether Chrome can translate the page or not. In case that the translation tool
-        dialog box does not appear, make sure to enable Chrome's translation tool from the Settings &gt; Advanced &gt;
+        dialog box does not appear, make sure to enable Chrome&apos;s translation tool from the Settings &gt; Advanced &gt;
         Languages section.
       </p>
     </section>

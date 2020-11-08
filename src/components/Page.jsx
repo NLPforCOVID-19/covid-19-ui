@@ -1,6 +1,5 @@
 import React from 'react'
 import dayjs from 'dayjs'
-import meta from '@src/meta'
 
 import { makeTranslatedUrl } from '../utils'
 import { useTranslation } from '../context/LanguageContext'
