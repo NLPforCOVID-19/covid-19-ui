@@ -1,13 +1,14 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "commonjs": true,
+        "es2020": true,
+        "node": true
     },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 6,
         "sourceType": "module"
     },
     "extends": [
@@ -23,6 +24,9 @@
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off",
         "react/jsx-no-target-blank": "off",
+        "import/no-unresolved": ["error", {
+            "ignore": ["^@src/"]
+        }],
         "import/order": [
             "error",
             {
