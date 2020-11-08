@@ -51,7 +51,8 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
 
 const Title = ({ entry, region }) => {
   const { t, lang } = useTranslation()
-  const needsTranslation = (lang === 'ja' && entry.displayed_country === 'jp') || (lang === 'en' && entry.displayed_country === 'us')
+  const needsTranslation =
+    (lang === 'ja' && entry.displayed_country === 'jp') || (lang === 'en' && entry.displayed_country === 'us')
   const url = needsTranslation ? entry.url : makeTranslatedUrl(entry.url, lang)
   const day = dayjs(entry.orig.timestamp).format('MM/DD')
   const title = entry.translated.title
