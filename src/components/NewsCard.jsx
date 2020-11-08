@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
+
+import { StoreContext, loadMore } from '../store'
+import { useTranslation } from '../context/LanguageContext'
+
 import Page from './Page'
 import Loading from './Loading'
 import { ModifyModal } from './ModifyModal'
-import { StoreContext, loadMore } from '../store'
-import { useTranslation } from '../context/LanguageContext'
 
 const countryIds = [
   'fr',

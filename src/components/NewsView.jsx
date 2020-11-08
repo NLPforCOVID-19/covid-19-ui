@@ -2,13 +2,15 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
+import { StoreContext } from '../store'
+import { useTranslation } from '../context/LanguageContext'
+
 import NewsCard from './NewsCard'
 import Tabs from './Tabs'
 import Loading from './Loading'
 import IndicatorLegends from './IndicatorLegends'
-import { StoreContext } from '../store'
 import Stats from './Stats'
-import { useTranslation } from '../context/LanguageContext'
+
 
 const NewsView = ({ showEditButton }) => {
   const regionViewRef = useRef(null)

@@ -1,7 +1,8 @@
 import React from 'react'
 
-import * as Icons from './Icons'
 import { useTranslation } from '../context/LanguageContext'
+
+import * as Icons from './Icons'
 
 const IndicatorLegends = () => {
   const { t } = useTranslation()

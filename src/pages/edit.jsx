@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react'
-
 import { fetchMeta, loadAllTopicsNews, StoreContext } from '@src/store'
 import { useTranslation } from '@src/context/LanguageContext'
 import Layout from '@src/components/Layout'

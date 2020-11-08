@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useTranslation } from '../context/LanguageContext'
 
 const BaseIcon = ({ title, color, size, iconId }) => (

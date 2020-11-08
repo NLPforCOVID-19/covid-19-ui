@@ -1,10 +1,11 @@
 import React from 'react'
 import dayjs from 'dayjs'
-
-import * as Icons from './Icons'
 import meta from '@src/meta'
+
 import { makeTranslatedUrl } from '../utils'
 import { useTranslation } from '../context/LanguageContext'
+
+import * as Icons from './Icons'
 
 function EntryIcon({ entry }) {
   if (entry.is_useful) {

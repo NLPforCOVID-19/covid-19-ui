@@ -1,9 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
 
+import { useTranslation } from '../context/LanguageContext'
+
 import Header from './Header'
 import Footer from './Footer'
-import { useTranslation } from '../context/LanguageContext'
 
 const Layout = ({ title, children }) => {
   const { t } = useTranslation()

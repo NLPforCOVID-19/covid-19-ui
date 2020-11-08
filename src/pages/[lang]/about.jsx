@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Layout from '@src/components/Layout'
 import React from 'react'
+
 import { languagePaths } from '../../utils'
 
 const AboutJp = () => (

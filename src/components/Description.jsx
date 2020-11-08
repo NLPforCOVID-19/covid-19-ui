@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container'
-
 import Link from 'next/link'
+
 import { useTranslation } from '../context/LanguageContext'
 
 const Description = () => {

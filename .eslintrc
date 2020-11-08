@@ -28,7 +28,7 @@
             {
                 "pathGroups": [
                     {
-                        "pattern": "@/**",
+                        "pattern": "@src/**",
                         "group": "parent",
                         "position": "after"
                     }

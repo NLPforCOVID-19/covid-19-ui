@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+
 import { localeList, defaultLang } from './translations'
 
 export function makeTranslatedUrl(url, lang) {

@@ -1,5 +1,6 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+
 import { defaultLang } from '../translations'
 
 const gtagScript = `window.dataLayer = window.dataLayer || [];

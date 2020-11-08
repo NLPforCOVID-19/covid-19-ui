@@ -4,11 +4,12 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
+import dayjs from 'dayjs'
 
 import { fetchHistory, modifyRegionCategory } from '../api'
 import { makeTranslatedUrl } from '../utils'
+
 import Loading from './Loading'
-import dayjs from 'dayjs'
 
 export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   if (!entry) {
@@ -68,10 +69,12 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
   function handleChangeTopic(e) {
     const targetTopic = e.target.name
     const checked = e.target.checked
-    setSelectedTopics((prev) => ({
-      ...prev,
-      [targetTopic]: checked
-    }))
+    setSelectedTopics((prev) => {
+      return {
+        ...prev,
+        [targetTopic]: checked
+      }
+    })
   }
   function handleChangePassword(e) {
     setPassword(e.target.value)

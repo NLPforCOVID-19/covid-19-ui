@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
-
 import Layout from '@src/components/Layout'
 import Description from '@src/components/Description'
 import Map from '@src/components/Map'
 import NewsView from '@src/components/NewsView'
 import { useTranslation } from '@src/context/LanguageContext'
-import { languagePaths } from '../../utils'
 import { fetchMeta, loadAllTopicsNews, StoreContext } from '@src/store'
+
+import { languagePaths } from '../../utils'
 
 const Index = () => {
   const { t, lang } = useTranslation()
