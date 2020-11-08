@@ -8,7 +8,7 @@ import NewsView from '@src/components/NewsView'
 import { useTranslation } from '@src/context/LanguageContext'
 import { languagePaths } from '../../utils'
 import { fetchMeta, loadAllTopicsNews, StoreContext } from '@src/store'
-import { SurveyToast } from '@src/components/SurveyToast'
+import { FeedbackToast } from '@src/components/FeedbackToast'
 
 const Index = () => {
   const { t, lang } = useTranslation()
@@ -23,15 +23,16 @@ const Index = () => {
     }
   }, [state.metaLoaded])
   useEffect(() => {
-    if (state.metaLoaded) {
+    const threshold = 0.2
+    if (state.metaLoaded && Math.random() < threshold) {
       setTimeout(() => {
         setShowToast(true)
-      }, 5000)
+      }, 10000)
     }
   }, [state.metaLoaded])
   return (
     <Layout>
-      <SurveyToast show={showToast} onClose={() => setShowToast(false)} />
+      <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
       <Map />
       <NewsView />
