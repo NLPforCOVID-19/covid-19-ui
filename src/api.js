@@ -66,3 +66,11 @@ export async function fetchHistory(url) {
   })
   return response.data
 }
+
+export function postFeedback(content) {
+  const path = '/feedback'
+  const data = {
+    content
+  }
+  return axios.post(baseUrl + path, data)
+}
