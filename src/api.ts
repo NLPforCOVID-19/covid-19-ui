@@ -2,6 +2,20 @@ import axios from 'axios'
 
 const baseUrl = process.env.API_URL
 
+interface Region {
+  country: string
+  language: string
+  name: string
+  representativeSiteUrl: string
+  sources: string[]
+  stats: {
+    confirmation_today: number
+    confirmation_total: number
+    death_today: number
+    death_total: number
+  }
+}
+
 export async function fetchNewsByClass(klass, limit, lang) {
   const path = `/classes/${klass}`
   const response = await axios.get(baseUrl + path, {
@@ -26,19 +40,13 @@ export async function fetchNewsByClassAndCountry(klass, country, offset, limit, 
   return response.data
 }
 
-export async function fetchMeta(lang) {
+export async function fetchMeta(lang): Promise<{ countries: Region[], topics: string[] }> {
   const path = '/meta'
   const response = await axios.get(baseUrl + path, {
     params: {
       lang: lang
     }
   })
-  return response.data
-}
-
-export async function fetchStats() {
-  const path = '/stats'
-  const response = await axios.get(baseUrl + path)
   return response.data
 }
 
