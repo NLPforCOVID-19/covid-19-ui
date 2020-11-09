@@ -14,6 +14,31 @@ export async function fetchNewsByClass(klass, limit, lang) {
   return response.data
 }
 
+export async function searchNews(lang, query) {
+  const path = '/classes/search'
+  const response = await axios.get(baseUrl + path, {
+    params: {
+      start: 0,
+      limit: 20,
+      lang,
+      query
+    }
+  })
+  return response.data
+}
+
+export async function searchNewsByRegion(topic, region, lang, query, start) {
+  const path = `/classes/search/${region}`
+  const response = await axios.get(baseUrl + path, {
+    params: {
+      start,
+      lang,
+      query
+    }
+  })
+  return response.data
+}
+
 export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang) {
   const path = `/classes/${klass}/${country}`
   const response = await axios.get(baseUrl + path, {
