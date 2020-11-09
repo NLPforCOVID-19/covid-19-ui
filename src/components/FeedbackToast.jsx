@@ -5,19 +5,25 @@ import Button from 'react-bootstrap/Button'
 import { postFeedback } from '../api'
 import { useTranslation } from '../context/LanguageContext'
 
+const feedbackRadioChoices = ['yes', 'no']
+
 export const FeedbackToast = ({ show, onClose }) => {
   const [feedbackContent, setFeedbackContent] = React.useState('')
+  const [feedbackUseful, setFeedbackUseful] = React.useState('')
   const [submitButtonEnabled, setSubmitButtonEnabled] = React.useState(true)
   const [showThanks, setShowThanks] = React.useState(false)
   const { t } = useTranslation()
   function handleChangeContent(e) {
     setFeedbackContent(e.target.value)
   }
+  function handleChangeRadio(e) {
+    setFeedbackUseful(e.target.value)
+  }
   async function handleSubmit(e) {
     e.preventDefault()
     setShowThanks(true)
     setSubmitButtonEnabled(false)
-    await postFeedback(feedbackContent).catch((e) => {
+    await postFeedback(`useful: ${feedbackUseful}, comment: ${feedbackContent}`).catch(() => {
       console.log(e)
     })
     onClose()
@@ -32,11 +38,26 @@ export const FeedbackToast = ({ show, onClose }) => {
           {!showThanks && (
             <Form onSubmit={handleSubmit}>
               <Form.Group>
+                <Form.Label>{t('feedback_useful')}</Form.Label>
+                <br />
+                {feedbackRadioChoices.map((c) => (
+                  <Form.Check
+                    key={c}
+                    type="radio"
+                    name="useful"
+                    value={c}
+                    label={t(c)}
+                    onChange={handleChangeRadio}
+                    checked={feedbackUseful === c}
+                    inline
+                  />
+                ))}
+              </Form.Group>
+              <Form.Group>
                 <Form.Control
                   value={feedbackContent}
                   onChange={handleChangeContent}
                   as="textarea"
-                  required
                   rows={3}
                   placeholder={t('feedback_placeholder')}
                 />

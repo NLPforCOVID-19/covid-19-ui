@@ -46,5 +46,8 @@ export const en = {
     'Our service will be temporarily down for a planned power outage from Saturday Sep 12 at 19:00 JST (GMT+09) until Sunday, Sep 13 at 22:00 JST (GMT+09).',
   feedback: 'Feedback',
   feedback_placeholder: 'Please enter your feedback on this site',
-  submit: 'Submit'
+  submit: 'Submit',
+  feedback_useful: 'Is this site useful?',
+  yes: 'Yes',
+  no: 'No'
 }
