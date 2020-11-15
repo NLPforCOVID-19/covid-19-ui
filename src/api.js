@@ -67,15 +67,21 @@ export async function fetchStats() {
   return response.data
 }
 
-export async function modifyRegionCategory(url, region, topics, useful, about_covid, about_rumor, notes, password) {
+export async function modifyRegionCategory(
+  url,
+  { aboutCovid, useful, hidden, aboutRumor, country, topics },
+  notes,
+  password
+) {
   const path = '/update'
   const data = {
     url: url,
-    new_displayed_country: region,
+    new_displayed_country: country,
     new_classes: topics,
+    is_hidden: hidden,
     is_useful: useful,
-    'is_about_COVID-19': about_covid,
-    is_about_false_rumor: about_rumor,
+    'is_about_COVID-19': aboutCovid,
+    is_about_false_rumor: aboutRumor,
     notes: notes,
     password: password
   }
@@ -90,4 +96,12 @@ export async function fetchHistory(url) {
     }
   })
   return response.data
+}
+
+export function postFeedback(content) {
+  const path = '/feedback'
+  const data = {
+    content
+  }
+  return axios.post(baseUrl + path, data)
 }

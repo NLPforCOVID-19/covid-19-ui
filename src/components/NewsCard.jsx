@@ -6,7 +6,27 @@ import { ModifyModal } from './ModifyModal'
 import { StoreContext, loadMore } from '../store'
 import { useTranslation } from '../context/LanguageContext'
 
-const countryIds = ['fr', 'es', 'de', 'eu', 'eur_other', 'kr', 'in', 'asia_other', 'jp', 'cn', 'us', 'us_other', 'br', 'sa_other', 'au', 'oceania_other', 'za', 'africa_other', 'int']
+const countryIds = [
+  'fr',
+  'es',
+  'de',
+  'eu',
+  'eur_other',
+  'kr',
+  'in',
+  'asia_other',
+  'jp',
+  'cn',
+  'us',
+  'us_other',
+  'br',
+  'sa_other',
+  'au',
+  'oceania_other',
+  'za',
+  'africa_other',
+  'int'
+]
 
 const Country = ({ title, countryId, topic, onClickTitle, showEditButton, children }) => {
   const { t, lang } = useTranslation()
@@ -97,7 +117,7 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
                   <Loading />
                 </div>
               )}
-              <div ref={observeEl} className="observe"></div>
+              <div ref={observeEl} className="observe" />
             </div>
           </div>
         </div>
@@ -144,13 +164,15 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
           }
         `}</style>
       </div>
-      <ModifyModal
-        show={showEditModal}
-        onHide={closeEditModal}
-        countries={countries}
-        topics={topics}
-        entry={editingEntry}
-      />
+      {showEditModal && (
+        <ModifyModal
+          show={showEditModal}
+          onHide={closeEditModal}
+          countries={countries}
+          topics={topics}
+          entry={editingEntry}
+        />
+      )}
     </>
   )
 }
