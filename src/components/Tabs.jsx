@@ -6,10 +6,10 @@ const Tabs = ({ active, choices, onChange }) => (
   <div>
     {choices.map((topic, i) => (
       <span key={i}>
-        {' '}
-        <Button variant="outline-info" size="sm" className="mb-1" active={active === topic} onClick={() => onChange(i)}>
+        <Button variant="outline-info" size="sm" active={active === topic} onClick={() => onChange(i)}>
           {topic}
         </Button>
+        &thinsp;
       </span>
     ))}
   </div>
