@@ -48,5 +48,6 @@ export const ja = {
   submit: '送信',
   feedback_useful: 'このサイトは役に立ちますか?',
   yes: 'はい',
-  no: 'いいえ'
+  no: 'いいえ',
+  search: '検索'
 }

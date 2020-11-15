@@ -49,5 +49,6 @@ export const en = {
   submit: 'Submit',
   feedback_useful: 'Is this site useful?',
   yes: 'Yes',
-  no: 'No'
+  no: 'No',
+  search: 'Search'
 }
