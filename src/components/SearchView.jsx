@@ -1,40 +1,48 @@
-import React, { useEffect } from 'react'
-import Container from 'react-bootstrap/Container'
+import React, { useContext } from 'react'
 import Row from 'react-bootstrap/Row'
 import Page from './Page'
 import Loading from './Loading'
 import { searchNews } from '../api'
 import { useTranslation } from '../context/LanguageContext'
 import Stats from './Stats'
-import { loadMore } from '../store'
+import { StoreContext } from '../store'
 
-const Card = ({ title, stats, entries, loading, onLoadMore }) => {
+const Card = React.memo(function Card({ title, stats, entries, loading, onClickRegion }) {
   const observeEl = React.useRef(null)
   const wrapEl = React.useRef(null)
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (e) => {
-        if (e[0].isIntersecting && !loading) {
-          onLoadMore()
-        }
-      },
-      {
-        root: wrapEl.current
-      }
-    )
-    observer.observe(observeEl.current)
-    function unobserve() {
-      observer.unobserve(observeEl.current)
-    }
-    return unobserve
-  }, [])
+  const handleClickRegion = React.useCallback(
+    (e) => {
+      e.preventDefault()
+      onClickRegion()
+    },
+    [onClickRegion]
+  )
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (e) => {
+  //       if (e[0].isIntersecting && !loading) {
+  //         onLoadMore()
+  //       }
+  //     },
+  //     {
+  //       root: wrapEl.current
+  //     }
+  //   )
+  //   observer.observe(observeEl.current)
+  //   function unobserve() {
+  //     observer.unobserve(observeEl.current)
+  //   }
+  //   return unobserve
+  // }, [])
   return (
     <div className="col-xl-4 col-lg-6 p-1">
       <div className="p-2 border rounded">
         <div className="inner">
           <div className="header">
             <h5 className="m-0">
-              <a href="#">{title}</a>
+              <a onClick={handleClickRegion} href="#">
+                {title}
+              </a>
             </h5>
           </div>
           <div className="text-muted small">
@@ -99,32 +107,42 @@ const Card = ({ title, stats, entries, loading, onLoadMore }) => {
       `}</style>
     </div>
   )
-}
+})
 
-export const SearchView = ({ countries }) => {
+export const SearchView = React.memo(function SearchView({ query, show, onClickRegion }) {
   const { lang } = useTranslation()
-  const [query, setQuery] = React.useState('')
+  const [state] = useContext(StoreContext)
   const [entries, setEntries] = React.useState({})
   const [loading, setLoading] = React.useState(false)
-  async function handleSubmit(e) {
-    e.preventDefault()
+  React.useEffect(() => {
+    if (query === '') {
+      return
+    }
+    setEntries({})
     setLoading(true)
-    const res = await searchNews(lang, query)
-    setLoading(false)
-    setEntries(res)
+    searchNews(lang, query)
+      .then((res) => {
+        setEntries(res)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [query, lang])
+  if (!show) {
+    return null
   }
   return (
-    <Container>
-      <Row>
-        <form onSubmit={handleSubmit}>
-          <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} />
-        </form>
-      </Row>
-      <Row>
-        {countries.map((c) => (
-          <Card key={c.country} title={c.name} stats={c.stats} entries={entries[c.country] || []} loading={loading} />
-        ))}
-      </Row>
-    </Container>
+    <Row>
+      {state.meta.countries.map((c) => (
+        <Card
+          key={c.country}
+          title={c.name}
+          stats={c.stats}
+          entries={entries[c.country] || []}
+          loading={loading}
+          onClickRegion={() => onClickRegion(c.country)}
+        />
+      ))}
+    </Row>
   )
-}
+})
