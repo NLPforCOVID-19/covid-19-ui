@@ -23,6 +23,7 @@ export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, on
         size="sm"
         value={query}
         onChange={handleChangeQuery}
+        style={{ width: '120px' }}
       />
       &thinsp;
       <Button type="submit" size="sm">

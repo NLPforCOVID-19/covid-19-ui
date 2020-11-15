@@ -29,6 +29,7 @@ export const TopicView = ({ selectedTopic, showEditButton, onClickTopic, onClick
       <IndicatorLegends />
       <Row>
         <Tabs active={focusedToSearch ? '' : selectedTopic} choices={topics} onChange={handleClickTopic} />
+        &ensp;
         <TopicSearchForm onFocus={() => setFocusedToSearch(true)} onSubmit={handleSubmitSearch} />
       </Row>
       <SearchView query={query} show={focusedToSearch} onClickRegion={onClickRegion} />
