@@ -1,8 +1,10 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { useTranslation } from '../context/LanguageContext'
 
 export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, onSubmit }) {
+  const { t } = useTranslation()
   const [query, setQuery] = React.useState('')
   const handleChangeQuery = React.useCallback((e) => {
     setQuery(e.target.value)
@@ -19,7 +21,7 @@ export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, on
       <Form.Control
         onFocus={onFocus}
         type="search"
-        placeholder="検索:"
+        placeholder={`${t('search')}:`}
         size="sm"
         value={query}
         onChange={handleChangeQuery}
@@ -27,7 +29,7 @@ export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, on
       />
       &thinsp;
       <Button type="submit" size="sm">
-        検索
+        {t('search')}
       </Button>
     </Form>
   )
