@@ -19,7 +19,7 @@ export async function searchNews(lang, query) {
   const response = await axios.get(baseUrl + path, {
     params: {
       start: 0,
-      limit: 20,
+      limit: 50,
       lang,
       query
     }
