@@ -15,7 +15,7 @@ export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, on
     [query]
   )
   return (
-    <Form inline onSubmit={handleSubmit}>
+    <Form inline onSubmit={handleSubmit} className="mb-2">
       <Form.Control
         onFocus={onFocus}
         type="search"

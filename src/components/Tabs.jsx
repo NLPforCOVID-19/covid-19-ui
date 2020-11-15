@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 
 const Tabs = ({ active, choices, onChange }) => (
-  <div>
+  <>
     {choices.map((topic, i) => (
-      <span key={i}>
+      <span key={i} className="mb-2">
         <Button variant="outline-info" size="sm" active={active === topic} onClick={() => onChange(i)}>
           {topic}
         </Button>
         &thinsp;
       </span>
     ))}
-  </div>
+  </>
 )
 
 Tabs.propTypes = {
