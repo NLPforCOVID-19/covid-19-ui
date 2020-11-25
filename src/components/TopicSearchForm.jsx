@@ -21,7 +21,6 @@ export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, on
       <Form.Control
         onFocus={onFocus}
         type="search"
-        placeholder={`${t('search')}:`}
         size="sm"
         value={query}
         onChange={handleChangeQuery}
