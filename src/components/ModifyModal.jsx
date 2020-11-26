@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
@@ -12,90 +11,98 @@ import { makeTranslatedUrl } from '../utils'
 
 import Loading from './Loading'
 
+function initializeFormState(entry) {
+  return {
+    aboutCovid: true,
+    hidden: false,
+    useful: entry.is_useful === 1,
+    aboutRumor: entry.is_about_false_rumor === 1,
+    country: entry.displayed_country,
+    topics: entry.topics.map((t) => t.name),
+    notes: '',
+    password: ''
+  }
+}
+
+const formActionType = {
+  ABOUT_COVID: 'ABOUT_COVID',
+  HIDDEN: 'HIDDEN',
+  USEFUL: 'USEFUL',
+  ABOUT_RUMOR: 'ABOUT_RUMOR',
+  COUNTRY: 'COUNTRY',
+  TOPICS: 'TOPICS',
+  NOTES: 'NOTES',
+  PASSWORD: 'PASSWORD'
+}
+
+function modifyFormReducer(state, action) {
+  const t = formActionType
+  const { type, payload } = action
+  switch (type) {
+    case t.ABOUT_COVID:
+      return { ...state, aboutCovid: payload }
+    case t.HIDDEN:
+      return { ...state, hidden: payload }
+    case t.USEFUL:
+      return { ...state, useful: payload }
+    case t.ABOUT_RUMOR:
+      return { ...state, aboutRumor: payload }
+    case t.COUNTRY:
+      return { ...state, country: payload }
+    case t.TOPICS: {
+      const { topic, checked } = payload
+      const topicSet = new Set(state.topics)
+      checked ? topicSet.add(topic) : topicSet.delete(topic)
+      return { ...state, topics: [...topicSet] }
+    }
+    case t.NOTES:
+      return { ...state, notes: payload }
+    case t.PASSWORD:
+      return { ...state, password: payload }
+    default:
+      return state
+  }
+}
+
+function submit(url, state) {
+  return modifyRegionCategory(url, state, state.notes, state.password)
+}
+
 export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
-  if (!entry) {
-    return null
-  }
   const isJp = entry.displayed_country === 'jp'
-
-  const currentTopics = entry.topics.filter((t) => topics.includes(t.name))
-
-  const [isAboutCovid, setIsAboutCovid] = useState(true)
-  const [isUseful, setIsUseful] = useState(false)
-  const [notes, setNotes] = useState('')
-  const [isAboutRumor, setIsAboutRumor] = useState(false)
-  const [selectedCounrty, setSelectedCountry] = useState('')
-  const [history, setHistory] = useState(null)
-  useEffect(() => {
-    setIsAboutRumor(entry.is_about_false_rumor)
-    setIsUseful(entry.is_useful === 1)
-    setIsAboutCovid(true)
-    setSelectedCountry(entry.displayed_country)
-    setHistory(null)
-    fetchHistory(entry.url)
-      .then((res) => {
-        setHistory(res)
-      })
-      .catch(() => {
-        setHistory('error')
-      })
-  }, [entry.url])
-
-  const initialTopicState = {}
-  for (const topicName of topics) {
-    initialTopicState[topicName] = !!currentTopics.find((t) => t.name === topicName)
-  }
-  const [selectedTopics, setSelectedTopics] = useState(initialTopicState)
-  useEffect(() => {
-    setSelectedTopics(initialTopicState)
-  }, [entry.topics])
-
-  const [isChangedFromCurrent, setIsChangedFromCurrent] = useState(false)
-  useEffect(() => {
-    const changedCountry = entry.displayed_country !== selectedCounrty
-    const changedTopic = JSON.stringify(initialTopicState) !== JSON.stringify(selectedTopics)
-    const changedUseful = isUseful !== (entry.is_useful === 1)
-    const changedAboutRumor = isAboutRumor !== entry.is_about_false_rumor
-    const isChanged = changedCountry || changedTopic || changedUseful || !isAboutCovid || changedAboutRumor
-    setIsChangedFromCurrent(isChanged)
-  }, [entry.url, selectedTopics, selectedCounrty, isUseful, isAboutCovid, isAboutRumor])
-
-  const [password, setPassword] = useState('')
+  const [formState, dispatch] = useReducer(modifyFormReducer, entry, initializeFormState)
   const [isRequesting, setIsRequesting] = useState(false)
   const [failed, setFailed] = useState(false)
-
-  function handleChangeRegion(e) {
-    setSelectedCountry(e.target.value)
-  }
-  function handleChangeTopic(e) {
-    const targetTopic = e.target.name
-    const checked = e.target.checked
-    setSelectedTopics((prev) => {
-      return {
-        ...prev,
-        [targetTopic]: checked
-      }
-    })
-  }
-  function handleChangePassword(e) {
-    setPassword(e.target.value)
-  }
-  function handleSubmit(e) {
-    e.preventDefault()
-    setIsRequesting(true)
-    const newTopics = topics.filter((t) => selectedTopics[t])
-    modifyRegionCategory(entry.url, selectedCounrty, newTopics, isUseful, isAboutCovid, isAboutRumor, notes, password)
-      .then(() => {
-        onHide()
-      })
-      .catch(() => {
-        setFailed(true)
-        setTimeout(() => setFailed(false), 3000)
-      })
-      .finally(() => {
-        setIsRequesting(false)
-      })
-  }
+  const [history, setHistory] = useState(null)
+  useEffect(() => {
+    fetchHistory(entry.url)
+      .then((h) => setHistory(h))
+      .catch(() => setHistory('error'))
+  }, [entry.url])
+  const handleChangeTopic = React.useCallback(
+    (e) => {
+      dispatch({ type: formActionType.TOPICS, payload: { topic: e.target.name, checked: e.target.checked } })
+    },
+    [dispatch]
+  )
+  const handleSubmit = React.useCallback(
+    (e) => {
+      e.preventDefault()
+      setIsRequesting(true)
+      submit(entry.url, formState)
+        .then(() => {
+          onHide()
+        })
+        .catch(() => {
+          setFailed(true)
+          setTimeout(() => setFailed(false), 3000)
+        })
+        .finally(() => {
+          setIsRequesting(false)
+        })
+    },
+    [entry.url, formState]
+  )
   return (
     <Modal show={show} onHide={onHide}>
       <Form onSubmit={handleSubmit}>
@@ -123,27 +130,37 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               <Form.Check
                 type="checkbox"
                 label="COVID-19関連"
-                checked={isAboutCovid}
-                onChange={(e) => setIsAboutCovid(e.target.checked)}
+                checked={formState.aboutCovid}
+                onChange={(e) => dispatch({ type: formActionType.ABOUT_COVID, payload: e.target.checked })}
               />
               <Form.Check
                 type="checkbox"
                 label="特に役に立つ"
-                checked={isUseful}
-                onChange={(e) => setIsUseful(e.target.checked)}
+                checked={formState.useful}
+                onChange={(e) => dispatch({ type: formActionType.USEFUL, payload: e.target.checked })}
               />
               <Form.Check
                 type="checkbox"
                 label="デマに関する情報"
-                checked={isAboutRumor}
-                onChange={(e) => setIsAboutRumor(e.target.checked)}
+                checked={formState.aboutRumor}
+                onChange={(e) => dispatch({ type: formActionType.ABOUT_RUMOR, payload: e.target.checked })}
+              />
+              <Form.Check
+                type="checkbox"
+                label="非表示にする"
+                checked={formState.hidden}
+                onChange={(e) => dispatch({ type: formActionType.HIDDEN, payload: e.target.checked })}
               />
             </Form.Group>
             <hr />
             <div>地域: {countries.find((r) => r.id === entry.displayed_country)?.name}</div>
             <Form.Group>
               <Form.Label>地域を修正する</Form.Label>
-              <Form.Control as="select" value={selectedCounrty} onChange={handleChangeRegion}>
+              <Form.Control
+                as="select"
+                value={formState.country}
+                onChange={(e) => dispatch({ type: formActionType.COUNTRY, payload: e.target.value })}
+              >
                 {countries.map((r) => (
                   <option key={r.id} value={r.id}>
                     {r.name}
@@ -154,7 +171,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
             <hr />
             <div>カテゴリ:</div>
             <ul>
-              {currentTopics.map((t) => (
+              {entry.topics.map((t) => (
                 <li key={t.name}>
                   <span>{t.name}</span>
                   <br />
@@ -170,7 +187,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
                     <Form.Check.Input
                       type="checkbox"
                       name={t}
-                      checked={selectedTopics[t]}
+                      checked={formState.topics.includes(t)}
                       onChange={handleChangeTopic}
                     />
                     {t}
@@ -200,17 +217,23 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               }
             `}</style>
           </div>
-          {/* <fieldset> */}
           <hr />
           <Form.Group>
             <Form.Label>メモ欄</Form.Label>
-            <Form.Control as="textarea" value={notes} onChange={(e) => setNotes(e.target.value)} />
+            <Form.Control
+              as="textarea"
+              value={formState.notes}
+              onChange={(e) => dispatch({ type: formActionType.NOTES, payload: e.target.value })}
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label>パスワード</Form.Label>
-            <Form.Control type="password" required onChange={handleChangePassword} />
+            <Form.Control
+              type="password"
+              required
+              onChange={(e) => dispatch({ type: formActionType.PASSWORD, payload: e.target.value })}
+            />
           </Form.Group>
-          {/* </fieldset> */}
           {failed && <Alert variant="danger">修正に失敗しました。</Alert>}
           <HistoryDiv history={history} />
         </Modal.Body>
@@ -221,7 +244,7 @@ export const ModifyModal = ({ show, onHide, countries, topics, entry }) => {
               <Button variant="secondary" onClick={onHide}>
                 キャンセル
               </Button>
-              <Button variant="primary" type="submit" disabled={!isChangedFromCurrent}>
+              <Button variant="primary" type="submit">
                 確定
               </Button>
             </>

@@ -21,6 +21,8 @@ export const en = {
   eur_other: 'Europe (Other)',
   kr: 'South Korea',
   in: 'India',
+  np: 'Nepal',
+  my: 'Malaysia',
   asia_other: 'Asia (Other)',
   jp: 'Japan',
   cn: 'China',
@@ -43,5 +45,12 @@ export const en = {
   lab_inui: 'Inui Lab at Tohoku University',
   lab_morishima: 'Morishima Lab at University of Tsukuba',
   outage:
-    'Our service will be temporarily down for a planned power outage from Saturday Sep 12 at 19:00 JST (GMT+09) until Sunday, Sep 13 at 22:00 JST (GMT+09).'
+    'Our service will be temporarily down for a planned power outage from Saturday Sep 12 at 19:00 JST (GMT+09) until Sunday, Sep 13 at 22:00 JST (GMT+09).',
+  feedback: 'Feedback',
+  feedback_placeholder: 'Please enter your feedback on this site',
+  submit: 'Submit',
+  feedback_useful: 'Is this site useful?',
+  yes: 'Yes',
+  no: 'No',
+  search: 'Search'
 }

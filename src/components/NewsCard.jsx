@@ -119,7 +119,7 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
                   <Loading />
                 </div>
               )}
-              <div ref={observeEl} className="observe"></div>
+              <div ref={observeEl} className="observe" />
             </div>
           </div>
         </div>
@@ -166,13 +166,15 @@ const Country = ({ title, countryId, topic, onClickTitle, showEditButton, childr
           }
         `}</style>
       </div>
-      <ModifyModal
-        show={showEditModal}
-        onHide={closeEditModal}
-        countries={countries}
-        topics={topics}
-        entry={editingEntry}
-      />
+      {showEditModal && (
+        <ModifyModal
+          show={showEditModal}
+          onHide={closeEditModal}
+          countries={countries}
+          topics={topics}
+          entry={editingEntry}
+        />
+      )}
     </>
   )
 }
