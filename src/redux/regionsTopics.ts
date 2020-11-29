@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { RegionId, Region, Topic } from '@src/types'
 import { fetchMeta } from '@src/redux/asyncActions'
@@ -33,10 +33,13 @@ const regionsTopicsSlice = createSlice({
         state.regions.byId[region.id] = region
       }
       state.topics.allIds = topics
+      state.loaded = true
     })
   }
 })
 
 export const selectRegionTopicLoaded = (state: RootState) => state.regionsTopics.loaded
+export const selectRegions = (state: RootState) => state.regionsTopics.regions
+export const selectTopics = (state: RootState) => state.regionsTopics.topics.allIds
 
 export default regionsTopicsSlice.reducer

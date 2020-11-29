@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { Url, RegionId, Topic } from '@src/types'
+import { RootState } from '@src/redux/index'
 
 import { fetchMeta, loadMore } from './asyncActions'
 
@@ -85,5 +86,17 @@ const entriesByRegionTopicSlice = createSlice({
   }
 })
 export const { linkEntryToRegionTopic, setNoMoreToTrue } = entriesByRegionTopicSlice.actions
+
+export const selectEntriesForRegionTopic = createSelector(
+  [
+    (state: RootState) => state.entriesByRegionTopic,
+    (state) => state.entries.byUrl,
+    (_, p: { region: RegionId; topic: Topic }) => p.region,
+    (_, p) => p.topic
+  ],
+  (byRegionTopic, entriesByUrl, region, topic) => {
+    return byRegionTopic[region][topic].entries.map((url) => entriesByUrl[url])
+  }
+)
 
 export default entriesByRegionTopicSlice.reducer
