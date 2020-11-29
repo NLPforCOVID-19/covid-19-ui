@@ -40,4 +40,4 @@ jobs:
           REMOTE: ${{ secrets.REMOTE }}
         run: |
           chmod -R g+w out
-          rsync --dry-run -av out/ $REMOTE:$DEPLOY_PATH
+          rsync -av out/ $REMOTE:$DEPLOY_PATH
