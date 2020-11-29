@@ -1,6 +1,6 @@
 name: Check with linter & formater
 on:
-  pull_resuest:
+  pull_request:
     branches:
       - master
       - staging
