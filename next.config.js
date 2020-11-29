@@ -3,11 +3,6 @@ const path = require('path')
 if (!process.env.API_URL) {
   throw new Error('API URL is not specified')
 }
-if (process.env.NODE_ENV === 'production') {
-  if (!process.env.GA_TRACKING_ID) {
-    throw new Error('Google Analytics ID is not specified')
-  }
-}
 
 module.exports = {
   env: {

@@ -1,14 +1,14 @@
-name: Build and Deploy to Production
+name: Build and Deploy to Staging
 
 on:
   push:
     branches:
-      - master
+      - staging
 
 jobs:
   deploy:
     env:
-      BASE_PATH: /NLPforCOVID-19
+      BASE_PATH: ${{ secrets.BASE_PATH_STAGING }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
       - name: Build Project
         env:
           API_URL: ${{ secrets.API_URL }}
-          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+          GA_TRACKING_ID: ''
         run: |
           npm ci
           npm run build
@@ -36,7 +36,7 @@ jobs:
           echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
       - name: Deploy to Server
         env:
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH_STAGING }}
           REMOTE: ${{ secrets.REMOTE }}
         run: |
           chmod -R g+w out
