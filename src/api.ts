@@ -1,10 +1,13 @@
 import axios from 'axios'
 
+import { Entry, Region, Topic } from '@src/types'
+
 const baseUrl = process.env.API_URL
 
-interface Region {
+type ResponseBool = 0 | 1
+
+interface ResponseRegion {
   country: string
-  language: string
   name: string
   representativeSiteUrl: string
   sources: string[]
@@ -13,6 +16,61 @@ interface Region {
     confirmation_total: number
     death_today: number
     death_total: number
+  }
+}
+
+interface ResponseTopic {
+  name: string
+  snippet: string
+}
+
+interface ResponseEntry {
+  displayed_country: string
+  domain_label: string
+  is_about_false_rumor: ResponseBool
+  is_useful: ResponseBool
+  orig: {
+    timestamp: string
+  }
+  topics: ResponseTopic[]
+  translated: {
+    title: string
+  }
+  url: string
+}
+
+const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
+  const snippets: Record<Topic, string> = {}
+  for (const topic of responseEntry.topics) {
+    snippets[topic.name] = topic.snippet
+  }
+  return {
+    url: responseEntry.url,
+    country: responseEntry.displayed_country,
+    title: responseEntry.translated.title,
+    timestamp: new Date(responseEntry.orig.timestamp),
+    domainLabel: responseEntry.domain_label,
+    flags: {
+      aboutRumor: responseEntry.is_about_false_rumor === 1,
+      useful: responseEntry.is_useful === 1
+    },
+    snippets: snippets
+  }
+}
+
+const parseResponseRegion = (responseRegion: ResponseRegion): Region => {
+  const { stats } = responseRegion
+  return {
+    id: responseRegion.country,
+    name: responseRegion.name,
+    officialUrl: responseRegion.representativeSiteUrl,
+    sourceUrls: responseRegion.sources,
+    stats: {
+      confirmToday: stats.confirmation_today,
+      confirmTotal: stats.confirmation_total,
+      deathToday: stats.death_today,
+      deathTotal: stats.death_total
+    }
   }
 }
 
@@ -53,26 +111,30 @@ export async function searchNewsByRegion(topic, region, lang, query, start) {
   return response.data
 }
 
-export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang) {
+export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang): Promise<Entry[]> {
   const path = `/classes/${klass}/${country}`
-  const response = await axios.get(baseUrl + path, {
+  const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
     params: {
       start: offset,
       limit: limit || 10,
       lang: lang
     }
   })
-  return response.data
+  return response.data.map(parseResponseEntry)
 }
 
-export async function fetchMeta(lang): Promise<{ countries: Region[], topics: string[] }> {
+export async function fetchMeta(lang): Promise<{ regions: Region[]; topics: string[] }> {
   const path = '/meta'
-  const response = await axios.get(baseUrl + path, {
+  const response = await axios.get<{ countries: ResponseRegion[]; topics: string[] }>(baseUrl + path, {
     params: {
       lang: lang
     }
   })
-  return response.data
+  const { countries, topics } = response.data
+  return {
+    regions: countries.map(parseResponseRegion),
+    topics
+  }
 }
 
 export async function modifyRegionCategory(

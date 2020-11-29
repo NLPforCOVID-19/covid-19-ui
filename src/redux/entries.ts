@@ -1,18 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Property } from 'csstype'
 
-import Top = Property.Top
-
-export type Url = string
-type CountryId = string
-export type Topic = string
-
-interface Entry {
-  country: CountryId
-  title: string
-  url: Url
-  snippets: Record<Top, string>
-}
+import { Url, Entry } from '@src/types'
 
 const initialState: { byUrl: Record<Url, Entry>; allUrl: Url[] } = {
   byUrl: {},
