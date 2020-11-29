@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import { RegionId, Region, Topic } from '@src/types'
-import { fetchMeta } from '@src/redux/asyncActions'
+import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 import { RootState } from '@src/redux'
 
 interface State {
@@ -26,7 +26,7 @@ const regionsTopicsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchMeta.fulfilled, (state, action) => {
+    builder.addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {
       const { regions, topics } = action.payload
       state.regions.allIds = regions.map((r) => r.id)
       for (const region of regions) {

@@ -19,6 +19,12 @@ export const loadMore = createAsyncThunk<Entry[], { region: RegionId; topic: Top
   }
 )
 
-export const fetchMeta = createAsyncThunk('fetchMeta', async (_, ThunkAPI) => {
-  return API.fetchMeta('ja')
+export const fetchMetaAndFirstEntries = createAsyncThunk('fetchMetaAndFirstEntries', async () => {
+  const { regions, topics } = await API.fetchMeta('ja')
+  const entriesByRegion = await API.fetchEntriesAll()
+  return {
+    regions,
+    topics,
+    entriesByRegion
+  }
 })

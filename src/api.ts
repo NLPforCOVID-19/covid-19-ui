@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Entry, Region, Topic } from '@src/types'
+import { Entry, Region, RegionId, Topic } from '@src/types'
 
 const baseUrl = process.env.API_URL
 
@@ -48,7 +48,7 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     url: responseEntry.url,
     country: responseEntry.displayed_country,
     title: responseEntry.translated.title,
-    timestamp: new Date(responseEntry.orig.timestamp),
+    timestamp: Date.parse(responseEntry.orig.timestamp),
     domainLabel: responseEntry.domain_label,
     flags: {
       aboutRumor: responseEntry.is_about_false_rumor === 1,
@@ -109,6 +109,20 @@ export async function searchNewsByRegion(topic, region, lang, query, start) {
     }
   })
   return response.data
+}
+
+export const fetchEntriesAll = async (): Promise<Record<RegionId, Entry[]>> => {
+  const path = `/classes/all`
+  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+    params: {
+      limit: 5
+    }
+  })
+  const entriesByRegion = {}
+  for (const r of Object.keys(response.data)) {
+    entriesByRegion[r] = response.data[r].map(parseResponseEntry)
+  }
+  return entriesByRegion
 }
 
 export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang): Promise<Entry[]> {

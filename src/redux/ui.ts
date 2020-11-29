@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RegionId, Topic } from '@src/types'
-import { fetchMeta } from '@src/redux/asyncActions'
+import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 import { RootState } from '@src/redux/index'
 
 type ViewMode = 'topic' | 'region' | 'neutral'
@@ -29,7 +29,7 @@ const uiSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchMeta.fulfilled, (state, action) => {
+    builder.addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {
       state.viewMode = 'topic'
       state.selectedTopic = action.payload.topics[0]
       state.selectedRegion = action.payload.regions[0].id

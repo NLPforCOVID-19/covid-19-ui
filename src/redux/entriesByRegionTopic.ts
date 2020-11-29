@@ -3,7 +3,7 @@ import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Url, RegionId, Topic } from '@src/types'
 import { RootState } from '@src/redux/index'
 
-import { fetchMeta, loadMore } from './asyncActions'
+import { fetchMetaAndFirstEntries, loadMore } from './asyncActions'
 
 interface StateForEachRegionTopic {
   entries: Url[]
@@ -70,8 +70,8 @@ const entriesByRegionTopicSlice = createSlice({
         }
         state[region][topic].entries.push(...newEntries.map((e) => e.url))
       })
-      .addCase(fetchMeta.fulfilled, (state, action) => {
-        const { regions, topics } = action.payload
+      .addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {
+        const { regions, topics, entriesByRegion } = action.payload
         for (const region of regions) {
           state[region.id] = {}
           for (const topic of topics) {
@@ -79,6 +79,12 @@ const entriesByRegionTopicSlice = createSlice({
               entries: [],
               isNoMore: false,
               loading: false
+            }
+          }
+          for (const entry of entriesByRegion[region.id]) {
+            const topics = Object.keys(entry.snippets)
+            for (const topic of topics) {
+              state[region.id][topic].entries.push(entry.url)
             }
           }
         }
@@ -96,6 +102,38 @@ export const selectEntriesForRegionTopic = createSelector(
   ],
   (byRegionTopic, entriesByUrl, region, topic) => {
     return byRegionTopic[region][topic].entries.map((url) => entriesByUrl[url])
+  }
+)
+
+export const selectEntryCountForRegion = createSelector(
+  [
+    (s: RootState) => s.entriesByRegionTopic,
+    (s) => s.regionsTopics.topics,
+    (s) => s.regionsTopics.loaded,
+    (_, p: { region: RegionId }) => p.region
+  ],
+  (byRegionTopic, topics, loaded, region) => {
+    if (!loaded) {
+      return 0
+    }
+    const counts = topics.allIds.map((t) => byRegionTopic[region][t].entries.length)
+    return counts.reduce((a, c) => a + c)
+  }
+)
+
+export const selectEntryCountForTopic = createSelector(
+  [
+    (s: RootState) => s.entriesByRegionTopic,
+    (s) => s.regionsTopics.regions,
+    (s) => s.regionsTopics.loaded,
+    (_, p: { topic: RegionId }) => p.topic
+  ],
+  (byRegionTopic, regions, loaded, topic) => {
+    if (!loaded) {
+      return 0
+    }
+    const counts = regions.allIds.map((r) => byRegionTopic[r][topic].entries.length)
+    return counts.reduce((a, c) => a + c)
   }
 )
 
