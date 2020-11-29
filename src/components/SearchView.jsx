@@ -51,7 +51,7 @@ const Card = React.memo(function Card({ title, stats, entries, loading, onClickR
           <div ref={wrapEl} className="scroll mt-1 mb-1">
             <ul>
               {entries.map((entry, i) => (
-                <Page key={i} entry={entry} topic='Search' region={''} showEditButton={false} onClickEdit={null} />
+                <Page key={i} entry={entry} topic="Search" region={''} showEditButton={false} onClickEdit={null} />
               ))}
             </ul>
             {loading && (
