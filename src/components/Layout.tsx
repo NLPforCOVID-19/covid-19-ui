@@ -6,7 +6,7 @@ import { useTranslation } from '../context/LanguageContext'
 import Header from './Header'
 import Footer from './Footer'
 
-const Layout = ({ title, children }) => {
+const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
   const { t } = useTranslation()
   return (
     <div className="wrap">

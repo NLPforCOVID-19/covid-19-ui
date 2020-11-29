@@ -1,41 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Layout from '@src/components/Layout'
 import Description from '@src/components/Description'
-import Map from '@src/components/Map'
-import NewsView from '@src/components/NewsView'
 import { useTranslation } from '@src/context/LanguageContext'
-import { fetchMeta, loadAllTopicsNews, StoreContext } from '@src/store'
 import { FeedbackToast } from '@src/components/FeedbackToast'
-
-import { languagePaths } from '../../utils'
+import { languagePaths } from '@src/utils'
+import { NewsViewContainer } from '@src/containers/NewsViewContainer'
+import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
+import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 
 const Index = () => {
-  const { t, lang } = useTranslation()
-  const [state, dispatch] = useContext(StoreContext)
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const initialLoaded = useSelector(selectRegionTopicLoaded)
   const [showToast, setShowToast] = useState(false)
+
   useEffect(() => {
-    if (!state.metaLoaded) {
-      dispatch(fetchMeta(lang))
+    if (!initialLoaded) {
+      dispatch(fetchMetaAndFirstEntries())
     }
-    if (state.metaLoaded) {
-      dispatch(loadAllTopicsNews(lang))
-    }
-  }, [state.metaLoaded])
+  }, [initialLoaded, dispatch])
+
   useEffect(() => {
     const threshold = 0.2
-    if (state.metaLoaded && Math.random() < threshold) {
+    if (initialLoaded && Math.random() < threshold) {
       setTimeout(() => {
         setShowToast(true)
       }, 10000)
     }
-  }, [state.metaLoaded])
+  }, [initialLoaded])
+
   return (
     <Layout>
       <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
-      <Map />
-      <NewsView />
+      <NewsViewContainer />
       <Container>
         <div className="small text-right">
           <a className="text-muted" href="./../edit/">

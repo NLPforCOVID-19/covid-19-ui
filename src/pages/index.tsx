@@ -1,10 +1,11 @@
 import React from 'react'
 
 import Layout from '../components/Layout'
-import { useLangageRedirect } from '../utils'
+
+import { useLanguageRedirect } from '@src/context/LanguageContext'
 
 const IndexPage = () => {
-  useLangageRedirect('/')
+  useLanguageRedirect('/')
   return <Layout />
 }
 
