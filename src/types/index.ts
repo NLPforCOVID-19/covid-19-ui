@@ -2,12 +2,13 @@ export type Url = string
 type CountryId = string
 export type Topic = string
 export type RegionId = string
+type UnixEpoch = number
 
 export interface Entry {
   url: Url
   country: CountryId
   title: string
-  timestamp: Date
+  timestamp: UnixEpoch
   domainLabel: string
   flags: {
     aboutRumor: boolean
