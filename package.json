@@ -16,7 +16,10 @@
     "build": "next build",
     "dev": "next",
     "export": "next export",
-    "lint": "eslint src/**/*.{js,jsx} --fix",
+    "format": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --check",
+    "format:fix": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --write",
+    "lint": "eslint --no-error-on-unmatched-pattern --ext .ts,.tsx,.js,.jsx ./src",
+    "lint:fix": "eslint --no-error-on-unmatched-pattern --ext .ts,.tsx,.js,.jsx ./src --fix",
     "upgrade-interactive": "npm-check --update"
   },
   "devDependencies": {
@@ -25,6 +28,6 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "npm-check": "^5.9.2",
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.1"
   }
 }

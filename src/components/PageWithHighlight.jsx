@@ -13,7 +13,7 @@ function EntryIcon({ entry }) {
   }
 }
 
-const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
+const PageWithHighlight = ({ entry, topic, region, onClickEdit, showEditButton, highlightQuery }) => {
   const topicData = entry.topics.find((t) => t.name === topic)
   const snippet = topicData ? topicData.snippet : ''
   function handleClickEdit(e) {
@@ -33,7 +33,7 @@ const Page = ({ entry, topic, region, onClickEdit, showEditButton }) => {
       <div className="news">
         <Title entry={entry} region={region} />
         <Domain entry={entry} />
-        <Snippet text={snippet} />
+        <Snippet text={snippet} highlightQuery={highlightQuery} />
       </div>
       <style jsx>{`
         li {
@@ -111,11 +111,22 @@ const Domain = ({ entry }) => {
   )
 }
 
-const Snippet = ({ text }) => {
+const Snippet = ({ text, highlightQuery }) => {
   return (
     <div className="wrap">
       <div className="mb-2 small text-secondary">
-        <span className="snippet">{text}</span>
+        <span className="snippet">
+          {text.split(highlightQuery).map((str, i) =>
+            i === 0 ? (
+              <span key={i}>{str}</span>
+            ) : (
+              <span key={i}>
+                <mark className="">{highlightQuery}</mark>
+                {str}
+              </span>
+            )
+          )}
+        </span>
       </div>
       <style jsx>{`
         .wrap {
@@ -127,9 +138,12 @@ const Snippet = ({ text }) => {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
         }
+        mark {
+          background-color: yellow;
+        }
       `}</style>
     </div>
   )
 }
 
-export default Page
+export default PageWithHighlight
