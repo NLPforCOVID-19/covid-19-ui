@@ -1,25 +1,23 @@
 import Col from 'react-bootstrap/Col'
 
-import { Entry } from '@src/types'
-import { EntryView } from '@src/presenters/EntryView'
+import { Url } from '@src/types'
 
 interface Props {
   title: string
-  entries: Entry[]
+  entryIds: Url[]
   loading: boolean
-  onClickTitle?: () => void
+  onClickTitle?: () => never
   onLoadMore: () => void
+  renderEntry: (url: Url) => React.ReactElement
 }
 
 export const NewsCard: React.FC<Props> = (props) => {
-  const { title, entries, loading, onLoadMore } = props
+  const { title, entryIds, loading, onLoadMore, renderEntry } = props
   return (
     <Col>
       <div>{title}</div>
       <div>
-        {entries.map((e) => (
-          <EntryView key={e.url} entry={e} />
-        ))}
+        {entryIds.map(renderEntry)}
         {loading && <div>loading</div>}
         <button onClick={onLoadMore}>load more</button>
       </div>

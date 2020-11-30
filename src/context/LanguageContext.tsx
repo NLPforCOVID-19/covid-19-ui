@@ -5,7 +5,7 @@ import { translations, defaultLang, localeList, isSupportedLang } from '../trans
 
 import { Lang } from '@src/types'
 
-const LanguageContext = createContext({
+const LanguageContext = createContext<{ lang: Lang }>({
   lang: defaultLang
 })
 
@@ -16,11 +16,15 @@ export const LanguageProvider = ({ lang, children }) => {
   return <LanguageContext.Provider value={{ lang }}>{children}</LanguageContext.Provider>
 }
 
+// TODO: useCallback
 export function useTranslation() {
   const { lang } = useContext(LanguageContext)
-  function t(key) {
+  function t(key: string) {
     if (typeof translations[lang][key] === 'undefined') {
       console.warn(`Translation not found. lang: ${lang}, key: ${key}`)
+      if (typeof translations[defaultLang][key] === 'undefined') {
+        throw new Error(`Unknown translation key: ${key}`)
+      }
     }
     return translations[lang][key]
   }

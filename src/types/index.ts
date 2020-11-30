@@ -21,7 +21,7 @@ export interface Entry {
   snippets: Record<Topic, string>
 }
 
-interface RegionStats {
+export interface RegionStats {
   confirmToday: number
   confirmTotal: number
   deathToday: number

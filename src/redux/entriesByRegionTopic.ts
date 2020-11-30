@@ -93,7 +93,7 @@ const entriesByRegionTopicSlice = createSlice({
 })
 export const { linkEntryToRegionTopic, setNoMoreToTrue } = entriesByRegionTopicSlice.actions
 
-export const selectEntriesForRegionTopic = createSelector(
+export const selectEntryIdsForRegionTopic = createSelector(
   [
     (state: RootState) => state.entriesByRegionTopic,
     (state) => state.entries.byUrl,
@@ -101,39 +101,7 @@ export const selectEntriesForRegionTopic = createSelector(
     (_, p) => p.topic
   ],
   (byRegionTopic, entriesByUrl, region, topic) => {
-    return byRegionTopic[region][topic].entries.map((url) => entriesByUrl[url])
-  }
-)
-
-export const selectEntryCountForRegion = createSelector(
-  [
-    (s: RootState) => s.entriesByRegionTopic,
-    (s) => s.regionsTopics.topics,
-    (s) => s.regionsTopics.loaded,
-    (_, p: { region: RegionId }) => p.region
-  ],
-  (byRegionTopic, topics, loaded, region) => {
-    if (!loaded) {
-      return 0
-    }
-    const counts = topics.allIds.map((t) => byRegionTopic[region][t].entries.length)
-    return counts.reduce((a, c) => a + c)
-  }
-)
-
-export const selectEntryCountForTopic = createSelector(
-  [
-    (s: RootState) => s.entriesByRegionTopic,
-    (s) => s.regionsTopics.regions,
-    (s) => s.regionsTopics.loaded,
-    (_, p: { topic: RegionId }) => p.topic
-  ],
-  (byRegionTopic, regions, loaded, topic) => {
-    if (!loaded) {
-      return 0
-    }
-    const counts = regions.allIds.map((r) => byRegionTopic[r][topic].entries.length)
-    return counts.reduce((a, c) => a + c)
+    return byRegionTopic[region][topic].entries
   }
 )
 

@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSelector, createSlice } from '@reduxjs/toolkit'
 
 import { Url, Entry } from '@src/types'
 import { fetchMetaAndFirstEntries, loadMore } from '@src/redux/asyncActions'
+import { RootState } from '@src/redux/index'
 
 interface State {
   byUrl: Record<Url, Entry>
@@ -35,5 +36,10 @@ const entriesSlice = createSlice({
       })
   }
 })
+
+export const selectEntryByUrl = createSelector(
+  [(state: RootState) => state.entries.byUrl, (_, url: Url) => url],
+  (byUrl, url) => byUrl[url]
+)
 
 export default entriesSlice.reducer
