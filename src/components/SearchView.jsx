@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import Row from 'react-bootstrap/Row'
-import Page from './Page'
+import PageWithHighlight from './PageWithHighlight'
 import Loading from './Loading'
 import { searchNews } from '../api'
 import { useTranslation } from '../context/LanguageContext'
 import Stats from './Stats'
 import { StoreContext } from '../store'
 
-const Card = React.memo(function Card({ title, stats, entries, loading, onClickRegion }) {
+const Card = React.memo(function Card({ title, stats, entries, loading, onClickRegion, query }) {
   const observeEl = React.useRef(null)
   const wrapEl = React.useRef(null)
   const handleClickRegion = React.useCallback(
@@ -51,7 +51,15 @@ const Card = React.memo(function Card({ title, stats, entries, loading, onClickR
           <div ref={wrapEl} className="scroll mt-1 mb-1">
             <ul>
               {entries.map((entry, i) => (
-                <Page key={i} entry={entry} topic="Search" region={''} showEditButton={false} onClickEdit={null} />
+                <PageWithHighlight
+                  key={i}
+                  entry={entry}
+                  topic="Search"
+                  region={''}
+                  showEditButton={false}
+                  onClickEdit={null}
+                  highlightQuery={query}
+                />
               ))}
             </ul>
             {loading && (
@@ -141,6 +149,7 @@ export const SearchView = React.memo(function SearchView({ query, show, onClickR
           entries={entries[c.country] || []}
           loading={loading}
           onClickRegion={() => onClickRegion(c.country)}
+          query={query}
         />
       ))}
     </Row>
