@@ -3,10 +3,10 @@ import Head from 'next/head'
 
 import { useTranslation } from '../context/LanguageContext'
 
-import Header from './Header'
-import Footer from './Footer'
+import { Header } from './Header'
+import { Footer } from './Footer'
 
-const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
+export const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
   const { t } = useTranslation()
   return (
     <div className="wrap">
@@ -32,4 +32,3 @@ const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
     </div>
   )
 }
-export default Layout

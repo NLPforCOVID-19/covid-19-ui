@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useTranslation } from '../context/LanguageContext'
 
-const Footer = () => {
+export const Footer = () => {
   const { t } = useTranslation()
   return (
     <footer className="mt-3 p-3 bg-light">
@@ -12,4 +12,3 @@ const Footer = () => {
     </footer>
   )
 }
-export default Footer

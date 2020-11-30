@@ -2,10 +2,11 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import Layout from '@src/components/Layout'
 import React from 'react'
 
-import { languagePaths } from '../../utils'
+import { Layout } from '@src/components/Layout'
+import { languagePaths } from '@src/utils'
+import { Lang } from '@src/types'
 
 const AboutJp = () => (
   <Container className="p-3 text-dark">
@@ -105,16 +106,21 @@ const AboutEn = () => (
   </Container>
 )
 
-const ContentTranslations = {
-  ja: AboutJp,
-  en: AboutEn
+const ContentTranslations: React.FC<{ lang: Lang }> = ({ lang }) => {
+  switch (lang) {
+    case 'ja':
+      return <AboutJp />
+    case 'en':
+      return <AboutEn />
+    default:
+      return <AboutJp />
+  }
 }
 
 const About = ({ lang }) => {
-  const Content = ContentTranslations[lang]
   return (
     <Layout>
-      <Content />
+      <ContentTranslations lang={lang} />
       <style jsx>{`
         .back-link-wrap {
           margin-bottom: 10px;

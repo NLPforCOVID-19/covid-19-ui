@@ -31,7 +31,7 @@ const LangLink = ({ lang, currentLang, className }) => {
   )
 }
 
-const Header = () => {
+export const Header = () => {
   const { t, lang } = useTranslation()
   return (
     <div>
@@ -98,5 +98,3 @@ const Header = () => {
     </div>
   )
 }
-
-export default Header

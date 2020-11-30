@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { useTranslation } from '../context/LanguageContext'
 
-const Description = () => {
+export const Description = () => {
   const { t, lang } = useTranslation()
   return (
     <div className="mt-3">
@@ -20,5 +20,3 @@ const Description = () => {
     </div>
   )
 }
-
-export default Description
