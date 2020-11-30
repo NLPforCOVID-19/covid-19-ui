@@ -1,5 +1,5 @@
 /// <reference types="next" />
 /// <reference types="next/types/global" />
 interface Window {
-  gtag?: (type: string, id: string, data: never) => void
+  gtag?: (type: 'config', id: string, data: { page_location: string }) => void
 }
