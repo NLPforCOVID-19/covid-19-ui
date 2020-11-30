@@ -20,11 +20,11 @@ Router.events.on('routeChangeComplete', (url) => {
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <Provider store={store}>
-      <LanguageProvider lang={pageProps.lang}>
+    <LanguageProvider lang={pageProps.lang}>
+      <Provider store={store}>
         <Component {...pageProps} />
-      </LanguageProvider>
-    </Provider>
+      </Provider>
+    </LanguageProvider>
   )
 }
 

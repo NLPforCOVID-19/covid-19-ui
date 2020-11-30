@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { translations, defaultLang, localeList } from '../translations'
+import { translations, defaultLang, localeList, isSupportedLang } from '../translations'
+
+import { Lang } from '@src/types'
 
 const LanguageContext = createContext({
   lang: defaultLang
@@ -29,9 +31,9 @@ export function useLanguageRedirect(path) {
   const router = useRouter()
   useEffect(() => {
     const acceptLangs = [navigator.language, ...navigator.languages].map((l) => l.split('-')[0])
-    let langToNavigate = defaultLang
+    let langToNavigate: Lang = defaultLang
     for (const prefferedLang of acceptLangs) {
-      if (localeList.includes(prefferedLang)) {
+      if (isSupportedLang(prefferedLang)) {
         langToNavigate = prefferedLang
         break
       }

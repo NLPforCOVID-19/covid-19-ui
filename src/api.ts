@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Entry, Region, RegionId, Topic } from '@src/types'
+import { Entry, Lang, Region, RegionId, Topic } from '@src/types'
 
 const baseUrl = process.env.API_URL
 
@@ -111,11 +111,12 @@ export async function searchNewsByRegion(topic, region, lang, query, start) {
   return response.data
 }
 
-export const fetchEntriesAll = async (): Promise<Record<RegionId, Entry[]>> => {
+export const fetchEntriesAll = async (lang: Lang): Promise<Record<RegionId, Entry[]>> => {
   const path = `/classes/all`
   const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
-      limit: 5
+      limit: 5,
+      lang
     }
   })
   const entriesByRegion = {}
@@ -125,7 +126,7 @@ export const fetchEntriesAll = async (): Promise<Record<RegionId, Entry[]>> => {
   return entriesByRegion
 }
 
-export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang): Promise<Entry[]> {
+export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang: Lang): Promise<Entry[]> {
   const path = `/classes/${klass}/${country}`
   const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
     params: {

@@ -1,3 +1,7 @@
+export const localeList = ['ja', 'en'] as const
+
+export type Lang = typeof localeList[number]
+
 export type Url = string
 type CountryId = string
 export type Topic = string

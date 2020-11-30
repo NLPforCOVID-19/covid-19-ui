@@ -12,16 +12,16 @@ import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 
 const Index = () => {
-  const { t } = useTranslation()
+  const { t, lang } = useTranslation()
   const dispatch = useDispatch()
   const initialLoaded = useSelector(selectRegionTopicLoaded)
   const [showToast, setShowToast] = useState(false)
 
   useEffect(() => {
     if (!initialLoaded) {
-      dispatch(fetchMetaAndFirstEntries())
+      dispatch(fetchMetaAndFirstEntries({ lang }))
     }
-  }, [initialLoaded, dispatch])
+  }, [initialLoaded, dispatch, lang])
 
   useEffect(() => {
     const threshold = 0.2

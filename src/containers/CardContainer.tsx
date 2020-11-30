@@ -8,6 +8,7 @@ import { selectViewMode } from '@src/redux/ui'
 import { selectRegions } from '@src/redux/regionsTopics'
 import { RootState } from '@src/redux'
 import { loadMore } from '@src/redux/asyncActions'
+import { useTranslation } from '@src/context/LanguageContext'
 
 interface Props {
   region: RegionId
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const CardContainer: React.FC<Props> = ({ region, topic }) => {
+  const { lang } = useTranslation()
   const dispatch = useDispatch()
   const entriesForRegionTopic = useSelector((state: RootState) => selectEntriesForRegionTopic(state, { region, topic }))
   const viewMode = useSelector(selectViewMode)
@@ -22,8 +24,8 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
   const loading = useSelector((state: RootState) => state.entriesByRegionTopic[region][topic].loading)
 
   const handleLoadMore = useCallback(() => {
-    dispatch(loadMore({ region, topic }))
-  }, [region, topic, dispatch])
+    dispatch(loadMore({ region, topic, lang }))
+  }, [region, topic, dispatch, lang])
 
   const title = viewMode === 'region' ? topic : regions.byId[region].name
 
