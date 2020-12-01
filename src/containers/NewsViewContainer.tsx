@@ -6,6 +6,7 @@ import { selectViewTopic, setTopic, setRegion, selectViewMode, selectViewRegion 
 import { CardContainer } from '@src/containers/CardContainer'
 import { Tabs } from '@src/components/Tabs'
 import { Loading } from '@src/components/Loading'
+import { Stats } from '@src/components/Stats'
 
 export const NewsViewContainer = () => {
   const topics = useSelector(selectTopics)
@@ -21,6 +22,7 @@ export const NewsViewContainer = () => {
     return (
       <div>
         <Tabs choices={regionNames} active={regions.byId[selectedRegion].name} onChange={handleChangeRegion} />
+        <Stats stats={regions.byId[selectedRegion].stats} />
         <div>
           {topics.map((t) => (
             <CardContainer key={t} region={selectedRegion} topic={t} />
