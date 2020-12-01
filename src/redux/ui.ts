@@ -41,4 +41,6 @@ export const selectViewMode = (state: RootState) => state.ui.viewMode
 export const selectViewTopic = (state: RootState) => state.ui.selectedTopic
 export const selectViewRegion = (state: RootState) => state.ui.selectedRegion
 
+export const { changeViewMode, setRegion, setTopic } = uiSlice.actions
+
 export default uiSlice.reducer

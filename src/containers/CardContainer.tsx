@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { NewsCard } from '@src/presenters/NewsCard'
 import { RegionId, Topic } from '@src/types'
 import { selectEntryIdsForRegionTopic } from '@src/redux/entriesByRegionTopic'
-import { selectViewMode } from '@src/redux/ui'
+import { selectViewMode, changeViewMode, setTopic, setRegion } from '@src/redux/ui'
 import { selectRegions } from '@src/redux/regionsTopics'
 import { RootState } from '@src/redux'
 import { loadMore } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { EntryContainer } from '@src/containers/EntryContainer'
+import { Stats } from '@src/components/Stats'
 
 interface Props {
   region: RegionId
@@ -28,20 +29,39 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
     dispatch(loadMore({ region, topic, lang }))
   }, [region, topic, dispatch, lang])
 
+  const handleClickTitle = useCallback(() => {
+    if (viewMode === 'topic') {
+      dispatch(setRegion(region))
+      dispatch(changeViewMode('region'))
+    } else if (viewMode === 'region') {
+      dispatch(setTopic(topic))
+      dispatch(changeViewMode('topic'))
+    }
+  }, [dispatch, region, topic, viewMode])
+
   const renderEntry = useCallback((url) => <EntryContainer key={url} url={url} regionId={region} topic={topic} />, [
     region,
     topic
   ])
 
-  const title = viewMode === 'region' ? topic : regions.byId[region].name
+  const renderStats = useCallback(() => <Stats stats={regions.byId[region].stats} />, [regions.byId, region])
+
+  const title = useMemo(() => (viewMode === 'region' ? topic : regions.byId[region].name), [
+    viewMode,
+    topic,
+    region,
+    regions.byId
+  ])
 
   return (
     <NewsCard
       title={title}
       entryIds={entryIdsForRegionTopic}
       loading={loading}
+      onClickTitle={handleClickTitle}
       onLoadMore={handleLoadMore}
       renderEntry={renderEntry}
+      renderSubInfo={viewMode === 'topic' && renderStats}
     />
   )
 }

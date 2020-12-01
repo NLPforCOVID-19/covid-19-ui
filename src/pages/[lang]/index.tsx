@@ -7,9 +7,9 @@ import { Description } from '@src/components/Description'
 import { useTranslation } from '@src/context/LanguageContext'
 import { FeedbackToast } from '@src/components/FeedbackToast'
 import { languagePaths } from '@src/utils'
-import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
+import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 
 const Index = () => {
   const { t, lang } = useTranslation()
