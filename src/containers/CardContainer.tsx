@@ -4,8 +4,8 @@ import { useCallback, useMemo } from 'react'
 import { NewsCard } from '@src/presenters/NewsCard'
 import { RegionId, Topic } from '@src/types'
 import { selectEntryIdsForRegionTopic } from '@src/redux/entriesByRegionTopic'
-import { selectViewMode, changeViewMode, setTopic, setRegion } from '@src/redux/ui'
-import { selectRegions } from '@src/redux/regionsTopics'
+import { selectViewMode, changeViewMode } from '@src/redux/ui'
+import { selectRegions, setActiveTopic, setActiveRegion } from '@src/redux/regionsTopics'
 import { RootState } from '@src/redux'
 import { loadMore } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
@@ -31,10 +31,10 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
 
   const handleClickTitle = useCallback(() => {
     if (viewMode === 'topic') {
-      dispatch(setRegion(region))
+      dispatch(setActiveRegion(region))
       dispatch(changeViewMode('region'))
     } else if (viewMode === 'region') {
-      dispatch(setTopic(topic))
+      dispatch(setActiveTopic(topic))
       dispatch(changeViewMode('topic'))
     }
   }, [dispatch, region, topic, viewMode])

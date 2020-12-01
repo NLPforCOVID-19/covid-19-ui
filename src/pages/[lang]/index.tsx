@@ -8,18 +8,19 @@ import { useTranslation } from '@src/context/LanguageContext'
 import { FeedbackToast } from '@src/components/FeedbackToast'
 import { languagePaths } from '@src/utils'
 import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
-import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
+import { createNewsViewHash, fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 
 const Index = () => {
   const { t, lang } = useTranslation()
   const dispatch = useDispatch()
   const initialLoaded = useSelector(selectRegionTopicLoaded)
+  const hash = useSelector(createNewsViewHash)
   const [showToast, setShowToast] = useState(false)
 
   useEffect(() => {
     if (!initialLoaded) {
-      dispatch(fetchMetaAndFirstEntries({ lang }))
+      dispatch(fetchMetaAndFirstEntries({ lang, hash: location.hash }))
     }
   }, [initialLoaded, dispatch, lang])
 
@@ -31,6 +32,12 @@ const Index = () => {
       }, 10000)
     }
   }, [initialLoaded])
+
+  useEffect(() => {
+    if (initialLoaded) {
+      location.hash = hash
+    }
+  }, [hash, initialLoaded])
 
   return (
     <Layout>
