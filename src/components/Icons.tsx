@@ -34,3 +34,5 @@ export const Default = () => {
 }
 
 export const Edit = () => <BaseIcon iconId="edit" />
+
+export const OpenInNew = () => <BaseIcon iconId="open_in_new" />

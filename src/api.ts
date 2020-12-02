@@ -26,6 +26,7 @@ interface ResponseTopic {
 
 interface ResponseEntry {
   displayed_country: string
+  domain: string
   domain_label: string
   is_about_false_rumor: ResponseBool
   is_useful: ResponseBool
@@ -49,6 +50,7 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     country: responseEntry.displayed_country,
     title: responseEntry.translated.title,
     timestamp: Date.parse(responseEntry.orig.timestamp),
+    domainUrl: responseEntry.domain,
     domainLabel: responseEntry.domain_label,
     flags: {
       aboutRumor: responseEntry.is_about_false_rumor === 1,

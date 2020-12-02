@@ -13,6 +13,7 @@ export interface Entry {
   country: CountryId
   title: string
   timestamp: UnixEpoch
+  domainUrl: string
   domainLabel: string
   flags: {
     aboutRumor: boolean

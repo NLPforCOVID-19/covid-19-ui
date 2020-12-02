@@ -65,7 +65,7 @@ export const NewsCard: React.FC<Props> = (props) => {
       </div>
       <style jsx>{`
         .wrap {
-          height: 400px;
+          height: 410px;
           display: flex;
           flex-flow: column nowrap;
         }

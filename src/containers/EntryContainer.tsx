@@ -1,9 +1,10 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
 
 import { Entry, Lang, RegionId, Topic, Url } from '@src/types'
 import { EntryView } from '@src/presenters/EntryView'
 import { useTranslation } from '@src/context/LanguageContext'
+import * as Icon from '@src/components/Icons'
 
 const makeTranslatedUrl = (url: string, lang: string) => {
   return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
@@ -45,6 +46,8 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
     showSearchSnippet,
     topic
   ])
+  const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
+  const renderIcon = useCallback(() => (entry.flags.useful ? <Icon.Useful /> : <Icon.Default />), [entry.flags.useful])
 
   return (
     <EntryView
@@ -53,9 +56,11 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
       altUrl={alt}
       date={date}
       sourceName={entry.domainLabel}
-      sourceUrl={''}
+      sourceUrl={entry.domainUrl}
       snippet={snippet}
       country={countryDisplayName}
+      renderIcon={renderIcon}
+      mark={aboutRumor}
     />
   )
 }
