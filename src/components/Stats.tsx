@@ -18,7 +18,7 @@ function numberWithPlusMinus(num: number) {
 export const Stats: React.FC<{ stats: RegionStats }> = ({ stats }) => {
   const { t } = useTranslation()
   return (
-    <span>
+    <span className="text-muted">
       {t('感染者')}: {stats.confirmTotal.toLocaleString()} ({numberWithPlusMinus(stats.confirmToday)}) / {t('死亡者')}:{' '}
       {stats.deathTotal.toLocaleString()} ({numberWithPlusMinus(stats.deathToday)})
     </span>

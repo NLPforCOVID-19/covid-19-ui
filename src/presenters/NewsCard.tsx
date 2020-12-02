@@ -51,12 +51,12 @@ export const NewsCard: React.FC<Props> = (props) => {
             {title}
           </a>
         </div>
-        {renderSubInfo && <div>{renderSubInfo()}</div>}
+        {renderSubInfo && <div className="small text-muted">{renderSubInfo()}</div>}
         <div className="scroll" ref={infiniteScrollWrapRef}>
-          {entryIds.length === 0 && noMore && <div className="text-muted">{t('no_info')}</div>}
+          {entryIds.length === 0 && noMore && <div className="text-muted text-center p-2">{t('no_info')}</div>}
           {entryIds.map(renderEntry)}
           {loading && (
-            <div className="text-center">
+            <div className="text-center p-2">
               <Loading />
             </div>
           )}
@@ -73,10 +73,7 @@ export const NewsCard: React.FC<Props> = (props) => {
           font-size: 1.3rem;
         }
         .scroll {
-          display: flex;
-          flex-flow: column nowrap;
           overflow-y: auto;
-          margin: auto;
         }
       `}</style>
     </Col>

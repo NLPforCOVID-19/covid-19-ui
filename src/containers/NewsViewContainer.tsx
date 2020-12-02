@@ -13,6 +13,7 @@ import { TopicSearchForm } from '@src/components/TopicSearchForm'
 import { searchForAllRegion } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { selectCurrentQuery } from '@src/redux/search'
+import IndicatorLegends from '@src/components/IndicatorLegends'
 
 export const NewsViewContainer = () => {
   const { lang } = useTranslation()
@@ -51,8 +52,17 @@ export const NewsViewContainer = () => {
   if (viewMode === 'region') {
     return (
       <Container>
-        <Tabs choices={regionNames} active={regions.byId[activeRegion].name} onChange={handleChangeRegion} />
-        <Stats stats={regions.byId[activeRegion].stats} />
+        <Row>
+          <IndicatorLegends />
+        </Row>
+        <Row>
+          <Tabs choices={regionNames} active={regions.byId[activeRegion].name} onChange={handleChangeRegion} />
+        </Row>
+        <Row>
+          <div className="text-muted">
+            <Stats stats={regions.byId[activeRegion].stats} />
+          </div>
+        </Row>
         <Row>
           {topics.map((t) => (
             <CardContainer key={t} region={activeRegion} topic={t} />
@@ -64,8 +74,13 @@ export const NewsViewContainer = () => {
   if (viewMode === 'topic') {
     return (
       <Container>
-        <Tabs choices={topics} active={activeTopic} onChange={handleChangeTopic} />
-        <TopicSearchForm onFocus={handleFocusToSearchForm} onSubmit={handleSearch} />
+        <Row>
+          <IndicatorLegends />
+        </Row>
+        <Row>
+          <Tabs choices={topics} active={activeTopic} onChange={handleChangeTopic} />
+          <TopicSearchForm onFocus={handleFocusToSearchForm} onSubmit={handleSearch} />
+        </Row>
         <Row>
           {regions.allIds.map((regionId) => (
             <CardContainer key={regionId} region={regionId} topic={activeTopic} />
