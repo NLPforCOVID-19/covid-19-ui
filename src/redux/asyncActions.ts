@@ -1,34 +1,10 @@
-import { createAsyncThunk, createSelector } from '@reduxjs/toolkit'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import * as API from '../api'
 
 import { RootState } from '@src/redux/index'
-import { Entry, Lang, RegionId, Topic } from '@src/types'
-import { ViewMode } from '@src/redux/ui'
-
-const entriesNumSelector = createSelector(
-  (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
-    state.entriesByRegionTopic[region][topic].entries,
-  (entries) => entries.length
-)
-
-export const createNewsViewHash = createSelector(
-  [
-    (state: RootState) => state.ui.viewMode,
-    (state: RootState) => state.regionsTopics.activeRegion,
-    (state: RootState) => state.regionsTopics.activeTopic
-  ],
-  (mode, region, topic) => {
-    switch (mode) {
-      case 'region':
-        return `#r/${region}`
-      case 'topic':
-        return `#t/${topic}`
-      default:
-        return ''
-    }
-  }
-)
+import { Entry, Lang, RegionId, Topic, ViewMode } from '@src/types'
+import { entriesNumSelector } from '@src/redux/globalSelectors'
 
 const parseHashToViewState = (hash: string): { mode: ViewMode; target: string } => {
   // #r/jp -> ['r', 'jp']
@@ -41,6 +17,8 @@ const parseHashToViewState = (hash: string): { mode: ViewMode; target: string } 
       return { mode: 'region', target }
     case 't':
       return { mode: 'topic', target }
+    default:
+      return { mode: 'neutral', target: '' }
   }
 }
 
@@ -66,5 +44,13 @@ export const loadMore = createAsyncThunk<Entry[], { region: RegionId; topic: Top
   async ({ region, topic, lang }, ThunkAPI) => {
     const offset = entriesNumSelector(ThunkAPI.getState(), { region, topic })
     return API.fetchNewsByClassAndCountry(topic, region, offset, 20, lang)
+  }
+)
+
+export const searchForAllRegion = createAsyncThunk(
+  'searchForAllRegion',
+  async (args: { lang: Lang; query: string }) => {
+    const { lang, query } = args
+    return API.searchNews(lang, query)
   }
 )

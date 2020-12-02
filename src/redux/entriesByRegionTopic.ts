@@ -1,13 +1,12 @@
-import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { Url, RegionId, Topic } from '@src/types'
-import { RootState } from '@src/redux/index'
 
 import { fetchMetaAndFirstEntries, loadMore } from './asyncActions'
 
 interface StateForEachRegionTopic {
   entries: Url[]
-  isNoMore: boolean
+  noMore: boolean
   loading: boolean
 }
 
@@ -20,7 +19,7 @@ const createInitialStateForEachRegionTopic = (prev: State, region: RegionId, top
   if (!prev[region][topic]) {
     prev[region][topic] = {
       entries: [],
-      isNoMore: false,
+      noMore: false,
       loading: false
     }
   }
@@ -28,32 +27,10 @@ const createInitialStateForEachRegionTopic = (prev: State, region: RegionId, top
 
 const initialState: State = {}
 
-interface LinkEntryPayload {
-  region: RegionId
-  topic: Topic
-  url: Url
-}
-
-interface SetNoMorePayload {
-  region: RegionId
-  topic: Topic
-}
-
 const entriesByRegionTopicSlice = createSlice({
   name: 'entriesByRegionTopic',
   initialState,
-  reducers: {
-    linkEntryToRegionTopic(state, action: PayloadAction<LinkEntryPayload>) {
-      const { region, topic, url } = action.payload
-      createInitialStateForEachRegionTopic(state, region, topic)
-      state[region][topic].entries.push(url)
-    },
-    setNoMoreToTrue(state, action: PayloadAction<SetNoMorePayload>) {
-      const { region, topic } = action.payload
-      createInitialStateForEachRegionTopic(state, region, topic)
-      state[region][topic].isNoMore = true
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loadMore.pending, (state, action) => {
@@ -66,7 +43,7 @@ const entriesByRegionTopicSlice = createSlice({
         const newEntries = action.payload
         state[region][topic].loading = false
         if (newEntries.length === 0) {
-          state[region][topic].isNoMore = true
+          state[region][topic].noMore = true
         }
         state[region][topic].entries.push(...newEntries.map((e) => e.url))
       })
@@ -77,7 +54,7 @@ const entriesByRegionTopicSlice = createSlice({
           for (const topic of topics) {
             state[region.id][topic] = {
               entries: [],
-              isNoMore: false,
+              noMore: false,
               loading: false
             }
           }
@@ -91,18 +68,5 @@ const entriesByRegionTopicSlice = createSlice({
       })
   }
 })
-export const { linkEntryToRegionTopic, setNoMoreToTrue } = entriesByRegionTopicSlice.actions
-
-export const selectEntryIdsForRegionTopic = createSelector(
-  [
-    (state: RootState) => state.entriesByRegionTopic,
-    (state) => state.entries.byUrl,
-    (_, p: { region: RegionId; topic: Topic }) => p.region,
-    (_, p) => p.topic
-  ],
-  (byRegionTopic, entriesByUrl, region, topic) => {
-    return byRegionTopic[region][topic].entries
-  }
-)
 
 export default entriesByRegionTopicSlice.reducer

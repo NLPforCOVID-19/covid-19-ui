@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 import { RootState } from '@src/redux/index'
-
-export type ViewMode = 'topic' | 'region' | 'neutral'
+import { ViewMode } from '@src/types'
 
 interface State {
   viewMode: ViewMode
+  focusedToSearch: boolean
 }
 
-const initialState: State = { viewMode: 'neutral' }
+const initialState: State = { viewMode: 'neutral', focusedToSearch: false }
 
 const uiSlice = createSlice({
   name: 'ui',
@@ -17,6 +17,9 @@ const uiSlice = createSlice({
   reducers: {
     changeViewMode: (state, action: PayloadAction<ViewMode>) => {
       state.viewMode = action.payload
+    },
+    focusToSearch: (state, action: PayloadAction<boolean>) => {
+      state.focusedToSearch = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -27,7 +30,8 @@ const uiSlice = createSlice({
 })
 
 export const selectViewMode = (state: RootState) => state.ui.viewMode
+export const selectFocusedToSearch = (state: RootState) => state.ui.focusedToSearch
 
-export const { changeViewMode } = uiSlice.actions
+export const { changeViewMode, focusToSearch } = uiSlice.actions
 
 export default uiSlice.reducer

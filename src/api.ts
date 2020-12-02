@@ -86,9 +86,9 @@ export async function fetchNewsByClass(klass, limit, lang) {
   return response.data
 }
 
-export async function searchNews(lang, query) {
+export async function searchNews(lang: Lang, query: string): Promise<Record<RegionId, Entry[]>> {
   const path = '/classes/search'
-  const response = await axios.get(baseUrl + path, {
+  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
       start: 0,
       limit: 50,
@@ -96,7 +96,11 @@ export async function searchNews(lang, query) {
       query
     }
   })
-  return response.data
+  const entriesByRegion: Record<RegionId, Entry[]> = {}
+  for (const r of Object.keys(response.data)) {
+    entriesByRegion[r] = response.data[r].map(parseResponseEntry)
+  }
+  return entriesByRegion
 }
 
 export async function searchNewsByRegion(topic, region, lang, query, start) {
@@ -119,26 +123,32 @@ export const fetchEntriesAll = async (lang: Lang): Promise<Record<RegionId, Entr
       lang
     }
   })
-  const entriesByRegion = {}
+  const entriesByRegion: Record<RegionId, Entry[]> = {}
   for (const r of Object.keys(response.data)) {
     entriesByRegion[r] = response.data[r].map(parseResponseEntry)
   }
   return entriesByRegion
 }
 
-export async function fetchNewsByClassAndCountry(klass, country, offset, limit, lang: Lang): Promise<Entry[]> {
+export async function fetchNewsByClassAndCountry(
+  klass: Topic,
+  country: RegionId,
+  offset: number,
+  limit: number,
+  lang: Lang
+): Promise<Entry[]> {
   const path = `/classes/${klass}/${country}`
   const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
     params: {
       start: offset,
-      limit: limit || 10,
+      limit: limit,
       lang: lang
     }
   })
   return response.data.map(parseResponseEntry)
 }
 
-export async function fetchMeta(lang): Promise<{ regions: Region[]; topics: string[] }> {
+export async function fetchMeta(lang: Lang): Promise<{ regions: Region[]; topics: string[] }> {
   const path = '/meta'
   const response = await axios.get<{ countries: ResponseRegion[]; topics: string[] }>(baseUrl + path, {
     params: {
@@ -173,7 +183,7 @@ export async function modifyRegionCategory(
   return axios.post(baseUrl + path, data)
 }
 
-export async function fetchHistory(url) {
+export async function fetchHistory(url: string) {
   const path = '/history'
   const response = await axios.get(baseUrl + path, {
     params: {

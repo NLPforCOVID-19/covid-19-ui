@@ -35,3 +35,5 @@ export interface Region {
   sourceUrls: string[]
   stats: RegionStats
 }
+
+export type ViewMode = 'topic' | 'region' | 'neutral'

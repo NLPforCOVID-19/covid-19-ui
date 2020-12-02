@@ -1,20 +1,26 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 import { useTranslation } from '../context/LanguageContext'
 
-export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, onSubmit }) {
+interface Props {
+  onFocus: () => void
+  onSubmit: (q: string) => void
+}
+
+export const TopicSearchForm: React.FC<Props> = ({ onFocus, onSubmit }) => {
   const { t } = useTranslation()
-  const [query, setQuery] = React.useState('')
-  const handleChangeQuery = React.useCallback((e) => {
+  const [query, setQuery] = useState('')
+  const handleChangeQuery = useCallback((e) => {
     setQuery(e.target.value)
   }, [])
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     (e) => {
       e.preventDefault()
       onSubmit(query)
     },
-    [query]
+    [query, onSubmit]
   )
   return (
     <Form inline onSubmit={handleSubmit} className="mb-2">
@@ -32,4 +38,4 @@ export const TopicSearchForm = React.memo(function TopicSearchForm({ onFocus, on
       </Button>
     </Form>
   )
-})
+}

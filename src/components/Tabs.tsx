@@ -9,7 +9,7 @@ interface Props {
 
 export const Tabs: React.FC<Props> = ({ active, choices, onChange }) => {
   return (
-    <>
+    <div>
       {choices.map((choice, i) => (
         <span key={choice} className="mb-2">
           <Button variant="outline-info" size="sm" active={active === choice} onClick={() => onChange(i)}>
@@ -18,6 +18,6 @@ export const Tabs: React.FC<Props> = ({ active, choices, onChange }) => {
           &thinsp;
         </span>
       ))}
-    </>
+    </div>
   )
 }

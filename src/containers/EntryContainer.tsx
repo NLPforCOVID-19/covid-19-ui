@@ -1,13 +1,14 @@
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
-import { Lang, RegionId, Topic, Url } from '@src/types'
+import { Entry, Lang, RegionId, Topic, Url } from '@src/types'
 import { EntryView } from '@src/presenters/EntryView'
-import { selectEntryByUrl } from '@src/redux/entries'
+// import { selectEntryByUrl } from '@src/redux/entries'
 import { useTranslation } from '@src/context/LanguageContext'
+// import { RootState } from '@src/redux'
 
-const makeTranslatedUrl = (url, lang) => {
+const makeTranslatedUrl = (url: string, lang: string) => {
   return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
 }
 
@@ -27,18 +28,28 @@ const mainAltUrl = (country: string, lang: Lang, url: Url) => {
 }
 
 interface Props {
-  url: Url
+  entry: Entry
+  // url: Url
   topic: Topic
   regionId: RegionId
+  showSearchSnippet: boolean
 }
 
-export const EntryContainer: React.FC<Props> = ({ url, topic, regionId }) => {
+export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSearchSnippet }) => {
   const { lang, t } = useTranslation()
-  const entry = useSelector((s) => selectEntryByUrl(s, url))
-  // const entry: Entry = useMemo(() => entryFactory[url], [entryFactory, url])
+  // const entry = useSelector((s: RootState) => selectEntryByUrl(s, url))
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
   const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
-  const countryDisplayName = useMemo(() => t(entry.country), [entry.country, t])
+  const countryDisplayName = useMemo(() => {
+    if (regionId === entry.country) return
+    return t(entry.country)
+  }, [entry.country, t, regionId])
+  const snippet = useMemo(() => (showSearchSnippet ? 'search' : entry.snippets[topic]), [
+    entry.snippets,
+    showSearchSnippet,
+    topic
+  ])
+
   return (
     <EntryView
       title={entry.title}
@@ -47,8 +58,8 @@ export const EntryContainer: React.FC<Props> = ({ url, topic, regionId }) => {
       date={date}
       sourceName={entry.domainLabel}
       sourceUrl={''}
-      snippet={entry.snippets[topic]}
-      country={entry.country !== regionId ? countryDisplayName : undefined}
+      snippet={snippet}
+      country={countryDisplayName}
     />
   )
 }

@@ -4,12 +4,14 @@ import entriesReducer from './entries'
 import regionsTopicsReducer from './regionsTopics'
 import entriesByRegionTopicReducer from './entriesByRegionTopic'
 import uiReducer from './ui'
+import searchReducer from './search'
 
 const rootReducer = combineReducers({
   entries: entriesReducer,
   regionsTopics: regionsTopicsReducer,
   entriesByRegionTopic: entriesByRegionTopicReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  search: searchReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

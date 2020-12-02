@@ -7,6 +7,7 @@ interface Props {
   title: string
   entryIds: Url[]
   loading: boolean
+  noMore: boolean
   onClickTitle: () => void
   onLoadMore: () => void
   renderEntry: (url: Url) => React.ReactElement
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export const NewsCard: React.FC<Props> = (props) => {
-  const { title, entryIds, loading, onClickTitle, onLoadMore, renderEntry, renderSubInfo } = props
+  const { title, entryIds, loading, onClickTitle, noMore, onLoadMore, renderEntry, renderSubInfo } = props
   const handleClickTitle = useCallback(
     (e) => {
       e.preventDefault()
@@ -33,7 +34,7 @@ export const NewsCard: React.FC<Props> = (props) => {
       <div>
         {entryIds.map(renderEntry)}
         {loading && <div>loading</div>}
-        <button onClick={onLoadMore}>load more</button>
+        {noMore ? <div>No More</div> : <button onClick={onLoadMore}>load more</button>}
       </div>
     </Col>
   )
