@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 
 import { selectActive, selectRegions, selectTopics, setActiveRegion, setActiveTopic } from '@src/redux/regionsTopics'
 import { selectViewMode, focusToSearch } from '@src/redux/ui'
@@ -38,6 +40,7 @@ export const NewsViewContainer = () => {
   const handleFocusToSearchForm = useCallback(() => dispatch(focusToSearch(true)), [dispatch])
   const handleSearch = useCallback(
     (query: string) => {
+      dispatch(focusToSearch(true))
       if (query === currentQuery) return
       dispatch(searchForAllRegion({ lang, query }))
     },
@@ -47,33 +50,33 @@ export const NewsViewContainer = () => {
   const regionNames = useMemo(() => regions.allIds.map((rId) => regions.byId[rId].name), [regions])
   if (viewMode === 'region') {
     return (
-      <div>
+      <Container>
         <Tabs choices={regionNames} active={regions.byId[activeRegion].name} onChange={handleChangeRegion} />
         <Stats stats={regions.byId[activeRegion].stats} />
-        <div>
+        <Row>
           {topics.map((t) => (
             <CardContainer key={t} region={activeRegion} topic={t} />
           ))}
-        </div>
-      </div>
+        </Row>
+      </Container>
     )
   }
   if (viewMode === 'topic') {
     return (
-      <div>
+      <Container>
         <Tabs choices={topics} active={activeTopic} onChange={handleChangeTopic} />
         <TopicSearchForm onFocus={handleFocusToSearchForm} onSubmit={handleSearch} />
-        <div>
+        <Row>
           {regions.allIds.map((regionId) => (
             <CardContainer key={regionId} region={regionId} topic={activeTopic} />
           ))}
-        </div>
-      </div>
+        </Row>
+      </Container>
     )
   }
   return (
-    <div className="text-center">
+    <Container className="text-center">
       <Loading />
-    </div>
+    </Container>
   )
 }

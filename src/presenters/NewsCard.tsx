@@ -1,7 +1,9 @@
 import Col from 'react-bootstrap/Col'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 import { Url } from '@src/types'
+import { Loading } from '@src/components/Loading'
+import { useTranslation } from '@src/context/LanguageContext'
 
 interface Props {
   title: string
@@ -15,6 +17,7 @@ interface Props {
 }
 
 export const NewsCard: React.FC<Props> = (props) => {
+  const { t } = useTranslation()
   const { title, entryIds, loading, onClickTitle, noMore, onLoadMore, renderEntry, renderSubInfo } = props
   const handleClickTitle = useCallback(
     (e) => {
@@ -23,19 +26,59 @@ export const NewsCard: React.FC<Props> = (props) => {
     },
     [onClickTitle]
   )
+
+  const infiniteScrollWrapRef = useRef()
+  const infiniteScrollObserveRef = useRef()
+  useEffect(() => {
+    const observeEl = infiniteScrollObserveRef.current
+    const observer = new IntersectionObserver(
+      (e) => {
+        if (e[0].isIntersecting && !loading && !noMore) {
+          onLoadMore()
+        }
+      },
+      { root: infiniteScrollWrapRef.current }
+    )
+    observer.observe(observeEl)
+    return () => observer.unobserve(observeEl)
+  }, [infiniteScrollWrapRef, infiniteScrollObserveRef, loading, noMore, onLoadMore])
+
   return (
-    <Col>
-      <div>
-        <a href="#" onClick={handleClickTitle}>
-          {title}
-        </a>
+    <Col xl={4} lg={6} className="p-1">
+      <div className="p-2 rounded border wrap">
+        <div className="header">
+          <a href="#" onClick={handleClickTitle}>
+            {title}
+          </a>
+        </div>
+        {renderSubInfo && <div>{renderSubInfo()}</div>}
+        <div className="scroll" ref={infiniteScrollWrapRef}>
+          {entryIds.length === 0 && noMore && <div className="text-muted">{t('no_info')}</div>}
+          {entryIds.map(renderEntry)}
+          {loading && (
+            <div className="text-center">
+              <Loading />
+            </div>
+          )}
+          <div ref={infiniteScrollObserveRef} />
+        </div>
       </div>
-      {renderSubInfo && <div>{renderSubInfo()}</div>}
-      <div>
-        {entryIds.map(renderEntry)}
-        {loading && <div>loading</div>}
-        {noMore ? <div>No More</div> : <button onClick={onLoadMore}>load more</button>}
-      </div>
+      <style jsx>{`
+        .wrap {
+          height: 400px;
+          display: flex;
+          flex-flow: column nowrap;
+        }
+        .header {
+          font-size: 1.3rem;
+        }
+        .scroll {
+          display: flex;
+          flex-flow: column nowrap;
+          overflow-y: auto;
+          margin: auto;
+        }
+      `}</style>
     </Col>
   )
 }
