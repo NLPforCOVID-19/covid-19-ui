@@ -1,10 +1,12 @@
 import { useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Entry, Lang, RegionId, Topic, Url } from '@src/types'
 import { EntryView } from '@src/presenters/EntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
+import { selectEditMode, startEdit } from '@src/redux/ui'
 
 const makeTranslatedUrl = (url: string, lang: string) => {
   return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
@@ -35,6 +37,9 @@ interface Props {
 
 export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSearchSnippet }) => {
   const { lang, t } = useTranslation()
+  const dispatch = useDispatch()
+  const editMode = useSelector(selectEditMode)
+
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
   const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
   const countryDisplayName = useMemo(() => {
@@ -47,7 +52,28 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
     topic
   ])
   const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
-  const renderIcon = useCallback(() => (entry.flags.useful ? <Icon.Useful /> : <Icon.Default />), [entry.flags.useful])
+
+  const handleClickEdit = useCallback(
+    (e) => {
+      e.preventDefault()
+      if (!editMode) return
+      dispatch(startEdit(entry))
+    },
+    [editMode, dispatch, entry]
+  )
+
+  const renderIcon = useCallback(() => {
+    return (
+      <>
+        {entry.flags.useful ? <Icon.Useful /> : <Icon.Default />}
+        {editMode && (
+          <a href="#" onClick={handleClickEdit}>
+            <Icon.Edit />
+          </a>
+        )}
+      </>
+    )
+  }, [entry.flags.useful, editMode, handleClickEdit])
 
   return (
     <EntryView

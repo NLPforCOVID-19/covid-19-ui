@@ -1,6 +1,6 @@
 import { localeList } from './translations'
 
-export function makeTranslatedUrl(url, lang) {
+export function makeTranslatedUrl(url: string, lang: string) {
   return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
 }
 

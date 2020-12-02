@@ -11,6 +11,7 @@ import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 import { createNewsViewHash } from '@src/redux/globalSelectors'
+import { changeEditMode } from '@src/redux/ui'
 
 const Index = () => {
   const { t, lang } = useTranslation()
@@ -39,6 +40,9 @@ const Index = () => {
       location.hash = hash
     }
   }, [hash, initialLoaded])
+  useEffect(() => {
+    dispatch(changeEditMode(false))
+  })
 
   return (
     <Layout>

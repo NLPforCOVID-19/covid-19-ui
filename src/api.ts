@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Entry, Lang, Region, RegionId, Topic } from '@src/types'
+import { Entry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
 
 const baseUrl = process.env.API_URL
 
@@ -38,6 +38,12 @@ interface ResponseEntry {
     title: string
   }
   url: string
+}
+
+interface HistoryResponse {
+  is_checked: ResponseBool
+  notes?: string
+  time?: string
 }
 
 const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
@@ -165,34 +171,38 @@ export async function fetchMeta(lang: Lang): Promise<{ regions: Region[]; topics
 }
 
 export async function modifyRegionCategory(
-  url,
-  { aboutCovid, useful, hidden, aboutRumor, country, topics },
-  notes,
-  password
+  url: string,
+  data: { country: string; topics: Topic[]; flags: EntryFlagsEdit; notes: string; password: string }
 ) {
   const path = '/update'
-  const data = {
-    url: url,
+  const { country, topics, flags, notes, password } = data
+  const postData = {
+    url,
     new_displayed_country: country,
     new_classes: topics,
-    is_hidden: hidden,
-    is_useful: useful,
-    'is_about_COVID-19': aboutCovid,
-    is_about_false_rumor: aboutRumor,
-    notes: notes,
-    password: password
+    is_hidden: flags.hidden,
+    is_useful: flags.useful,
+    'is_about_COVID-19': flags.aboutCovid,
+    is_about_false_rumor: flags.aboutRumor,
+    notes,
+    password
   }
-  return axios.post(baseUrl + path, data)
+  return axios.post(baseUrl + path, postData)
 }
 
-export async function fetchHistory(url: string) {
+export async function fetchHistory(url: string): Promise<EditHistory> {
   const path = '/history'
-  const response = await axios.get(baseUrl + path, {
+  const response = await axios.get<HistoryResponse>(baseUrl + path, {
     params: {
       url
     }
   })
-  return response.data
+  const { is_checked, time, notes } = response.data
+  return {
+    checked: is_checked === 1,
+    timestamp: time ? Date.parse(time) : 0,
+    notes: notes || ''
+  }
 }
 
 export function postFeedback(content) {
