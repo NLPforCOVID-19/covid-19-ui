@@ -1,12 +1,9 @@
-// import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
 import dayjs from 'dayjs'
 
 import { Entry, Lang, RegionId, Topic, Url } from '@src/types'
 import { EntryView } from '@src/presenters/EntryView'
-// import { selectEntryByUrl } from '@src/redux/entries'
 import { useTranslation } from '@src/context/LanguageContext'
-// import { RootState } from '@src/redux'
 
 const makeTranslatedUrl = (url: string, lang: string) => {
   return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
@@ -37,14 +34,13 @@ interface Props {
 
 export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSearchSnippet }) => {
   const { lang, t } = useTranslation()
-  // const entry = useSelector((s: RootState) => selectEntryByUrl(s, url))
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
   const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
   const countryDisplayName = useMemo(() => {
     if (regionId === entry.country) return
     return t(entry.country)
   }, [entry.country, t, regionId])
-  const snippet = useMemo(() => (showSearchSnippet ? 'search' : entry.snippets[topic]), [
+  const snippet = useMemo(() => (showSearchSnippet ? entry.snippets['Search'] : entry.snippets[topic]), [
     entry.snippets,
     showSearchSnippet,
     topic
