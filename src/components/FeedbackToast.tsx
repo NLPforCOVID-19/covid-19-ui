@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Toast from 'react-bootstrap/Toast'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -8,25 +8,34 @@ import { useTranslation } from '../context/LanguageContext'
 
 const feedbackRadioChoices = ['yes', 'no']
 
-export const FeedbackToast = ({ show, onClose }) => {
+interface Props {
+  show: boolean
+  onClose: () => void
+}
+
+export const FeedbackToast: React.FC<Props> = ({ show, onClose }) => {
   const [feedbackContent, setFeedbackContent] = useState('')
   const [feedbackUseful, setFeedbackUseful] = useState('')
   const [submitButtonEnabled, setSubmitButtonEnabled] = useState(true)
   const [showThanks, setShowThanks] = useState(false)
   const { t } = useTranslation()
-  function handleChangeContent(e) {
+  const handleChangeContent = useCallback((e) => {
     setFeedbackContent(e.target.value)
-  }
-  function handleChangeRadio(e) {
+  }, [])
+  const handleChangeRadio = useCallback((e) => {
     setFeedbackUseful(e.target.value)
-  }
-  async function handleSubmit(e) {
-    e.preventDefault()
-    setShowThanks(true)
-    setSubmitButtonEnabled(false)
-    await postFeedback(`useful: ${feedbackUseful}, comment: ${feedbackContent}`).catch()
-    onClose()
-  }
+  }, [])
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault()
+      setShowThanks(true)
+      setSubmitButtonEnabled(false)
+      await postFeedback(`useful: ${feedbackUseful}, comment: ${feedbackContent}`).catch()
+      onClose()
+    },
+    [feedbackContent, feedbackUseful, onClose]
+  )
+
   return (
     <div className="toast-wrap">
       <Toast show={show} onClose={onClose}>
