@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Toast from 'react-bootstrap/Toast'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 import { postFeedback } from '../api'
 import { useTranslation } from '../context/LanguageContext'
 
 const feedbackRadioChoices = ['yes', 'no']
 
 export const FeedbackToast = ({ show, onClose }) => {
-  const [feedbackContent, setFeedbackContent] = React.useState('')
-  const [feedbackUseful, setFeedbackUseful] = React.useState('')
-  const [submitButtonEnabled, setSubmitButtonEnabled] = React.useState(true)
-  const [showThanks, setShowThanks] = React.useState(false)
+  const [feedbackContent, setFeedbackContent] = useState('')
+  const [feedbackUseful, setFeedbackUseful] = useState('')
+  const [submitButtonEnabled, setSubmitButtonEnabled] = useState(true)
+  const [showThanks, setShowThanks] = useState(false)
   const { t } = useTranslation()
   function handleChangeContent(e) {
     setFeedbackContent(e.target.value)
@@ -23,9 +24,7 @@ export const FeedbackToast = ({ show, onClose }) => {
     e.preventDefault()
     setShowThanks(true)
     setSubmitButtonEnabled(false)
-    await postFeedback(`useful: ${feedbackUseful}, comment: ${feedbackContent}`).catch(() => {
-      console.log(e)
-    })
+    await postFeedback(`useful: ${feedbackUseful}, comment: ${feedbackContent}`).catch()
     onClose()
   }
   return (
