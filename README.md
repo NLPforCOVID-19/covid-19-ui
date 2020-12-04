@@ -59,3 +59,8 @@ To build or develop the website, set the following variables.
 #### BASE_URL
 
 To serve the website from a sub directory, `http://example.com/covid-19/`, set `BASE_URL` as `/covid-19`.
+
+## Branching Strategy
+
+- Feature branches are first merged into "staging" (or release, development) branch.
+- Then the staging branch is merged into "master" branch, which is for production release.

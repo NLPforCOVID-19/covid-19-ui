@@ -23,6 +23,7 @@ export const ja = {
   in: 'インド',
   np: 'ネパール',
   my: 'マレーシア',
+  sg: 'シンガポール',
   asia_other: 'アジア (その他)',
   jp: '日本',
   cn: '中国',
