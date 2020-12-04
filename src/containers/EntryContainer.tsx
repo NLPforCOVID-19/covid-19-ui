@@ -7,10 +7,7 @@ import { EntryView } from '@src/presenters/EntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
-
-const makeTranslatedUrl = (url: string, lang: string) => {
-  return `https://translate.google.com/translate?tl=${lang}&u=${escape(url)}`
-}
+import { makeTranslatedUrl } from '@src/utils'
 
 const localeLangMap: Record<string, Lang> = {
   us: 'en',
