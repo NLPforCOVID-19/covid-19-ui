@@ -51,7 +51,7 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
   const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
 
   const handleClickEdit = useCallback(
-    (e) => {
+    (e: React.MouseEvent) => {
       e.preventDefault()
       if (!editMode) return
       dispatch(startEdit(entry))

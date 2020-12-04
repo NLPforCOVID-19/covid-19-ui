@@ -25,14 +25,14 @@ export const NewsViewContainer = () => {
 
   const dispatch = useDispatch()
   const handleChangeTopic = useCallback(
-    (i) => {
+    (i: number) => {
       dispatch(focusToSearch(false))
       dispatch(setActiveTopic(topics[i]))
     },
     [dispatch, topics]
   )
   const handleChangeRegion = useCallback(
-    (i) => {
+    (i: number) => {
       dispatch(focusToSearch(false))
       dispatch(setActiveRegion(regions.allIds[i]))
     },

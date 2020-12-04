@@ -20,15 +20,15 @@ export const NewsCard: React.FC<Props> = (props) => {
   const { t } = useTranslation()
   const { title, entryIds, loading, onClickTitle, noMore, onLoadMore, renderEntry, renderSubInfo } = props
   const handleClickTitle = useCallback(
-    (e) => {
+    (e: React.MouseEvent) => {
       e.preventDefault()
       onClickTitle()
     },
     [onClickTitle]
   )
 
-  const infiniteScrollWrapRef = useRef()
-  const infiniteScrollObserveRef = useRef()
+  const infiniteScrollWrapRef = useRef<HTMLDivElement>(null)
+  const infiniteScrollObserveRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const observeEl = infiniteScrollObserveRef.current
     const observer = new IntersectionObserver(
@@ -39,8 +39,14 @@ export const NewsCard: React.FC<Props> = (props) => {
       },
       { root: infiniteScrollWrapRef.current }
     )
-    observer.observe(observeEl)
-    return () => observer.unobserve(observeEl)
+    if (observeEl) {
+      observer.observe(observeEl)
+    }
+    return () => {
+      if (observeEl) {
+        observer.unobserve(observeEl)
+      }
+    }
   }, [infiniteScrollWrapRef, infiniteScrollObserveRef, loading, noMore, onLoadMore])
 
   return (

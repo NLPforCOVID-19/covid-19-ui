@@ -7,7 +7,9 @@ import Link from 'next/link'
 import { useTranslation } from '../context/LanguageContext'
 import { localeList } from '../translations'
 
-const LangLink = ({ lang, currentLang, className }) => {
+import { Lang } from '@src/types'
+
+const LangLink: React.FC<{ lang: Lang; currentLang: Lang; className: string }> = ({ lang, currentLang, className }) => {
   const displayLanguageNames = {
     en: 'English',
     ja: '日本語'

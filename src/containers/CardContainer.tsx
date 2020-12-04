@@ -44,7 +44,7 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
   }, [dispatch, region, topic, viewMode])
 
   const renderEntry = useCallback(
-    (url) => {
+    (url: string) => {
       return (
         <EntryContainer
           key={url}

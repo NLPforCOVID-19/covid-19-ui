@@ -33,15 +33,16 @@ export const EditModal: React.FC<Props> = (props) => {
   const { t } = useTranslation()
   const topics = useSelector(selectTopics)
   const handleSubmit = useCallback(
-    (e) => {
+    (e: React.FormEvent) => {
       e.preventDefault()
       onSubmit()
     },
     [onSubmit]
   )
   const handleChangeTopic = useCallback(
-    (e) => {
-      dispatch({ type: 'topics', payload: { topic: e.target.name, checked: e.target.checked } })
+    (e: React.FormEvent) => {
+      const t = e.target as HTMLInputElement
+      dispatch({ type: 'topics', payload: { topic: t.name, checked: t.checked } })
     },
     [dispatch]
   )

@@ -12,11 +12,11 @@ interface Props {
 export const TopicSearchForm: React.FC<Props> = ({ onFocus, onSubmit }) => {
   const { t } = useTranslation()
   const [query, setQuery] = useState('')
-  const handleChangeQuery = useCallback((e) => {
-    setQuery(e.target.value)
+  const handleChangeQuery = useCallback((e: React.FormEvent) => {
+    setQuery((e.target as HTMLInputElement).value)
   }, [])
   const handleSubmit = useCallback(
-    (e) => {
+    (e: React.FormEvent) => {
       e.preventDefault()
       onSubmit(query)
     },

@@ -19,14 +19,14 @@ export const FeedbackToast: React.FC<Props> = ({ show, onClose }) => {
   const [submitButtonEnabled, setSubmitButtonEnabled] = useState(true)
   const [showThanks, setShowThanks] = useState(false)
   const { t } = useTranslation()
-  const handleChangeContent = useCallback((e) => {
-    setFeedbackContent(e.target.value)
+  const handleChangeContent = useCallback((e: React.FormEvent) => {
+    setFeedbackContent((e.target as HTMLTextAreaElement).value)
   }, [])
-  const handleChangeRadio = useCallback((e) => {
-    setFeedbackUseful(e.target.value)
+  const handleChangeRadio = useCallback((e: React.FormEvent) => {
+    setFeedbackUseful((e.target as HTMLInputElement).value)
   }, [])
   const handleSubmit = useCallback(
-    async (e) => {
+    async (e: React.FormEvent) => {
       e.preventDefault()
       setShowThanks(true)
       setSubmitButtonEnabled(false)

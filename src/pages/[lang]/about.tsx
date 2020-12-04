@@ -3,10 +3,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import React from 'react'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
 import { Layout } from '@src/components/Layout'
 import { languagePaths } from '@src/utils'
 import { Lang } from '@src/types'
+import { defaultLang } from '@src/translations'
 
 const AboutJp = () => (
   <Container className="p-3 text-dark">
@@ -117,7 +119,10 @@ const ContentTranslations: React.FC<{ lang: Lang }> = ({ lang }) => {
   }
 }
 
-const About = ({ lang }) => {
+interface Props {
+  lang: Lang
+}
+const About: NextPage<Props> = ({ lang }) => {
   return (
     <Layout>
       <ContentTranslations lang={lang} />
@@ -142,9 +147,11 @@ const About = ({ lang }) => {
     </Layout>
   )
 }
-
-export async function getStaticProps(ctx) {
-  const { lang } = ctx.params
+type Query = {
+  lang: Lang
+}
+export const getStaticProps: GetStaticProps<Props, Query> = async (ctx) => {
+  const lang = ctx.params?.lang || defaultLang
   return {
     props: {
       lang
@@ -152,7 +159,7 @@ export async function getStaticProps(ctx) {
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: languagePaths,
     fallback: false
