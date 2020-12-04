@@ -25,6 +25,7 @@ interface Props {
   state: EditFormState
   submitStatus: SubmitState
   dispatch: (a: EditFormAction) => void
+  renderHistory: () => React.ReactElement
 }
 
 export const EditModal: React.FC<Props> = (props) => {
@@ -50,7 +51,7 @@ export const EditModal: React.FC<Props> = (props) => {
         <Modal.Title>地域とカテゴリの修正</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>{props.title}</div>
+        <h4>{props.title}</h4>
         <ul>
           {props.urls.map(({ text, url }) => (
             <li key={url}>
@@ -66,28 +67,32 @@ export const EditModal: React.FC<Props> = (props) => {
             label="COVID-19関連"
             checked={state.flags.aboutCovid}
             onChange={(e) => dispatch({ type: 'aboutCovid', payload: (e.target as HTMLInputElement).checked })}
+            inline
           />
           <Form.Check
             type="checkbox"
             label="特に役に立つ"
             checked={state.flags.useful}
             onChange={(e) => dispatch({ type: 'useful', payload: (e.target as HTMLInputElement).checked })}
+            inline
           />
           <Form.Check
             type="checkbox"
             label="デマに関する情報"
             checked={state.flags.aboutRumor}
             onChange={(e) => dispatch({ type: 'aboutRumor', payload: (e.target as HTMLInputElement).checked })}
+            inline
           />
           <Form.Check
             type="checkbox"
             label="非表示にする"
             checked={state.flags.hidden}
             onChange={(e) => dispatch({ type: 'hidden', payload: (e.target as HTMLInputElement).checked })}
+            inline
           />
         </Form.Group>
         <hr />
-        <div>地域: {t(props.country)}</div>
+        <h5>地域: {t(props.country)}</h5>
         <Form.Group>
           <Form.Label>地域を修正する</Form.Label>
           <Form.Control
@@ -103,7 +108,7 @@ export const EditModal: React.FC<Props> = (props) => {
           </Form.Control>
         </Form.Group>
         <hr />
-        <div>カテゴリ:</div>
+        <h5>カテゴリ:</h5>
         <ul>
           {Object.keys(props.snippets).map((topic) => (
             <li key={topic}>
@@ -115,8 +120,9 @@ export const EditModal: React.FC<Props> = (props) => {
         </ul>
         <Form.Group>
           <Form.Label>カテゴリを修正する</Form.Label>
+          <br />
           {topics.map((t) => (
-            <Form.Check key={t}>
+            <Form.Check key={t} inline>
               <Form.Check.Label>
                 <Form.Check.Input
                   type="checkbox"
@@ -147,23 +153,23 @@ export const EditModal: React.FC<Props> = (props) => {
             onChange={(e) => dispatch({ type: 'password', payload: e.target.value })}
           />
         </Form.Group>
-        {props.submitStatus === 'rejected' && <Alert variant="danger">Failed to modify.</Alert>}
+        <hr />
+        {props.renderHistory()}
       </Modal.Body>
       <Modal.Footer>
-        <div>
-          {props.submitStatus === 'pending' && <Loading />}
-          {props.submitStatus !== 'pending' && (
-            <>
-              <Button variant="secondary" onClick={props.onHide}>
-                キャンセル
-              </Button>
-              &ensp;
-              <Button variant="primary" type="submit">
-                確定
-              </Button>
-            </>
-          )}
-        </div>
+        {props.submitStatus === 'rejected' && <Alert variant="danger">Failed to modify.</Alert>}
+        {props.submitStatus === 'pending' && <Loading />}
+        {props.submitStatus !== 'pending' && (
+          <>
+            <Button variant="secondary" onClick={props.onHide}>
+              キャンセル
+            </Button>
+            &ensp;
+            <Button variant="primary" type="submit">
+              確定
+            </Button>
+          </>
+        )}
       </Modal.Footer>
     </Form>
   )

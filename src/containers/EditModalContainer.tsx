@@ -7,6 +7,7 @@ import { EditModal } from '@src/presenters/EditModal'
 import { fetchHistory, modifyRegionCategory } from '@src/api'
 import { EditHistory, Entry, EntryFlagsEdit, SubmitState, Topic } from '@src/types'
 import { makeTranslatedUrl } from '@src/utils'
+import { EditHistoryView } from '@src/presenters/EditHisoryView'
 
 interface EditHistoryError extends EditHistory {
   state: SubmitState
@@ -109,6 +110,7 @@ export const EditModalContainer: React.FC = () => {
       .then((h) => setHistory({ ...h, state: 'fulfilled' }))
       .catch(() => setHistory((s) => ({ ...s, state: 'rejected' })))
   }, [editEntry])
+  const renderHistory = useCallback(() => <EditHistoryView {...history} />, [history])
 
   const urls = useMemo(() => (editEntry !== null ? makeUrls(editEntry.url) : []), [editEntry])
 
@@ -131,7 +133,7 @@ export const EditModalContainer: React.FC = () => {
   }, [editEntry, formState, handleHide])
 
   return (
-    <Modal show={editEntry !== null} onHide={handleHide}>
+    <Modal show={editEntry !== null} onHide={handleHide} size="lg">
       {editEntry !== null ? (
         <EditModal
           onSubmit={handleSubmit}
@@ -143,6 +145,7 @@ export const EditModalContainer: React.FC = () => {
           state={formState}
           dispatch={dispatchFormState}
           country={editEntry.country}
+          renderHistory={renderHistory}
         />
       ) : null}
     </Modal>
