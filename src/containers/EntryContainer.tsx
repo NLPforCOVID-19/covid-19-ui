@@ -8,6 +8,7 @@ import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
 import { makeTranslatedUrl } from '@src/utils'
+import { selectCurrentQuery } from '@src/redux/search'
 
 const localeLangMap: Record<string, Lang> = {
   us: 'en',
@@ -36,6 +37,7 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
   const { lang, t } = useTranslation()
   const dispatch = useDispatch()
   const editMode = useSelector(selectEditMode)
+  const query = useSelector(selectCurrentQuery)
 
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
   const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
@@ -43,11 +45,29 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
     if (regionId === entry.country) return
     return t(entry.country)
   }, [entry.country, t, regionId])
-  const snippet = useMemo(() => (showSearchSnippet ? entry.snippets['Search'] : entry.snippets[topic]), [
-    entry.snippets,
-    showSearchSnippet,
-    topic
-  ])
+
+  const renderSnippet = useCallback(() => {
+    if (!showSearchSnippet) {
+      return <>{entry.snippets[topic]}</>
+    }
+    return (
+      <>
+        {entry.snippets['Search'].split(query).map((text, i) => (
+          <span key={i}>
+            {i === 0 ? (
+              <>{text}</>
+            ) : (
+              <>
+                <mark>{query}</mark>
+                {text}
+              </>
+            )}
+          </span>
+        ))}
+      </>
+    )
+  }, [entry.snippets, showSearchSnippet, topic, query])
+
   const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
 
   const handleClickEdit = useCallback(
@@ -80,7 +100,7 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
       date={date}
       sourceName={entry.domainLabel}
       sourceUrl={entry.domainUrl}
-      snippet={snippet}
+      renderSnippet={renderSnippet}
       country={countryDisplayName}
       renderIcon={renderIcon}
       mark={aboutRumor}

@@ -9,7 +9,7 @@ interface Props {
   date: string
   sourceName: string
   sourceUrl: string
-  snippet: string
+  renderSnippet: () => React.ReactElement
   altUrl?: string
   mark?: string
   country?: string
@@ -18,7 +18,7 @@ interface Props {
 
 export const EntryView: React.FC<Props> = (props) => {
   const { t } = useTranslation()
-  const { title, mainUrl, date, sourceName, sourceUrl, snippet, altUrl, mark, country, renderIcon } = props
+  const { title, mainUrl, date, sourceName, sourceUrl, renderSnippet, altUrl, mark, country, renderIcon } = props
   return (
     <div className="wrap">
       <div className="icon">{renderIcon()}</div>
@@ -45,7 +45,7 @@ export const EntryView: React.FC<Props> = (props) => {
             {sourceName}
           </a>
         </div>
-        <div className="snippet small text-secondary">{snippet}</div>
+        <div className="snippet small text-secondary">{renderSnippet()}</div>
       </div>
       <style jsx>{`
         .wrap {
