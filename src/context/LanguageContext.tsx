@@ -9,7 +9,7 @@ const LanguageContext = createContext<{ lang: Lang }>({
   lang: defaultLang
 })
 
-export const LanguageProvider = ({ lang, children }) => {
+export const LanguageProvider: React.FC<{ lang: Lang }> = ({ lang, children }) => {
   if (!localeList.includes(lang)) {
     lang = defaultLang
   }
@@ -31,7 +31,7 @@ export function useTranslation() {
   return { t, lang }
 }
 
-export function useLanguageRedirect(path) {
+export function useLanguageRedirect(path: string) {
   const router = useRouter()
   useEffect(() => {
     const acceptLangs = [navigator.language, ...navigator.languages].map((l) => l.split('-')[0])
