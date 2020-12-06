@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
+import Map from '@src/components/Map'
 import { Layout } from '@src/components/Layout'
 import { Description } from '@src/components/Description'
 import { useTranslation } from '@src/context/LanguageContext'
@@ -55,6 +56,7 @@ const Index: NextPage<Props> = () => {
     <Layout>
       <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
+      <Map />
       <NewsViewContainer />
       <Container>
         <div className="small text-right">
