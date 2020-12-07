@@ -13,7 +13,7 @@ module.exports = {
   basePath: process.env.BASE_PATH,
   trailingSlash: true,
   webpack: (config) => {
-    const newConfig = {
+    return {
       ...config,
       resolve: {
         ...config.resolve,
@@ -23,6 +23,5 @@ module.exports = {
         }
       }
     }
-    return newConfig
   }
 }
