@@ -34,11 +34,6 @@ export const EntryView: React.FC<Props> = (props) => {
           <a href={mainUrl} target="_blank" rel="noreferrer" className="text-info">
             &thinsp;{title}
           </a>
-          {altUrl && (
-            <a href={altUrl} target="_blank" rel="noreferrer" title={t('元の言語で表示')}>
-              <Icons.OpenInNew />
-            </a>
-          )}
         </div>
         <div className="source small">
           <a href={sourceUrl} target="_blank" rel="noreferrer" className="text-muted">
@@ -47,6 +42,14 @@ export const EntryView: React.FC<Props> = (props) => {
         </div>
         <div className="snippet small text-secondary">{renderSnippet()}</div>
       </div>
+      <div className="spacer" />
+      {altUrl && (
+        <div>
+          <a href={altUrl} target="_blank" rel="noreferrer" title={t('元の言語で表示')}>
+            <Icons.OpenInNew />
+          </a>
+        </div>
+      )}
       <style jsx>{`
         .wrap {
           display: flex;
@@ -55,6 +58,9 @@ export const EntryView: React.FC<Props> = (props) => {
         .icon {
           flex: 0 0 16px;
           margin-right: 3px;
+        }
+        .spacer {
+          flex: 1 0 auto;
         }
         .title {
           display: -webkit-box;
