@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 
 import { RootState } from '@src/redux/index'
-import { RegionId, Topic } from '@src/types'
+import { Entry, EntryForMap, RegionId, Topic } from '@src/types'
 
 export const entriesNumSelector = createSelector(
   (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
@@ -58,5 +58,26 @@ export const selectLoadingNoMoreForRegionTopicSearch = createSelector(
   (byRT, searchByR, focus, r, t) => {
     const { loading, noMore } = focus ? searchByR[r] : byRT[r][t]
     return { loading, noMore }
+  }
+)
+
+const entryToMapEntry = (entry: Entry): EntryForMap => {
+  return {
+    url: entry.url,
+    title: entry.title,
+    position: {
+      lat: 36,
+      lng: 140
+    }
+  }
+}
+
+export const selectEntriesForMap = createSelector(
+  [(s: RootState) => s.entriesByRegionTopic, (s: RootState) => s.entries.byUrl],
+  (regionTopic, byUrl) => {
+    if (!regionTopic['jp']) return []
+    if (!regionTopic['jp']['感染状況']) return []
+    const ids = regionTopic['jp']['感染状況'].entries
+    return ids.slice(0, 1).map((id) => entryToMapEntry(byUrl[id]))
   }
 )
