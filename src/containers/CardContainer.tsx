@@ -29,8 +29,9 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
   )
 
   const handleLoadMore = useCallback(() => {
+    if (focusedToSearch) return
     dispatch(loadMore({ region, topic, lang }))
-  }, [region, topic, dispatch, lang])
+  }, [region, topic, dispatch, lang, focusedToSearch])
 
   const handleClickTitle = useCallback(() => {
     dispatch(focusToSearch(false))
