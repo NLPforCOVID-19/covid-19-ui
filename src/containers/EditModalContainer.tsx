@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal'
 import { cancelEdit, selectEditEntry } from '@src/redux/ui'
 import { EditModal } from '@src/presenters/EditModal'
 import { fetchHistory, modifyRegionCategory } from '@src/api'
-import { EditHistory, Entry, EntryFlagsEdit, SubmitState, Topic } from '@src/types'
+import { EditHistory, Entry, EntryFlagsEdit, EntryWithSearchSnippet, SubmitState, Topic } from '@src/types'
 import { makeTranslatedUrl } from '@src/utils'
 import { EditHistoryView } from '@src/presenters/EditHisoryView'
 
@@ -26,9 +26,9 @@ export type EditFormAction =
   | { type: keyof EntryFlagsEdit; payload: boolean }
   | { type: 'country'; payload: string }
   | { type: 'topics'; payload: { topic: Topic; checked: boolean } }
-  | { type: 'reset'; payload: Entry | null }
+  | { type: 'reset'; payload: Entry | EntryWithSearchSnippet | null }
 
-const initializeFormState = (e: Entry | null): EditFormState => {
+const initializeFormState = (e: Entry | EntryWithSearchSnippet | null): EditFormState => {
   const state: EditFormState = {
     password: '',
     notes: '',

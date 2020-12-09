@@ -46,17 +46,9 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
 
   const renderEntry = useCallback(
     (url: string) => {
-      return (
-        <EntryContainer
-          key={url}
-          entry={byId[url]}
-          regionId={region}
-          topic={topic}
-          showSearchSnippet={focusedToSearch}
-        />
-      )
+      return <EntryContainer key={url} entry={byId[url]} regionId={region} topic={topic} />
     },
-    [region, topic, focusedToSearch, byId]
+    [region, topic, byId]
   )
 
   const renderStats = useCallback(() => {
