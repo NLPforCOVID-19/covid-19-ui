@@ -9,6 +9,7 @@ import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
 import { makeTranslatedUrl } from '@src/utils'
 import { selectCurrentQuery } from '@src/redux/search'
+import { SnippetHighlighter } from '@src/presenters/SnippetHighlighter'
 
 const localeLangMap: Record<string, Lang> = {
   us: 'en',
@@ -47,25 +48,11 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
   }, [entry.country, t, regionId])
 
   const renderSnippet = useCallback(() => {
+    const snippet = entry.snippets[topic] || ''
     if (!showSearchSnippet) {
-      return <>{entry.snippets[topic]}</>
+      return <>{snippet}</>
     }
-    return (
-      <>
-        {entry.snippets['Search'].split(query).map((text, i) => (
-          <span key={i}>
-            {i === 0 ? (
-              <>{text}</>
-            ) : (
-              <>
-                <mark>{query}</mark>
-                {text}
-              </>
-            )}
-          </span>
-        ))}
-      </>
-    )
+    return <SnippetHighlighter snippet={snippet} query={query} />
   }, [entry.snippets, showSearchSnippet, topic, query])
 
   const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
