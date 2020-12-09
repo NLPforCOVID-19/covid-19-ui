@@ -48,11 +48,10 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
   }, [entry.country, t, regionId])
 
   const renderSnippet = useCallback(() => {
-    const snippet = entry.snippets[topic] || ''
     if (!showSearchSnippet) {
-      return <>{snippet}</>
+      return <>{entry.snippets[topic]}</>
     }
-    return <SnippetHighlighter snippet={snippet} query={query} />
+    return <SnippetHighlighter snippet={entry.snippets['Search']} query={query} />
   }, [entry.snippets, showSearchSnippet, topic, query])
 
   const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
