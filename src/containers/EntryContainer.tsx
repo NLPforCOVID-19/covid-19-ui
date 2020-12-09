@@ -8,7 +8,7 @@ import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
 import { makeTranslatedUrl } from '@src/utils'
-import { SnippetHighlighter } from '@src/presenters/SnippetHighlighter'
+import { SnippetTagRenderer } from '@src/presenters/SnippetTagRenderer'
 
 const localeLangMap: Record<string, Lang> = {
   us: 'en',
@@ -48,7 +48,13 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId }) => {
       return <>{entry.snippets[topic]}</>
     }
     if (entry.kind === 'EntryWithSearchSnippet') {
-      return <SnippetHighlighter snippet={entry.searchSnippet} />
+      return (
+        <>
+          {entry.searchSnippet.map((tag, i) => (
+            <SnippetTagRenderer key={i} tag={tag} />
+          ))}
+        </>
+      )
     }
     return entry
   }, [topic, entry])

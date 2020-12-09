@@ -1,13 +1,6 @@
 import { TagForSearchSnippet } from '@src/types'
 
-interface Props {
-  /**
-   * snippet: text includes <em> tags
-   */
-  snippet: TagForSearchSnippet[]
-}
-
-const TagRenderer: React.FC<{ tag: TagForSearchSnippet }> = ({ tag }) => {
+export const SnippetTagRenderer: React.FC<{ tag: TagForSearchSnippet }> = ({ tag }) => {
   switch (tag.type) {
     case 'exact-match':
       return (
@@ -26,14 +19,4 @@ const TagRenderer: React.FC<{ tag: TagForSearchSnippet }> = ({ tag }) => {
     default:
       return <>{tag.content}</>
   }
-}
-
-export const SnippetHighlighter: React.FC<Props> = ({ snippet }) => {
-  return (
-    <>
-      {snippet.map((tag, i) => (
-        <TagRenderer key={i} tag={tag} />
-      ))}
-    </>
-  )
 }
