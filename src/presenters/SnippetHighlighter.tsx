@@ -1,59 +1,13 @@
-import { useMemo } from 'react'
-
-interface Tag {
-  type: 'text' | 'match' | 'exact-match'
-  content: string
-}
-const parseTextWithTags = (text: string): Tag[] => {
-  const result: Tag[] = []
-  const [firstText, ...afterEmBeginTags] = text.split('<em>')
-  if (firstText.length > 0) {
-    result.push({ type: 'text', content: firstText })
-  }
-  for (const afterEmBeginTag of afterEmBeginTags) {
-    const [emTagTextContent, textOutOfEmTag] = afterEmBeginTag.split('</em>')
-    result.push({ type: 'match', content: emTagTextContent })
-    if (textOutOfEmTag.length > 0) {
-      result.push({ type: 'text', content: textOutOfEmTag })
-    }
-  }
-  console.log(text, result)
-  return result
-}
-
-const findExactMatch = (tags: Tag[], query: string): Tag[] => {
-  const result = [] as Tag[]
-  let buffer = [] as Tag[]
-  for (const tag of tags) {
-    switch (tag.type) {
-      case 'match': {
-        buffer.push(tag)
-        const joined = buffer.map((tag) => tag.content).join('')
-        if (joined === query) {
-          result.push({ type: 'exact-match', content: query })
-          buffer = []
-        }
-        break
-      }
-      case 'text':
-      default:
-        result.push(...buffer, tag)
-        buffer = []
-        break
-    }
-  }
-  return result
-}
+import { TagForSearchSnippet } from '@src/types'
 
 interface Props {
   /**
    * snippet: text includes <em> tags
    */
-  snippet: string
-  query: string
+  snippet: TagForSearchSnippet[]
 }
 
-const TagRenderer: React.FC<{ tag: Tag }> = ({ tag }) => {
+const TagRenderer: React.FC<{ tag: TagForSearchSnippet }> = ({ tag }) => {
   switch (tag.type) {
     case 'exact-match':
       return (
@@ -74,13 +28,10 @@ const TagRenderer: React.FC<{ tag: Tag }> = ({ tag }) => {
   }
 }
 
-export const SnippetHighlighter: React.FC<Props> = ({ snippet, query }) => {
-  const parsedSnippet = useMemo(() => {
-    return findExactMatch(parseTextWithTags(snippet), query)
-  }, [snippet, query])
+export const SnippetHighlighter: React.FC<Props> = ({ snippet }) => {
   return (
     <>
-      {parsedSnippet.map((tag, i) => (
+      {snippet.map((tag, i) => (
         <TagRenderer key={i} tag={tag} />
       ))}
     </>

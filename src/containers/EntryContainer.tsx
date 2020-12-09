@@ -2,13 +2,12 @@ import { useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Entry, Lang, RegionId, Topic, Url } from '@src/types'
+import { Entry, EntryWithSearchSnippet, Lang, RegionId, Topic, Url } from '@src/types'
 import { EntryView } from '@src/presenters/EntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
 import { makeTranslatedUrl } from '@src/utils'
-import { selectCurrentQuery } from '@src/redux/search'
 import { SnippetHighlighter } from '@src/presenters/SnippetHighlighter'
 
 const localeLangMap: Record<string, Lang> = {
@@ -27,18 +26,15 @@ const mainAltUrl = (country: string, lang: Lang, url: Url) => {
 }
 
 interface Props {
-  entry: Entry
-  // url: Url
+  entry: EntryWithSearchSnippet | Entry
   topic: Topic
   regionId: RegionId
-  showSearchSnippet: boolean
 }
 
-export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSearchSnippet }) => {
+export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId }) => {
   const { lang, t } = useTranslation()
   const dispatch = useDispatch()
   const editMode = useSelector(selectEditMode)
-  const query = useSelector(selectCurrentQuery)
 
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
   const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
@@ -48,11 +44,14 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId, showSe
   }, [entry.country, t, regionId])
 
   const renderSnippet = useCallback(() => {
-    if (!showSearchSnippet) {
+    if (entry.kind === 'Entry') {
       return <>{entry.snippets[topic]}</>
     }
-    return <SnippetHighlighter snippet={entry.snippets['Search']} query={query} />
-  }, [entry.snippets, showSearchSnippet, topic, query])
+    if (entry.kind === 'EntryWithSearchSnippet') {
+      return <SnippetHighlighter snippet={entry.searchSnippet} />
+    }
+    return entry
+  }, [topic, entry])
 
   const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
 
