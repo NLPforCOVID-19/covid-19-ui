@@ -17,7 +17,7 @@ jobs:
           node-version: '12'
       - name: Build Project
         env:
-          API_URL: ${{ secrets.API_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
           GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
         run: |
           npm ci
