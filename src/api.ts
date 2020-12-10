@@ -52,6 +52,7 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     snippets[topic.name] = topic.snippet
   }
   return {
+    kind: 'Entry',
     url: responseEntry.url,
     country: responseEntry.displayed_country,
     title: responseEntry.translated.title,
