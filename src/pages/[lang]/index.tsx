@@ -54,6 +54,9 @@ const Index: NextPage<Props> = () => {
 
   return (
     <Layout>
+      <Head>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
+      </Head>
       <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
       <Map />
