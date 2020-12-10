@@ -18,7 +18,7 @@ jobs:
       - name: Build Project
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
-          NEXT_PUBLIC_GA_TRACKING_ID: ''
+          NEXT_PUBLIC_GA_ID: ''
         run: |
           npm ci
           npm run build
