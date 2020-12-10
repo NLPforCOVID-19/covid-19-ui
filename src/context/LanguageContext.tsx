@@ -21,7 +21,6 @@ export function useTranslation() {
   const { lang } = useContext(LanguageContext)
   function t(key: string) {
     if (typeof translations[lang][key] === 'undefined') {
-      console.warn(`Translation not found. lang: ${lang}, key: ${key}`)
       if (typeof translations[defaultLang][key] === 'undefined') {
         throw new Error(`Unknown translation key: ${key}`)
       }

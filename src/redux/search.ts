@@ -17,7 +17,6 @@ const parseTextWithTags = (text: string): TagForSearchSnippet[] => {
       result.push({ type: 'text', content: textOutOfEmTag })
     }
   }
-  console.log(text, result)
   return result
 }
 
