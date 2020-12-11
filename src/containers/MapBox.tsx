@@ -31,6 +31,11 @@ export const MapBox = () => {
           <EntriesPopup key={countryId} countryId={countryId} entryIds={byId[countryId]} />
         ))}
       </ReactMapGL>
+      <div className="text-right small text-muted">
+        Coordinates of cities are taken from{' '}
+        <a href="https://simplemaps.com/data/world-cities">World Cities Database</a> (
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>)
+      </div>
     </Container>
   )
 }
