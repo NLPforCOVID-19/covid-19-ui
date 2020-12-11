@@ -24,7 +24,7 @@ export const MapBox = () => {
         width="100%"
         height="400px"
         mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-        mapStyle="mapbox://styles/mapbox/dark-v10"
+        mapStyle="mapbox://styles/mapbox/streets-v11"
         onViewStateChange={handleViewStateChange}
       >
         {allIds.map((countryId) => (
