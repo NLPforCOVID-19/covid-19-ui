@@ -74,17 +74,20 @@ export const selectEntriesForMap = createSelector(
     switch (viewMode) {
       case 'region':
         for (const topic of regionsTopics.topics.allIds) {
-          const idsForRT = regionTopic[activeRegion][topic].entries.slice(0, 10)
+          const idsForRT = regionTopic[activeRegion][topic].entries
+          let cnt = 0
           for (const id of idsForRT) {
+            if (cnt >= 2) break
             if (!ids.includes(id)) {
               ids.push(id)
+              cnt += 1
             }
           }
         }
         break
       case 'topic':
         for (const regionId of regionsTopics.regions.allIds) {
-          const idsForRT = regionTopic[regionId][activeTopic].entries.slice(0, 10)
+          const idsForRT = regionTopic[regionId][activeTopic].entries
           ids.push(...idsForRT)
         }
         break
@@ -99,6 +102,7 @@ export const selectEntriesForMap = createSelector(
       if (!byCountryId[entry.country]) {
         byCountryId[entry.country] = []
       }
+      if (byCountryId[entry.country].length >= 5) continue
       byCountryId[entry.country].push(entry.url)
     }
     return {
