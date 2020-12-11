@@ -15,7 +15,7 @@ Router.events.on('routeChangeComplete', (url) => {
   if (typeof window.gtag === 'undefined') {
     return
   }
-  window.gtag('config', process.env.GA_TRACKING_ID, {
+  window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
     page_location: url
   })
 })
