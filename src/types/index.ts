@@ -89,14 +89,3 @@ export interface EditHistory {
 }
 
 export type SubmitState = 'pending' | 'fulfilled' | 'rejected'
-
-export interface LatLng {
-  lat: number
-  lng: number
-}
-
-export interface EntryForMap {
-  url: string
-  title: string
-  position: LatLng
-}

@@ -2,28 +2,13 @@ import { useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Entry, EntryWithSearchSnippet, Lang, RegionId, Topic, Url } from '@src/types'
+import { Entry, EntryWithSearchSnippet, RegionId, Topic } from '@src/types'
 import { EntryView } from '@src/presenters/EntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
-import { makeTranslatedUrl } from '@src/utils'
+import { mainAltUrl } from '@src/utils'
 import { SnippetTagRenderer } from '@src/presenters/SnippetTagRenderer'
-
-const localeLangMap: Record<string, Lang> = {
-  us: 'en',
-  jp: 'ja'
-}
-
-const mainAltUrl = (country: string, lang: Lang, url: Url) => {
-  if (localeLangMap[country] === lang) {
-    return { main: url }
-  }
-  return {
-    main: makeTranslatedUrl(url, lang),
-    alt: url
-  }
-}
 
 interface Props {
   entry: EntryWithSearchSnippet | Entry
