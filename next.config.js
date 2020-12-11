@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  basePath: process.env.BASE_PATH,
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   trailingSlash: true,
   webpack: (config) => {
     return {

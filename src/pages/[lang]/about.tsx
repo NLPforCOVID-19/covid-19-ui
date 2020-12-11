@@ -27,7 +27,11 @@ const AboutJp = () => (
               カテゴリは「感染状況」「予防・緊急事態宣言」などの6つです。
               カテゴリはまず自動で分類し、順次、人手で検証しています。また、役立つ記事かどうかも人手で判断しています。
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view.png`} alt="カテゴリビュー" />
+            <Card.Img
+              variant="top"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/topic-view.png`}
+              alt="カテゴリビュー"
+            />
           </Card.Body>
         </Card>
       </Col>
@@ -39,7 +43,11 @@ const AboutJp = () => (
               地域名をクリックすると、地域別の表示に切り替わります。この表示では地域ごとに全カテゴリの情報を一覧できます。
               カテゴリ名をクリックするとカテゴリビューに戻ります。
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view.png`} alt="地域ビュー" />
+            <Card.Img
+              variant="top"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/region-view.png`}
+              alt="地域ビュー"
+            />
           </Card.Body>
         </Card>
       </Col>
@@ -75,7 +83,11 @@ const AboutEn = () => (
               &quot;Prevention and mitigation measures&quot; with the tabs above. Articles are categorized automatically
               at first, then sequentially verified manually. In addition, articles are evaluated and tagged as useful.
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/topic-view_en.png`} alt="category view" />
+            <Card.Img
+              variant="top"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/topic-view_en.png`}
+              alt="category view"
+            />
           </Card.Body>
         </Card>
       </Col>
@@ -87,7 +99,11 @@ const AboutEn = () => (
               Clicking on a region name will switch to a region-by-region view. In this view, you can list all
               categories of articles for the region.
             </Card.Text>
-            <Card.Img variant="top" src={`${process.env.BASE_PATH}/images/region-view_en.png`} alt="region view" />
+            <Card.Img
+              variant="top"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/region-view_en.png`}
+              alt="region view"
+            />
           </Card.Body>
         </Card>
       </Col>

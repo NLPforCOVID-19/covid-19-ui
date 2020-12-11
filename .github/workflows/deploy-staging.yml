@@ -7,8 +7,6 @@ on:
 
 jobs:
   deploy:
-    env:
-      BASE_PATH: ${{ secrets.BASE_PATH_STAGING }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +15,7 @@ jobs:
           node-version: '12'
       - name: Build Project
         env:
+          NEXT_PUBLIC_BASE_PATH: ${{ secrets.BASE_PATH_STAGING }}
           NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
           NEXT_PUBLIC_GA_ID: ''
         run: |
