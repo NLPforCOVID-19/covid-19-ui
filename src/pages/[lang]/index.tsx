@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import Head from 'next/head'
 
-import Map from '@src/components/Map'
 import { Layout } from '@src/components/Layout'
 import { Description } from '@src/components/Description'
 import { useTranslation } from '@src/context/LanguageContext'
@@ -16,6 +16,7 @@ import { createNewsViewHash } from '@src/redux/globalSelectors'
 import { changeEditMode } from '@src/redux/ui'
 import { Lang } from '@src/types'
 import { defaultLang } from '@src/translations'
+import { MapBox } from '@src/containers/MapBox'
 
 interface Props {
   lang: Lang
@@ -59,7 +60,7 @@ const Index: NextPage<Props> = () => {
       </Head>
       <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
-      <Map />
+      <MapBox />
       <NewsViewContainer />
       <Container>
         <div className="small text-right">
