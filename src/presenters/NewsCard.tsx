@@ -66,7 +66,7 @@ export const NewsCard: React.FC<Props> = (props) => {
               <Loading />
             </div>
           )}
-          <div ref={infiniteScrollObserveRef} />
+          <div ref={infiniteScrollObserveRef} className="scroll-observe" />
         </div>
       </div>
       <style jsx>{`
@@ -80,6 +80,9 @@ export const NewsCard: React.FC<Props> = (props) => {
         }
         .scroll {
           overflow-y: auto;
+        }
+        .scroll-observe {
+          height: 1px;
         }
       `}</style>
     </Col>
