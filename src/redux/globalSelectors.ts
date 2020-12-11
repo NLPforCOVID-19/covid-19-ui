@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 
 import { RootState } from '@src/redux/index'
-import { Entry, EntryForMap, RegionId, Topic } from '@src/types'
+import { RegionId, Topic, Url, ViewMode } from '@src/types'
 
 export const entriesNumSelector = createSelector(
   (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
@@ -61,23 +61,49 @@ export const selectLoadingNoMoreForRegionTopicSearch = createSelector(
   }
 )
 
-const entryToMapEntry = (entry: Entry): EntryForMap => {
-  return {
-    url: entry.url,
-    title: entry.title,
-    position: {
-      lat: 36,
-      lng: 140
-    }
-  }
-}
-
 export const selectEntriesForMap = createSelector(
-  [(s: RootState) => s.entriesByRegionTopic, (s: RootState) => s.entries.byUrl],
-  (regionTopic, byUrl) => {
-    if (!regionTopic['jp']) return []
-    if (!regionTopic['jp']['感染状況']) return []
-    const ids = regionTopic['jp']['感染状況'].entries
-    return ids.slice(0, 1).map((id) => entryToMapEntry(byUrl[id]))
+  [
+    (s: RootState) => s.entriesByRegionTopic,
+    (s: RootState) => s.entries.byUrl,
+    (s: RootState) => s.ui.viewMode,
+    (s: RootState) => s.regionsTopics
+  ],
+  (regionTopic, byUrl, viewMode: ViewMode, regionsTopics) => {
+    const { activeRegion, activeTopic } = regionsTopics
+    const ids: Url[] = []
+    switch (viewMode) {
+      case 'region':
+        for (const topic of regionsTopics.topics.allIds) {
+          const idsForRT = regionTopic[activeRegion][topic].entries.slice(0, 10)
+          for (const id of idsForRT) {
+            if (!ids.includes(id)) {
+              ids.push(id)
+            }
+          }
+        }
+        break
+      case 'topic':
+        for (const regionId of regionsTopics.regions.allIds) {
+          const idsForRT = regionTopic[regionId][activeTopic].entries.slice(0, 10)
+          ids.push(...idsForRT)
+        }
+        break
+      case 'neutral':
+      default:
+        // left ids empty
+        break
+    }
+    const entries = ids.map((id) => byUrl[id]).filter((e) => e.flags.useful)
+    const byCountryId: Record<string, Url[]> = {}
+    for (const entry of entries) {
+      if (!byCountryId[entry.country]) {
+        byCountryId[entry.country] = []
+      }
+      byCountryId[entry.country].push(entry.url)
+    }
+    return {
+      allIds: Object.keys(byCountryId),
+      byId: byCountryId
+    }
   }
 )
