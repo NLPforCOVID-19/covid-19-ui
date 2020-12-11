@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
 import { selectActive, selectRegions, selectTopics, setActiveRegion, setActiveTopic } from '@src/redux/regionsTopics'
-import { selectViewMode, focusToSearch } from '@src/redux/ui'
+import { selectViewMode, focusToSearch, selectFocusedToSearch } from '@src/redux/ui'
 import { CardContainer } from '@src/containers/CardContainer'
 import { Tabs } from '@src/components/Tabs'
 import { Loading } from '@src/components/Loading'
@@ -22,6 +22,7 @@ export const NewsViewContainer = () => {
   const { region: activeRegion, topic: activeTopic } = useSelector(selectActive)
   const viewMode = useSelector(selectViewMode)
   const currentQuery = useSelector(selectCurrentQuery)
+  const isFocusedToSearch = useSelector(selectFocusedToSearch)
 
   const dispatch = useDispatch()
   const handleChangeTopic = useCallback(
@@ -78,7 +79,7 @@ export const NewsViewContainer = () => {
           <IndicatorLegends />
         </Row>
         <Row>
-          <Tabs choices={topics} active={activeTopic} onChange={handleChangeTopic} />
+          <Tabs choices={topics} active={isFocusedToSearch ? undefined : activeTopic} onChange={handleChangeTopic} />
           <TopicSearchForm onFocus={handleFocusToSearchForm} onSubmit={handleSearch} />
         </Row>
         <Row>

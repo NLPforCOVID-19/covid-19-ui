@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
 import { RootState } from '@src/redux/index'
-import { Entry, ViewMode } from '@src/types'
+import { Entry, EntryWithSearchSnippet, ViewMode } from '@src/types'
 
 interface State {
   viewMode: ViewMode
   focusedToSearch: boolean
   editMode: boolean
-  editEntry: Entry | null
+  editEntry: Entry | EntryWithSearchSnippet | null
 }
 
 const initialState: State = { viewMode: 'neutral', focusedToSearch: false, editMode: false, editEntry: null }
@@ -26,7 +26,7 @@ const uiSlice = createSlice({
     changeEditMode: (state, action: PayloadAction<boolean>) => {
       state.editMode = action.payload
     },
-    startEdit: (state, action: PayloadAction<Entry>) => {
+    startEdit: (state, action: PayloadAction<Entry | EntryWithSearchSnippet>) => {
       state.editEntry = action.payload
     },
     cancelEdit: (state) => {

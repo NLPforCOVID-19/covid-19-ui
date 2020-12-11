@@ -1,8 +1,48 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { Entry, RegionId, Url } from '@src/types'
+import { EntryWithSearchSnippet, RegionId, TagForSearchSnippet, Url } from '@src/types'
 import { fetchMetaAndFirstEntries, searchForAllRegion } from '@src/redux/asyncActions'
 import { RootState } from '@src/redux/index'
+
+const parseTextWithTags = (text: string): TagForSearchSnippet[] => {
+  const result: TagForSearchSnippet[] = []
+  const [firstText, ...afterEmBeginTags] = text.split('<em>')
+  if (firstText.length > 0) {
+    result.push({ type: 'text', content: firstText })
+  }
+  for (const afterEmBeginTag of afterEmBeginTags) {
+    const [emTagTextContent, textOutOfEmTag] = afterEmBeginTag.split('</em>')
+    result.push({ type: 'match', content: emTagTextContent })
+    if (textOutOfEmTag.length > 0) {
+      result.push({ type: 'text', content: textOutOfEmTag })
+    }
+  }
+  return result
+}
+
+const findExactMatch = (tags: TagForSearchSnippet[], query: string): TagForSearchSnippet[] => {
+  const result = [] as TagForSearchSnippet[]
+  let buffer = [] as TagForSearchSnippet[]
+  for (const tag of tags) {
+    switch (tag.type) {
+      case 'match': {
+        buffer.push(tag)
+        const joined = buffer.map((tag) => tag.content).join('')
+        if (joined === query) {
+          result.push({ type: 'exact-match', content: query })
+          buffer = []
+        }
+        break
+      }
+      case 'text':
+      default:
+        result.push(...buffer, tag)
+        buffer = []
+        break
+    }
+  }
+  return result
+}
 
 interface StateForRegion {
   allIds: Url[]
@@ -12,7 +52,7 @@ interface StateForRegion {
 
 interface State {
   query: string
-  byUrl: Record<Url, Entry>
+  byUrl: Record<Url, EntryWithSearchSnippet>
   byRegion: Record<RegionId, StateForRegion>
 }
 
@@ -48,9 +88,16 @@ const searchSlice = createSlice({
       })
       .addCase(searchForAllRegion.fulfilled, (state, action) => {
         const searchRes = action.payload
+        const { query } = state
         for (const r of Object.keys(searchRes)) {
           for (const e of searchRes[r]) {
-            state.byUrl[e.url] = e
+            const snippetTags = findExactMatch(parseTextWithTags(e.snippets['Search']), query)
+            const entryWithSearchSnippet: EntryWithSearchSnippet = {
+              ...e,
+              kind: 'EntryWithSearchSnippet',
+              searchSnippet: snippetTags
+            }
+            state.byUrl[entryWithSearchSnippet.url] = entryWithSearchSnippet
             state.byRegion[r].allIds.push(e.url)
           }
           state.byRegion[r].loading = false

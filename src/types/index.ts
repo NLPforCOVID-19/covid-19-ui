@@ -44,6 +44,7 @@ export interface EntryFlagsEdit extends EntryFlags {
 }
 
 export interface Entry {
+  kind: 'Entry'
   url: Url
   country: string
   title: string
@@ -52,6 +53,16 @@ export interface Entry {
   domainLabel: string
   flags: EntryFlags
   snippets: Record<Topic, string>
+}
+
+export interface TagForSearchSnippet {
+  type: 'text' | 'match' | 'exact-match'
+  content: string
+}
+
+export interface EntryWithSearchSnippet extends Omit<Entry, 'kind'> {
+  kind: 'EntryWithSearchSnippet'
+  searchSnippet: TagForSearchSnippet[]
 }
 
 export interface RegionStats {

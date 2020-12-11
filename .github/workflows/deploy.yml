@@ -7,8 +7,6 @@ on:
 
 jobs:
   deploy:
-    env:
-      BASE_PATH: /NLPforCOVID-19
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,8 +15,9 @@ jobs:
           node-version: '12'
       - name: Build Project
         env:
-          API_URL: ${{ secrets.API_URL }}
-          GA_TRACKING_ID: ${{ secrets.GA_TRACKING_ID }}
+          NEXT_PUBLIC_BASE_PATH: /NLPforCOVID-19
+          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
+          NEXT_PUBLIC_GA_ID: ${{ secrets.GA_TRACKING_ID }}
         run: |
           npm ci
           npm run build

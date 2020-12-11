@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { Entry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
 
-const baseUrl = process.env.API_URL
+const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
 type ResponseBool = 0 | 1
 
@@ -52,6 +52,7 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     snippets[topic.name] = topic.snippet
   }
   return {
+    kind: 'Entry',
     url: responseEntry.url,
     country: responseEntry.displayed_country,
     title: responseEntry.translated.title,

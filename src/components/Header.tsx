@@ -16,7 +16,7 @@ const LangLink: React.FC<{ lang: Lang; currentLang: Lang; className: string }> =
   }
   if (lang !== currentLang) {
     return (
-      <a className={className} href={`${process.env.BASE_PATH}/${lang}/`}>
+      <a className={className} href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${lang}/`}>
         {displayLanguageNames[lang]}
       </a>
     )
