@@ -18,6 +18,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /NLPforCOVID-19
           NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_TRACKING_ID }}
+          NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
         run: |
           npm ci
           npm run build
