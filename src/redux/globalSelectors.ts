@@ -73,6 +73,13 @@ export const selectEntriesForMap = createSelector(
     const ids: Url[] = []
     switch (viewMode) {
       case 'region':
+        if (activeRegion === 'int') {
+          for (const regionId of regionsTopics.regions.allIds) {
+            const idsForRT = regionTopic[regionId][activeTopic].entries
+            ids.push(...idsForRT)
+          }
+          break
+        }
         for (const topic of regionsTopics.topics.allIds) {
           const idsForRT = regionTopic[activeRegion][topic].entries
           let cnt = 0
