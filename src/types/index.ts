@@ -55,6 +55,11 @@ export interface Entry {
   snippets: Record<Topic, string>
 }
 
+export interface TagForSearchSnippet {
+  type: 'text' | 'match' | 'exact-match'
+  content: string
+}
+
 export interface EntryWithSearchSnippet extends Omit<Entry, 'kind'> {
   kind: 'EntryWithSearchSnippet'
   searchSnippet: TagForSearchSnippet[]
@@ -84,8 +89,3 @@ export interface EditHistory {
 }
 
 export type SubmitState = 'pending' | 'fulfilled' | 'rejected'
-
-export interface TagForSearchSnippet {
-  type: 'text' | 'match' | 'exact-match'
-  content: string
-}
