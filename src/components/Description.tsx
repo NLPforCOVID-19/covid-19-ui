@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Link from 'next/link'
 
 import { useTranslation } from '../context/LanguageContext'
 
-export const Description = () => {
+export const Description = memo(() => {
   const { t, lang } = useTranslation()
   return (
     <div className="mt-3">
@@ -19,4 +19,5 @@ export const Description = () => {
       </Container>
     </div>
   )
-}
+})
+Description.displayName = 'Description'

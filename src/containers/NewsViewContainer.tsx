@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 
@@ -13,9 +13,9 @@ import { TopicSearchForm } from '@src/components/TopicSearchForm'
 import { searchForAllRegion } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { selectCurrentQuery } from '@src/redux/search'
-import IndicatorLegends from '@src/components/IndicatorLegends'
+import { IndicatorLegends } from '@src/components/IndicatorLegends'
 
-export const NewsViewContainer = () => {
+export const NewsViewContainer = memo(() => {
   const { lang } = useTranslation()
   const topics = useSelector(selectTopics)
   const regions = useSelector(selectRegions)
@@ -95,4 +95,5 @@ export const NewsViewContainer = () => {
       <Loading />
     </Container>
   )
-}
+})
+NewsViewContainer.displayName = 'NewsViewContainer'

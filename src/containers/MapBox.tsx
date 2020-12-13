@@ -1,12 +1,12 @@
 import Container from 'react-bootstrap/Container'
 import ReactMapGL from 'react-map-gl'
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { selectEntriesForMap } from '@src/redux/globalSelectors'
 import { EntriesPopup } from '@src/containers/EntriesPopup'
 
-export const MapBox = () => {
+export const MapBox = memo(() => {
   const [viewState, setViewState] = useState({
     latitude: 36,
     longitude: 140,
@@ -38,4 +38,5 @@ export const MapBox = () => {
       </div>
     </Container>
   )
-}
+})
+MapBox.displayName = 'MapBox'

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 
 import { NewsCard } from '@src/presenters/NewsCard'
 import { RegionId, Topic } from '@src/types'
@@ -17,7 +17,7 @@ interface Props {
   topic: Topic
 }
 
-export const CardContainer: React.FC<Props> = ({ region, topic }) => {
+export const CardContainer: React.FC<Props> = memo(({ region, topic }) => {
   const { lang } = useTranslation()
   const dispatch = useDispatch()
   const { byId, allIds } = useSelector((s: RootState) => selectEntriesForRegionTopicSearch(s, { region, topic }))
@@ -74,4 +74,5 @@ export const CardContainer: React.FC<Props> = ({ region, topic }) => {
       renderSubInfo={viewMode === 'topic' ? renderStats : undefined}
     />
   )
-}
+})
+CardContainer.displayName = 'CardContainer'

@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -16,7 +16,7 @@ interface Props {
   regionId: RegionId
 }
 
-export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId }) => {
+export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId }) => {
   const { lang, t } = useTranslation()
   const dispatch = useDispatch()
   const editMode = useSelector(selectEditMode)
@@ -82,4 +82,5 @@ export const EntryContainer: React.FC<Props> = ({ entry, topic, regionId }) => {
       mark={aboutRumor}
     />
   )
-}
+})
+EntryContainer.displayName = 'EntryContainer'

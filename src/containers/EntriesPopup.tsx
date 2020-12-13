@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Popup } from 'react-map-gl'
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 
 import { RootState } from '@src/redux'
 import { Url } from '@src/types'
@@ -30,7 +30,7 @@ const countryPosition: Record<string, { longitude: number; latitude: number }> =
   za: { latitude: -33.925, longitude: 18.425 }
 }
 
-export const EntriesPopup: React.FC<EntriesPopupProps> = ({ countryId, entryIds }) => {
+export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entryIds }) => {
   const { lang } = useTranslation()
   const byUrl = useSelector((s: RootState) => s.entries.byUrl)
 
@@ -60,7 +60,8 @@ export const EntriesPopup: React.FC<EntriesPopupProps> = ({ countryId, entryIds 
       `}</style>
     </Popup>
   )
-}
+})
+EntriesPopup.displayName = 'EntriesPopup'
 
 interface ListItemProps {
   title: string
@@ -68,7 +69,7 @@ interface ListItemProps {
   altUrl?: string
 }
 
-export const ListItem: React.FC<ListItemProps> = ({ title, url, altUrl }) => {
+export const ListItem: React.FC<ListItemProps> = memo(({ title, url, altUrl }) => {
   const { t } = useTranslation()
   return (
     <li className="small">
@@ -103,4 +104,5 @@ export const ListItem: React.FC<ListItemProps> = ({ title, url, altUrl }) => {
       `}</style>
     </li>
   )
-}
+})
+ListItem.displayName = 'ListItem'

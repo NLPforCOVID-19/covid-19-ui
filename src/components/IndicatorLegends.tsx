@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { useTranslation } from '../context/LanguageContext'
 
 import * as Icons from './Icons'
 
-const IndicatorLegends = () => {
+export const IndicatorLegends = memo(() => {
   const { t } = useTranslation()
   return (
     <ul>
@@ -31,6 +31,5 @@ const IndicatorLegends = () => {
       `}</style>
     </ul>
   )
-}
-
-export default IndicatorLegends
+})
+IndicatorLegends.displayName = 'IndicatorLegends'

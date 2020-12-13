@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,31 +9,34 @@ import { localeList } from '../translations'
 
 import { Lang } from '@src/types'
 
-const LangLink: React.FC<{ lang: Lang; currentLang: Lang; className: string }> = ({ lang, currentLang, className }) => {
-  const displayLanguageNames = {
-    en: 'English',
-    ja: '日本語'
-  }
-  if (lang !== currentLang) {
+const LangLink: React.FC<{ lang: Lang; currentLang: Lang; className: string }> = memo(
+  ({ lang, currentLang, className }) => {
+    const displayLanguageNames = {
+      en: 'English',
+      ja: '日本語'
+    }
+    if (lang !== currentLang) {
+      return (
+        <a className={className} href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${lang}/`}>
+          {displayLanguageNames[lang]}
+        </a>
+      )
+    }
     return (
-      <a className={className} href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${lang}/`}>
-        {displayLanguageNames[lang]}
-      </a>
+      <>
+        <span className={className}>{displayLanguageNames[lang]}</span>
+        <style jsx>{`
+          span {
+            text-decoration: underline;
+          }
+        `}</style>
+      </>
     )
   }
-  return (
-    <>
-      <span className={className}>{displayLanguageNames[lang]}</span>
-      <style jsx>{`
-        span {
-          text-decoration: underline;
-        }
-      `}</style>
-    </>
-  )
-}
+)
+LangLink.displayName = 'LangLink'
 
-export const Header = () => {
+export const Header = memo(() => {
   const { t, lang } = useTranslation()
   return (
     <div>
@@ -99,4 +102,5 @@ export const Header = () => {
       </div>
     </div>
   )
-}
+})
+Header.displayName = 'Header'
