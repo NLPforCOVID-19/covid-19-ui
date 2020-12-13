@@ -29,7 +29,7 @@ const AboutJp = () => (
             </Card.Text>
             <Card.Img
               variant="top"
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/topic-view.png`}
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/topic-view.png`}
               alt="カテゴリビュー"
             />
           </Card.Body>
@@ -45,7 +45,7 @@ const AboutJp = () => (
             </Card.Text>
             <Card.Img
               variant="top"
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/region-view.png`}
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/region-view.png`}
               alt="地域ビュー"
             />
           </Card.Body>
@@ -85,7 +85,7 @@ const AboutEn = () => (
             </Card.Text>
             <Card.Img
               variant="top"
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/topic-view_en.png`}
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/topic-view_en.png`}
               alt="category view"
             />
           </Card.Body>
@@ -101,7 +101,7 @@ const AboutEn = () => (
             </Card.Text>
             <Card.Img
               variant="top"
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/region-view_en.png`}
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/region-view_en.png`}
               alt="region view"
             />
           </Card.Body>
