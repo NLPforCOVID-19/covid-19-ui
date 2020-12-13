@@ -16,7 +16,7 @@ export const MapBox = () => {
     const { latitude, longitude, zoom } = viewState
     setViewState({ latitude, longitude, zoom })
   }, [])
-  const { allIds, byId } = useSelector(selectEntriesForMap)
+  const { allCountryIds, byCountryId } = useSelector(selectEntriesForMap)
   return (
     <Container className="mt-2 mb-2">
       <ReactMapGL
@@ -27,8 +27,8 @@ export const MapBox = () => {
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onViewStateChange={handleViewStateChange}
       >
-        {allIds.map((countryId) => (
-          <EntriesPopup key={countryId} countryId={countryId} entryIds={byId[countryId]} />
+        {allCountryIds.map((countryId) => (
+          <EntriesPopup key={countryId} countryId={countryId} entryIds={byCountryId[countryId]} />
         ))}
       </ReactMapGL>
       <div className="text-right small text-muted">
