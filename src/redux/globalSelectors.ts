@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 
 import { RootState } from '@src/redux/index'
-import { RegionId, Topic, Url, ViewMode } from '@src/types'
+import { RegionId, Topic, Url } from '@src/types'
 
 export const entriesNumSelector = createSelector(
   (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
@@ -65,45 +65,55 @@ export const selectEntriesForMap = createSelector(
   [
     (s: RootState) => s.entriesByRegionTopic,
     (s: RootState) => s.entries.byUrl,
-    (s: RootState) => s.ui.viewMode,
-    (s: RootState) => s.regionsTopics
+    (s: RootState) => s.ui,
+    (s: RootState) => s.regionsTopics,
+    (s: RootState) => s.search
   ],
-  (regionTopic, byUrl, viewMode: ViewMode, regionsTopics) => {
+  (regionTopic, byUrl, ui, regionsTopics, search) => {
+    const { viewMode, focusedToSearch } = ui
     const { activeRegion, activeTopic } = regionsTopics
     const ids: Url[] = []
-    switch (viewMode) {
-      case 'region':
-        if (activeRegion === 'int') {
+    if (focusedToSearch) {
+      const { byRegion } = search
+      for (const regionId of regionsTopics.regions.allIds) {
+        const idsForRegion = byRegion[regionId].allIds
+        ids.push(...idsForRegion)
+      }
+    } else {
+      switch (viewMode) {
+        case 'region':
+          if (activeRegion === 'int') {
+            for (const regionId of regionsTopics.regions.allIds) {
+              const idsForRT = regionTopic[regionId][activeTopic].entries
+              ids.push(...idsForRT)
+            }
+            break
+          }
+          for (const topic of regionsTopics.topics.allIds) {
+            const idsForRT = regionTopic[activeRegion][topic].entries
+            let cnt = 0
+            for (const id of idsForRT) {
+              if (cnt >= 2) break
+              if (!ids.includes(id)) {
+                ids.push(id)
+                cnt += 1
+              }
+            }
+          }
+          break
+        case 'topic':
           for (const regionId of regionsTopics.regions.allIds) {
             const idsForRT = regionTopic[regionId][activeTopic].entries
             ids.push(...idsForRT)
           }
           break
-        }
-        for (const topic of regionsTopics.topics.allIds) {
-          const idsForRT = regionTopic[activeRegion][topic].entries
-          let cnt = 0
-          for (const id of idsForRT) {
-            if (cnt >= 2) break
-            if (!ids.includes(id)) {
-              ids.push(id)
-              cnt += 1
-            }
-          }
-        }
-        break
-      case 'topic':
-        for (const regionId of regionsTopics.regions.allIds) {
-          const idsForRT = regionTopic[regionId][activeTopic].entries
-          ids.push(...idsForRT)
-        }
-        break
-      case 'neutral':
-      default:
-        // left ids empty
-        break
+        case 'neutral':
+        default:
+          // left ids empty
+          break
+      }
     }
-    const entries = ids.map((id) => byUrl[id]).filter((e) => e.flags.useful)
+    const entries = ids.map((id) => (focusedToSearch ? search.byUrl[id] : byUrl[id])).filter((e) => e.flags.useful)
     const byCountryId: Record<string, Url[]> = {}
     for (const entry of entries) {
       if (!byCountryId[entry.country]) {
@@ -113,8 +123,8 @@ export const selectEntriesForMap = createSelector(
       byCountryId[entry.country].push(entry.url)
     }
     return {
-      allIds: Object.keys(byCountryId),
-      byId: byCountryId
+      allCountryIds: Object.keys(byCountryId),
+      byCountryId: byCountryId
     }
   }
 )
