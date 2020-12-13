@@ -7,6 +7,7 @@ import { Url } from '@src/types'
 import { mainAltUrl } from '@src/utils'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icons from '@src/components/Icons'
+import { selectFocusedToSearch } from '@src/redux/ui'
 
 interface EntriesPopupProps {
   countryId: string
@@ -33,14 +34,16 @@ const countryPosition: Record<string, { longitude: number; latitude: number }> =
 export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entryIds }) => {
   const { lang } = useTranslation()
   const byUrl = useSelector((s: RootState) => s.entries.byUrl)
+  const byUrlSearch = useSelector((s: RootState) => s.search.byUrl)
+  const isFocusedToSearch = useSelector(selectFocusedToSearch)
 
   const renderEntry = useCallback(
     (id: Url) => {
-      const { country, title, url } = byUrl[id]
+      const { country, title, url } = isFocusedToSearch ? byUrlSearch[id] : byUrl[id]
       const { main, alt } = mainAltUrl(country, lang, url)
       return <ListItem key={id} title={title} url={main} altUrl={alt} />
     },
-    [byUrl, lang]
+    [byUrl, lang, isFocusedToSearch, byUrlSearch]
   )
 
   if (!countryPosition[countryId]) {
