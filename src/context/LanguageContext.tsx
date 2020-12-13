@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useCallback, useContext, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { translations, defaultLang, localeList, isSupportedLang } from '../translations'
@@ -19,14 +19,17 @@ export const LanguageProvider: React.FC<{ lang: Lang }> = ({ lang, children }) =
 // TODO: useCallback
 export function useTranslation() {
   const { lang } = useContext(LanguageContext)
-  function t(key: string) {
-    if (typeof translations[lang][key] === 'undefined') {
-      if (typeof translations[defaultLang][key] === 'undefined') {
-        throw new Error(`Unknown translation key: ${key}`)
+  const t = useCallback(
+    (key: string) => {
+      if (typeof translations[lang][key] === 'undefined') {
+        if (typeof translations[defaultLang][key] === 'undefined') {
+          throw new Error(`Unknown translation key: ${key}`)
+        }
       }
-    }
-    return translations[lang][key]
-  }
+      return translations[lang][key]
+    },
+    [lang]
+  )
   return { t, lang }
 }
 
