@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import Toast from 'react-bootstrap/Toast'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -13,7 +13,7 @@ interface Props {
   onClose: () => void
 }
 
-export const FeedbackToast: React.FC<Props> = ({ show, onClose }) => {
+export const FeedbackToast: React.FC<Props> = memo(({ show, onClose }) => {
   const [feedbackContent, setFeedbackContent] = useState('')
   const [feedbackUseful, setFeedbackUseful] = useState('')
   const [submitButtonEnabled, setSubmitButtonEnabled] = useState(true)
@@ -89,4 +89,5 @@ export const FeedbackToast: React.FC<Props> = ({ show, onClose }) => {
       `}</style>
     </div>
   )
-}
+})
+FeedbackToast.displayName = 'FeedbackToast'

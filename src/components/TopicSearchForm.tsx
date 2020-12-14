@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, memo } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -9,7 +9,7 @@ interface Props {
   onSubmit: (q: string) => void
 }
 
-export const TopicSearchForm: React.FC<Props> = ({ onFocus, onSubmit }) => {
+export const TopicSearchForm: React.FC<Props> = memo(({ onFocus, onSubmit }) => {
   const { t } = useTranslation()
   const [query, setQuery] = useState('')
   const handleChangeQuery = useCallback((e: React.FormEvent) => {
@@ -38,4 +38,5 @@ export const TopicSearchForm: React.FC<Props> = ({ onFocus, onSubmit }) => {
       </Button>
     </Form>
   )
-}
+})
+TopicSearchForm.displayName = 'TopicSearchForm'

@@ -1,5 +1,5 @@
 import Col from 'react-bootstrap/Col'
-import { useCallback, useEffect, useRef } from 'react'
+import { memo, useCallback, useEffect, useRef } from 'react'
 
 import { Url } from '@src/types'
 import { Loading } from '@src/components/Loading'
@@ -16,7 +16,7 @@ interface Props {
   renderSubInfo?: () => React.ReactElement
 }
 
-export const NewsCard: React.FC<Props> = (props) => {
+export const NewsCard: React.FC<Props> = memo((props) => {
   const { t } = useTranslation()
   const { title, entryIds, loading, onClickTitle, noMore, onLoadMore, renderEntry, renderSubInfo } = props
   const handleClickTitle = useCallback(
@@ -87,4 +87,5 @@ export const NewsCard: React.FC<Props> = (props) => {
       `}</style>
     </Col>
   )
-}
+})
+NewsCard.displayName = 'NewsCard'

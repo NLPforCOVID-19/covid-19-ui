@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Head from 'next/head'
 
 import { useTranslation } from '../context/LanguageContext'
@@ -6,7 +6,7 @@ import { useTranslation } from '../context/LanguageContext'
 import { Header } from './Header'
 import { Footer } from './Footer'
 
-export const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
+export const Layout: React.FC<{ title?: string }> = memo(({ title, children }) => {
   const { t } = useTranslation()
   return (
     <div className="wrap">
@@ -31,4 +31,5 @@ export const Layout: React.FC<{ title?: string }> = ({ title, children }) => {
       `}</style>
     </div>
   )
-}
+})
+Layout.displayName = 'Layout'

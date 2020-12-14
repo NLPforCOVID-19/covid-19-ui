@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { useTranslation } from '../context/LanguageContext'
 
@@ -15,7 +15,7 @@ function numberWithPlusMinus(num: number) {
   return `-${abs_str}`
 }
 
-export const Stats: React.FC<{ stats: RegionStats }> = ({ stats }) => {
+export const Stats: React.FC<{ stats: RegionStats }> = memo(({ stats }) => {
   const { t } = useTranslation()
   return (
     <span className="text-muted">
@@ -23,4 +23,5 @@ export const Stats: React.FC<{ stats: RegionStats }> = ({ stats }) => {
       {stats.deathTotal.toLocaleString()} ({numberWithPlusMinus(stats.deathToday)})
     </span>
   )
-}
+})
+Stats.displayName = 'Stats'
