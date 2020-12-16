@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import * as Icons from '@src/components/Icons'
 import { useTranslation } from '@src/context/LanguageContext'
@@ -16,7 +16,7 @@ interface Props {
   renderIcon: () => React.ReactElement
 }
 
-export const EntryView: React.FC<Props> = (props) => {
+export const EntryView: React.FC<Props> = memo((props) => {
   const { t } = useTranslation()
   const { title, mainUrl, date, sourceName, sourceUrl, renderSnippet, altUrl, mark, country, renderIcon } = props
   return (
@@ -83,4 +83,5 @@ export const EntryView: React.FC<Props> = (props) => {
       `}</style>
     </div>
   )
-}
+})
+EntryView.displayName = 'EntryView'

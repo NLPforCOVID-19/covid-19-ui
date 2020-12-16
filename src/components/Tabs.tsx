@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Button from 'react-bootstrap/Button'
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   onChange: (choiceIndex: number) => void
 }
 
-export const Tabs: React.FC<Props> = ({ active, choices, onChange }) => {
+export const Tabs: React.FC<Props> = memo(({ active, choices, onChange }) => {
   return (
     <div>
       {choices.map((choice, i) => (
@@ -20,4 +20,5 @@ export const Tabs: React.FC<Props> = ({ active, choices, onChange }) => {
       ))}
     </div>
   )
-}
+})
+Tabs.displayName = 'Tabs'

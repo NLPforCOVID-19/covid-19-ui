@@ -46,9 +46,13 @@ const entriesByRegionTopicSlice = createSlice({
           state[region][topic].noMore = true
         }
         state[region][topic].entries.push(...newEntries.map((e) => e.url))
+        for (const url of newEntries.map((e) => e.url)) {
+          if (state[region][topic].entries.includes(url)) continue
+          state[region][topic].entries.push(url)
+        }
       })
       .addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {
-        const { regions, topics, entriesByRegion } = action.payload
+        const { regions, topics } = action.payload
         for (const region of regions) {
           state[region.id] = {}
           for (const topic of topics) {
@@ -56,12 +60,6 @@ const entriesByRegionTopicSlice = createSlice({
               entries: [],
               noMore: false,
               loading: false
-            }
-          }
-          for (const entry of entriesByRegion[region.id]) {
-            const topics = Object.keys(entry.snippets)
-            for (const topic of topics) {
-              state[region.id][topic].entries.push(entry.url)
             }
           }
         }

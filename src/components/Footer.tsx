@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { useTranslation } from '../context/LanguageContext'
 
-export const Footer = () => {
+export const Footer = memo(() => {
   const { t } = useTranslation()
   return (
     <footer className="mt-3 p-3 bg-light">
@@ -11,4 +11,5 @@ export const Footer = () => {
       </p>
     </footer>
   )
-}
+})
+Footer.displayName = 'Footer'

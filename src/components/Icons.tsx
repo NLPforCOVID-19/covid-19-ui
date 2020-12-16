@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { useTranslation } from '../context/LanguageContext'
 
@@ -9,7 +9,7 @@ interface BaseIconProps {
   size?: string
 }
 
-const BaseIcon: React.FC<BaseIconProps> = ({ title, color, size, iconId }) => (
+const BaseIcon: React.FC<BaseIconProps> = memo(({ title, color, size, iconId }) => (
   <>
     <i className="material-icons" title={title || ''}>
       {iconId}
@@ -22,7 +22,8 @@ const BaseIcon: React.FC<BaseIconProps> = ({ title, color, size, iconId }) => (
       }
     `}</style>
   </>
-)
+))
+BaseIcon.displayName = 'BaseIcon'
 
 export const Useful = () => {
   const { t } = useTranslation()
