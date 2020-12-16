@@ -27,11 +27,9 @@ export const fetchMetaAndFirstEntries = createAsyncThunk(
   async ({ lang, hash }: { lang: Lang; hash: string }) => {
     const { mode, target } = parseHashToViewState(hash)
     const { regions, topics } = await API.fetchMeta(lang)
-    const entriesByRegion = await API.fetchEntriesAll(lang)
     return {
       regions,
       topics,
-      entriesByRegion,
       mode: mode === 'neutral' ? 'topic' : mode,
       activeTopic: mode === 'topic' ? target : topics[0],
       activeRegion: mode === 'region' ? target : regions[0].id
