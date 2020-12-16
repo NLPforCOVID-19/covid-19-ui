@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 
 import { Layout } from '@src/components/Layout'
 import { Description } from '@src/components/Description'
@@ -55,9 +54,6 @@ const Index: NextPage<Props> = () => {
 
   return (
     <Layout>
-      <Head>
-        <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
-      </Head>
       <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
       <MapBox />
