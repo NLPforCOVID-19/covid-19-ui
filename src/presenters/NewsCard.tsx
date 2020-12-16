@@ -53,7 +53,7 @@ export const NewsCard: React.FC<Props> = memo((props) => {
     <Col xl={4} lg={6} className="p-1">
       <div className="p-2 rounded border wrap">
         <div className="header">
-          <a href="#" onClick={handleClickTitle}>
+          <a href="#" onClick={handleClickTitle} className="text-info">
             {title}
           </a>
         </div>

@@ -31,7 +31,7 @@ export const EntryView: React.FC<Props> = memo((props) => {
             </span>
           )}
           {country && <span className="small text-muted">&thinsp;({country})</span>}
-          <a href={mainUrl} target="_blank" rel="noreferrer" className="text-info">
+          <a href={mainUrl} target="_blank" rel="noreferrer">
             &thinsp;{title}
           </a>
         </div>
