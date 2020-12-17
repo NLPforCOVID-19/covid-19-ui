@@ -1,5 +1,5 @@
-import '@src/styles/global.css'
 import '@src/styles/bootstrap.scss'
+import '@src/styles/global.css'
 
 import React from 'react'
 import { Router } from 'next/router'
