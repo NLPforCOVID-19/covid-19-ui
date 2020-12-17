@@ -33,7 +33,7 @@ export const TopicSearchForm: React.FC<Props> = memo(({ onFocus, onSubmit }) => 
         style={{ width: '120px' }}
       />
       &thinsp;
-      <Button type="submit" size="sm">
+      <Button variant="info" type="submit" size="sm">
         {t('search')}
       </Button>
     </Form>
