@@ -36,71 +36,40 @@ const LangLink: React.FC<{ lang: Lang; currentLang: Lang; className: string }> =
 )
 LangLink.displayName = 'LangLink'
 
-export const Header = memo(() => {
+export const Header = () => {
   const { t, lang } = useTranslation()
   return (
-    <div>
-      <div className="bg-info pt-1 pb-1">
-        <Container>
-          <Row>
-            <Col>
-              <h3 className="mb-1">
-                <Link href="/[lang]/" as={`/${lang}/`}>
-                  <a className="text-white">{t('title')}</a>
-                </Link>
-              </h3>
-            </Col>
-            <Col sm={2} className="text-right">
+    <header className="bg-info pt-2 pb-2">
+      <Container>
+        <Row>
+          <Col sm={10}>
+            <h3 className="mb-1">
+              <Link href="/[lang]/" as={`/${lang}/`}>
+                <a className="text-white">{t('title')}</a>
+              </Link>
+            </h3>
+          </Col>
+          <Col sm={2} className="text-right">
+            <div className="locals">
               {localeList.map((locale) => (
-                <span key={locale}>
+                <span key={locale} className="local-item">
                   <LangLink className="text-white" lang={locale} currentLang={lang} />
-                  <style jsx>{`
-                    span {
-                      margin-left: 10px;
-                    }
-                  `}</style>
                 </span>
               ))}
-            </Col>
-          </Row>
-          <Row>
-            <div className="small mt-0 text-white">
-              <a href="http://nlp.ist.i.kyoto-u.ac.jp/" className="text-white">
-                {t('lab_kurohashi')}
-              </a>
-              ,{' '}
-              <a href="http://nlp-waseda.jp/" className="text-white">
-                {t('lab_kawahara')}
-              </a>
-              ,{' '}
-              <a href="http://www.tkl.iis.u-tokyo.ac.jp/new/" className="text-white">
-                {t('lab_kitsuregawa')}
-              </a>
-              ,{' '}
-              <a href="https://mynlp.is.s.u-tokyo.ac.jp/ja/index" className="text-white">
-                {t('lab_miyao')}
-              </a>
-              ,{' '}
-              <a href="http://www-al.nii.ac.jp/ja/" className="text-white">
-                {t('lab_aizawa')}
-              </a>
-              ,{' '}
-              <a href="https://www.nlp.ecei.tohoku.ac.jp/" className="text-white">
-                {t('lab_inui')}
-              </a>
-              ,{' '}
-              <a href="http://fusioncomplab.org/" className="text-white">
-                {t('lab_morishima')}
-              </a>
-              .{' '}
-              <a href="https://mt-auto-minhon-mlt.ucri.jgn-x.jp" className="text-white">
-                Powered by みんなの自動翻訳 (NICT).
-              </a>
             </div>
-          </Row>
-        </Container>
-      </div>
-    </div>
+          </Col>
+        </Row>
+      </Container>
+      <style jsx>{`
+        .locals {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+        .local-item {
+          margin-left: 10px;
+        }
+      `}</style>
+    </header>
   )
-})
-Header.displayName = 'Header'
+}

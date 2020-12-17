@@ -8,13 +8,22 @@ export const SnippetTagRenderer: React.FC<{ tag: TagForSearchSnippet }> = ({ tag
           {tag.content}
           <style jsx>{`
             mark {
-              background-color: #ffee70;
+              background-color: #ffbbbb;
             }
           `}</style>
         </mark>
       )
     case 'match':
-      return <mark>{tag.content}</mark>
+      return (
+        <mark>
+          {tag.content}
+          <style jsx>{`
+            mark {
+              background-color: #ffeeee;
+            }
+          `}</style>
+        </mark>
+      )
     case 'text':
     default:
       return <>{tag.content}</>
