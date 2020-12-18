@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Popup } from 'react-map-gl'
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
 
 import { RootState } from '@src/redux'
 import { Url } from '@src/types'
@@ -46,13 +46,36 @@ export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entr
     [byUrl, lang, isFocusedToSearch, byUrlSearch]
   )
 
+  const popupRef = useRef<Popup>(null)
+  const [initialZIndex, setInitialZIndex] = useState('')
+  useEffect(() => {
+    if (popupRef.current) {
+      const container = popupRef.current._containerRef.current
+      if (container) {
+        setInitialZIndex(container.style.zIndex)
+        const handleMouseEnter = () => {
+          container.style.zIndex = '255'
+        }
+        const handleMouseLeave = () => {
+          container.style.zIndex = initialZIndex
+        }
+        container.addEventListener('mouseenter', handleMouseEnter)
+        container.addEventListener('mouseleave', handleMouseLeave)
+        return () => {
+          container.removeEventListener('mouseenter', handleMouseEnter)
+          container.removeEventListener('mouseleave', handleMouseLeave)
+        }
+      }
+    }
+  }, [initialZIndex])
+
   if (!countryPosition[countryId]) {
     return null
   }
   const { latitude, longitude } = countryPosition[countryId]
 
   return (
-    <Popup longitude={longitude} latitude={latitude} closeButton={false} sortByDepth={true}>
+    <Popup longitude={longitude} latitude={latitude} closeButton={false} ref={popupRef}>
       <ul className="wrap">{entryIds.map(renderEntry)}</ul>
       <style jsx>{`
         .wrap {
