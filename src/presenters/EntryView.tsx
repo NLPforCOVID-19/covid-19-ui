@@ -36,7 +36,7 @@ export const EntryView: React.FC<Props> = memo((props) => {
           </a>
         </div>
         <div className="source small">
-          <a href={sourceUrl} target="_blank" rel="noreferrer" className="text-muted">
+          <a href={`http://${sourceUrl}`} target="_blank" rel="noreferrer" className="text-muted">
             {sourceName}
           </a>
         </div>
