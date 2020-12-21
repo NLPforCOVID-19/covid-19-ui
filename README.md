@@ -19,7 +19,7 @@ $ npm install
 To launch a development server, run the following command.
 
 ```
-$ env API_URL=<API_URL> npm run dev
+$ npm run dev
 ```
 
 where `API_URL` is the root end-point of [the API server](https://github.com/NLPforCOVID-19/covid-19-api).
@@ -30,7 +30,7 @@ By default, this command will serve the website from `localhost:3000` in a devel
 Run the following command.
 
 ```
-$ env API_URL=<API_URL> BASE_PATH=. npm run build
+$ npm run build
 ```
 
 This command builds a website to serve with a Node.js server.
@@ -47,18 +47,12 @@ This command creates files under the `out` directory.
 
 ### Environment Variables
 
-To build or develop the website, set the following variables.
+To develop the website, put `.evn.local` on the root of the project.
 
-- Develop
-  - API_URL
-- Build
-  - API_URL
-  - BASE_URL (Optional; This variable is needed when the website is served from other than a domain's root.)
-  - GA_TRACKING_ID
-
-#### BASE_URL
-
-To serve the website from a sub directory, `http://example.com/covid-19/`, set `BASE_URL` as `/covid-19`.
+```
+NEXT_PUBLIC_API_URL=https://xxx.jp/xxx
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=xxxxxxxxxxxxx
+```
 
 ## Branching Strategy
 
