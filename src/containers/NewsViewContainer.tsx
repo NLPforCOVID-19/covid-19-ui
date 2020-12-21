@@ -77,7 +77,7 @@ export const NewsViewContainer = memo(() => {
           <Col>
             {regions.byId[activeRegion].sourceUrls.map((url, i) => (
               <div key={i}>
-                <a href={url} target="_blank" rel="noopener">
+                <a href={url} target="_blank" rel="noreferrer">
                   {url}
                 </a>
               </div>
