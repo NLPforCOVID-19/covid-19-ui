@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { memo, useCallback, useMemo } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import { selectActive, selectRegions, selectTopics, setActiveRegion, setActiveTopic } from '@src/redux/regionsTopics'
 import { selectViewMode, focusToSearch, selectFocusedToSearch } from '@src/redux/ui'
@@ -16,7 +17,7 @@ import { selectCurrentQuery } from '@src/redux/search'
 import { IndicatorLegends } from '@src/components/IndicatorLegends'
 
 export const NewsViewContainer = memo(() => {
-  const { lang } = useTranslation()
+  const { lang, t } = useTranslation()
   const topics = useSelector(selectTopics)
   const regions = useSelector(selectRegions)
   const { region: activeRegion, topic: activeTopic } = useSelector(selectActive)
@@ -68,6 +69,20 @@ export const NewsViewContainer = memo(() => {
           {topics.map((t) => (
             <CardContainer key={t} region={activeRegion} topic={t} />
           ))}
+        </Row>
+        <Row className="mt-2">
+          <h4>{t('情報源のサイト')}</h4>
+        </Row>
+        <Row>
+          <Col>
+            {regions.byId[activeRegion].sourceUrls.map((url, i) => (
+              <div key={i}>
+                <a href={url} target="_blank" rel="noopener">
+                  {url}
+                </a>
+              </div>
+            ))}
+          </Col>
         </Row>
       </Container>
     )
