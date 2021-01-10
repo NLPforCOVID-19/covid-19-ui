@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { EditHistory, SubmitState } from '@src/types'
 import { Loading } from '@src/components/Loading'
@@ -6,6 +7,9 @@ import { Loading } from '@src/components/Loading'
 interface Props extends EditHistory {
   state: SubmitState
 }
+
+// eslint-disable-next-line import/no-named-as-default-member
+dayjs.extend(relativeTime)
 
 export const EditHistoryView: React.FC<Props> = (props) => {
   const { state, checked, notes, timestamp } = props
@@ -17,7 +21,7 @@ export const EditHistoryView: React.FC<Props> = (props) => {
       {state === 'fulfilled' &&
         (checked ? (
           <ul>
-            <li>Modified at {dayjs(timestamp).format('YYYY/MM/DD HH:mm:ss')}</li>
+            <li>Modified {dayjs(timestamp).fromNow()}</li>
             <li>Notes: {notes}</li>
           </ul>
         ) : (
