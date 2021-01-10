@@ -1,4 +1,6 @@
 import axios from 'axios'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 
 import { Entry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
 
@@ -179,6 +181,9 @@ export async function modifyRegionCategory(
   return axios.post(baseUrl + path, postData)
 }
 
+// eslint-disable-next-line import/no-named-as-default-member
+dayjs.extend(utc)
+
 export async function fetchHistory(url: string): Promise<EditHistory> {
   const path = '/history'
   const response = await axios.get<HistoryResponse>(baseUrl + path, {
@@ -189,7 +194,7 @@ export async function fetchHistory(url: string): Promise<EditHistory> {
   const { is_checked, time, notes } = response.data
   return {
     checked: is_checked === 1,
-    timestamp: time ? Date.parse(time) : 0,
+    timestamp: time ? dayjs.utc(time).valueOf() : 0,
     notes: notes || ''
   }
 }
