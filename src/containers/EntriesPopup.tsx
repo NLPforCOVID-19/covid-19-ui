@@ -32,7 +32,7 @@ const countryPosition: Record<string, { longitude: number; latitude: number }> =
 }
 
 export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entryIds }) => {
-  const { lang } = useTranslation()
+  const { lang, t } = useTranslation()
   const byUrl = useSelector((s: RootState) => s.entries.byUrl)
   const byUrlSearch = useSelector((s: RootState) => s.search.byUrl)
   const isFocusedToSearch = useSelector(selectFocusedToSearch)
@@ -76,8 +76,13 @@ export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entr
 
   return (
     <Popup longitude={longitude} latitude={latitude} closeButton={false} ref={popupRef}>
+      <div className="country-name">{t(countryId)}</div>
       <ul className="wrap">{entryIds.map(renderEntry)}</ul>
       <style jsx>{`
+        .country-name {
+          font-size: 0.9rem;
+          padding: 0 5px;
+        }
         .wrap {
           max-width: 240px;
           padding-left: 1rem;
