@@ -1,6 +1,58 @@
 import { memo } from 'react'
 import Col from 'react-bootstrap/Col'
 
+
+const TweetTimestamp: React.FC<Props> = memo((props) => {
+    return (
+        <div class="tweet-timestamp">
+            <span>{props.value}</span>
+        </div>
+    )
+})
+
+const TweetTwitterActionReply: React.FC<Props> = memo((props) => {
+    return (
+        <div class="tweet-twitter-action tweet-twitter-action-reply">
+            <a href="" class="tweet-twitter-action-reply-link" target="_blank">
+                <svg viewBox="0 0 24 24" class="tweet-twitter-action-reply-logo"><g><path d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path></g></svg>
+            </a>
+        </div>
+    )
+})
+
+const TweetTwitterActionRetweet: React.FC<Props> = memo((props) => {
+    return (
+        <div class="tweet-twitter-action tweet-twitter-action-retweet">
+            <a href="" class="tweet-twitter-action-retweet-link" target="_blank">
+                <svg viewBox="0 0 24 24" class="tweet-twitter-action-retweet-logo"><g><path d="M11.96 14.945c-.067 0-.136-.01-.203-.027-1.13-.318-2.097-.986-2.795-1.932-.832-1.125-1.176-2.508-.968-3.893s.942-2.605 2.068-3.438l3.53-2.608c2.322-1.716 5.61-1.224 7.33 1.1.83 1.127 1.175 2.51.967 3.895s-.943 2.605-2.07 3.438l-1.48 1.094c-.333.246-.804.175-1.05-.158-.246-.334-.176-.804.158-1.05l1.48-1.095c.803-.592 1.327-1.463 1.476-2.45.148-.988-.098-1.975-.69-2.778-1.225-1.656-3.572-2.01-5.23-.784l-3.53 2.608c-.802.593-1.326 1.464-1.475 2.45-.15.99.097 1.975.69 2.778.498.675 1.187 1.15 1.992 1.377.4.114.633.528.52.928-.092.33-.394.547-.722.547z"></path><path d="M7.27 22.054c-1.61 0-3.197-.735-4.225-2.125-.832-1.127-1.176-2.51-.968-3.894s.943-2.605 2.07-3.438l1.478-1.094c.334-.245.805-.175 1.05.158s.177.804-.157 1.05l-1.48 1.095c-.803.593-1.326 1.464-1.475 2.45-.148.99.097 1.975.69 2.778 1.225 1.657 3.57 2.01 5.23.785l3.528-2.608c1.658-1.225 2.01-3.57.785-5.23-.498-.674-1.187-1.15-1.992-1.376-.4-.113-.633-.527-.52-.927.112-.4.528-.63.926-.522 1.13.318 2.096.986 2.794 1.932 1.717 2.324 1.224 5.612-1.1 7.33l-3.53 2.608c-.933.693-2.023 1.026-3.105 1.026z"></path></g></svg>
+            </a>
+        </div>
+    )
+})
+
+const TweetTwitterActionLike: React.FC<Props> = memo((props) => {
+    return (
+        <div class="tweet-twitter-action tweet-twitter-action-like">
+            <a href="" class="tweet-twitter-action-like-link" target="_blank">
+                <svg viewBox="0 0 24 24" class="tweet-twitter-action-like-logo"><g><path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path></g></svg>
+            </a>
+        </div>
+    )
+})
+
+const TweetFooter: React.FC<Props> = memo((props) => {
+    return (
+        <div class="tweet-footer">
+            <TweetTwitterActionLike />
+            <TweetTwitterActionRetweet />
+            <TweetTwitterActionReply />
+            <div class="tweet-filler">
+            </div>
+            <TweetTimestamp value={props.timestamp} />
+        </div>
+    )
+})
+
 export const Tweet = memo(() => {
     const data = [
         {
@@ -9,7 +61,8 @@ export const Tweet = memo(() => {
             username: "nlpforcovid",
             avatar: "https://pbs.twimg.com/profile_images/1347024085952331778/3oBHXOOn_bigger.jpg",
             contentOrig: "欧州がより多くのワクチンを求めている（ヨーロッパ，経済・福祉政策のニュース，France 24",
-            contentTrans: null
+            contentTrans: null,
+            timestamp: "2021-02-10 14:45:03"
         },
         {
             id: 1001,
@@ -17,7 +70,8 @@ export const Tweet = memo(() => {
             username: "HDrachster",
             avatar: "https://pbs.twimg.com/profile_images/1474064923/Hendrik-Drachsler_klein_bigger.jpg",
             contentOrig: "Head of http://edutec.science cares about advancing educational technology, learning analytics, recommender systems, artificial intelligence & learning science",
-            contentTrans: "http://edutec.scienceの責任者は、教育技術、学習分析、レコメンダーシステム、人工知能、学習科学の進歩に関心を持っています"
+            contentTrans: "http://edutec.scienceの責任者は、教育技術、学習分析、レコメンダーシステム、人工知能、学習科学の進歩に関心を持っています",
+            timestamp: "2021-02-10 14:40:24"
         },
         {
             id: 1002,
@@ -25,7 +79,8 @@ export const Tweet = memo(() => {
             username: "NASA",
             avatar: "https://pbs.twimg.com/profile_images/1321163587679784960/0ZxKlEKB_normal.jpg",
             contentOrig: "Let's go to Mars!",
-            contentTrans: "火星に行こう！"
+            contentTrans: "火星に行こう！",
+            timestamp: "2021-02-10 14:39:56"
         },
         {
             id: 1003,
@@ -33,7 +88,8 @@ export const Tweet = memo(() => {
             username: "matsu_bouzu",
             avatar: "https://pbs.twimg.com/profile_images/1274931784979906562/LBxVQhgd_bigger.jpg",
             contentOrig: "所属事務所：よしもとクリエイティブエージェンシー コンビ名：ダウンタウン 血液型：Ｂ型",
-            contentTrans: null
+            contentTrans: null,
+            timestamp: "2021-02-10 14:35:36"
         },
         {
             id: 1004,
@@ -41,7 +97,8 @@ export const Tweet = memo(() => {
             username: "NYU_LEARN",
             avatar: "https://pbs.twimg.com/profile_images/963529222340964355/5ZWgf5Jt_bigger.jpg",
             contentOrig: "Network of teachers + technologists using data to promote effective, engaging + equitable education",
-            contentTrans: "データを使用して効果的で魅力的な+公平な教育を促進する教師と技術者のネットワーク"
+            contentTrans: "データを使用して効果的で魅力的な+公平な教育を促進する教師と技術者のネットワーク",
+            timestamp: "2021-02-10 14:35:28"
         },
         {
             id: 1005,
@@ -49,7 +106,8 @@ export const Tweet = memo(() => {
             username: "nlpforcovid",
             avatar: "https://pbs.twimg.com/profile_images/1347024085952331778/3oBHXOOn_bigger.jpg",
             contentOrig: "介護者のための質の悪いマスク?（ヨーロッパ，その他のニュース，Franceinfo）https://lotus.kuee.kyoto-u.ac.jp/NLPforCOVID-19",
-            contentTrans: null
+            contentTrans: null,
+            timestamp: "2021-02-10 14:29:29"
         }
     ]
     return (
@@ -90,28 +148,7 @@ export const Tweet = memo(() => {
                                 <span>{tweetData.contentTrans}</span>
                             </div>}
                     </div>
-                    <div class="tweet-footer">
-                        <div class="tweet-twitter-action tweet-twitter-action-like">
-                            <a href="" class="tweet-twitter-action-like-link" target="_blank">
-                                <svg viewBox="0 0 24 24" class="tweet-twitter-action-like-logo"><g><path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path></g></svg>
-                            </a>
-                        </div>
-                        <div class="tweet-twitter-action tweet-twitter-action-retweet">
-                            <a href="" class="tweet-twitter-action-retweet-link" target="_blank">
-                                <svg viewBox="0 0 24 24" class="tweet-twitter-action-retweet-logo"><g><path d="M11.96 14.945c-.067 0-.136-.01-.203-.027-1.13-.318-2.097-.986-2.795-1.932-.832-1.125-1.176-2.508-.968-3.893s.942-2.605 2.068-3.438l3.53-2.608c2.322-1.716 5.61-1.224 7.33 1.1.83 1.127 1.175 2.51.967 3.895s-.943 2.605-2.07 3.438l-1.48 1.094c-.333.246-.804.175-1.05-.158-.246-.334-.176-.804.158-1.05l1.48-1.095c.803-.592 1.327-1.463 1.476-2.45.148-.988-.098-1.975-.69-2.778-1.225-1.656-3.572-2.01-5.23-.784l-3.53 2.608c-.802.593-1.326 1.464-1.475 2.45-.15.99.097 1.975.69 2.778.498.675 1.187 1.15 1.992 1.377.4.114.633.528.52.928-.092.33-.394.547-.722.547z"></path><path d="M7.27 22.054c-1.61 0-3.197-.735-4.225-2.125-.832-1.127-1.176-2.51-.968-3.894s.943-2.605 2.07-3.438l1.478-1.094c.334-.245.805-.175 1.05.158s.177.804-.157 1.05l-1.48 1.095c-.803.593-1.326 1.464-1.475 2.45-.148.99.097 1.975.69 2.778 1.225 1.657 3.57 2.01 5.23.785l3.528-2.608c1.658-1.225 2.01-3.57.785-5.23-.498-.674-1.187-1.15-1.992-1.376-.4-.113-.633-.527-.52-.927.112-.4.528-.63.926-.522 1.13.318 2.096.986 2.794 1.932 1.717 2.324 1.224 5.612-1.1 7.33l-3.53 2.608c-.933.693-2.023 1.026-3.105 1.026z"></path></g></svg>
-                            </a>
-                        </div>
-                        <div class="tweet-twitter-action tweet-twitter-action-reply">
-                            <a href="" class="tweet-twitter-action-reply-link" target="_blank">
-                                <svg viewBox="0 0 24 24" class="tweet-twitter-action-reply-logo"><g><path d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path></g></svg>
-                            </a>
-                        </div>
-                        <div class="tweet-filler">
-                        </div>
-                        <div class="tweet-timestamp">
-                            <span>2021-02-10 14:45:03</span>
-                        </div>
-                    </div>
+                    <TweetFooter timestamp={tweetData.timestamp}/>
                 </article>
             </div>
         ))}
