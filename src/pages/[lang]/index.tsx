@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 
@@ -16,6 +18,7 @@ import { changeEditMode } from '@src/redux/ui'
 import { Lang } from '@src/types'
 import { defaultLang } from '@src/translations'
 import { MapBox } from '@src/containers/MapBox'
+import { TwitterViewContainer } from '@src/containers/TwitterViewContainer'
 
 interface Props {
   lang: Lang
@@ -56,7 +59,18 @@ const Index: NextPage<Props> = () => {
     <Layout>
       <FeedbackToast show={showToast} onClose={() => setShowToast(false)} />
       <Description />
-      <MapBox />
+      <div>
+        <Container>
+          <Row>
+            <Col class="col-sm-8" style={{ paddingLeft: -15, paddingRight: -15, marginLeft: -15, marginRight: -15}}>
+              <MapBox />
+            </Col>
+            <Col class="col-sm-4" style={{ paddingLeft: 0, paddingRight: 0, marginLeft: -15, marginRight: -15}}>
+              <TwitterViewContainer />
+            </Col>
+          </Row>
+        </Container>
+      </div>
       <NewsViewContainer />
       <Container>
         <div className="small text-right">
