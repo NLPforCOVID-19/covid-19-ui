@@ -1,0 +1,152 @@
+.tweet-card {
+    border-width: 1px;
+    border-radius: 15px;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+}
+
+.tweet-article {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-header {
+    display: flex;
+    flex-direction: row;
+}
+
+.tweet-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-footer {
+    margin-top: 6px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.tweet-avatar {
+}
+
+.tweet-names {
+    margin-left: 6px;
+    margin-right: 6px;
+
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-twitter-logo {
+    width: 25px;
+    height: 25px;
+}
+
+.tweet-twitter-logo-link {
+    width: 100%;
+    height: 100%;
+    color: rgb(29, 161, 242);
+    fill: currentColor;
+}
+
+.tweet-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+
+.tweet-username {
+}
+
+.tweet-twitter-verif-badge {
+    width: 15px;
+    height: 15px;
+}
+
+.tweet-twitter-verif-badge-link {
+    width: 100%;
+    height: 100%;
+    color: rgb(29, 161, 242);
+    fill: currentColor;
+}
+
+.tweet-message-original {
+}
+
+.tweet-message-translation {
+    margin-top: 6px;
+}
+
+.tweet-translation-header {
+    text-decoration: underline;
+}
+
+.tweet-twitter-action {
+}
+
+.tweet-twitter-action-reply {
+}
+
+.tweet-twitter-action-retweet {
+}
+
+.tweet-twitter-action-reply {
+}
+
+.tweet-filler {
+    flex-grow: 1;
+}
+
+.tweet-timestamp {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: smaller;
+}
+
+.tweet-twitter-action-reply-logo {
+    width: 25px;
+    height: 25px;
+}
+
+.tweet-twitter-action-reply-link {
+    width: 100%;
+    height: 100%;
+    color: rgb(150, 150, 150);
+    fill: currentColor;
+}
+
+.tweet-twitter-action-retweet-logo {
+    width: 25px;
+    height: 25px;
+}
+
+.tweet-twitter-action-retweet-link {
+    width: 100%;
+    height: 100%;
+    color: rgb(150, 150, 150);
+    fill: currentColor;
+}
+
+.tweet-twitter-action-like-logo {
+    width: 25px;
+    height: 25px;
+}
+
+.tweet-twitter-action-like-link {
+    width: 100%;
+    height: 100%;
+    color: rgb(150, 150, 150);
+    fill: currentColor;
+}
+
+

@@ -1,16 +1,19 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { TopicSearchForm } from '@src/components/TopicSearchForm'
+import { TwitterCardContainer } from '@src/containers/TwitterCardContainer'
 
 export const TwitterViewContainer = () => {
     return (
-        <Container>
+        <Container className="mt-2 mb-2">
             <Row>
                 <Col>
-                  <h3>Tweets</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+                    <TopicSearchForm />
                 </Col>
+            </Row>
+            <Row>
+                <TwitterCardContainer />
             </Row>
         </Container>
     )
