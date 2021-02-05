@@ -211,7 +211,7 @@ export const Tweet = memo(() => {
     return (
         <div>
         {data.map((tweetData) => (
-            <TweetCard name={tweetData.name} username={tweetData.username} verified={tweetData.verified} avatar={tweetData.avatar}
+            <TweetCard key={tweetData.id} name={tweetData.name} username={tweetData.username} verified={tweetData.verified} avatar={tweetData.avatar}
                 msgorig={tweetData.contentOrig} msgtrans={tweetData.contentTrans}
                 timestamp={tweetData.timestamp} />
         ))}
