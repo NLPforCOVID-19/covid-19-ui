@@ -1,8 +1,4 @@
 .tweet-card {
-    border-width: 1px;
-    border-radius: 15px;
-    border-color: rgb(0, 0, 0);
-    border-style: solid;
 }
 
 .tweet-article {
@@ -33,6 +29,11 @@
 }
 
 .tweet-avatar {
+}
+
+.tweet-avatar-img {
+    border-radius: 9999px;
+    overflow: hidden;
 }
 
 .tweet-names {

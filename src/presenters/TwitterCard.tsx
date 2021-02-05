@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 
 const TweetCard: React.DC<Props> = memo((props) => {
     return (
-        <div class="tweet-card mb-2">
+        <div class="tweet-card mb-2 small text-secondary border rounded mr-2">
             <article role="tweet-article" class="tweet-article">
                 <TweetHeader name={props.name} username={props.username} verified={props.verified} avatar={props.avatar} />
                 <TweetBody msgorig={props.msgorig} msgtrans={props.msgtrans} />
