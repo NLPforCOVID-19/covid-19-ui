@@ -7,7 +7,7 @@ const TweetCard: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-card mb-2 small text-secondary border rounded mr-2">
             <article role="tweet-article" className="tweet-article">
-                <TweetHeader name={props.name} username={props.username} verified={props.verified} avatar={props.avatar} />
+                <TweetHeader name={props.name} username={props.username} verified={props.verified} avatar={props.avatar} status={props.status}/>
                 <TweetBody msgorig={props.msgorig} msgtrans={props.msgtrans} />
                 <TweetFooter timestamp={props.timestamp} />
             </article>
@@ -20,7 +20,7 @@ const TweetHeader: React.DC<Props> = memo((props) => {
         <div className="tweet-header">
             <TweetAvatar href={props.avatar} username={props.username} />
             <TweetNames name={props.name} username={props.username} verified={props.verified} />
-            <TweetTwitterLogo />
+            <TweetTwitterLogo username={props.username} status={props.status} />
         </div>
     )
 })
@@ -75,7 +75,7 @@ const TweetUsername: React.DC<Props> = memo((props) => {
 const TweetTwitterLogo: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-twitter-logo">
-            <a href="" className="tweet-twitter-logo-link" target="_blank">
+            <a href={twitterBaseUrl + '/' + props.username + '/status/' + props.status} className="tweet-twitter-logo-link" target="_blank">
                 <svg viewBox="0 0 24 24" className="tweet-twitter-logo"><g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g></svg>
             </a>
         </div>
@@ -151,7 +151,7 @@ const TweetFooter: React.FC<Props> = memo((props) => {
 export const Tweet = memo(() => {
     const data = [
         {
-            id: 1000,
+            id: '1357006259413635076',
             name: "nlpforcovid-19",
             verified: true,
             username: "nlpforcovid",
@@ -161,7 +161,7 @@ export const Tweet = memo(() => {
             timestamp: "2021-02-10 14:45:03"
         },
         {
-            id: 1001,
+            id: '1001',
             name: "HDrachster",
             verified: false,
             username: "HDrachster",
@@ -171,7 +171,7 @@ export const Tweet = memo(() => {
             timestamp: "2021-02-10 14:40:24"
         },
         {
-            id: 1002,
+            id: '1002',
             name: "NASA",
             verified: true,
             username: "NASA",
@@ -181,7 +181,7 @@ export const Tweet = memo(() => {
             timestamp: "2021-02-10 14:39:56"
         },
         {
-            id: 1003,
+            id: '1003',
             name: "松本人志",
             verified: true,
             username: "matsu_bouzu",
@@ -191,7 +191,7 @@ export const Tweet = memo(() => {
             timestamp: "2021-02-10 14:35:36"
         },
         {
-            id: 1004,
+            id: '1004',
             name: "LEARN Analytics Research",
             verified: true,
             username: "NYU_LEARN",
@@ -201,7 +201,7 @@ export const Tweet = memo(() => {
             timestamp: "2021-02-10 14:35:28"
         },
         {
-            id: 1005,
+            id: '1354968521143324672',
             name: "nlpforcovid-19",
             verified: true,
             username: "nlpforcovid",
@@ -216,6 +216,7 @@ export const Tweet = memo(() => {
         {data.map((tweetData) => (
             <TweetCard key={tweetData.id} name={tweetData.name} username={tweetData.username} verified={tweetData.verified} avatar={tweetData.avatar}
                 msgorig={tweetData.contentOrig} msgtrans={tweetData.contentTrans}
+                status={tweetData.id}
                 timestamp={tweetData.timestamp} />
         ))}
         </div>
