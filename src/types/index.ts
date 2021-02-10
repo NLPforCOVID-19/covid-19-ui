@@ -3,6 +3,7 @@ export const localeList = ['ja', 'en'] as const
 export type Lang = typeof localeList[number]
 
 export const countryIds = [
+  'gb',
   'fr',
   'es',
   'de',
