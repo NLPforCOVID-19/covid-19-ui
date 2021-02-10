@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import Col from 'react-bootstrap/Col'
 
+const twitterBaseUrl = "https://twitter.com"
 
 const TweetCard: React.DC<Props> = memo((props) => {
     return (
@@ -17,7 +18,7 @@ const TweetCard: React.DC<Props> = memo((props) => {
 const TweetHeader: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-header">
-            <TweetAvatar href={props.avatar} />
+            <TweetAvatar href={props.avatar} username={props.username} />
             <TweetNames name={props.name} username={props.username} verified={props.verified} />
             <TweetTwitterLogo />
         </div>
@@ -27,7 +28,9 @@ const TweetHeader: React.DC<Props> = memo((props) => {
 const TweetAvatar: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-avatar">
-            <img className="tweet-avatar-img" src={props.href}/>
+            <a href={twitterBaseUrl + '/' + props.username} target="_blank">
+                <img className="tweet-avatar-img" src={props.href}/>
+            </a>
         </div>
     )
 })
@@ -35,7 +38,7 @@ const TweetAvatar: React.DC<Props> = memo((props) => {
 const TweetNames: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-names">
-            <TweetName value={props.name} verified={props.verified} />
+            <TweetName value={props.name} verified={props.verified} username={props.username} />
             <TweetUsername value={props.username} />
         </div>
     )
@@ -44,7 +47,7 @@ const TweetNames: React.DC<Props> = memo((props) => {
 const TweetVerifBadge: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-twitter-verif-badge">
-            <a href="" className="tweet-twitter-verif-badge-link" target="_blank">
+            <a href={twitterBaseUrl + '/' + props.username} className="tweet-twitter-verif-badge-link" target="_blank">
                 <svg viewBox="0 0 24 24" className="tweet-twitter-verif-badge-logo"><g><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path></g></svg>
             </a>
         </div>
@@ -54,9 +57,9 @@ const TweetVerifBadge: React.DC<Props> = memo((props) => {
 const TweetName: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-name">
-            <span>{props.value}</span>
+            <span><a href={twitterBaseUrl + '/' + props.username} target="_blank">{props.value}</a></span>
             {props.verified &&
-                <TweetVerifBadge />}
+                <TweetVerifBadge username={props.username} />}
         </div>
     )
 })
@@ -64,7 +67,7 @@ const TweetName: React.DC<Props> = memo((props) => {
 const TweetUsername: React.DC<Props> = memo((props) => {
     return (
         <div className="tweet-username">
-            <span>@{props.value}</span>
+            <span><a href={twitterBaseUrl + '/' + props.value} target="_blank">@{props.value}</a></span>
         </div>
     )
 })
