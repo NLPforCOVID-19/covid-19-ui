@@ -1,14 +1,17 @@
 import { memo } from 'react'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { selectRegions } from '@src/redux/regionsTopics'
+import { useTranslation } from '@src/context/LanguageContext'
 import { TwitterCard } from '@src/presenters/TwitterCard'
 
-export const TwitterCardContainer: React.FC<Props> = memo(({ country, topic }) => {
-  //const { lang } = useTranslation()
-  //const dispatch = useDispatch()
+export const TwitterCardContainer: React.FC<Props> = memo(({ region }) => {
+  const { lang, t } = useTranslation()
+  const dispatch = useDispatch()
   //const { byId, allIds } = useSelector((s: RootState) => selectEntriesForRegionTopicSearch(s, { region, topic }))
   //const viewMode = useSelector(selectViewMode)
   //const focusedToSearch = useSelector(selectFocusedToSearch)
-  //const regions = useSelector(selectRegions)
+  const regions = useSelector(selectRegions)
   //const { loading, noMore } = useSelector((s: RootState) =>
   //  selectLoadingNoMoreForRegionTopicSearch(s, { region, topic })
   //)
@@ -48,7 +51,7 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ country, topic }) =
   //])
 
   return (
-    <TwitterCard />
+    <TwitterCard region={region}/>
   )
 })
 TwitterCardContainer.displayName = 'TwitterCardContainer'

@@ -1,6 +1,19 @@
 import { memo } from 'react'
 import Col from 'react-bootstrap/Col'
 
+import { useTranslation } from '@src/context/LanguageContext'
+
+interface Props {
+    id: string,
+    name: string,
+    verified: boolean,
+    username: string,
+    avatar: Url,
+    contentOrig: string,
+    contentTrans: string,
+    timestamp: string
+}
+
 const twitterBaseUrl = "https://twitter.com"
 
 const TweetCard: React.DC<Props> = memo((props) => {
@@ -83,6 +96,7 @@ const TweetTwitterLogo: React.DC<Props> = memo((props) => {
 })
 
 const TweetBody: React.DC<Props> = memo((props) => {
+    const { lang, t } = useTranslation()
     return (
         <div className="tweet-body">
             <div className="tweet-message-original">
@@ -90,7 +104,7 @@ const TweetBody: React.DC<Props> = memo((props) => {
             </div>
             {props.msgtrans &&
                 <div className="tweet-message-translation">
-                    <span className="tweet-translation-header">Translation</span><br/>
+                    <span className="tweet-translation-header">{t('translation')}:</span><br/>
                     <span>{props.msgtrans}</span>
                 </div>}
         </div>
@@ -234,7 +248,7 @@ export const Tweet = memo(() => {
 
 
 export const TwitterCard: React.FC<Props> = memo((props) => {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
   // const { title, entryIds, loading, onClickTitle, noMore, onLoadMore, renderEntry, renderSubInfo } = props
   // const handleClickTitle = useCallback(
   //   (e: React.MouseEvent) => {

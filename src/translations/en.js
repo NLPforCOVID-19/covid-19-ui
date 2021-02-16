@@ -54,5 +54,6 @@ export const en = {
   feedback_useful: 'Is this site useful?',
   yes: 'Yes',
   no: 'No',
-  search: 'Search'
+  search: 'Search',
+  translation: 'Translation'
 }
