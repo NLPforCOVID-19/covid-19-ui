@@ -1,14 +1,21 @@
 import { memo } from 'react'
 
+import { RegionId, Topic } from '@src/types'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectRegions } from '@src/redux/regionsTopics'
 import { useTranslation } from '@src/context/LanguageContext'
 import { TwitterCard } from '@src/presenters/TwitterCard'
+import { selectEntriesForRegionTopicSearch } from '@src/redux/globalSelectors'
 
-export const TwitterCardContainer: React.FC<Props> = memo(({ region }) => {
-  const { lang, t } = useTranslation()
+interface Props {
+    region: RegionId,
+    topic: Topic
+}
+
+export const TwitterCardContainer: React.FC<Props> = memo(({ region, topic }) => {
+  const { lang } = useTranslation()
   const dispatch = useDispatch()
-  //const { byId, allIds } = useSelector((s: RootState) => selectEntriesForRegionTopicSearch(s, { region, topic }))
+  const { byId, allIds } = useSelector((s: RootState) => selectEntriesForRegionTopicSearch(s, { region, topic }))
   //const viewMode = useSelector(selectViewMode)
   //const focusedToSearch = useSelector(selectFocusedToSearch)
   const regions = useSelector(selectRegions)
@@ -20,17 +27,6 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ region }) => {
   //  if (focusedToSearch) return
   //  dispatch(loadMore({ region, topic, lang }))
   //}, [region, topic, dispatch, lang, focusedToSearch])
-
-  //const handleClickTitle = useCallback(() => {
-  //  dispatch(focusToSearch(false))
-  //  if (viewMode === 'topic') {
-  //    dispatch(setActiveRegion(region))
-  //    dispatch(changeViewMode('region'))
-  //  } else if (viewMode === 'region') {
-  //    dispatch(setActiveTopic(topic))
-  //    dispatch(changeViewMode('topic'))
-  //  }
-  //}, [dispatch, region, topic, viewMode])
 
   //const renderEntry = useCallback(
   //  (url: string) => {

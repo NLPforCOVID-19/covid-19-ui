@@ -14,8 +14,9 @@ import { TwitterCardContainer } from '@src/containers/TwitterCardContainer'
 
 export const TwitterViewContainer = () => {
     const { lang, t } = useTranslation()
+    const topics = useSelector(selectTopics)
     const regions = useSelector(selectRegions)
-    const { region: activeRegion } = useSelector(selectActive)
+    const { region: activeRegion, topic: activeTopic } = useSelector(selectActive)
     const viewMode = useSelector(selectViewMode)
     const currentQuery = useSelector(selectCurrentQuery)
     const isFocusedToSearch = useSelector(selectFocusedToSearch)
@@ -25,7 +26,7 @@ export const TwitterViewContainer = () => {
         return (
             <Container className="mt-2 mb-2">
                 <Row>
-                    <TwitterCardContainer region={viewMode === 'topic' ? '' : activeRegion} />
+                    <TwitterCardContainer region={activeRegion} topic={activeTopic} />
                 </Row>
             </Container>
         )
