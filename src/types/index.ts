@@ -33,6 +33,7 @@ export type Url = string
 export type Topic = string
 export type RegionId = string
 export type UnixEpoch = number
+export type TweetId = string
 
 interface EntryFlags {
   aboutRumor: boolean
@@ -54,6 +55,18 @@ export interface Entry {
   domainLabel: string
   flags: EntryFlags
   snippets: Record<Topic, string>
+}
+
+export interface TwitterEntry {
+  kind: 'TwitterEntry'
+  id: TweetId
+  name: string,
+  username: string,
+  verified: boolean,
+  avatar: Url,
+  contentOrig: string,
+  contentTrans: string,
+  timestamp: UnixEpoc
 }
 
 export interface TagForSearchSnippet {
