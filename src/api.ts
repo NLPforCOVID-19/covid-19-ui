@@ -86,7 +86,7 @@ const parseResponseRegion = (responseRegion: ResponseRegion): Region => {
 }
 
 export async function searchNews(lang: Lang, query: string): Promise<Record<RegionId, Entry[]>> {
-  const path = '/classes/search'
+  const path = '/articles/search'
   const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
       start: 0,
@@ -115,7 +115,7 @@ export async function searchNews(lang: Lang, query: string): Promise<Record<Regi
 // }
 
 export const fetchEntriesAll = async (lang: Lang, limitPerRegion?: number): Promise<Record<RegionId, Entry[]>> => {
-  const path = `/classes/all`
+  const path = `/articles/all`
   const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
       limit: limitPerRegion === undefined ? 10 : limitPerRegion,
@@ -136,7 +136,7 @@ export async function fetchNewsByClassAndCountry(
   limit: number,
   lang: Lang
 ): Promise<Entry[]> {
-  const path = `/classes/${klass}/${country}`
+  const path = `/articles/${klass}/${country}`
   const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
     params: {
       start: offset,
