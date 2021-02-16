@@ -1,0 +1,87 @@
+import { memo, useCallback, useMemo } from 'react'
+// import dayjs from 'dayjs'
+// import { useDispatch, useSelector } from 'react-redux'
+// 
+import { TwitterEntry, TwitterEntryWithSearchSnippet, RegionId, Topic } from '@src/types'
+import { TwitterEntryView } from '@src/presenters/TwitterEntryView'
+// import { useTranslation } from '@src/context/LanguageContext'
+// import * as Icon from '@src/components/Icons'
+// import { selectEditMode, startEdit } from '@src/redux/ui'
+// import { mainAltUrl } from '@src/utils'
+// import { SnippetTagRenderer } from '@src/presenters/SnippetTagRenderer'
+
+interface Props {
+  entry: TwitterEntryWithSearchSnippet | TwitterEntry
+  topic: Topic
+  regionId: RegionId
+}
+
+export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regionId }) => {
+  // const { lang, t } = useTranslation()
+  // const dispatch = useDispatch()
+  // const editMode = useSelector(selectEditMode)
+
+  // const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
+  // const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
+  // const countryDisplayName = useMemo(() => {
+  //   if (regionId === entry.country) return
+  //   return t(entry.country)
+  // }, [entry.country, t, regionId])
+
+  // const renderSnippet = useCallback(() => {
+  //   if (entry.kind === 'Entry') {
+  //     return <>{entry.snippets[topic]}</>
+  //   }
+  //   if (entry.kind === 'EntryWithSearchSnippet') {
+  //     return (
+  //       <>
+  //         {entry.searchSnippet.map((tag, i) => (
+  //           <SnippetTagRenderer key={i} tag={tag} />
+  //         ))}
+  //       </>
+  //     )
+  //   }
+  //   return entry
+  // }, [topic, entry])
+
+  // const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
+
+  // const handleClickEdit = useCallback(
+  //   (e: React.MouseEvent) => {
+  //     e.preventDefault()
+  //     if (!editMode) return
+  //     dispatch(startEdit(entry))
+  //   },
+  //   [editMode, dispatch, entry]
+  // )
+
+  // const renderIcon = useCallback(() => {
+  //   return (
+  //     <>
+  //       {entry.flags.useful ? <Icon.Useful /> : <Icon.Default />}
+  //       {editMode && (
+  //         <a href="#" onClick={handleClickEdit}>
+  //           <Icon.Edit />
+  //         </a>
+  //       )}
+  //     </>
+  //   )
+  // }, [entry.flags.useful, editMode, handleClickEdit])
+
+  return (
+    <TwitterEntryView
+      title={entry.title}
+      mainUrl={main}
+      altUrl={alt}
+      date={date}
+      sourceName={entry.domainLabel}
+      sourceUrl={entry.domainUrl}
+      renderSnippet={renderSnippet}
+      country={countryDisplayName}
+      renderIcon={renderIcon}
+      mark={aboutRumor}
+    />
+  )
+})
+TwitterEntryContainer.displayName = 'TwitterEntryContainer'
+

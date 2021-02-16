@@ -1,11 +1,15 @@
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 
 import { RegionId, Topic } from '@src/types'
+import { selectViewMode, selectFocusedToSearch } from '@src/redux/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectRegions } from '@src/redux/regionsTopics'
+import { RootState } from '@src/redux'
+import { loadMore } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
+import { TwitterEntryContainer } from '@src/containers/TwitterEntryContainer'
 import { TwitterCard } from '@src/presenters/TwitterCard'
-import { selectEntriesForRegionTopicSearch } from '@src/redux/globalSelectors'
+import { selectEntriesForRegionTopicSearch, selectLoadingNoMoreForRegionTopicSearch } from '@src/redux/globalSelectors'
 
 interface Props {
     region: RegionId,
@@ -16,38 +20,32 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ region, topic }) =>
   const { lang } = useTranslation()
   const dispatch = useDispatch()
   const { byId, allIds } = useSelector((s: RootState) => selectEntriesForRegionTopicSearch(s, { region, topic }))
-  //const viewMode = useSelector(selectViewMode)
-  //const focusedToSearch = useSelector(selectFocusedToSearch)
+  const viewMode = useSelector(selectViewMode)
+  const focusedToSearch = useSelector(selectFocusedToSearch)
   const regions = useSelector(selectRegions)
-  //const { loading, noMore } = useSelector((s: RootState) =>
-  //  selectLoadingNoMoreForRegionTopicSearch(s, { region, topic })
-  //)
+  const { loading, noMore } = useSelector((s: RootState) =>
+      selectLoadingNoMoreForRegionTopicSearch(s, { region, topic })
+  )
 
-  //const handleLoadMore = useCallback(() => {
-  //  if (focusedToSearch) return
-  //  dispatch(loadMore({ region, topic, lang }))
-  //}, [region, topic, dispatch, lang, focusedToSearch])
+  const handleLoadMore = useCallback(() => {
+    if (focusedToSearch) return
+    dispatch(loadMore({ region, topic, lang }))
+  }, [region, topic, dispatch, lang, focusedToSearch])
 
-  //const renderEntry = useCallback(
-  //  (url: string) => {
-  //    return <EntryContainer key={url} entry={byId[url]} regionId={region} topic={topic} />
-  //  },
-  //  [region, topic, byId]
-  //)
-
-  //const renderStats = useCallback(() => {
-  //  return <Stats stats={regions.byId[region].stats} />
-  //}, [regions.byId, region])
-
-  //const title = useMemo(() => (viewMode === 'region' ? topic : regions.byId[region].name), [
-  //  viewMode,
-  //  topic,
-  //  region,
-  //  regions.byId
-  //])
+  const renderTwitterEntry = useCallback(
+    (id: string) => {
+        return <TwitterEntryContainer key={id} entry={byId[id]} regionId={region} topic={topic} />
+    },
+    [region, topic, byId]
+  )
 
   return (
-    <TwitterCard region={region}/>
+    <TwitterCard 
+        entryIds={allIds} 
+        loading={loading}
+        noMore={noMore}
+        onLoadMore={handleLoadMore}
+        renderEntry={renderTwitterEntry} />
   )
 })
 TwitterCardContainer.displayName = 'TwitterCardContainer'

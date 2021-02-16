@@ -79,6 +79,11 @@ export interface EntryWithSearchSnippet extends Omit<Entry, 'kind'> {
   searchSnippet: TagForSearchSnippet[]
 }
 
+export interface TwitterEntryWithSearchSnippet extends Omit<TwitterEntry, 'kind'> {
+  kind: 'TwitterEntryWithSearchSnippet'
+  searchSnippet: TagForSearchSnippet[]
+}
+
 export interface RegionStats {
   confirmToday: number
   confirmTotal: number

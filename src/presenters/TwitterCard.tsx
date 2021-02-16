@@ -4,14 +4,11 @@ import Col from 'react-bootstrap/Col'
 import { useTranslation } from '@src/context/LanguageContext'
 
 interface Props {
-    id: string,
-    name: string,
-    verified: boolean,
-    username: string,
-    avatar: Url,
-    contentOrig: string,
-    contentTrans: string,
-    timestamp: string
+  entryIds: TweetId[]
+  loading: boolean
+  noMore: boolean
+  onLoadMore: () => void
+  renderEntry: (url: Url) => React.ReactElement
 }
 
 const twitterBaseUrl = "https://twitter.com"
