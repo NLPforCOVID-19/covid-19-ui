@@ -230,7 +230,7 @@ export async function searchTweets(lang: Lang, query: string): Promise<Record<Re
   })
   const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
   for (const r of Object.keys(response.data)) {
-    entriesByRegion[r] = response.data[r].map(parseResponseEntry)
+    entriesByRegion[r] = response.data[r].map(parseResponseTwitterEntry)
   }
   return entriesByRegion
 }
