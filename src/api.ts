@@ -2,7 +2,7 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 
-import { Entry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
+import { Entry, TwitterEntry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
@@ -40,6 +40,17 @@ interface ResponseEntry {
     title: string
   }
   url: string
+}
+
+interface ResponseTwitterEntry {
+  avatar: string
+  contentOrig: string
+  contentTrans: string
+  name: string
+  username: string
+  timestamp: string
+  verified: boolean
+  id: string
 }
 
 interface HistoryResponse {
@@ -206,3 +217,75 @@ export function postFeedback(content: string) {
   }
   return axios.post(baseUrl + path, data)
 }
+
+export async function searchTweets(lang: Lang, query: string): Promise<Record<RegionId, TwitterEntry[]>> {
+  const path = '/tweets/topic/search'
+  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+    params: {
+      start: 0,
+      limit: 50,
+      lang,
+      query
+    }
+  })
+  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
+  for (const r of Object.keys(response.data)) {
+    entriesByRegion[r] = response.data[r].map(parseResponseEntry)
+  }
+  return entriesByRegion
+}
+
+export const fetchTwitterEntriesAll = async (lang: Lang, limitPerRegion?: number): Promise<Record<RegionId, TwitterEntry[]>> => {
+  const path = `/tweets/topic/all`
+  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+    params: {
+      limit: limitPerRegion === undefined ? 10 : limitPerRegion,
+      lang
+    }
+  })
+  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
+  for (const r of Object.keys(response.data)) {
+    entriesByRegion[r] = response.data[r].map(parseResponseEntry)
+  }
+  return entriesByRegion
+}
+
+export async function fetchTweetsByClassAndCountry(
+  klass: Topic,
+  country: RegionId,
+  offset: number,
+  limit: number,
+  lang: Lang
+): Promise<TwitterEntry[]> {
+  const path = `/tweets/topic/${klass}/${country}`
+  const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
+    params: {
+      start: offset,
+      limit: limit,
+      lang: lang
+    }
+  })
+  console.log("response")
+  console.dir(response)
+  return response.data.map(parseResponseTwitterEntry)
+}
+
+const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): TwitterEntry => {
+  const snippets: Record<Topic, string> = {}
+  //for (const topic of responseEntry.topics) {
+  //  snippets[topic.name] = topic.snippet
+  //}
+  return {
+    kind: 'TwitterEntry',
+    id: responseEntry.id,
+    name: responseEntry.name,
+    username: responseEntry.username,
+    verified: responseEntry.verified,
+    avatar: responseEntry.avatar,
+    contentOrig: responseEntry.contentOrig,
+    contentTrans: responseEntry.contentTrans,
+    timestamp: Date.parse(responseEntry.timestamp),
+    snippets: snippets
+  }
+}
+
