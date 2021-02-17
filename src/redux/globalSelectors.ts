@@ -131,22 +131,22 @@ export const selectEntriesForMap = createSelector(
 
 export const selectTwitterEntriesForRegionTopicSearch = createSelector(
   [
-    (s: RootState) => s.entries.byUrl,
-    (s: RootState) => s.entriesByRegionTopic,
+    (s: RootState) => s.twitterEntries.byId,
+    (s: RootState) => s.twitterEntriesByRegionTopic,
     (s: RootState) => s.search,
     (s: RootState) => s.ui.focusedToSearch,
     (_: RootState, { region }: { region: RegionId }) => region,
     (_: RootState, { topic }: { topic: Topic }) => topic
   ],
-  (entriesByUrl, entriesByRT, search, focusedToSearch, r, t) => {
-    if (focusedToSearch) {
-      return {
-        byId: search.byUrl,
-        allIds: search.byRegion[r].allIds
-      }
-    }
+  (entriesById, entriesByRT, search, focusedToSearch, r, t) => {
+    //if (focusedToSearch) {
+    //  return {
+    //    byId: search.byUrl,
+    //    allIds: search.byRegion[r].allIds
+    //  }
+    //}
     return {
-      byId: entriesByUrl,
+      byId: entriesById,
       allIds: entriesByRT[r][t].entries
     }
   }

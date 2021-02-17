@@ -52,3 +52,12 @@ export const searchForAllRegion = createAsyncThunk(
     return API.searchNews(lang, query)
   }
 )
+
+export const loadMoreTweets = createAsyncThunk<TwitterEntry[], { region: RegionId; topic: Topic; lang: Lang }, { state: RootState }>(
+  'loadMoreTweets',
+  async ({ region, topic, lang }, ThunkAPI) => {
+    const offset = entriesNumSelector(ThunkAPI.getState(), { region, topic })
+    return API.fetchTweetsByClassAndCountry(topic, region, offset, 20, lang)
+  }
+)
+
