@@ -37,31 +37,6 @@ export const TwitterCard: React.FC<Props> = memo((props) => {
     }
   }, [infiniteScrollWrapRef, infiniteScrollObserveRef, loading, noMore, onLoadMore])
 
-  //return (
-  //  <Col>
-  //    <div className="wrap">
-  //      <div className="scroll">
-  //          <Tweet />
-  //      </div>
-  //    </div>
-  //    <style jsx>{`
-  //      .wrap {
-  //        height: 410px;
-  //        display: flex;
-  //        flex-flow: column nowrap;
-  //      }
-  //      .header {
-  //        font-size: 1.3rem;
-  //      }
-  //      .scroll {
-  //        overflow-y: auto;
-  //      }
-  //      .scroll-observe {
-  //        height: 1px;
-  //      }
-  //    `}</style>
-  //  </Col>
-  //)
   return (
     <Col>
       <div className="wrap">

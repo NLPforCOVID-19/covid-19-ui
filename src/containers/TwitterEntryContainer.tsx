@@ -1,13 +1,10 @@
 import { memo, useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
 // import { useDispatch, useSelector } from 'react-redux'
-// 
+ 
 import { TwitterEntry, TwitterEntryWithSearchSnippet, RegionId, Topic } from '@src/types'
 import { TwitterEntryView } from '@src/presenters/TwitterEntryView'
 import { useTranslation } from '@src/context/LanguageContext'
-// import * as Icon from '@src/components/Icons'
-// import { selectEditMode, startEdit } from '@src/redux/ui'
-// import { mainAltUrl } from '@src/utils'
 // import { SnippetTagRenderer } from '@src/presenters/SnippetTagRenderer'
 
 interface Props {
@@ -87,7 +84,6 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regi
 
   const { lang, t } = useTranslation()
   // const dispatch = useDispatch()
-  // const editMode = useSelector(selectEditMode)
 
   const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
 
