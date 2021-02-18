@@ -1,5 +1,5 @@
 import { memo, useCallback, useMemo } from 'react'
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
 // import { useDispatch, useSelector } from 'react-redux'
 // 
 import { TwitterEntry, TwitterEntryWithSearchSnippet, RegionId, Topic } from '@src/types'
@@ -89,12 +89,7 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regi
   // const dispatch = useDispatch()
   // const editMode = useSelector(selectEditMode)
 
-  // const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
-  // const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
-  // const countryDisplayName = useMemo(() => {
-  //   if (regionId === entry.country) return
-  //   return t(entry.country)
-  // }, [entry.country, t, regionId])
+  const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
 
   // const renderSnippet = useCallback(() => {
   //   if (entry.kind === 'Entry') {
@@ -121,7 +116,7 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regi
        avatar={entry.avatar}
        contentOrig={entry.contentOrig}
        contentTrans={entry.contentTrans}
-       timestamp={entry.timestamp}
+       timestamp={shortTimestamp}
     />
   )
 })
