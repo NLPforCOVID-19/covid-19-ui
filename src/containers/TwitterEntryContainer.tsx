@@ -1,6 +1,5 @@
 import { memo, useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
-// import { useDispatch, useSelector } from 'react-redux'
  
 import { TwitterEntry, TwitterEntryWithSearchSnippet, RegionId, Topic } from '@src/types'
 import { TwitterEntryView } from '@src/presenters/TwitterEntryView'
@@ -79,12 +78,10 @@ const data = [
 export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regionId }) => {
     // Temporary to simulate fake data.
     console.log(`TwitterEntryContainer entry=${entry} topic=${topic} regionId=${regionId}`)
-    const i = Math.floor(Math.random() * data.length)
-    entry = data[i]
+    //const i = Math.floor(Math.random() * data.length)
+    //entry = data[i]
 
   const { lang, t } = useTranslation()
-  // const dispatch = useDispatch()
-
   const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
 
   // const renderSnippet = useCallback(() => {

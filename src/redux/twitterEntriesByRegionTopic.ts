@@ -47,10 +47,10 @@ const twitterEntriesByRegionTopicSlice = createSlice({
         if (newEntries.length === 0) {
           state[region][topic].noMore = true
         }
-        state[region][topic].entries.push(...newEntries.map((e) => e.url))
-        for (const url of newEntries.map((e) => e.url)) {
-          if (state[region][topic].entries.includes(url)) continue
-          state[region][topic].entries.push(url)
+        state[region][topic].entries.push(...newEntries.map((e) => e.id))
+        for (const id of newEntries.map((e) => e.id)) {
+          if (state[region][topic].entries.includes(id)) continue
+          state[region][topic].entries.push(id)
         }
       })
       .addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {

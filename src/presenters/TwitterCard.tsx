@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef } from 'react'
 import Col from 'react-bootstrap/Col'
 
+import { Loading } from '@src/components/Loading'
 import { useTranslation } from '@src/context/LanguageContext'
 
 interface Props {
@@ -41,8 +42,14 @@ export const TwitterCard: React.FC<Props> = memo((props) => {
     <Col>
       <div className="wrap">
         <div className="scroll" ref={infiniteScrollWrapRef}>
-        {entryIds.length == 0 && noMore && <div className="text-muted text-center p-2">{t('no_info')}</div>}
-        {entryIds.map(renderEntry)}
+          {entryIds.length == 0 && noMore && <div className="text-muted text-center p-2">{t('no_info')}</div>}
+          {entryIds.map(renderEntry)}
+          {loading && (
+            <div className="text-center p-2">
+              <Loading />
+            </div>
+          )}
+          <div ref={infiniteScrollObserveRef} className="scroll-observe" />
         </div>
       </div>
       <style jsx>{`

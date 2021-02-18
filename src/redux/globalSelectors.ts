@@ -149,9 +149,7 @@ export const selectTwitterEntriesForRegionTopicSearch = createSelector(
     //}
     return {
       byId: entriesById,
-      //allIds: entriesByRT[r][t].entries
-      allIds: ['1357006259413635076','1001', '1002', '1003', '1004', '1354968521143324672']
-      //allIds: []
+      allIds: entriesByRT[r][t].entries
     }
   }
 )
