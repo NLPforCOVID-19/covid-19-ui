@@ -133,8 +133,10 @@ export const selectTwitterEntriesForRegionTopicSearch = createSelector(
   [
     (s: RootState) => s.twitterEntries.byId,
     (s: RootState) => s.twitterEntriesByRegionTopic,
-    (s: RootState) => s.search,
-    (s: RootState) => s.ui.focusedToSearch,
+    //(s: RootState) => s.search,
+    (s: RootState) => null,
+    //(s: RootState) => s.ui.focusedToSearch,
+    (s: RootState) => null,
     (_: RootState, { region }: { region: RegionId }) => region,
     (_: RootState, { topic }: { topic: Topic }) => topic
   ],
@@ -147,7 +149,26 @@ export const selectTwitterEntriesForRegionTopicSearch = createSelector(
     //}
     return {
       byId: entriesById,
-      allIds: entriesByRT[r][t].entries
+      //allIds: entriesByRT[r][t].entries
+      allIds: ['1357006259413635076','1001', '1002', '1003', '1004', '1354968521143324672']
+      //allIds: []
     }
   }
 )
+export const selectLoadingNoMoreTweetsForRegionTopicSearch = createSelector(
+  [
+    (s: RootState) => s.twitterEntriesByRegionTopic,
+    (s: RootState) => s.search.byRegion,
+    (s: RootState) => s.ui.focusedToSearch,
+    (_: RootState, { region }: { region: RegionId }) => region,
+    (_: RootState, { topic }: { topic: Topic }) => topic
+  ],
+  (byRT, searchByR, focus, r, t) => {
+    console.log(`selectLoadingNoMoreTweetsForRegionTopicSearch focus=${focus} r=${r} t=${t}`)
+    console.log(`byRT[r][t]=${byRT[r][t]}`)
+    console.dir(byRT[r][t])
+    const { loading, noMore } = focus ? searchByR[r] : byRT[r][t]
+    return { loading, noMore }
+  }
+)
+

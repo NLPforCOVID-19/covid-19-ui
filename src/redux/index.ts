@@ -10,8 +10,7 @@ import searchReducer from './search'
 
 const rootReducer = combineReducers({
   entries: entriesReducer,
-  //twitterEntries: twitterEntriesReducer,
-  twitterEntries: {},
+  twitterEntries: twitterEntriesReducer,
   regionsTopics: regionsTopicsReducer,
   entriesByRegionTopic: entriesByRegionTopicReducer,
   twitterEntriesByRegionTopic: twitterEntriesByRegionTopicReducer,

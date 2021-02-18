@@ -3,15 +3,15 @@ import { createSlice } from '@reduxjs/toolkit'
 import { TweetId, TwitterEntry } from '@src/types'
 import { loadMoreTweets } from '@src/redux/asyncActions'
 
-interface TwitterState {
+interface State {
   byId: Record<TweetId, TwitterEntry>
 }
 
-const initialTwitterState: TwitterState = {
+const initialState: State = {
   byId: {}
 }
 
-const skipsertTwitterEntries = (state: TwitterState, entries: TwitterEntry[]) => {
+const skipsertTwitterEntries = (state: State, entries: TwitterEntry[]) => {
   for (const e of entries) {
     if (state.byId[e.id]) continue
     state.byId[e.id] = e
@@ -20,7 +20,7 @@ const skipsertTwitterEntries = (state: TwitterState, entries: TwitterEntry[]) =>
 
 const twitterEntriesSlice = createSlice({
   name: 'twitterEntries',
-  initialTwitterState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     console.log("twitterEntriesSlice.addCase")

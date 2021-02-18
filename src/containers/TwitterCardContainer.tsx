@@ -5,11 +5,11 @@ import { selectViewMode, selectFocusedToSearch } from '@src/redux/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectRegions } from '@src/redux/regionsTopics'
 import { RootState } from '@src/redux'
-import { loadMore } from '@src/redux/asyncActions'
+import { loadMore, loadMoreTweets } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { TwitterEntryContainer } from '@src/containers/TwitterEntryContainer'
 import { TwitterCard } from '@src/presenters/TwitterCard'
-import { selectTwitterEntriesForRegionTopicSearch, selectLoadingNoMoreForRegionTopicSearch } from '@src/redux/globalSelectors'
+import { selectTwitterEntriesForRegionTopicSearch, selectLoadingNoMoreTweetsForRegionTopicSearch } from '@src/redux/globalSelectors'
 
 interface Props {
     region: RegionId,
@@ -20,31 +20,31 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ region, topic }) =>
   const { lang } = useTranslation()
   const dispatch = useDispatch()
   console.log("Before")
-  const { byId, allIds } = {null, null}
-  //const { byId, allIds } = useSelector((s: RootState) => selectTwitterEntriesForRegionTopicSearch(s, { region, topic }))
-  //console.log("byId")
+  const { byId, allIds } = useSelector((s: RootState) => selectTwitterEntriesForRegionTopicSearch(s, { region, topic }))
+  //console.log("byId type="+(typeof byId))
   //console.dir(byId)
+  console.log(`allIds=${allIds}`)
   const viewMode = useSelector(selectViewMode)
   const focusedToSearch = useSelector(selectFocusedToSearch)
   const regions = useSelector(selectRegions)
   const { loading, noMore } = useSelector((s: RootState) =>
-      selectLoadingNoMoreForRegionTopicSearch(s, { region, topic })
+      selectLoadingNoMoreTweetsForRegionTopicSearch(s, { region, topic })
   )
 
   const handleLoadMoreTweets = useCallback(() => {
-    //  Do nothing for now.
     console.log('handleLoadMoreTweets')
-    //if (focusedToSearch) return
-    //dispatch(loadMore({ region, topic, lang }))
+    if (focusedToSearch) return
+    dispatch(loadMoreTweets({ region, topic, lang }))
   }, [region, topic, dispatch, lang, focusedToSearch])
 
-  const renderTwitterEntry = {}
-  //const renderTwitterEntry = useCallback(
-  //  (id: string) => {
-  //      return <TwitterEntryContainer key={id} entry={byId[id]} regionId={region} topic={topic} />
-  //  },
-  //  [region, topic, byId]
-  //)
+  const renderTwitterEntry = useCallback(
+    (id: string) => {
+        console.log(`renderTwitterEntry id=${id}`)
+        //return <div>TwitterEntry key={id} region={region} topic={topic} entry={byId[id]}</div>
+        return <TwitterEntryContainer key={id} entry={byId[id]} regionId={region} topic={topic} />
+    },
+    [region, topic, byId]
+  )
 
   return (
     <TwitterCard 
