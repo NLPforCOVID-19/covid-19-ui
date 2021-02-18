@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 
-import * as Icons from '@src/components/Icons'
 import { useTranslation } from '@src/context/LanguageContext'
 
 interface Props {
@@ -170,69 +169,6 @@ export const TwitterEntryView: React.FC<Props> = memo((props) => {
             </article>
         </div>
     )
-  //return (
-  //  <div className="wrap">
-  //    <div className="news">
-  //      <div className="title text-info">
-  //        <span className="small text-muted">[{timestamp}]</span>
-  //        {mark && (
-  //          <span>
-  //            &thinsp;<mark className="small text-muted">{mark}</mark>
-  //          </span>
-  //        )}
-  //        {country && <span className="small text-muted">&thinsp;({country})</span>}
-  //        <a href={mainUrl} target="_blank" rel="noreferrer">
-  //          &thinsp;{name}
-  //        </a>
-  //      </div>
-  //      <div className="source small">
-  //        <a href={`http://${sourceUrl}`} target="_blank" rel="noreferrer" className="text-muted">
-  //          {sourceName}
-  //        </a>
-  //      </div>
-  //      <div className="snippet small text-secondary">renderSnippetHere</div>
-  //    </div>
-  //    <div className="spacer" />
-  //    {altUrl && (
-  //      <div>
-  //        <a href={altUrl} target="_blank" rel="noreferrer" title={t('元の言語で表示')}>
-  //          <Icons.OpenInNew />
-  //        </a>
-  //      </div>
-  //    )}
-  //    <style jsx>{`
-  //      .wrap {
-  //        display: flex;
-  //        padding: 3px;
-  //      }
-  //      .icon {
-  //        flex: 0 0 16px;
-  //        margin-right: 3px;
-  //      }
-  //      .spacer {
-  //        flex: 1 0 auto;
-  //      }
-  //      .title {
-  //        display: -webkit-box;
-  //        overflow: hidden;
-  //        -webkit-line-clamp: 2;
-  //        -webkit-box-orient: vertical;
-  //      }
-  //      mark {
-  //        background-color: #ffee70;
-  //      }
-  //      .source > a {
-  //        text-decoration: underline;
-  //      }
-  //      .snippet {
-  //        display: -webkit-box;
-  //        overflow: hidden;
-  //        -webkit-line-clamp: 3;
-  //        -webkit-box-orient: vertical;
-  //      }
-  //    `}</style>
-  //  </div>
-  //)
 })
 TwitterEntryView.displayName = 'TwitterEntryView'
 
