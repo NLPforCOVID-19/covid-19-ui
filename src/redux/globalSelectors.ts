@@ -169,4 +169,9 @@ export const selectLoadingNoMoreTweetsForRegionTopicSearch = createSelector(
     return { loading, noMore }
   }
 )
+export const twitterEntriesNumSelector = createSelector(
+  (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
+    state.twitterEntriesByRegionTopic[region][topic].entries,
+  (entries) => entries.length
+)
 

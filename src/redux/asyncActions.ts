@@ -4,7 +4,7 @@ import * as API from '../api'
 
 import { RootState } from '@src/redux/index'
 import { Entry, Lang, RegionId, Topic, ViewMode } from '@src/types'
-import { entriesNumSelector } from '@src/redux/globalSelectors'
+import { entriesNumSelector, twitterEntriesNumSelector } from '@src/redux/globalSelectors'
 
 const parseHashToViewState = (hash: string): { mode: ViewMode; target: string } => {
   // #r/jp -> ['r', 'jp']
@@ -56,7 +56,7 @@ export const searchForAllRegion = createAsyncThunk(
 export const loadMoreTweets = createAsyncThunk<TwitterEntry[], { region: RegionId; topic: Topic; lang: Lang }, { state: RootState }>(
   'loadMoreTweets',
   async ({ region, topic, lang }, ThunkAPI) => {
-    const offset = entriesNumSelector(ThunkAPI.getState(), { region, topic })
+    const offset = twitterEntriesNumSelector(ThunkAPI.getState(), { region, topic })
     // We ignore the topic for tweets because they all belong to the "all" category.
     return API.fetchTweetsByClassAndCountry("all", region, offset, 20, lang)
   }
