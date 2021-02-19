@@ -23,7 +23,6 @@ const twitterEntriesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    console.log("twitterEntriesSlice.addCase")
     builder.addCase(loadMoreTweets.fulfilled, (state, action) => skipsertTwitterEntries(state, action.payload))
   }
 })

@@ -34,13 +34,11 @@ const twitterEntriesByRegionTopicSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadMoreTweets.pending, (state, action) => {
-        console.log('twitterEntriesByRegionTopic.addCase1')
         const { region, topic } = action.meta.arg
         createInitialStateForEachRegionTopic(state, region, topic)
         state[region][topic].loading = true
       })
       .addCase(loadMoreTweets.fulfilled, (state, action) => {
-        console.log('twitterEntriesByRegionTopic.addCase2')
         const { region, topic } = action.meta.arg
         const newEntries = action.payload
         state[region][topic].loading = false
@@ -54,7 +52,6 @@ const twitterEntriesByRegionTopicSlice = createSlice({
         }
       })
       .addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {
-        console.log('twitterEntriesByRegionTopic.addCase3')
         const { regions, topics } = action.payload
         for (const region of regions) {
           state[region.id] = {}

@@ -162,9 +162,6 @@ export const selectLoadingNoMoreTweetsForRegionTopicSearch = createSelector(
     (_: RootState, { topic }: { topic: Topic }) => topic
   ],
   (byRT, searchByR, focus, r, t) => {
-    console.log(`selectLoadingNoMoreTweetsForRegionTopicSearch focus=${focus} r=${r} t=${t}`)
-    console.log(`byRT[r][t]=${byRT[r][t]}`)
-    console.dir(byRT[r][t])
     const { loading, noMore } = focus ? searchByR[r] : byRT[r][t]
     return { loading, noMore }
   }
