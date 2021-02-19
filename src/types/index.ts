@@ -67,6 +67,7 @@ export interface TwitterEntry {
   contentOrig: string,
   contentTrans: string,
   timestamp: UnixEpoc
+  lang: string
 }
 
 export interface TagForSearchSnippet {

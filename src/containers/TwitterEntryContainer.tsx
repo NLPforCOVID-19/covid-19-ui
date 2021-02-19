@@ -15,7 +15,7 @@ interface Props {
 export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regionId }) => {
   const { lang, t } = useTranslation()
   const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
-
+  const contentTrans = entry.lang == lang ? null : entry.contentTrans;
   // const renderSnippet = useCallback(() => {
   //   if (entry.kind === 'Entry') {
   //     return <>{entry.snippets[topic]}</>
@@ -40,7 +40,7 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regi
        verified={entry.verified}
        avatar={entry.avatar}
        contentOrig={entry.contentOrig}
-       contentTrans={entry.contentTrans}
+       contentTrans={contentTrans}
        timestamp={shortTimestamp}
     />
   )

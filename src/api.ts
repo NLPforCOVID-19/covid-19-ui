@@ -265,8 +265,6 @@ export async function fetchTweetsByClassAndCountry(
       lang: lang
     }
   })
-  console.log("response")
-  console.dir(response)
   return response.data.map(parseResponseTwitterEntry)
 }
 
@@ -275,6 +273,16 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
   //for (const topic of responseEntry.topics) {
   //  snippets[topic.name] = topic.snippet
   //}
+
+  const cleanContent = function(content) {
+      let contentWithoutUrl = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
+      let contentWithoutHashtab = contentWithoutUrl.replaceAll(/#\w+\s*/g, '')
+      return contentWithoutHashtab
+  }
+
+  const cleanContentOrig = cleanContent(responseEntry.contentOrig);
+  const cleanContentTrans = cleanContent(responseEntry.contentTrans);
+
   return {
     kind: 'TwitterEntry',
     id: responseEntry.id,
@@ -282,9 +290,10 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     username: responseEntry.username,
     verified: responseEntry.verified,
     avatar: responseEntry.avatar,
-    contentOrig: responseEntry.contentOrig,
-    contentTrans: responseEntry.contentTrans,
+    contentOrig: cleanContentOrig,
+    contentTrans: cleanContentTrans,
     timestamp: Date.parse(responseEntry.timestamp),
+    lang: responseEntry.lang,
     snippets: snippets
   }
 }
