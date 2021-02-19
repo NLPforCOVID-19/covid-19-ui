@@ -294,6 +294,8 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     contentTrans: cleanContentTrans,
     timestamp: Date.parse(responseEntry.timestamp),
     lang: responseEntry.lang,
+    country: responseEntry.country,
+    retweetCount: responseEntry.retweetCount,
     snippets: snippets
   }
 }

@@ -68,6 +68,8 @@ export interface TwitterEntry {
   contentTrans: string,
   timestamp: UnixEpoc
   lang: string
+  country: string
+  retweetCount: number
 }
 
 export interface TagForSearchSnippet {

@@ -42,6 +42,8 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regi
        contentOrig={entry.contentOrig}
        contentTrans={contentTrans}
        timestamp={shortTimestamp}
+       retweetCount={entry.retweetCount}
+       country={entry.country}
     />
   )
 })
