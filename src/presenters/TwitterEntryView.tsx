@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import { toast } from 'react-hot-toast'
 
 import { useTranslation } from '@src/context/LanguageContext'
 
@@ -105,7 +105,7 @@ const TweetTwitterLogo: React.DC<Props> = memo((props) => {
 })
 
 const TweetBody: React.DC<Props> = memo((props) => {
-  const { lang, t } = useTranslation()
+  const { t } = useTranslation()
   return (
     <div className="tweet-body">
       <div className="tweet-message-original">
@@ -175,11 +175,9 @@ const TweetTwitterActionCopyLink: React.FC<Props> = memo((props) => {
     const link = `${twitterBaseUrl}/${props.username}/status/${props.status}`
     navigator.clipboard.writeText(link).then(
       () => {
-        console.log(t('twitter_link_saved_to_clipboard'))
         notify(t('twitter_link_saved_to_clipboard'))
       },
       () => {
-        console.log(t('twitter_link_not_saved_to_clipboard'))
         notify(t('twitter_link_not_saved_to_clipboard'))
       }
     )
@@ -228,8 +226,7 @@ const TweetFooter: React.FC<Props> = memo((props) => {
   )
 })
 export const TwitterEntryView: React.FC<Props> = memo((props) => {
-  const { t } = useTranslation()
-  const { id, name, username, verified, avatar, contentOrig, contentTrans, timestamp, retweetCount, country } = props
+  const { id, name, username, verified, avatar, contentOrig, contentTrans, timestamp, retweetCount } = props
   return (
     <div className="tweet-card mb-2 small text-secondary border rounded mr-2">
       <article role="tweet-article" className="tweet-article">

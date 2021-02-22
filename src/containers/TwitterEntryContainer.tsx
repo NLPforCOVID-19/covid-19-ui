@@ -1,19 +1,17 @@
-import { memo, useCallback, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import dayjs from 'dayjs'
 
-import { TwitterEntry, TwitterEntryWithSearchSnippet, RegionId, Topic } from '@src/types'
+import { TwitterEntry, TwitterEntryWithSearchSnippet } from '@src/types'
 import { TwitterEntryView } from '@src/presenters/TwitterEntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 // import { SnippetTagRenderer } from '@src/presenters/SnippetTagRenderer'
 
 interface Props {
   entry: TwitterEntryWithSearchSnippet | TwitterEntry
-  topic: Topic
-  regionId: RegionId
 }
 
-export const TwitterEntryContainer: React.FC<Props> = memo(({ entry, topic, regionId }) => {
-  const { lang, t } = useTranslation()
+export const TwitterEntryContainer: React.FC<Props> = memo(({ entry }) => {
+  const { lang } = useTranslation()
   const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
   const contentTrans = entry.lang == lang ? null : entry.contentTrans
   // const renderSnippet = useCallback(() => {

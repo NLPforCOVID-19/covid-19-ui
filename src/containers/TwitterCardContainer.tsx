@@ -2,8 +2,7 @@ import { memo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RegionId, Topic } from '@src/types'
-import { selectViewMode, selectFocusedToSearch } from '@src/redux/ui'
-import { selectRegions } from '@src/redux/regionsTopics'
+import { selectFocusedToSearch } from '@src/redux/ui'
 import { RootState } from '@src/redux'
 import { loadMoreTweets } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
@@ -23,9 +22,7 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ region, topic }) =>
   const { lang } = useTranslation()
   const dispatch = useDispatch()
   const { byId, allIds } = useSelector((s: RootState) => selectTwitterEntriesForRegionTopicSearch(s, { region, topic }))
-  const viewMode = useSelector(selectViewMode)
   const focusedToSearch = useSelector(selectFocusedToSearch)
-  const regions = useSelector(selectRegions)
   const { loading, noMore } = useSelector((s: RootState) =>
     selectLoadingNoMoreTweetsForRegionTopicSearch(s, { region, topic })
   )

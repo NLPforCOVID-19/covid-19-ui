@@ -133,10 +133,8 @@ export const selectTwitterEntriesForRegionTopicSearch = createSelector(
   [
     (s: RootState) => s.twitterEntries.byId,
     (s: RootState) => s.twitterEntriesByRegionTopic,
-    //(s: RootState) => s.search,
-    (s: RootState) => null,
-    //(s: RootState) => s.ui.focusedToSearch,
-    (s: RootState) => null,
+    (s: RootState) => s.search,
+    (s: RootState) => s.ui.focusedToSearch,
     (_: RootState, { region }: { region: RegionId }) => region,
     (_: RootState, { topic }: { topic: Topic }) => topic
   ],
