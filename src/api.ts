@@ -281,7 +281,7 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     //const contentWithoutUrl = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
     //const contentWithoutHashtab = contentWithoutUrl.replaceAll(/#\w+\s*/g, '')
     //return contentWithoutHashtab
-    let temp : string = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
+    let temp: string = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
     temp = temp.replaceAll(/#\w+\s*/g, '')
     return temp
   }

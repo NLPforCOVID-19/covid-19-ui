@@ -3,57 +3,70 @@ import { toast } from 'react-hot-toast'
 
 import { useTranslation } from '@src/context/LanguageContext'
 
-interface Props {
-  id: TweetId
-  name: string
-  username: string
-  verified: boolean
-  avatar: string
-  contentOrig: string
-  contentTrans: string
-  timestamp: date
-}
-
 const notify = (msg) => toast(msg)
 
 const twitterBaseUrl = 'https://twitter.com'
 
-const TweetHeader: React.FC<Props> = memo((props) => {
+interface TweetHeaderProps {
+  avatar: string
+  name: string
+  status: TweetId
+  username: string
+  verified: boolean
+}
+const TweetHeader: React.FC<TweetHeaderProps> = memo(({ avatar, name, status, username, verified }) => {
   return (
     <div className="tweet-header">
-      <TweetAvatar href={props.avatar} username={props.username} />
-      <TweetNames name={props.name} username={props.username} verified={props.verified} />
-      <TweetTwitterLogo username={props.username} status={props.status} />
+      <TweetAvatar href={avatar} username={username} />
+      <TweetNames name={name} username={username} verified={verified} />
+      <TweetTwitterLogo username={username} status={status} />
     </div>
   )
 })
-TweetHeader.displayName = "TweetHeader"
+TweetHeader.displayName = 'TweetHeader'
 
-const TweetAvatar: React.FC<Props> = memo((props) => {
+interface TweetAvatarProps {
+  username: string
+  href: string
+}
+const TweetAvatar: React.FC<TweetAvatarProps> = memo(({ href, username }) => {
   return (
     <div className="tweet-avatar">
-      <a href={twitterBaseUrl + '/' + props.username} target="_blank" rel="noreferrer">
-        <img className="tweet-avatar-img" src={props.href} />
+      <a href={twitterBaseUrl + '/' + username} target="_blank" rel="noreferrer">
+        <img className="tweet-avatar-img" src={href} />
       </a>
     </div>
   )
 })
-TweetAvatar.displayName = "TweetAvatar"
+TweetAvatar.displayName = 'TweetAvatar'
 
-const TweetNames: React.FC<Props> = memo((props) => {
+interface TweetNamesProps {
+  name: string
+  username: string
+  verified: boolean
+}
+const TweetNames: React.FC<TweetNamesProps> = memo(({ name, username, verified }) => {
   return (
     <div className="tweet-names">
-      <TweetName value={props.name} verified={props.verified} username={props.username} />
-      <TweetUsername value={props.username} />
+      <TweetName value={name} verified={verified} username={username} />
+      <TweetUsername value={username} />
     </div>
   )
 })
-TweetNames.displayName = "TweetNames"
+TweetNames.displayName = 'TweetNames'
 
-const TweetVerifBadge: React.FC<Props> = memo((props) => {
+interface TweetVerifBadgeProps {
+  username: string
+}
+const TweetVerifBadge: React.FC<TweetVerifBadgeProps> = memo(({ username }) => {
   return (
     <div className="tweet-twitter-verif-badge">
-      <a href={twitterBaseUrl + '/' + props.username} className="tweet-twitter-verif-badge-link" target="_blank" rel="noreferrer">
+      <a
+        href={twitterBaseUrl + '/' + username}
+        className="tweet-twitter-verif-badge-link"
+        target="_blank"
+        rel="noreferrer"
+      >
         <svg viewBox="0 0 24 24" className="tweet-twitter-verif-badge-logo">
           <g>
             <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path>
@@ -63,40 +76,52 @@ const TweetVerifBadge: React.FC<Props> = memo((props) => {
     </div>
   )
 })
-TweetVerifBadge.displayName = "TweetVerifBadge"
+TweetVerifBadge.displayName = 'TweetVerifBadge'
 
-const TweetName: React.FC<Props> = memo((props) => {
+interface TweetNameProps {
+  username: string
+  value: string
+  verified: boolean
+}
+const TweetName: React.FC<TweetNameProps> = memo(({ username, value, verified }) => {
   return (
     <div className="tweet-name">
       <span>
-        <a href={twitterBaseUrl + '/' + props.username} target="_blank" rel="noreferrer">
-          {props.value}
+        <a href={twitterBaseUrl + '/' + username} target="_blank" rel="noreferrer">
+          {value}
         </a>
       </span>
-      {props.verified && <TweetVerifBadge username={props.username} />}
+      {verified && <TweetVerifBadge username={username} />}
     </div>
   )
 })
-TweetName.displayName = "TweetName"
+TweetName.displayName = 'TweetName'
 
-const TweetUsername: React.FC<Props> = memo((props) => {
+interface TweetUsernameProps {
+  value: string
+}
+const TweetUsername: React.FC<TweetUsernameProps> = memo(({ value }) => {
   return (
     <div className="tweet-username">
       <span>
-        <a href={twitterBaseUrl + '/' + props.value} target="_blank" rel="noreferrer">
-          @{props.value}
+        <a href={twitterBaseUrl + '/' + value} target="_blank" rel="noreferrer">
+          @{value}
         </a>
       </span>
     </div>
   )
 })
-TweetUsername.displayName = "TweetUsername"
+TweetUsername.displayName = 'TweetUsername'
 
-const TweetTwitterLogo: React.FC<Props> = memo((props) => {
+interface TweetTwitterLogoProps {
+  status: TweetId
+  username: string
+}
+const TweetTwitterLogo: React.FC<TweetTwitterLogoProps> = memo(({ status, username }) => {
   return (
     <div className="tweet-twitter-logo">
       <a
-        href={twitterBaseUrl + '/' + props.username + '/status/' + props.status}
+        href={twitterBaseUrl + '/' + username + '/status/' + status}
         className="tweet-twitter-logo-link"
         target="_blank"
         rel="noreferrer"
@@ -110,41 +135,51 @@ const TweetTwitterLogo: React.FC<Props> = memo((props) => {
     </div>
   )
 })
-TweetTwitterLogo.displayName = "TweetTwitterLogo"
+TweetTwitterLogo.displayName = 'TweetTwitterLogo'
 
-const TweetBody: React.FC<Props> = memo((props) => {
+interface TweetBodyProps {
+  msgorig: string
+  msgtrans: string
+}
+const TweetBody: React.FC<TweetBodyProps> = memo(({ msgorig, msgtrans }) => {
   const { t } = useTranslation()
   return (
     <div className="tweet-body">
       <div className="tweet-message-original">
-        <span>{props.msgorig}</span>
+        <span>{msgorig}</span>
       </div>
-      {props.msgtrans && (
+      {msgtrans && (
         <div className="tweet-message-translation">
           <span className="tweet-translation-header">{t('translation')}:</span>
           <br />
-          <span>{props.msgtrans}</span>
+          <span>{msgtrans}</span>
         </div>
       )}
     </div>
   )
 })
-TweetBody.displayName = "TweetBody"
+TweetBody.displayName = 'TweetBody'
 
-const TweetTimestamp: React.FC<Props> = memo((props) => {
+interface TweetTimestampProps {
+  value: date
+}
+const TweetTimestamp: React.FC<TweetTimestampProps> = memo(({ value }) => {
   return (
     <div className="tweet-timestamp">
-      <span>{props.value}</span>
+      <span>{value}</span>
     </div>
   )
 })
-TweetTimestamp.displayName = "TweetTimestamp"
+TweetTimestamp.displayName = 'TweetTimestamp'
 
-const TweetTwitterActionReply: React.FC<Props> = memo((props) => {
+interface TweetTwitterActionReplyProps {
+  status: TweetId
+}
+const TweetTwitterActionReply: React.FC<TweetTwitterActionReplyProps> = memo(({ status }) => {
   return (
     <div className="tweet-twitter-action tweet-twitter-action-reply">
       <a
-        href={twitterBaseUrl + '/intent/tweet?in_reply_to=' + props.status}
+        href={twitterBaseUrl + '/intent/tweet?in_reply_to=' + status}
         className="tweet-twitter-action-reply-link"
         target="_blank"
         rel="noreferrer"
@@ -158,14 +193,18 @@ const TweetTwitterActionReply: React.FC<Props> = memo((props) => {
     </div>
   )
 })
-TweetTwitterActionReply.displayName = "TweetTwitterActionReply"
+TweetTwitterActionReply.displayName = 'TweetTwitterActionReply'
 
-const TweetTwitterActionRetweet: React.FC<Props> = memo((props) => {
-  const retweetCountElement = props.retweetCount == 0 ? '' : `  ~${props.retweetCount}`
+interface TweetTwitterActionRetweetProps {
+  retweetCount: number
+  status: TweetId
+}
+const TweetTwitterActionRetweet: React.FC<TweetTwitterActionRetweetProps> = memo(({ retweetCount, status }) => {
+  const retweetCountElement = retweetCount == 0 ? '' : `  ~${retweetCount}`
   return (
     <div className="tweet-twitter-action tweet-twitter-action-retweet">
       <a
-        href={twitterBaseUrl + '/intent/retweet?tweet_id=' + props.status}
+        href={twitterBaseUrl + '/intent/retweet?tweet_id=' + status}
         className="tweet-twitter-action-retweet-link"
         target="_blank"
         rel="noreferrer"
@@ -180,13 +219,17 @@ const TweetTwitterActionRetweet: React.FC<Props> = memo((props) => {
     </div>
   )
 })
-TweetTwitterActionRetweet.displayName = "TweetTwitterActionRetweet"
+TweetTwitterActionRetweet.displayName = 'TweetTwitterActionRetweet'
 
-const TweetTwitterActionCopyLink: React.FC<Props> = memo((props) => {
+interface TweetTwitterActionCopyLinkProps {
+  status: TweetId
+  username: string
+}
+const TweetTwitterActionCopyLink: React.FC<TweetTwitterActionCopyLinkProps> = memo(({ status, username }) => {
   const { t } = useTranslation()
-  const handleClick = function (e : MouseEvent) {
+  const handleClick = function (e: MouseEvent) {
     e.preventDefault()
-    const link = `${twitterBaseUrl}/${props.username}/status/${props.status}`
+    const link = `${twitterBaseUrl}/${username}/status/${status}`
     navigator.clipboard.writeText(link).then(
       () => {
         notify(t('twitter_link_saved_to_clipboard'))
@@ -209,13 +252,16 @@ const TweetTwitterActionCopyLink: React.FC<Props> = memo((props) => {
     </div>
   )
 })
-TweetTwitterActionCopyLink.displayName = "TweetTwitterActionCopyLink"
+TweetTwitterActionCopyLink.displayName = 'TweetTwitterActionCopyLink'
 
-const TweetTwitterActionLike: React.FC<Props> = memo((props) => {
+interface TweetTwitterActionLikeProps {
+  status: TweetId
+}
+const TweetTwitterActionLike: React.FC<TweetTwitterActionLikeProps> = memo(({ status }) => {
   return (
     <div className="tweet-twitter-action tweet-twitter-action-like">
       <a
-        href={twitterBaseUrl + '/intent/like?tweet_id=' + props.status}
+        href={twitterBaseUrl + '/intent/like?tweet_id=' + status}
         className="tweet-twitter-action-like-link"
         target="_blank"
         rel="noreferrer"
@@ -229,21 +275,37 @@ const TweetTwitterActionLike: React.FC<Props> = memo((props) => {
     </div>
   )
 })
-TweetTwitterActionLike.displayName = "TweetTwitterActionLike"
+TweetTwitterActionLike.displayName = 'TweetTwitterActionLike'
 
-const TweetFooter: React.FC<Props> = memo((props) => {
+interface TweetTwitterActionLikeProps {
+  retweetCount: number
+  status: TweetId
+  timestamp: date
+  username: string
+}
+const TweetFooter: React.FC<TweetTwitterActionLikeProps> = memo(({ retweetCount, status, timestamp, username }) => {
   return (
     <div className="tweet-footer">
-      <TweetTwitterActionReply status={props.status} />
-      <TweetTwitterActionRetweet status={props.status} retweetCount={props.retweetCount} />
-      <TweetTwitterActionLike status={props.status} />
-      <TweetTwitterActionCopyLink status={props.status} username={props.username} />
-      <TweetTimestamp value={props.timestamp} />
+      <TweetTwitterActionReply status={status} />
+      <TweetTwitterActionRetweet status={status} retweetCount={retweetCount} />
+      <TweetTwitterActionLike status={status} />
+      <TweetTwitterActionCopyLink status={status} username={username} />
+      <TweetTimestamp value={timestamp} />
     </div>
   )
 })
-TweetFooter.displayName = "TweetFooter"
+TweetFooter.displayName = 'TweetFooter'
 
+interface Props {
+  id: TweetId
+  name: string
+  username: string
+  verified: boolean
+  avatar: string
+  contentOrig: string
+  contentTrans: string
+  timestamp: date
+}
 export const TwitterEntryView: React.FC<Props> = memo((props) => {
   const { id, name, username, verified, avatar, contentOrig, contentTrans, timestamp, retweetCount } = props
   return (

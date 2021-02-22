@@ -45,8 +45,8 @@ const twitterEntriesByRegionTopicSlice = createSlice({
         if (newEntries.length === 0) {
           state[region][topic].noMore = true
         }
-        state[region][topic].entries.push(...newEntries.map((e : TwitterEntry) => e.id))
-        for (const id of newEntries.map((e : TwitterEntry) => e.id)) {
+        state[region][topic].entries.push(...newEntries.map((e: TwitterEntry) => e.id))
+        for (const id of newEntries.map((e: TwitterEntry) => e.id)) {
           if (state[region][topic].entries.includes(id)) continue
           state[region][topic].entries.push(id)
         }
