@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 
+import toast, { Toaster } from 'react-hot-toast';
 import { useTranslation } from '@src/context/LanguageContext'
 
 interface Props {
@@ -12,6 +13,8 @@ interface Props {
   contentTrans: string
   timestamp: date 
 }
+
+const notify = (msg) => toast(msg);
 
 const twitterBaseUrl = "https://twitter.com"
 
@@ -129,13 +132,16 @@ const TweetTwitterActionRetweet: React.FC<Props> = memo((props) => {
 })
 
 const TweetTwitterActionCopyLink: React.FC<Props> = memo((props) => {
+    const { t } = useTranslation()
     const handleClick = function(e) {
         e.preventDefault()
         const link = `${twitterBaseUrl}/${props.username}/status/${props.status}`
         navigator.clipboard.writeText(link).then(() => {
-            console.log('Link saved to clipboard.')
+            console.log(t('twitter_link_saved_to_clipboard'))
+            notify(t('twitter_link_saved_to_clipboard'))
         }, () => {
-            console.log('Link NOT saved to clipboard!')
+            console.log(t('twitter_link_not_saved_to_clipboard'))
+            notify(t('twitter_link_not_saved_to_clipboard'))
         });
     }
     return (
