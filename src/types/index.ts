@@ -60,12 +60,12 @@ export interface Entry {
 export interface TwitterEntry {
   kind: 'TwitterEntry'
   id: TweetId
-  name: string,
-  username: string,
-  verified: boolean,
-  avatar: Url,
-  contentOrig: string,
-  contentTrans: string,
+  name: string
+  username: string
+  verified: boolean
+  avatar: Url
+  contentOrig: string
+  contentTrans: string
   timestamp: UnixEpoc
   lang: string
   country: string

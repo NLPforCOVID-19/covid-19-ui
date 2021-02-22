@@ -68,4 +68,3 @@ const twitterEntriesByRegionTopicSlice = createSlice({
 })
 
 export default twitterEntriesByRegionTopicSlice.reducer
-

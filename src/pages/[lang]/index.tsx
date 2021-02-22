@@ -62,10 +62,13 @@ const Index: NextPage<Props> = () => {
       <div>
         <Container>
           <Row>
-            <Col className="col-sm-8" style={{ paddingLeft: -15, paddingRight: -15, marginLeft: -15, marginRight: -15}}>
+            <Col
+              className="col-sm-8"
+              style={{ paddingLeft: -15, paddingRight: -15, marginLeft: -15, marginRight: -15 }}
+            >
               <MapBox />
             </Col>
-            <Col className="col-sm-4" style={{ paddingLeft: 0, paddingRight: 0, marginLeft: 0, marginRight: -15}}>
+            <Col className="col-sm-4" style={{ paddingLeft: 0, paddingRight: 0, marginLeft: 0, marginRight: -15 }}>
               <TwitterViewContainer />
             </Col>
           </Row>

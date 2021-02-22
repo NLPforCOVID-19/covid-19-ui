@@ -171,4 +171,3 @@ export const twitterEntriesNumSelector = createSelector(
     state.twitterEntriesByRegionTopic[region][topic].entries,
   (entries) => entries.length
 )
-

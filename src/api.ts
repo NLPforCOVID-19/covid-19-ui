@@ -235,7 +235,10 @@ export async function searchTweets(lang: Lang, query: string): Promise<Record<Re
   return entriesByRegion
 }
 
-export const fetchTwitterEntriesAll = async (lang: Lang, limitPerRegion?: number): Promise<Record<RegionId, TwitterEntry[]>> => {
+export const fetchTwitterEntriesAll = async (
+  lang: Lang,
+  limitPerRegion?: number
+): Promise<Record<RegionId, TwitterEntry[]>> => {
   const path = `/tweets/topic/all`
   const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
@@ -274,14 +277,14 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
   //  snippets[topic.name] = topic.snippet
   //}
 
-  const cleanContent = function(content) {
-      let contentWithoutUrl = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
-      let contentWithoutHashtab = contentWithoutUrl.replaceAll(/#\w+\s*/g, '')
-      return contentWithoutHashtab
+  const cleanContent = function (content) {
+    const contentWithoutUrl = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
+    const contentWithoutHashtab = contentWithoutUrl.replaceAll(/#\w+\s*/g, '')
+    return contentWithoutHashtab
   }
 
-  const cleanContentOrig = cleanContent(responseEntry.contentOrig);
-  const cleanContentTrans = cleanContent(responseEntry.contentTrans);
+  const cleanContentOrig = cleanContent(responseEntry.contentOrig)
+  const cleanContentTrans = cleanContent(responseEntry.contentTrans)
 
   return {
     kind: 'TwitterEntry',
@@ -299,4 +302,3 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     snippets: snippets
   }
 }
-

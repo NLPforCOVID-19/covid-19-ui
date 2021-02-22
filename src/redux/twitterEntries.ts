@@ -28,4 +28,3 @@ const twitterEntriesSlice = createSlice({
 })
 
 export default twitterEntriesSlice.reducer
-

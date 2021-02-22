@@ -53,12 +53,12 @@ export const searchForAllRegion = createAsyncThunk(
   }
 )
 
-export const loadMoreTweets = createAsyncThunk<TwitterEntry[], { region: RegionId; topic: Topic; lang: Lang }, { state: RootState }>(
-  'loadMoreTweets',
-  async ({ region, topic, lang }, ThunkAPI) => {
-    const offset = twitterEntriesNumSelector(ThunkAPI.getState(), { region, topic })
-    // We ignore the topic for tweets because they all belong to the "all" category.
-    return API.fetchTweetsByClassAndCountry("all", region, offset, 20, lang)
-  }
-)
-
+export const loadMoreTweets = createAsyncThunk<
+  TwitterEntry[],
+  { region: RegionId; topic: Topic; lang: Lang },
+  { state: RootState }
+>('loadMoreTweets', async ({ region, topic, lang }, ThunkAPI) => {
+  const offset = twitterEntriesNumSelector(ThunkAPI.getState(), { region, topic })
+  // We ignore the topic for tweets because they all belong to the "all" category.
+  return API.fetchTweetsByClassAndCountry('all', region, offset, 20, lang)
+})
