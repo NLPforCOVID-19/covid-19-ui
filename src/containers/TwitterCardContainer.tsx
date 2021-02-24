@@ -36,7 +36,7 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ region, topic }) =>
     (id: string) => {
       return <TwitterEntryContainer key={id} entry={byId[id]} />
     },
-    [region, topic, byId]
+    [byId]
   )
 
   return (
