@@ -5,6 +5,7 @@ import utc from 'dayjs/plugin/utc'
 import { Entry, TwitterEntry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
+const ampersand = '\u0026'
 
 type ResponseBool = 0 | 1
 
@@ -281,11 +282,9 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
   //}
 
   const cleanContent = (content: string): string => {
-    //const contentWithoutUrl = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
-    //const contentWithoutHashtab = contentWithoutUrl.replaceAll(/#\w+\s*/g, '')
-    //return contentWithoutHashtab
     let temp: string = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
     temp = temp.replaceAll(/#\w+\s*/g, '')
+    temp = temp.replaceAll(/&amp;/g, ampersand)
     return temp
   }
 
