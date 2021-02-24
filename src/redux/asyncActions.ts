@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import * as API from '../api'
 
 import { RootState } from '@src/redux/index'
-import { Entry, Lang, RegionId, Topic, ViewMode } from '@src/types'
+import { Entry, Lang, RegionId, Topic, TwitterEntry, ViewMode } from '@src/types'
 import { entriesNumSelector, twitterEntriesNumSelector } from '@src/redux/globalSelectors'
 
 const parseHashToViewState = (hash: string): { mode: ViewMode; target: string } => {

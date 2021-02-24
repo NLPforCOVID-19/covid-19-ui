@@ -66,7 +66,7 @@ export interface TwitterEntry {
   avatar: Url
   contentOrig: string
   contentTrans: string
-  timestamp: UnixEpoc
+  timestamp: UnixEpoch
   lang: string
   country: string
   retweetCount: number

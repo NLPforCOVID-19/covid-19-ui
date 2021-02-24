@@ -51,6 +51,9 @@ interface ResponseTwitterEntry {
   timestamp: string
   verified: boolean
   id: string
+  lang: string
+  country: string
+  retweetCount: number
 }
 
 interface HistoryResponse {
@@ -218,40 +221,40 @@ export function postFeedback(content: string) {
   return axios.post(baseUrl + path, data)
 }
 
-export async function searchTweets(lang: Lang, query: string): Promise<Record<RegionId, TwitterEntry[]>> {
-  const path = '/tweets/topic/search'
-  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
-    params: {
-      start: 0,
-      limit: 50,
-      lang,
-      query
-    }
-  })
-  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
-  for (const r of Object.keys(response.data)) {
-    entriesByRegion[r] = response.data[r].map(parseResponseTwitterEntry)
-  }
-  return entriesByRegion
-}
+//export async function searchTweets(lang: Lang, query: string): Promise<Record<RegionId, TwitterEntry[]>> {
+//  const path = '/tweets/topic/search'
+//  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+//    params: {
+//      start: 0,
+//      limit: 50,
+//      lang,
+//      query
+//    }
+//  })
+//  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
+//  for (const r of Object.keys(response.data)) {
+//    entriesByRegion[r] = response.data[r].map(parseResponseTwitterEntry)
+//  }
+//  return entriesByRegion
+//}
 
-export const fetchTwitterEntriesAll = async (
-  lang: Lang,
-  limitPerRegion?: number
-): Promise<Record<RegionId, TwitterEntry[]>> => {
-  const path = `/tweets/topic/all`
-  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
-    params: {
-      limit: limitPerRegion === undefined ? 10 : limitPerRegion,
-      lang
-    }
-  })
-  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
-  for (const r of Object.keys(response.data)) {
-    entriesByRegion[r] = response.data[r].map(parseResponseEntry)
-  }
-  return entriesByRegion
-}
+//export const fetchTwitterEntriesAll = async (
+//  lang: Lang,
+//  limitPerRegion?: number
+//): Promise<Record<RegionId, TwitterEntry[]>> => {
+//  const path = `/tweets/topic/all`
+//  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+//    params: {
+//      limit: limitPerRegion === undefined ? 10 : limitPerRegion,
+//      lang
+//    }
+//  })
+//  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
+//  for (const r of Object.keys(response.data)) {
+//    entriesByRegion[r] = response.data[r].map(parseResponseTwitterEntry)
+//  }
+//  return entriesByRegion
+//}
 
 export async function fetchTweetsByClassAndCountry(
   klass: Topic,
@@ -261,7 +264,7 @@ export async function fetchTweetsByClassAndCountry(
   lang: Lang
 ): Promise<TwitterEntry[]> {
   const path = `/tweets/topic/${klass}/${country}`
-  const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
+  const response = await axios.get<ResponseTwitterEntry[]>(baseUrl + path, {
     params: {
       start: offset,
       limit: limit,
@@ -272,7 +275,7 @@ export async function fetchTweetsByClassAndCountry(
 }
 
 const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): TwitterEntry => {
-  const snippets: Record<Topic, string> = {}
+  //const snippets: Record<Topic, string> = {}
   //for (const topic of responseEntry.topics) {
   //  snippets[topic.name] = topic.snippet
   //}
@@ -301,7 +304,6 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     timestamp: Date.parse(responseEntry.timestamp),
     lang: responseEntry.lang,
     country: responseEntry.country,
-    retweetCount: responseEntry.retweetCount,
-    snippets: snippets
+    retweetCount: responseEntry.retweetCount
   }
 }

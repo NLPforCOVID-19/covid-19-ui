@@ -34,7 +34,7 @@ export const TwitterCardContainer: React.FC<Props> = memo(({ region, topic }) =>
 
   const renderTwitterEntry = useCallback(
     (id: string) => {
-      return <TwitterEntryContainer key={id} entry={byId[id]} regionId={region} topic={topic} />
+      return <TwitterEntryContainer key={id} entry={byId[id]} />
     },
     [region, topic, byId]
   )

@@ -13,7 +13,7 @@ interface Props {
 export const TwitterEntryContainer: React.FC<Props> = memo(({ entry }) => {
   const { lang } = useTranslation()
   const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
-  const contentTrans = entry.lang == lang ? null : entry.contentTrans
+  const contentTrans = entry.lang == lang ? '' : entry.contentTrans
   // const renderSnippet = useCallback(() => {
   //   if (entry.kind === 'Entry') {
   //     return <>{entry.snippets[topic]}</>
@@ -41,7 +41,6 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry }) => {
       contentTrans={contentTrans}
       timestamp={shortTimestamp}
       retweetCount={entry.retweetCount}
-      country={entry.country}
     />
   )
 })

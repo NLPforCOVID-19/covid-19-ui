@@ -1,9 +1,10 @@
 import React, { memo } from 'react'
 import { toast } from 'react-hot-toast'
 
+import { TweetId } from '@src/types'
 import { useTranslation } from '@src/context/LanguageContext'
 
-const notify = (msg) => toast(msg)
+const notify = (msg: string) => toast(msg)
 
 const twitterBaseUrl = 'https://twitter.com'
 
@@ -161,7 +162,7 @@ const TweetBody: React.FC<TweetBodyProps> = memo(({ msgorig, msgtrans }) => {
 TweetBody.displayName = 'TweetBody'
 
 interface TweetTimestampProps {
-  value: date
+  value: string
 }
 const TweetTimestamp: React.FC<TweetTimestampProps> = memo(({ value }) => {
   return (
@@ -227,7 +228,7 @@ interface TweetTwitterActionCopyLinkProps {
 }
 const TweetTwitterActionCopyLink: React.FC<TweetTwitterActionCopyLinkProps> = memo(({ status, username }) => {
   const { t } = useTranslation()
-  const handleClick = function (e: MouseEvent) {
+  const handleClick = function (e: React.MouseEvent) {
     e.preventDefault()
     const link = `${twitterBaseUrl}/${username}/status/${status}`
     navigator.clipboard.writeText(link).then(
@@ -277,13 +278,13 @@ const TweetTwitterActionLike: React.FC<TweetTwitterActionLikeProps> = memo(({ st
 })
 TweetTwitterActionLike.displayName = 'TweetTwitterActionLike'
 
-interface TweetTwitterActionLikeProps {
+interface TweetFooterProps {
   retweetCount: number
   status: TweetId
-  timestamp: date
+  timestamp: string
   username: string
 }
-const TweetFooter: React.FC<TweetTwitterActionLikeProps> = memo(({ retweetCount, status, timestamp, username }) => {
+const TweetFooter: React.FC<TweetFooterProps> = memo(({ retweetCount, status, timestamp, username }) => {
   return (
     <div className="tweet-footer">
       <TweetTwitterActionReply status={status} />
@@ -304,7 +305,8 @@ interface Props {
   avatar: string
   contentOrig: string
   contentTrans: string
-  timestamp: date
+  timestamp: string
+  retweetCount: number
 }
 export const TwitterEntryView: React.FC<Props> = memo((props) => {
   const { id, name, username, verified, avatar, contentOrig, contentTrans, timestamp, retweetCount } = props

@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef } from 'react'
 import Col from 'react-bootstrap/Col'
 
+import { TweetId, Url } from '@src/types'
 import { Loading } from '@src/components/Loading'
 import { useTranslation } from '@src/context/LanguageContext'
 
