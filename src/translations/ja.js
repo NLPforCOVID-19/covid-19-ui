@@ -21,6 +21,7 @@ export const ja = {
   eu: 'EU',
   eur_other: 'EU (その他)',
   kr: '韓国',
+  id: 'インドネシア',
   in: 'インド',
   np: 'ネパール',
   my: 'マレーシア',
