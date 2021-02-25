@@ -45,7 +45,7 @@ const twitterEntriesByRegionTopicSlice = createSlice({
         if (newEntries.length === 0) {
           state[region][topic].noMore = true
         }
-        state[region][topic].entries.push(...newEntries.map((e: TwitterEntry) => e.id))
+        state[region][topic].entries.push(...newEntries.map((e) => e.id))
         for (const id of newEntries.map((e: TwitterEntry) => e.id)) {
           if (state[region][topic].entries.includes(id)) continue
           state[region][topic].entries.push(id)
@@ -53,9 +53,9 @@ const twitterEntriesByRegionTopicSlice = createSlice({
       })
       .addCase(fetchMetaAndFirstEntries.fulfilled, (state, action) => {
         const { regions, topics } = action.payload
-        for (const region of regions) {
+        for (const region of [...regions, { id: 'all' }]) {
           state[region.id] = {}
-          for (const topic of topics) {
+          for (const topic of [...topics, 'all']) {
             state[region.id][topic] = {
               entries: [],
               noMore: false,
