@@ -128,3 +128,44 @@ export const selectEntriesForMap = createSelector(
     }
   }
 )
+
+export const selectTwitterEntriesForRegionTopicSearch = createSelector(
+  [
+    (s: RootState) => s.twitterEntries.byId,
+    (s: RootState) => s.twitterEntriesByRegionTopic,
+    (s: RootState) => s.search,
+    (s: RootState) => s.ui.focusedToSearch,
+    (_: RootState, { region }: { region: RegionId }) => region,
+    (_: RootState, { topic }: { topic: Topic }) => topic
+  ],
+  (entriesById, entriesByRT, search, focusedToSearch, r, t) => {
+    //if (focusedToSearch) {
+    //  return {
+    //    byId: search.byUrl,
+    //    allIds: search.byRegion[r].allIds
+    //  }
+    //}
+    return {
+      byId: entriesById,
+      allIds: entriesByRT[r][t].entries
+    }
+  }
+)
+export const selectLoadingNoMoreTweetsForRegionTopicSearch = createSelector(
+  [
+    (s: RootState) => s.twitterEntriesByRegionTopic,
+    (s: RootState) => s.search.byRegion,
+    (s: RootState) => s.ui.focusedToSearch,
+    (_: RootState, { region }: { region: RegionId }) => region,
+    (_: RootState, { topic }: { topic: Topic }) => topic
+  ],
+  (byRT, searchByR, focus, r, t) => {
+    const { loading, noMore } = focus ? searchByR[r] : byRT[r][t]
+    return { loading, noMore }
+  }
+)
+export const twitterEntriesNumSelector = createSelector(
+  (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
+    state.twitterEntriesByRegionTopic[region][topic].entries,
+  (entries) => entries.length
+)
