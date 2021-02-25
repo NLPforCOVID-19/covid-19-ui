@@ -10,6 +10,7 @@
     "format:fix": "prettier \"src/**/*.{ts,tsx,js,jsx}\" --write",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .ts,.tsx,.js,.jsx --max-warnings 0 ./src",
     "lint:fix": "eslint --no-error-on-unmatched-pattern --ext .ts,.tsx,.js,.jsx ./src --fix",
+    "ts": "tsc",
     "upgrade-interactive": "npm-check --update"
   },
   "dependencies": {
