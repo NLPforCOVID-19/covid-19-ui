@@ -2,9 +2,10 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 
-import { Entry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
+import { Entry, TwitterEntry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
+const ampersand = '\u0026'
 
 type ResponseBool = 0 | 1
 
@@ -40,6 +41,20 @@ interface ResponseEntry {
     title: string
   }
   url: string
+}
+
+interface ResponseTwitterEntry {
+  avatar: string
+  contentOrig: string
+  contentTrans: string
+  name: string
+  username: string
+  timestamp: string
+  verified: boolean
+  id: string
+  lang: string
+  country: string
+  retweetCount: number
 }
 
 interface HistoryResponse {
@@ -86,7 +101,7 @@ const parseResponseRegion = (responseRegion: ResponseRegion): Region => {
 }
 
 export async function searchNews(lang: Lang, query: string): Promise<Record<RegionId, Entry[]>> {
-  const path = '/classes/search'
+  const path = '/articles/topic/search'
   const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
       start: 0,
@@ -115,7 +130,7 @@ export async function searchNews(lang: Lang, query: string): Promise<Record<Regi
 // }
 
 export const fetchEntriesAll = async (lang: Lang, limitPerRegion?: number): Promise<Record<RegionId, Entry[]>> => {
-  const path = `/classes/all`
+  const path = `/articles/topic/all`
   const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
     params: {
       limit: limitPerRegion === undefined ? 10 : limitPerRegion,
@@ -136,7 +151,7 @@ export async function fetchNewsByClassAndCountry(
   limit: number,
   lang: Lang
 ): Promise<Entry[]> {
-  const path = `/classes/${klass}/${country}`
+  const path = `/articles/topic/${klass}/${country}`
   const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
     params: {
       start: offset,
@@ -205,4 +220,89 @@ export function postFeedback(content: string) {
     content
   }
   return axios.post(baseUrl + path, data)
+}
+
+//export async function searchTweets(lang: Lang, query: string): Promise<Record<RegionId, TwitterEntry[]>> {
+//  const path = '/tweets/topic/search'
+//  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+//    params: {
+//      start: 0,
+//      limit: 50,
+//      lang,
+//      query
+//    }
+//  })
+//  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
+//  for (const r of Object.keys(response.data)) {
+//    entriesByRegion[r] = response.data[r].map(parseResponseTwitterEntry)
+//  }
+//  return entriesByRegion
+//}
+
+//export const fetchTwitterEntriesAll = async (
+//  lang: Lang,
+//  limitPerRegion?: number
+//): Promise<Record<RegionId, TwitterEntry[]>> => {
+//  const path = `/tweets/topic/all`
+//  const response = await axios.get<Record<RegionId, ResponseEntry[]>>(baseUrl + path, {
+//    params: {
+//      limit: limitPerRegion === undefined ? 10 : limitPerRegion,
+//      lang
+//    }
+//  })
+//  const entriesByRegion: Record<RegionId, TwitterEntry[]> = {}
+//  for (const r of Object.keys(response.data)) {
+//    entriesByRegion[r] = response.data[r].map(parseResponseTwitterEntry)
+//  }
+//  return entriesByRegion
+//}
+
+export async function fetchTweetsByClassAndCountry(
+  klass: Topic,
+  country: RegionId,
+  offset: number,
+  limit: number,
+  lang: Lang
+): Promise<TwitterEntry[]> {
+  const path = `/tweets/topic/${klass}/${country}`
+  const response = await axios.get<ResponseTwitterEntry[]>(baseUrl + path, {
+    params: {
+      start: offset,
+      limit: limit,
+      lang: lang
+    }
+  })
+  return response.data.map(parseResponseTwitterEntry)
+}
+
+const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): TwitterEntry => {
+  //const snippets: Record<Topic, string> = {}
+  //for (const topic of responseEntry.topics) {
+  //  snippets[topic.name] = topic.snippet
+  //}
+
+  const cleanContent = (content: string): string => {
+    let temp: string = content.replaceAll(/https:\/\/t.co\/\w+/g, '')
+    temp = temp.replaceAll(/#\w+\s*/g, '')
+    temp = temp.replaceAll(/&amp;/g, ampersand)
+    return temp
+  }
+
+  const cleanContentOrig = cleanContent(responseEntry.contentOrig)
+  const cleanContentTrans = cleanContent(responseEntry.contentTrans)
+
+  return {
+    kind: 'TwitterEntry',
+    id: responseEntry.id,
+    name: responseEntry.name,
+    username: responseEntry.username,
+    verified: responseEntry.verified,
+    avatar: responseEntry.avatar,
+    contentOrig: cleanContentOrig,
+    contentTrans: cleanContentTrans,
+    timestamp: Date.parse(responseEntry.timestamp),
+    lang: responseEntry.lang,
+    country: responseEntry.country,
+    retweetCount: responseEntry.retweetCount
+  }
 }

@@ -55,5 +55,8 @@ export const en = {
   feedback_useful: 'Is this site useful?',
   yes: 'Yes',
   no: 'No',
-  search: 'Search'
+  search: 'Search',
+  translation: 'Translation',
+  twitter_link_saved_to_clipboard: 'Link saved to clipboard.',
+  twitter_link_not_saved_to_clipboard: 'Link could not be saved to clipboard.'
 }

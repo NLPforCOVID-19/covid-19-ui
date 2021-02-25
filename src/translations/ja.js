@@ -54,5 +54,8 @@ export const ja = {
   feedback_useful: 'このサイトは役に立ちますか?',
   yes: 'はい',
   no: 'いいえ',
-  search: '検索'
+  search: '検索',
+  translation: '翻訳',
+  twitter_link_saved_to_clipboard: 'リンクがクリップボードに保存されました。',
+  twitter_link_not_saved_to_clipboard: 'リンクをクリップボードに保存できませんでした。'
 }

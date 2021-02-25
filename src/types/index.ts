@@ -34,6 +34,7 @@ export type Url = string
 export type Topic = string
 export type RegionId = string
 export type UnixEpoch = number
+export type TweetId = string
 
 interface EntryFlags {
   aboutRumor: boolean
@@ -57,6 +58,21 @@ export interface Entry {
   snippets: Record<Topic, string>
 }
 
+export interface TwitterEntry {
+  kind: 'TwitterEntry'
+  id: TweetId
+  name: string
+  username: string
+  verified: boolean
+  avatar: Url
+  contentOrig: string
+  contentTrans: string
+  timestamp: UnixEpoch
+  lang: string
+  country: string
+  retweetCount: number
+}
+
 export interface TagForSearchSnippet {
   type: 'text' | 'match' | 'exact-match'
   content: string
@@ -64,6 +80,11 @@ export interface TagForSearchSnippet {
 
 export interface EntryWithSearchSnippet extends Omit<Entry, 'kind'> {
   kind: 'EntryWithSearchSnippet'
+  searchSnippet: TagForSearchSnippet[]
+}
+
+export interface TwitterEntryWithSearchSnippet extends Omit<TwitterEntry, 'kind'> {
+  kind: 'TwitterEntryWithSearchSnippet'
   searchSnippet: TagForSearchSnippet[]
 }
 
