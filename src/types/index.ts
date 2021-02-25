@@ -10,6 +10,7 @@ export const countryIds = [
   'eu',
   'eur_other',
   'kr',
+  'id',
   'in',
   'np',
   'my',

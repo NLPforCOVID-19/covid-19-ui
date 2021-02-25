@@ -28,7 +28,9 @@ const countryPosition: Record<string, { longitude: number; latitude: number }> =
   us: { latitude: 38.9047, longitude: -77.0163 },
   br: { latitude: -15.7744, longitude: -48.0773 },
   au: { latitude: -35.2931, longitude: 149.1269 },
-  za: { latitude: -33.925, longitude: 18.425 }
+  za: { latitude: -33.925, longitude: 18.425 },
+  id: { latitude: -6.2146, longitude: 106.8451 },
+  gb: { latitude: 51.5072, longitude: -0.1275 }
 }
 
 export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entryIds }) => {

@@ -21,6 +21,7 @@ export const en = {
   eu: 'EU',
   eur_other: 'Europe (Other)',
   kr: 'South Korea',
+  id: 'Indonesia',
   in: 'India',
   np: 'Nepal',
   my: 'Malaysia',
