@@ -41,7 +41,7 @@ const initializeFormState = (e: Entry | EntryWithSearchSnippet | null): EditForm
     ...state,
     country: e.country,
     flags: { ...state.flags, ...e.flags },
-    topics: Object.keys(e.snippets)
+    topics: Object.keys(e.snippets).filter(topic => topic !== "Search")
   }
 }
 
