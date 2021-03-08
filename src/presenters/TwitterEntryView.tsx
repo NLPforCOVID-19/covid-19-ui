@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import React, { memo } from 'react'
 import { toast } from 'react-hot-toast'
 
@@ -162,12 +163,15 @@ const TweetBody: React.FC<TweetBodyProps> = memo(({ msgorig, msgtrans }) => {
 TweetBody.displayName = 'TweetBody'
 
 interface TweetTimestampProps {
-  value: string
+  value: timestamp
 }
 const TweetTimestamp: React.FC<TweetTimestampProps> = memo(({ value }) => {
+  const localTimestamp = new Date(value)
+  const shortTimestamp = dayjs(localTimestamp).format('MM/DD HH:mm')
+
   return (
     <div className="tweet-timestamp">
-      <span>{value}</span>
+      <span>{shortTimestamp}</span>
     </div>
   )
 })
@@ -281,7 +285,7 @@ TweetTwitterActionLike.displayName = 'TweetTwitterActionLike'
 interface TweetFooterProps {
   retweetCount: number
   status: TweetId
-  timestamp: string
+  timestamp: timestamp
   username: string
 }
 const TweetFooter: React.FC<TweetFooterProps> = memo(({ retweetCount, status, timestamp, username }) => {
@@ -305,7 +309,7 @@ interface Props {
   avatar: string
   contentOrig: string
   contentTrans: string
-  timestamp: string
+  timestamp: timestamp
   retweetCount: number
 }
 export const TwitterEntryView: React.FC<Props> = memo((props) => {
