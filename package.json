@@ -19,7 +19,7 @@
     "bootstrap": "^4.5.3",
     "dayjs": "^1.10.4",
     "mapbox-gl": "^2.0.1",
-    "next": "^10.0.7",
+    "next": "^10.0.8",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
@@ -33,11 +33,11 @@
   "devDependencies": {
     "@types/mapbox-gl": "^2.1.0",
     "@types/react": "^17.0.2",
-    "@types/node": "^14.14.31",
+    "@types/node": "^14.14.32",
     "@types/react-map-gl": "^5.2.9",
     "@types/react-redux": "^7.1.16",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-import-resolver-typescript": "^2.4.0",
@@ -47,6 +47,6 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "npm-check": "^5.9.2",
     "prettier": "^2.2.1",
-    "typescript": "^4.2.2"
+    "typescript": "^4.2.3"
   }
 }
