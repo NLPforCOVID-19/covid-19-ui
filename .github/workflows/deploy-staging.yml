@@ -38,7 +38,7 @@ jobs:
       - name: Deploy to Server
         env:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH_STAGING }}
-          REMOTE: ${{ secrets.REMOTE }}
+          REMOTE: ${{ secrets.REMOTE_STAGING }}
         run: |
           chmod -R g+w out
           rsync -av out/ $REMOTE:$DEPLOY_PATH
