@@ -18,7 +18,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "dayjs": "^1.10.4",
-    "mapbox-gl": "^2.0.1",
+    "mapbox-gl": "^2.1.1",
     "next": "^10.0.9",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
