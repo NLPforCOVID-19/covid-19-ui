@@ -300,7 +300,7 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     avatar: responseEntry.avatar,
     contentOrig: cleanContentOrig,
     contentTrans: cleanContentTrans,
-    timestamp: Date.parse(responseEntry.timestamp),
+    timestamp: dayjs.utc(responseEntry.timestamp).valueOf(),
     lang: responseEntry.lang,
     country: responseEntry.country,
     retweetCount: responseEntry.retweetCount

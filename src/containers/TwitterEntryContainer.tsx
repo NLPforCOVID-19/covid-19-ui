@@ -1,5 +1,4 @@
-import { memo, useMemo } from 'react'
-import dayjs from 'dayjs'
+import { memo } from 'react'
 
 import { TwitterEntry, TwitterEntryWithSearchSnippet } from '@src/types'
 import { TwitterEntryView } from '@src/presenters/TwitterEntryView'
@@ -12,7 +11,7 @@ interface Props {
 
 export const TwitterEntryContainer: React.FC<Props> = memo(({ entry }) => {
   const { lang } = useTranslation()
-  const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
+  //const shortTimestamp = useMemo(() => dayjs(entry.timestamp).format('MM/DD HH:mm'), [entry.timestamp])
   const contentTrans = entry.lang == lang ? '' : entry.contentTrans
   // const renderSnippet = useCallback(() => {
   //   if (entry.kind === 'Entry') {
@@ -39,7 +38,7 @@ export const TwitterEntryContainer: React.FC<Props> = memo(({ entry }) => {
       avatar={entry.avatar}
       contentOrig={entry.contentOrig}
       contentTrans={contentTrans}
-      timestamp={shortTimestamp}
+      timestamp={entry.timestamp}
       retweetCount={entry.retweetCount}
     />
   )
