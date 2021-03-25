@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useSelector } from 'react-redux'
 import { Popup } from 'react-map-gl'
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
@@ -48,7 +50,7 @@ export const EntriesPopup: React.FC<EntriesPopupProps> = memo(({ countryId, entr
     [byUrl, lang, isFocusedToSearch, byUrlSearch]
   )
 
-  const popupRef = useRef<Popup>(null)
+  const popupRef = useRef<typeof Popup>(null)
   const [initialZIndex, setInitialZIndex] = useState('')
   useEffect(() => {
     if (popupRef.current) {
