@@ -18,7 +18,6 @@ import { changeEditMode } from '@src/redux/ui'
 import { Lang } from '@src/types'
 import { defaultLang } from '@src/translations'
 import { MapBox } from '@src/containers/MapBox'
-import { TwitterViewContainer } from '@src/containers/TwitterViewContainer'
 
 interface Props {
   lang: Lang
