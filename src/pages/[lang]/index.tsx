@@ -18,7 +18,6 @@ import { changeEditMode } from '@src/redux/ui'
 import { Lang } from '@src/types'
 import { defaultLang } from '@src/translations'
 import { MapBox } from '@src/containers/MapBox'
-import { TwitterViewContainer } from '@src/containers/TwitterViewContainer'
 
 interface Props {
   lang: Lang
@@ -63,13 +62,10 @@ const Index: NextPage<Props> = () => {
         <Container>
           <Row>
             <Col
-              className="col-sm-8"
+              className="col-sm-12"
               style={{ paddingLeft: -15, paddingRight: -15, marginLeft: -15, marginRight: -15 }}
             >
               <MapBox />
-            </Col>
-            <Col className="col-sm-4" style={{ paddingLeft: 0, paddingRight: 0, marginLeft: 0, marginRight: -15 }}>
-              <TwitterViewContainer />
             </Col>
           </Row>
         </Container>
