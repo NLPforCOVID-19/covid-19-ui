@@ -32,6 +32,7 @@ export const en = {
   us: 'US',
   us_other: 'US (Other)',
   br: 'Brazil',
+  mx: 'Mexico',
   sa_other: 'South America (Other)',
   oceania: 'Oceania',
   au: 'Australia',
