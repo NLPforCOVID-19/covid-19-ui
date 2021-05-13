@@ -33,6 +33,7 @@ export const ja = {
   us_other: 'アメリカ (その他)',
   br: 'ブラジル',
   mx: 'メキシコ',
+  ru: 'ロシア',
   sa_other: '南アメリカ (その他)',
   oceania: 'オセアニア',
   au: 'オーストラリア',
