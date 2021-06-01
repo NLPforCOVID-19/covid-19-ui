@@ -1,0 +1,33 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "10:00"
+    timezone: Asia/Tokyo
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: react-map-gl
+    versions:
+    - ">= 6.a, < 7"
+  - dependency-name: react-map-gl
+    versions:
+    - 5.3.10
+    - 5.3.11
+    - 5.3.5
+    - 5.3.7
+    - 5.3.9
+  - dependency-name: eslint-config-prettier
+    versions:
+    - 7.2.0
+    - 8.0.0
+    - 8.1.0
+  - dependency-name: mapbox-gl
+    versions:
+    - 2.1.0
+    - 2.1.1
+  - dependency-name: react-bootstrap
+    versions:
+    - 1.5.0
+    - 1.5.1
