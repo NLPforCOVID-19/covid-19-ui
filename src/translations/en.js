@@ -18,6 +18,7 @@ export const en = {
   es: 'Spain',
   gb: 'United Kingdoms',
   de: 'Germany',
+  it: 'Italy',
   eu: 'EU',
   ru: 'Russia',
   eur_other: 'Europe (Other)',
