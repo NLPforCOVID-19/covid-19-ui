@@ -14,20 +14,12 @@ export const TwitterViewContainer = () => {
   switch (viewMode) {
     case 'region':
       return (
-        <Container className="mt-2 mb-2">
-          <Row>
-            <TwitterCardContainer region={activeRegion} topic="all" />
-          </Row>
-        </Container>
+        <TwitterCardContainer region={activeRegion} topic="all" />
       )
 
     case 'topic':
       return (
-        <Container className="mt-2 mb-2">
-          <Row>
-            <TwitterCardContainer region="all" topic="all" />
-          </Row>
-        </Container>
+        <TwitterCardContainer region="all" topic="all" />
       )
 
     default:
