@@ -7,6 +7,7 @@ import { fetchMetaAndFirstEntries } from '../redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { Layout } from '@src/components/Layout'
 import { changeEditMode } from '@src/redux/ui'
+import { GoodNewsViewContainer } from '@src/containers/GoodNewsViewContainer'
 import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 import { EditModalContainer } from '@src/containers/EditModalContainer'
 
@@ -28,6 +29,7 @@ const Edit = () => {
   return (
     <Layout>
       <EditModalContainer />
+      <GoodNewsViewContainer />
       <NewsViewContainer />
     </Layout>
   )
