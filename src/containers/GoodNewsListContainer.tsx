@@ -19,7 +19,7 @@ export const GoodNewsListContainer: React.FC<Props> = memo(({ region, topic }) =
       <Container className="rounded border wrap">
         <Row className="mt-2 mb-2">
           <Col className="col-sm-1">
-            <img src="/images/GoodNewsLogo.svg" width="100%" />
+            <img src="/images/GoodNewsLogo.svg" height="24px"/>
             <input type="hidden" name="region" value={r} />
             <input type="hidden" name="topic" value={t} />
           </Col>
