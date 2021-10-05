@@ -12,7 +12,7 @@ import { FeedbackToast } from '@src/components/FeedbackToast'
 import { languagePaths } from '@src/utils'
 import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
-import { GoodNewsViewContainer } from '@src/containers/GoodNewsViewContainer'
+import { GoodNewsListContainer } from '@src/containers/GoodNewsListContainer'
 import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 import { createNewsViewHash } from '@src/redux/globalSelectors'
 import { changeEditMode } from '@src/redux/ui'
@@ -64,7 +64,7 @@ const Index: NextPage<Props> = () => {
         <Container>
           <Row>
             <Col className="col-sm-12">
-              <GoodNewsViewContainer />
+              <GoodNewsListContainer region="all" topic="all" />
             </Col>
           </Row>
           <Row className="no-gutters">
