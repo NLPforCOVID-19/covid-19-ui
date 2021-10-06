@@ -10,6 +10,7 @@ import { loadMoreGoodNews } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { RegionId, Topic } from '@src/types'
 import { GoodNewsList } from '@src/presenters/GoodNewsList'
+import { GoodNewsEntryContainer } from '@src/containers/GoodNewsEntryContainer'
 import { selectGoodNewsEntries } from '@src/redux/globalSelectors'
 
 interface Props {
@@ -20,7 +21,8 @@ interface Props {
 export const GoodNewsListContainer: React.FC<Props> = memo(() => {
   const { lang } = useTranslation()
   const dispatch = useDispatch()
-  const { byId, allIds } = useSelector((s: RootState) => selectGoodNewsEntries(s))
+  const { byId } = useSelector((s: RootState) => selectGoodNewsEntries(s))
+  const allIds = Object.keys(byId)
   const viewMode = useSelector(selectViewMode)
   const regions = useSelector(selectRegions)
 
@@ -28,16 +30,12 @@ export const GoodNewsListContainer: React.FC<Props> = memo(() => {
     dispatch(loadMoreGoodNews({ lang }))
   }, [dispatch, lang])
 
-  //const displayObjAsString = function(o) {
-  //    return o.length
-  //    //let str = ''
-  //    //for (x in o) {
-  //    //    str += '.'
-  //    //}
-  //    //return str
-  //}
-
-  //const allIdsStr = displayObjAsString(allIds)
+  const renderEntry = useCallback(
+    (url: string) => {
+      return <GoodNewsEntryContainer key={url} entry={byId[url]} />
+    },
+    [byId]
+  )
 
   return (
     <div className="mt-3">
@@ -50,7 +48,7 @@ export const GoodNewsListContainer: React.FC<Props> = memo(() => {
           </Col>
           <Col className="col-sm-11"></Col>
         </Row>
-        <GoodNewsList entryIds={allIds} onLoadMore={handleLoadMore} />
+        <GoodNewsList entryIds={allIds} onLoadMore={handleLoadMore} renderEntry={renderEntry} />
       </Container>
     </div>
   )

@@ -15,7 +15,6 @@ import {
 } from '@src/types'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
-const fakeUrl = process.env.FAKE_API_URL
 const ampersand = '\u0026'
 
 type ResponseBool = 0 | 1
@@ -333,8 +332,8 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
 }
 
 export async function fetchGoodNews(offset: number, limit: number, lang: Lang): Promise<GoodNewsEntry[]> {
-  const path = `/positive_news.php`
-  const response = await axios.get<ResponseGoodNewsEntry[]>(fakeUrl + path, {
+  const path = `/articles/topic/Current%20state%20of%20infection/int?start=0&limit=${limit}&lang=${lang}`
+  const response = await axios.get<ResponseGoodNewsEntry[]>(baseUrl + path, {
     params: {
       start: offset,
       limit: limit,

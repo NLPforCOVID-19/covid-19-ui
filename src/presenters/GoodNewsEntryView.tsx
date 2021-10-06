@@ -10,24 +10,18 @@ interface Props {
   sourceName: string
   sourceUrl: string
   altUrl?: string
-  mark?: string
   country?: string
   renderIcon: () => React.ReactElement
 }
 
 export const GoodNewsEntryView: React.FC<Props> = memo((props) => {
   const { t } = useTranslation()
-  const { title, mainUrl, date, sourceName, sourceUrl, altUrl, mark, country, renderIcon } = props
+  const { title, mainUrl, date, sourceName, sourceUrl, altUrl, country, renderIcon } = props
   return (
     <div className="news">
       <div className="title text-info">
         <span className="icon">{renderIcon()}</span>
         <span className="small text-muted">[{date}]</span>
-        {mark && (
-          <span>
-            &thinsp;<mark className="small text-muted">{mark}</mark>
-          </span>
-        )}
         <span className="small text-muted">&thinsp;({country})</span>
         <a href={mainUrl} target="_blank" rel="noreferrer">
           &thinsp;{title}

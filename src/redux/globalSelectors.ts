@@ -179,8 +179,7 @@ export const selectGoodNewsEntries = createSelector(
   [(s: RootState) => s.goodNewsEntries.byUrl],
   (goodNewsEntriesByUrl) => {
     return {
-      byId: goodNewsEntriesByUrl,
-      allIds: goodNewsEntriesByUrl
+      byId: goodNewsEntriesByUrl
     }
   }
 )
