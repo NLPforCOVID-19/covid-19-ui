@@ -170,3 +170,17 @@ export const twitterEntriesNumSelector = createSelector(
     state.twitterEntriesByRegionTopic[region][topic].entries,
   (entries) => entries.length
 )
+export const goodNewsEntriesNumSelector = createSelector(
+  (state: RootState) => state.goodNewsEntries,
+  (goodNewsEntries) => goodNewsEntries.byUrl.length
+)
+
+export const selectGoodNewsEntries = createSelector(
+  [(s: RootState) => s.goodNewsEntries.byUrl],
+  (goodNewsEntriesByUrl) => {
+    return {
+      byId: goodNewsEntriesByUrl,
+      allIds: goodNewsEntriesByUrl
+    }
+  }
+)

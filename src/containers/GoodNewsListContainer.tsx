@@ -1,31 +1,56 @@
-import { memo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { memo, useCallback } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import { selectViewMode } from '@src/redux/ui'
+import { selectRegions } from '@src/redux/regionsTopics'
+import { loadMoreGoodNews } from '@src/redux/asyncActions'
+import { useTranslation } from '@src/context/LanguageContext'
 import { RegionId, Topic } from '@src/types'
 import { GoodNewsList } from '@src/presenters/GoodNewsList'
+import { selectGoodNewsEntries } from '@src/redux/globalSelectors'
 
 interface Props {
   region: RegionId
   topic: Topic
 }
 
-export const GoodNewsListContainer: React.FC<Props> = memo(({ region, topic }) => {
-  const { r } = region
-  const { t } = topic
+export const GoodNewsListContainer: React.FC<Props> = memo(() => {
+  const { lang } = useTranslation()
+  const dispatch = useDispatch()
+  const { byId, allIds } = useSelector((s: RootState) => selectGoodNewsEntries(s))
+  const viewMode = useSelector(selectViewMode)
+  const regions = useSelector(selectRegions)
+
+  const handleLoadMore = useCallback(() => {
+    dispatch(loadMoreGoodNews({ lang }))
+  }, [dispatch, lang])
+
+  //const displayObjAsString = function(o) {
+  //    return o.length
+  //    //let str = ''
+  //    //for (x in o) {
+  //    //    str += '.'
+  //    //}
+  //    //return str
+  //}
+
+  //const allIdsStr = displayObjAsString(allIds)
+
   return (
     <div className="mt-3">
       <Container className="rounded border wrap">
         <Row className="mt-2 mb-2">
           <Col className="col-sm-1">
             <img src="/images/GoodNewsLogo.svg" height="24px" />
-            <input type="hidden" name="region" value={r} />
-            <input type="hidden" name="topic" value={t} />
+            <input type="hidden" name="viewMode" value={viewMode} />
+            <input type="hidden" name="regions" value={regions} />
           </Col>
           <Col className="col-sm-11"></Col>
         </Row>
-        <GoodNewsList />
+        <GoodNewsList entryIds={allIds} onLoadMore={handleLoadMore} />
       </Container>
     </div>
   )

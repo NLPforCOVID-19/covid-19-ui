@@ -2,9 +2,20 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 
-import { Entry, TwitterEntry, EntryFlagsEdit, EditHistory, Lang, Region, RegionId, Topic } from '@src/types'
+import {
+  Entry,
+  TwitterEntry,
+  GoodNewsEntry,
+  EntryFlagsEdit,
+  EditHistory,
+  Lang,
+  Region,
+  RegionId,
+  Topic
+} from '@src/types'
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
+const fakeUrl = process.env.FAKE_API_URL
 const ampersand = '\u0026'
 
 type ResponseBool = 0 | 1
@@ -55,6 +66,20 @@ interface ResponseTwitterEntry {
   lang: string
   country: string
   retweetCount: number
+}
+
+interface ResponseGoodNewsEntry {
+  displayed_country: string
+  domain: string
+  domain_label: string
+  orig: {
+    timestamp: string
+  }
+  topics: ResponseTopic[]
+  translated: {
+    title: string
+  }
+  url: string
 }
 
 interface HistoryResponse {
@@ -304,5 +329,29 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     lang: responseEntry.lang,
     country: responseEntry.country,
     retweetCount: responseEntry.retweetCount
+  }
+}
+
+export async function fetchGoodNews(offset: number, limit: number, lang: Lang): Promise<GoodNewsEntry[]> {
+  const path = `/positive_news.php`
+  const response = await axios.get<ResponseGoodNewsEntry[]>(fakeUrl + path, {
+    params: {
+      start: offset,
+      limit: limit,
+      lang: lang
+    }
+  })
+  return response.data.map(parseResponseGoodNewsEntry)
+}
+
+const parseResponseGoodNewsEntry = (responseEntry: ResponseGoodNewsEntry): GoodNewsEntry => {
+  return {
+    kind: 'GoodNewsEntry',
+    url: responseEntry.url,
+    country: responseEntry.displayed_country,
+    title: responseEntry.translated.title,
+    timestamp: Date.parse(responseEntry.orig.timestamp),
+    domainUrl: responseEntry.domain,
+    domainLabel: responseEntry.domain_label
   }
 }

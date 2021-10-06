@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import * as API from '../api'
 
 import { RootState } from '@src/redux/index'
-import { Entry, Lang, RegionId, Topic, TwitterEntry, ViewMode } from '@src/types'
+import { Entry, Lang, RegionId, Topic, TwitterEntry, ViewMode, GoodNewsEntry } from '@src/types'
 import { entriesNumSelector, twitterEntriesNumSelector } from '@src/redux/globalSelectors'
 
 const parseHashToViewState = (hash: string): { mode: ViewMode; target: string } => {
@@ -62,3 +62,12 @@ export const loadMoreTweets = createAsyncThunk<
   // We ignore the topic for tweets because they all belong to the "all" category.
   return API.fetchTweetsByClassAndCountry('all', region, offset, 20, lang)
 })
+
+export const loadMoreGoodNews = createAsyncThunk<GoodNewsEntry[], { lang: Lang }, { state: RootState }>(
+  'loadMoreGoodNews',
+  async ({ lang }, ThunkAPI) => {
+    //const offset = goodNewsEntriesNumSelector(ThunkAPI.getState(), {})
+    const offset = 0
+    return API.fetchGoodNews(offset, 20, lang)
+  }
+)

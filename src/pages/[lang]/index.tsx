@@ -64,7 +64,7 @@ const Index: NextPage<Props> = () => {
         <Container>
           <Row>
             <Col className="col-sm-12">
-              <GoodNewsListContainer region="all" topic="all" />
+              <GoodNewsListContainer />
             </Col>
           </Row>
           <Row className="no-gutters">

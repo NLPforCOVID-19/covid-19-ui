@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { memo, useCallback, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -7,7 +7,14 @@ import { selectEditMode } from '@src/redux/ui'
 import * as Icon from '@src/components/Icons'
 import { GoodNewsEntryView } from '@src/presenters/GoodNewsEntryView'
 
-export const GoodNewsList = () => {
+interface Props {
+  entryIds: Url[]
+  onLoadMore: () => void
+}
+
+export const GoodNewsList: React.FC<Props> = memo((props) => {
+  const { entryIds, onLoadMore } = props
+
   const editMode = useSelector(selectEditMode)
 
   const handleClickEdit = useCallback(
@@ -30,11 +37,36 @@ export const GoodNewsList = () => {
       </>
     )
   }, [editMode, handleClickEdit])
+
+  const infiniteScrollWrapRef = useRef<HTMLDivElement>(null)
+  const infiniteScrollObserveRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const observeEl = infiniteScrollObserveRef.current
+    const observer = new IntersectionObserver(
+      (e) => {
+        onLoadMore()
+        //if (e[0].isIntersecting && !loading && !noMore) {
+        //  onLoadMore()
+        //}
+      },
+      { root: infiniteScrollWrapRef.current }
+    )
+    if (observeEl) {
+      observer.observe(observeEl)
+    }
+    return () => {
+      if (observeEl) {
+        observer.unobserve(observeEl)
+      }
+    }
+  }, [infiniteScrollWrapRef, infiniteScrollObserveRef, onLoadMore])
+
   return (
     <Row className="mt-2 mb-2">
+      <input type="hidden" name="entryIds" value={entryIds} />
       <Col>
         <div className="wrap">
-          <div className="scroll">
+          <div className="scroll" ref={infiniteScrollWrapRef}>
             <GoodNewsEntryView
               title="庭駅ナサ場対先メツロモ中化亮影トぞ多防ヘ陣社どぽれご岡世にト栄事都いどゆそ北空シ府升忍曇椎ほふスち。"
               mainUrl="https://www.example.com"
@@ -112,5 +144,5 @@ export const GoodNewsList = () => {
       </Col>
     </Row>
   )
-}
+})
 GoodNewsList.displayName = 'GoodNewsList'
