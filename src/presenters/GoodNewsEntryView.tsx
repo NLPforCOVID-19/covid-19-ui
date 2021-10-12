@@ -27,16 +27,16 @@ export const GoodNewsEntryView: React.FC<Props> = memo((props) => {
           &thinsp;{title}
         </a>
         {altUrl && (
-          <span>
-            <a href="{altUrl}" target="_blank" rel="noreferrer" title={t('元の言語で表示')}>
+          <span className="ml-1">
+            <a href={altUrl} target="_blank" rel="noreferrer" title={t('元の言語で表示')}>
               &thinsp;
               <Icons.OpenInNew />
             </a>
           </span>
         )}
-        <span className="source small">
-          <a href={sourceUrl} target="_blank" rel="noreferrer">
-            &thinsp;{sourceName}
+        <span className="source small ml-3">
+          <a href={`http://${sourceUrl}`} target="_blank" rel="noreferrer" className="text-muted">
+            {sourceName}
           </a>
         </span>
       </div>
