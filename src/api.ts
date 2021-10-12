@@ -332,7 +332,7 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
 }
 
 export async function fetchGoodNews(offset: number, limit: number, lang: Lang): Promise<GoodNewsEntry[]> {
-  const path = `/articles/topic/Current%20state%20of%20infection/int?start=0&limit=${limit}&lang=${lang}`
+  const path = `/positive_articles?lang=${lang}`
   const response = await axios.get<ResponseGoodNewsEntry[]>(baseUrl + path, {
     params: {
       start: offset,
