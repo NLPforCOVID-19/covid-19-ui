@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -70,40 +70,34 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="37.818382"
-       y="72.610649"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="36.975006"
+       y="73.381157"
        id="text76"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan74"
-         x="37.818382"
-         y="72.610649"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:0.264583">G</tspan></text>
-    <g
-       id="g150"
-       transform="translate(-0.2086113,0.65441897)"
-       inkscape:export-xdpi="43.07"
-       inkscape:export-ydpi="43.07">
-      <ellipse
-         style="fill:#ffdd55;fill-rule:evenodd;stroke-width:0.264583"
-         id="path10-2"
-         cx="57.572376"
-         cy="73.78685"
-         rx="10.327805"
-         ry="10.09336" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-         x="52.872177"
-         y="77.639313"
-         id="text76-9"><tspan
-           sodipodi:role="line"
-           id="tspan102"
-           x="52.872177"
-           y="77.639313">O</tspan></text>
-    </g>
+         x="36.975006"
+         y="73.381157"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:0.264583">G</tspan></text>
+    <ellipse
+       style="fill:#ffcc00;fill-rule:evenodd;stroke-width:0.264583"
+       id="path10-2"
+       cx="57.363766"
+       cy="74.441269"
+       rx="10.327805"
+       ry="10.09336" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="51.968746"
+       y="79.06424"
+       id="text76-9"><tspan
+         sodipodi:role="line"
+         id="tspan102"
+         x="51.968746"
+         y="79.06424">O</tspan></text>
     <ellipse
        style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-2-3"
@@ -115,16 +109,16 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="68.196533"
-       y="72.610649"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="67.297348"
+       y="73.381157"
        id="text76-9-8"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan102-7"
-         x="68.196533"
-         y="72.610649">O</tspan></text>
+         x="67.297348"
+         y="73.381157">O</tspan></text>
     <ellipse
        style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-2-3-8"
@@ -136,16 +130,16 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="83.419205"
-       y="78.298904"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="82.498833"
+       y="79.070442"
        id="text76-9-0"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan140"
-         x="83.419205"
-         y="78.298904">D</tspan></text>
+         x="82.498833"
+         y="79.070442">D</tspan></text>
     <ellipse
        style="fill:#ff9955;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-20"
@@ -157,16 +151,16 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="106.55677"
-       y="72.247513"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="105.67102"
+       y="73.019051"
        id="text76-3"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan334"
-         x="106.55677"
-         y="72.247513">N</tspan></text>
+         x="105.67102"
+         y="73.019051">N</tspan></text>
     <ellipse
        style="fill:#0055d4;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-2-34"
@@ -178,16 +172,16 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="122.60109"
-       y="77.930595"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="121.85849"
+       y="78.702133"
        id="text76-9-6"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan336"
-         x="122.60109"
-         y="77.930595">E</tspan></text>
+         x="121.85849"
+         y="78.702133">E</tspan></text>
     <ellipse
        style="fill:#c83737;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-2-3-5"
@@ -199,16 +193,16 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="135.81355"
-       y="72.247513"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="134.64772"
+       y="73.019051"
        id="text76-9-8-4"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan338"
-         x="135.81355"
-         y="72.247513">W</tspan></text>
+         x="134.64772"
+         y="73.019051">W</tspan></text>
     <ellipse
        style="fill:#9955ff;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-2-3-8-6"
@@ -220,16 +214,16 @@
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="153.16786"
-       y="77.92543"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="152.40718"
+       y="78.69593"
        id="text76-9-0-7"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan340"
-         x="153.16786"
-         y="77.92543">S</tspan></text>
+         x="152.40718"
+         y="78.69593">S</tspan></text>
     <ellipse
        style="fill:#ff9955;fill-rule:evenodd;stroke-width:0.0624045"
        id="path10-20-8"
