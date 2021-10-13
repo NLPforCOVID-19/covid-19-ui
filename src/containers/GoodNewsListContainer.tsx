@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { selectViewMode } from '@src/redux/ui'
-import { selectActive, selectRegions } from '@src/redux/regionsTopics'
+import { selectActive } from '@src/redux/regionsTopics'
 import { loadMoreGoodNews } from '@src/redux/asyncActions'
 import { useTranslation } from '@src/context/LanguageContext'
 import { GoodNewsList } from '@src/presenters/GoodNewsList'
@@ -18,7 +18,6 @@ export const GoodNewsListContainer: React.FC = memo(() => {
   const { byId } = useSelector((s: RootState) => selectGoodNewsEntries(s))
   const allIds = Object.keys(byId)
   const viewMode = useSelector(selectViewMode)
-  const regions = useSelector(selectRegions)
   const { region: activeRegion, topic: activeTopic } = useSelector(selectActive)
   const region = viewMode == 'region' ? activeRegion : null
   const topic = viewMode == 'topic' ? activeTopic : null
