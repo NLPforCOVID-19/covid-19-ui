@@ -20,8 +20,8 @@ export const GoodNewsListContainer: React.FC = memo(() => {
   const allIds = Object.keys(byId)
   const viewMode = useSelector(selectViewMode)
   const { region: activeRegion, topic: activeTopic } = useSelector(selectActive)
-  const region = viewMode == 'region' ? activeRegion : ""
-  const topic = viewMode == 'topic' ? activeTopic : ""
+  const region = viewMode == 'region' ? activeRegion : ''
+  const topic = viewMode == 'topic' ? activeTopic : ''
 
   const handleLoadMore = useCallback(() => {
     dispatch(loadMoreGoodNews({ region, topic, lang }))
