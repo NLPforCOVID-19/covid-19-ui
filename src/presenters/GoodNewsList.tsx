@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { Url } from '@src/types'
 
 import { useTranslation } from '@src/context/LanguageContext'
 

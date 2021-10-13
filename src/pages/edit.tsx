@@ -29,7 +29,7 @@ const Edit = () => {
   return (
     <Layout>
       <EditModalContainer />
-      <GoodNewsListContainer region="all" topic="all" />
+      <GoodNewsListContainer />
       <NewsViewContainer />
     </Layout>
   )
