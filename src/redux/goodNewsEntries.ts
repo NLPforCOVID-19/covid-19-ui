@@ -12,6 +12,7 @@ const initialState: State = {
 }
 
 const skipsertEntries = (state: State, entries: GoodNewsEntry[]) => {
+  state.byUrl = {}
   for (const e of entries) {
     if (state.byUrl[e.url]) continue
     state.byUrl[e.url] = e

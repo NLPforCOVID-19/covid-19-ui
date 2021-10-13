@@ -19,11 +19,8 @@ export const GoodNewsList: React.FC<Props> = memo((props) => {
   useEffect(() => {
     const observeEl = infiniteScrollObserveRef.current
     const observer = new IntersectionObserver(
-      (e) => {
+      () => {
         onLoadMore()
-        //if (e[0].isIntersecting && !loading && !noMore) {
-        //  onLoadMore()
-        //}
       },
       { root: infiniteScrollWrapRef.current }
     )

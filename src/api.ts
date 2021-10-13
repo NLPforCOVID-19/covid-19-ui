@@ -331,8 +331,17 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
   }
 }
 
-export async function fetchGoodNews(offset: number, limit: number, lang: Lang): Promise<GoodNewsEntry[]> {
-  const path = `/positive_articles?lang=${lang}`
+export async function fetchGoodNews(
+  klass: Topic,
+  country: RegionId,
+  offset: number,
+  limit: number,
+  lang: Lang
+): Promise<GoodNewsEntry[]> {
+  let subPath = ''
+  if (klass) subPath = `/topic/${klass}`
+  else if (country) subPath = `/country/${country}`
+  const path = `/positive_articles${subPath}?lang=${lang}`
   const response = await axios.get<ResponseGoodNewsEntry[]>(baseUrl + path, {
     params: {
       start: offset,

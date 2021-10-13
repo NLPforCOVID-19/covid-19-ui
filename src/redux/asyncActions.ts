@@ -63,11 +63,12 @@ export const loadMoreTweets = createAsyncThunk<
   return API.fetchTweetsByClassAndCountry('all', region, offset, 20, lang)
 })
 
-export const loadMoreGoodNews = createAsyncThunk<GoodNewsEntry[], { lang: Lang }, { state: RootState }>(
-  'loadMoreGoodNews',
-  async ({ lang }, ThunkAPI) => {
-    //const offset = goodNewsEntriesNumSelector(ThunkAPI.getState(), {})
-    const offset = 0
-    return API.fetchGoodNews(offset, 20, lang)
-  }
-)
+export const loadMoreGoodNews = createAsyncThunk<
+  GoodNewsEntry[],
+  { region: RegionId; topic: Topic; lang: Lang },
+  { state: RootState }
+>('loadMoreGoodNews', async ({ region, topic, lang }) => {
+  const offset = 0
+  const limit = 5
+  return API.fetchGoodNews(topic, region, offset, limit, lang)
+})
