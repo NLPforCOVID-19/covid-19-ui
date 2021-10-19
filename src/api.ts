@@ -190,6 +190,7 @@ export async function modifyRegionCategory(
     is_useful: flags.useful,
     'is_about_COVID-19': flags.aboutCovid,
     is_about_false_rumor: flags.aboutRumor,
+    is_positive: flags.positive,
     notes,
     password
   }
