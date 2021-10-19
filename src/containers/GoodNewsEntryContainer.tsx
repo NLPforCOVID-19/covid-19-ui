@@ -1,20 +1,21 @@
 import { memo, useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { GoodNewsEntry } from '@src/types'
+import { Entry } from '@src/types'
 import { GoodNewsEntryView } from '@src/presenters/GoodNewsEntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
-import { selectEditMode } from '@src/redux/ui'
+import { selectEditMode, startEdit } from '@src/redux/ui'
 import { mainAltUrl } from '@src/utils'
 
 interface Props {
-  entry: GoodNewsEntry
+  entry: Entry
 }
 
 export const GoodNewsEntryContainer: React.FC<Props> = memo(({ entry }) => {
   const { lang, t } = useTranslation()
+  const dispatch = useDispatch()
   const editMode = useSelector(selectEditMode)
 
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
@@ -27,8 +28,9 @@ export const GoodNewsEntryContainer: React.FC<Props> = memo(({ entry }) => {
     (e: React.MouseEvent) => {
       e.preventDefault()
       if (!editMode) return
+      dispatch(startEdit(entry))
     },
-    [editMode]
+    [editMode, dispatch, entry]
   )
 
   const renderIcon = useCallback(() => {

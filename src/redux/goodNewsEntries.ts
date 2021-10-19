@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { Url, GoodNewsEntry } from '@src/types'
+import { Url, Entry } from '@src/types'
 import { loadMoreGoodNews } from '@src/redux/asyncActions'
 
 interface State {
-  byUrl: Record<Url, GoodNewsEntry>
+  byUrl: Record<Url, Entry>
 }
 
 const initialState: State = {
   byUrl: {}
 }
 
-const skipsertEntries = (state: State, entries: GoodNewsEntry[]) => {
+const skipsertEntries = (state: State, entries: Entry[]) => {
   state.byUrl = {}
   for (const e of entries) {
     if (state.byUrl[e.url]) continue

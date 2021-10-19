@@ -77,16 +77,6 @@ export interface TwitterEntry {
   retweetCount: number
 }
 
-export interface GoodNewsEntry {
-  kind: 'GoodNewsEntry'
-  url: Url
-  country: string
-  title: string
-  timestamp: UnixEpoch
-  domainUrl: string
-  domainLabel: string
-}
-
 export interface TagForSearchSnippet {
   type: 'text' | 'match' | 'exact-match'
   content: string
