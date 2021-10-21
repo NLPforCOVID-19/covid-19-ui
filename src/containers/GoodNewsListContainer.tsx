@@ -39,9 +39,13 @@ export const GoodNewsListContainer: React.FC = memo(() => {
       <Container className="rounded border wrap">
         <Row className="mt-2 mb-2">
           <Col className="col-sm-1">
-            <img src="/images/GoodNewsLogo.svg" height="24px" />
+            <img
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/GoodNewsLogo.svg`}
+              height="24px"
+              alt="good news"
+            />
           </Col>
-          <Col className="col-sm-11"></Col>
+          <Col className="col-sm-11" />
         </Row>
         <GoodNewsList entryIds={allIds} onLoadMore={handleLoadMore} renderEntry={renderEntry} />
       </Container>
