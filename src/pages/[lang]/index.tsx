@@ -12,6 +12,7 @@ import { FeedbackToast } from '@src/components/FeedbackToast'
 import { languagePaths } from '@src/utils'
 import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
+import { GoodNewsListContainer } from '@src/containers/GoodNewsListContainer'
 import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 import { createNewsViewHash } from '@src/redux/globalSelectors'
 import { changeEditMode } from '@src/redux/ui'
@@ -62,13 +63,15 @@ const Index: NextPage<Props> = () => {
       <div>
         <Container>
           <Row>
-            <Col
-              className="col-sm-8"
-              style={{ paddingLeft: -15, paddingRight: -15, marginLeft: -15, marginRight: -15 }}
-            >
+            <Col className="col-sm-12">
+              <GoodNewsListContainer />
+            </Col>
+          </Row>
+          <Row className="no-gutters">
+            <Col className="col-sm-8">
               <MapBox />
             </Col>
-            <Col className="col-sm-4" style={{ paddingLeft: 0, paddingRight: 0, marginLeft: 0, marginRight: -15 }}>
+            <Col className="col-sm-4">
               <TwitterViewContainer />
             </Col>
           </Row>
