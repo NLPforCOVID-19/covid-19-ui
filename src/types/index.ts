@@ -48,6 +48,7 @@ interface EntryFlags {
 export interface EntryFlagsEdit extends EntryFlags {
   hidden: boolean
   aboutCovid: boolean
+  positive: boolean
 }
 
 export interface Entry {

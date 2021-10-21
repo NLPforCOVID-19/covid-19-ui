@@ -136,6 +136,15 @@ export const EditModal: React.FC<Props> = (props) => {
             </Form.Check>
           ))}
         </Form.Group>
+        <Form.Group>
+          <Form.Check
+            type="checkbox"
+            label="Positive News"
+            checked={state.flags.positive}
+            onChange={(e) => dispatch({ type: 'positive', payload: (e.target as HTMLInputElement).checked })}
+            inline
+          />
+        </Form.Group>
         <hr />
         <Form.Group>
           <Form.Label>メモ欄</Form.Label>

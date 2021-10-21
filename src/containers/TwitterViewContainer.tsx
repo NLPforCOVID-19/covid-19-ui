@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
 
 import { selectActive } from '@src/redux/regionsTopics'
 import { selectViewMode } from '@src/redux/ui'
@@ -13,22 +12,10 @@ export const TwitterViewContainer = () => {
 
   switch (viewMode) {
     case 'region':
-      return (
-        <Container className="mt-2 mb-2">
-          <Row>
-            <TwitterCardContainer region={activeRegion} topic="all" />
-          </Row>
-        </Container>
-      )
+      return <TwitterCardContainer region={activeRegion} topic="all" />
 
     case 'topic':
-      return (
-        <Container className="mt-2 mb-2">
-          <Row>
-            <TwitterCardContainer region="all" topic="all" />
-          </Row>
-        </Container>
-      )
+      return <TwitterCardContainer region="all" topic="all" />
 
     default:
       return (
