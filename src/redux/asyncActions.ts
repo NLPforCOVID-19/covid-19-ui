@@ -62,3 +62,13 @@ export const loadMoreTweets = createAsyncThunk<
   // We ignore the topic for tweets because they all belong to the "all" category.
   return API.fetchTweetsByClassAndCountry('all', region, offset, 20, lang)
 })
+
+export const loadMoreGoodNews = createAsyncThunk<
+  Entry[],
+  { region: RegionId; topic: Topic; lang: Lang },
+  { state: RootState }
+>('loadMoreGoodNews', async ({ region, topic, lang }) => {
+  const offset = 0
+  const limit = 5
+  return API.fetchGoodNews(topic, region, offset, limit, lang)
+})
