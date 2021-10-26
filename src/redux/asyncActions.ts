@@ -31,7 +31,7 @@ export const fetchMetaAndFirstEntries = createAsyncThunk(
       regions,
       topics,
       mode: mode === 'neutral' ? 'topic' : mode,
-      activeTopic: mode === 'topic' ? target : topics[0],
+      activeTopic: mode === 'topic' ? target : topics[1],
       activeRegion: mode === 'region' ? target : regions[0].id
     }
   }
