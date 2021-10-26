@@ -55,7 +55,7 @@ export const TwitterCard: React.FC<Props> = memo((props) => {
       </div>
       <style jsx>{`
         .wrap {
-          height: 410px;
+          height: 610px;
           display: flex;
           flex-flow: column nowrap;
         }
