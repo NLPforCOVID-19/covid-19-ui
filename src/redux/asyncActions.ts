@@ -31,7 +31,7 @@ export const fetchMetaAndFirstEntries = createAsyncThunk(
       regions,
       topics,
       mode: mode === 'neutral' ? 'topic' : mode,
-      activeTopic: mode === 'topic' ? target : topics[0],
+      activeTopic: mode === 'topic' ? target : topics[1],
       activeRegion: mode === 'region' ? target : regions[0].id
     }
   }
@@ -61,4 +61,14 @@ export const loadMoreTweets = createAsyncThunk<
   const offset = twitterEntriesNumSelector(ThunkAPI.getState(), { region, topic })
   // We ignore the topic for tweets because they all belong to the "all" category.
   return API.fetchTweetsByClassAndCountry('all', region, offset, 20, lang)
+})
+
+export const loadMoreGoodNews = createAsyncThunk<
+  Entry[],
+  { region: RegionId; topic: Topic; lang: Lang },
+  { state: RootState }
+>('loadMoreGoodNews', async ({ region, topic, lang }) => {
+  const offset = 0
+  const limit = 5
+  return API.fetchGoodNews(topic, region, offset, limit, lang)
 })

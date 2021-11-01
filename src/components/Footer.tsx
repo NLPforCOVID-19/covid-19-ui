@@ -47,7 +47,7 @@ export const Footer = () => {
         </Row>
         <Row className="mt-2">
           <Col className="text-muted text-center">
-            &copy; 2020 NLPforCOVID-19. {t('お問い合わせ')} nlpforcovid-19 (at) nlp.ist.i.kyoto-u.ac.jp
+            &copy; 2020-2021 NLPforCOVID-19. {t('お問い合わせ')} nlpforcovid-19 (at) nlp.ist.i.kyoto-u.ac.jp
           </Col>
         </Row>
       </Container>

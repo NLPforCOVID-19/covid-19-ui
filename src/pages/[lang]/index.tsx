@@ -12,12 +12,14 @@ import { FeedbackToast } from '@src/components/FeedbackToast'
 import { languagePaths } from '@src/utils'
 import { selectRegionTopicLoaded } from '@src/redux/regionsTopics'
 import { fetchMetaAndFirstEntries } from '@src/redux/asyncActions'
+import { GoodNewsListContainer } from '@src/containers/GoodNewsListContainer'
 import { NewsViewContainer } from '@src/containers/NewsViewContainer'
 import { createNewsViewHash } from '@src/redux/globalSelectors'
 import { changeEditMode } from '@src/redux/ui'
 import { Lang } from '@src/types'
 import { defaultLang } from '@src/translations'
 import { MapBox } from '@src/containers/MapBox'
+import { TwitterViewContainer } from '@src/containers/TwitterViewContainer'
 
 interface Props {
   lang: Lang
@@ -61,11 +63,12 @@ const Index: NextPage<Props> = () => {
       <div>
         <Container>
           <Row>
-            <Col
-              className="col-sm-12"
-              style={{ paddingLeft: -15, paddingRight: -15, marginLeft: -15, marginRight: -15 }}
-            >
+            <Col className="col-sm-8">
+              <GoodNewsListContainer />
               <MapBox />
+            </Col>
+            <Col className="col-sm-4" style={{ padding: 0 }}>
+              <TwitterViewContainer />
             </Col>
           </Row>
         </Container>

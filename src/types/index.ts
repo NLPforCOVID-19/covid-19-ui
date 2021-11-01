@@ -7,7 +7,9 @@ export const countryIds = [
   'fr',
   'es',
   'de',
+  'it',
   'eu',
+  'ru',
   'eur_other',
   'kr',
   'id',
@@ -15,12 +17,14 @@ export const countryIds = [
   'np',
   'my',
   'sg',
+  'af',
   'asia_other',
   'jp',
   'cn',
   'us',
   'us_other',
   'br',
+  'mx',
   'sa_other',
   'au',
   'oceania_other',
@@ -44,6 +48,7 @@ interface EntryFlags {
 export interface EntryFlagsEdit extends EntryFlags {
   hidden: boolean
   aboutCovid: boolean
+  positive: boolean
 }
 
 export interface Entry {

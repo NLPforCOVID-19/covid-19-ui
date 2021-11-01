@@ -190,6 +190,7 @@ export async function modifyRegionCategory(
     is_useful: flags.useful,
     'is_about_COVID-19': flags.aboutCovid,
     is_about_false_rumor: flags.aboutRumor,
+    is_positive: flags.positive,
     notes,
     password
   }
@@ -305,4 +306,25 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     country: responseEntry.country,
     retweetCount: responseEntry.retweetCount
   }
+}
+
+export async function fetchGoodNews(
+  klass: Topic,
+  country: RegionId,
+  offset: number,
+  limit: number,
+  lang: Lang
+): Promise<Entry[]> {
+  let subPath = ''
+  if (klass) subPath = `/topic/${klass}`
+  else if (country) subPath = `/country/${country}`
+  const path = `/positive_articles${subPath}?lang=${lang}`
+  const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
+    params: {
+      start: offset,
+      limit: limit,
+      lang: lang
+    }
+  })
+  return response.data.map(parseResponseEntry)
 }
