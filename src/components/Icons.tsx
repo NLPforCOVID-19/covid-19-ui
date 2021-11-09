@@ -30,6 +30,11 @@ export const Useful = () => {
   return <BaseIcon title={t('useful')} color="var(--yellow)" iconId="fiber_manual_record" />
 }
 
+export const Positive = () => {
+  const { t } = useTranslation()
+  return <BaseIcon title={t('positive')} color="var(--yellow)" iconId="fiber_manual_record" />
+}
+
 export const Default = () => {
   return <BaseIcon color="#A9A9A9" iconId="fiber_manual_record" />
 }

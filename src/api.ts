@@ -33,6 +33,7 @@ interface ResponseEntry {
   domain_label: string
   is_about_false_rumor: ResponseBool
   is_useful: ResponseBool
+  is_positive: ResponseBool
   orig: {
     timestamp: string
   }
@@ -78,7 +79,8 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     domainLabel: responseEntry.domain_label,
     flags: {
       aboutRumor: responseEntry.is_about_false_rumor === 1,
-      useful: responseEntry.is_useful === 1
+      useful: responseEntry.is_useful === 1,
+      positive: responseEntry.is_positive === 1
     },
     snippets: snippets
   }

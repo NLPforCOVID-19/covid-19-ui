@@ -33,7 +33,7 @@ const initializeFormState = (e: Entry | EntryWithSearchSnippet | null): EditForm
     password: '',
     notes: '',
     country: '',
-    flags: { aboutCovid: true, hidden: false, aboutRumor: false, useful: false, positive: true },
+    flags: { aboutCovid: true, hidden: false, aboutRumor: false, useful: false, positive: false },
     topics: []
   }
   if (e === null) return state

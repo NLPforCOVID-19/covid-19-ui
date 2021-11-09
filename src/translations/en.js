@@ -6,6 +6,7 @@ export const en = {
   情報源のサイト: 'Information sources list',
   お問い合わせ: 'Contact:',
   useful: 'Useful article',
+  positive: 'Positive article (GOOD NEWS)',
   no_info: 'No information available.',
   false_rumor: 'Disputable',
   元の言語で表示: 'Show in original language',
