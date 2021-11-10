@@ -32,7 +32,6 @@ interface ResponseEntry {
   domain: string
   domain_label: string
   is_about_false_rumor: ResponseBool
-  is_useful: ResponseBool
   is_positive: ResponseBool
   orig: {
     timestamp: string
@@ -79,7 +78,6 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     domainLabel: responseEntry.domain_label,
     flags: {
       aboutRumor: responseEntry.is_about_false_rumor === 1,
-      useful: responseEntry.is_useful === 1,
       positive: responseEntry.is_positive === 1
     },
     snippets: snippets
@@ -189,7 +187,6 @@ export async function modifyRegionCategory(
     new_displayed_country: country,
     new_classes: topics,
     is_hidden: flags.hidden,
-    is_useful: flags.useful,
     'is_about_COVID-19': flags.aboutCovid,
     is_about_false_rumor: flags.aboutRumor,
     is_positive: flags.positive,

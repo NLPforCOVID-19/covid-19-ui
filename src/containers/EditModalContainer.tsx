@@ -33,7 +33,7 @@ const initializeFormState = (e: Entry | EntryWithSearchSnippet | null): EditForm
     password: '',
     notes: '',
     country: '',
-    flags: { aboutCovid: true, hidden: false, aboutRumor: false, useful: false, positive: false },
+    flags: { aboutCovid: true, hidden: false, aboutRumor: false, positive: false },
     topics: []
   }
   if (e === null) return state
@@ -62,7 +62,6 @@ const formReducer = (state: EditFormState, action: EditFormAction): EditFormStat
     case 'aboutCovid':
     case 'aboutRumor':
     case 'hidden':
-    case 'useful':
     case 'positive':
       return {
         ...state,

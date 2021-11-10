@@ -5,7 +5,6 @@ export const en = {
   check_public_website: 'Check out websites of public institutions',
   情報源のサイト: 'Information sources list',
   お問い合わせ: 'Contact:',
-  useful: 'Useful article',
   positive: 'Positive article (GOOD NEWS)',
   no_info: 'No information available.',
   false_rumor: 'Disputable',
