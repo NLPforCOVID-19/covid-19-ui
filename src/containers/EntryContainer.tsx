@@ -58,7 +58,7 @@ export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId })
   const renderIcon = useCallback(() => {
     return (
       <>
-        {entry.flags.useful ? <Icon.Useful /> : <Icon.Default />}
+        {entry.flags.positive ? <Icon.Positive /> : <Icon.Default />}
         {editMode && (
           <a href="#" onClick={handleClickEdit}>
             <Icon.Edit />
@@ -66,7 +66,7 @@ export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId })
         )}
       </>
     )
-  }, [entry.flags.useful, editMode, handleClickEdit])
+  }, [entry.flags.positive, editMode, handleClickEdit])
 
   return (
     <EntryView
