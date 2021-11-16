@@ -81,7 +81,7 @@ const AboutEn = () => (
             <Card.Text>
               By default, you can choose one of the categories like &quot;Current state of infection&quot;,
               &quot;Prevention and mitigation measures&quot; with the tabs above. Articles are categorized automatically
-              at first, then sequentially verified manually. In addition, articles are evaluated and tagged as useful.
+              at first, then sequentially verified manually. In addition, articles are evaluated and tagged as positive.
             </Card.Text>
             <Card.Img
               variant="top"

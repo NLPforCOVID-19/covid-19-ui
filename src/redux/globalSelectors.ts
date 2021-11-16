@@ -113,7 +113,7 @@ export const selectEntriesForMap = createSelector(
           break
       }
     }
-    const entries = ids.map((id) => (focusedToSearch ? search.byUrl[id] : byUrl[id])).filter((e) => e.flags.useful)
+    const entries = ids.map((id) => (focusedToSearch ? search.byUrl[id] : byUrl[id])).filter((e) => e.flags.positive)
     const byCountryId: Record<string, Url[]> = {}
     for (const entry of entries) {
       if (!byCountryId[entry.country]) {
