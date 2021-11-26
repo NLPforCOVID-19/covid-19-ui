@@ -53,6 +53,10 @@ const AboutJp = () => (
       </Col>
     </Row>
     <section>
+      <p>ポジティブな記事(GOOD NEWS): 感情分析によってポジティブと自動判定された記事</p>
+      <p>デマ関連情報: デマの可能性がある情報について言及していると自動判定された記事</p>
+    </section>
+    <section>
       <h5>よくある質問</h5>
       <h6 className="question">Q. Google 翻訳で翻訳できない</h6>
       <p className="desc">
@@ -108,6 +112,10 @@ const AboutEn = () => (
         </Card>
       </Col>
     </Row>
+    <section>
+      <p>Positive article (GOOD NEWS): An article automatically judged to be positive by sentiment analysis</p>
+      <p>Disputable: An article automatically judged as referring to disputable information</p>
+    </section>
     <section>
       <h5>FAQ</h5>
       <h6 className="question">Q. Cannot translate with Google Translate</h6>
