@@ -53,8 +53,8 @@ const AboutJp = () => (
       </Col>
     </Row>
     <section>
-        <p>ポジティブな記事(GOOD NEWS): 感情分析によってポジティブと自動判定された記事</p>
-        <p>デマ関連情報: デマの可能性がある情報について言及していると自動判定された記事</p>
+      <p>ポジティブな記事(GOOD NEWS): 感情分析によってポジティブと自動判定された記事</p>
+      <p>デマ関連情報: デマの可能性がある情報について言及していると自動判定された記事</p>
     </section>
     <section>
       <h5>よくある質問</h5>
@@ -113,8 +113,8 @@ const AboutEn = () => (
       </Col>
     </Row>
     <section>
-        <p>Positive article (GOOD NEWS): An article automatically judged to be positive by sentiment analysis</p>
-        <p>Disputable: An article automatically judged as referring to disputable information</p>
+      <p>Positive article (GOOD NEWS): An article automatically judged to be positive by sentiment analysis</p>
+      <p>Disputable: An article automatically judged as referring to disputable information</p>
     </section>
     <section>
       <h5>FAQ</h5>
