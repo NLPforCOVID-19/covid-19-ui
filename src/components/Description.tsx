@@ -12,7 +12,7 @@ export const Description = memo(() => {
         <div className="text-dark">
           {t('description')}
           &nbsp;
-          <a href={`${process.env.NEXT_PUBLIC_BASE_PATH}${lang}/about/`}>このサイトの使い方</a>
+          <a href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${lang}/about/`}>このサイトの使い方</a>
         </div>
       </Container>
     </div>
