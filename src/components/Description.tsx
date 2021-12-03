@@ -12,9 +12,9 @@ export const Description = memo(() => {
         <div className="text-dark">
           {t('description')}
           &nbsp;
-          <Link href="/[lang]/about" as={`/${lang}/about`}>
-            <a>{t('このサイトの使い方')}</a>
-          </Link>
+          <a href={`/${lang}/about`}>
+            このサイトの使い方
+          </a>
         </div>
       </Container>
     </div>
