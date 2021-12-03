@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import Container from 'react-bootstrap/Container'
+import Link from 'next/link'
 
 import { useTranslation } from '../context/LanguageContext'
 
@@ -11,7 +12,9 @@ export const Description = memo(() => {
         <div className="text-dark">
           {t('description')}
           &nbsp;
-          <a href={`/${lang}/about`}>このサイトの使い方</a>
+          <Link href="/[lang]/about/" as={`/${lang}/about/`}>
+            <a>このサイトの使い方</a>
+          </Link>
         </div>
       </Container>
     </div>
