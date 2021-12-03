@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import Container from 'react-bootstrap/Container'
-import Link from 'next/link'
 
 import { useTranslation } from '../context/LanguageContext'
 
 export const Description = memo(() => {
+  // TODO: Use <Link> instead of <a> to perform as an SPA
   const { t, lang } = useTranslation()
   return (
     <div className="mt-3">
@@ -12,9 +12,7 @@ export const Description = memo(() => {
         <div className="text-dark">
           {t('description')}
           &nbsp;
-          <Link href="/[lang]/about/" as={`/${lang}/about/`}>
-            <a>このサイトの使い方</a>
-          </Link>
+          <a href={`${process.env.NEXT_PUBLIC_BASE_PATH}${lang}/about/`}>このサイトの使い方</a>
         </div>
       </Container>
     </div>
