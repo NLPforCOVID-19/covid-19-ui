@@ -9,8 +9,8 @@ export const IndicatorLegends = memo(() => {
   return (
     <ul>
       <li>
-        <Icons.Useful />
-        <div className="text-secondary">{t('useful')}</div>
+        <Icons.Positive />
+        <div className="text-secondary">{t('positive')}</div>
       </li>
       <style jsx>{`
         ul {

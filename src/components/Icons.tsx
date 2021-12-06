@@ -25,9 +25,9 @@ const BaseIcon: React.FC<BaseIconProps> = memo(({ title, color, size, iconId }) 
 ))
 BaseIcon.displayName = 'BaseIcon'
 
-export const Useful = () => {
+export const Positive = () => {
   const { t } = useTranslation()
-  return <BaseIcon title={t('useful')} color="var(--yellow)" iconId="fiber_manual_record" />
+  return <BaseIcon title={t('positive')} color="var(--yellow)" iconId="fiber_manual_record" />
 }
 
 export const Default = () => {
