@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { memo } from 'react'
 import Container from 'react-bootstrap/Container'
 
@@ -12,7 +13,9 @@ export const Description = memo(() => {
         <div className="text-dark">
           {t('description')}
           &nbsp;
-          <a href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${lang}/about/`}>このサイトの使い方</a>
+          <Link href="/[lang]/about/" as={`/${lang}/about/`}>
+            <a>このサイトの使い方</a>
+          </Link>
         </div>
       </Container>
     </div>
