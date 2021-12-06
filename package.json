@@ -16,7 +16,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@types/gtag.js": "^0.0.8",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bootstrap": "^4.6.0",
     "dayjs": "^1.10.5",
     "mapbox-gl": "^2.3.0",
