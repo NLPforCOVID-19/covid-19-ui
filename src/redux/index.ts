@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import entriesReducer from './entries'
 import twitterEntriesReducer from './twitterEntries'
+import goodNewsEntriesReducer from './goodNewsEntries'
 import regionsTopicsReducer from './regionsTopics'
 import entriesByRegionTopicReducer from './entriesByRegionTopic'
 import twitterEntriesByRegionTopicReducer from './twitterEntriesByRegionTopic'
@@ -11,6 +12,7 @@ import searchReducer from './search'
 const rootReducer = combineReducers({
   entries: entriesReducer,
   twitterEntries: twitterEntriesReducer,
+  goodNewsEntries: goodNewsEntriesReducer,
   regionsTopics: regionsTopicsReducer,
   entriesByRegionTopic: entriesByRegionTopicReducer,
   twitterEntriesByRegionTopic: twitterEntriesByRegionTopicReducer,

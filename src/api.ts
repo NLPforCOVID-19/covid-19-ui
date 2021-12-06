@@ -32,7 +32,7 @@ interface ResponseEntry {
   domain: string
   domain_label: string
   is_about_false_rumor: ResponseBool
-  is_useful: ResponseBool
+  is_positive: ResponseBool
   orig: {
     timestamp: string
   }
@@ -78,7 +78,7 @@ const parseResponseEntry = (responseEntry: ResponseEntry): Entry => {
     domainLabel: responseEntry.domain_label,
     flags: {
       aboutRumor: responseEntry.is_about_false_rumor === 1,
-      useful: responseEntry.is_useful === 1
+      positive: responseEntry.is_positive === 1
     },
     snippets: snippets
   }
@@ -187,9 +187,9 @@ export async function modifyRegionCategory(
     new_displayed_country: country,
     new_classes: topics,
     is_hidden: flags.hidden,
-    is_useful: flags.useful,
     'is_about_COVID-19': flags.aboutCovid,
     is_about_false_rumor: flags.aboutRumor,
+    is_positive: flags.positive,
     notes,
     password
   }
@@ -305,4 +305,25 @@ const parseResponseTwitterEntry = (responseEntry: ResponseTwitterEntry): Twitter
     country: responseEntry.country,
     retweetCount: responseEntry.retweetCount
   }
+}
+
+export async function fetchGoodNews(
+  klass: Topic,
+  country: RegionId,
+  offset: number,
+  limit: number,
+  lang: Lang
+): Promise<Entry[]> {
+  let subPath = ''
+  if (klass) subPath = `/topic/${klass}`
+  else if (country) subPath = `/country/${country}`
+  const path = `/positive_articles${subPath}?lang=${lang}`
+  const response = await axios.get<ResponseEntry[]>(baseUrl + path, {
+    params: {
+      start: offset,
+      limit: limit,
+      lang: lang
+    }
+  })
+  return response.data.map(parseResponseEntry)
 }

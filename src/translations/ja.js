@@ -5,7 +5,7 @@ export const ja = {
   check_public_website: '公的機関のWebサイトを確認する',
   情報源のサイト: '情報源のサイト',
   お問い合わせ: 'お問い合わせ',
-  useful: '特に役立つ記事',
+  positive: 'ポジティブな記事(GOOD NEWS)',
   no_info: '情報はありません',
   false_rumor: 'デマ関連情報',
   元の言語で表示: '元の言語で表示する',

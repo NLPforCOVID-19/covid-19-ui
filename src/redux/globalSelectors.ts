@@ -113,7 +113,7 @@ export const selectEntriesForMap = createSelector(
           break
       }
     }
-    const entries = ids.map((id) => (focusedToSearch ? search.byUrl[id] : byUrl[id])).filter((e) => e.flags.useful)
+    const entries = ids.map((id) => (focusedToSearch ? search.byUrl[id] : byUrl[id])).filter((e) => e.flags.positive)
     const byCountryId: Record<string, Url[]> = {}
     for (const entry of entries) {
       if (!byCountryId[entry.country]) {
@@ -169,4 +169,17 @@ export const twitterEntriesNumSelector = createSelector(
   (state: RootState, { region, topic }: { region: RegionId; topic: Topic }) =>
     state.twitterEntriesByRegionTopic[region][topic].entries,
   (entries) => entries.length
+)
+export const goodNewsEntriesNumSelector = createSelector(
+  (state: RootState) => state.goodNewsEntries,
+  (goodNewsEntries) => goodNewsEntries.byUrl.length
+)
+
+export const selectGoodNewsEntries = createSelector(
+  [(s: RootState) => s.goodNewsEntries.byUrl],
+  (goodNewsEntriesByUrl) => {
+    return {
+      byId: goodNewsEntriesByUrl
+    }
+  }
 )

@@ -40,7 +40,7 @@ export const TwitterCard: React.FC<Props> = memo((props) => {
   }, [infiniteScrollWrapRef, infiniteScrollObserveRef, loading, noMore, onLoadMore])
 
   return (
-    <Col>
+    <Col className="mt-2 mb-2">
       <div className="wrap">
         <div className="scroll" ref={infiniteScrollWrapRef}>
           {entryIds.length == 0 && noMore && <div className="text-muted text-center p-2">{t('no_info')}</div>}
@@ -55,7 +55,7 @@ export const TwitterCard: React.FC<Props> = memo((props) => {
       </div>
       <style jsx>{`
         .wrap {
-          height: 410px;
+          height: 610px;
           display: flex;
           flex-flow: column nowrap;
         }

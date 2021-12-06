@@ -2,21 +2,18 @@ import { memo, useCallback, useMemo } from 'react'
 import dayjs from 'dayjs'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Entry, EntryWithSearchSnippet, RegionId, Topic } from '@src/types'
-import { EntryView } from '@src/presenters/EntryView'
+import { Entry } from '@src/types'
+import { GoodNewsEntryView } from '@src/presenters/GoodNewsEntryView'
 import { useTranslation } from '@src/context/LanguageContext'
 import * as Icon from '@src/components/Icons'
 import { selectEditMode, startEdit } from '@src/redux/ui'
 import { mainAltUrl } from '@src/utils'
-import { SnippetTagRenderer } from '@src/presenters/SnippetTagRenderer'
 
 interface Props {
-  entry: EntryWithSearchSnippet | Entry
-  topic: Topic
-  regionId: RegionId
+  entry: Entry
 }
 
-export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId }) => {
+export const GoodNewsEntryContainer: React.FC<Props> = memo(({ entry }) => {
   const { lang, t } = useTranslation()
   const dispatch = useDispatch()
   const editMode = useSelector(selectEditMode)
@@ -24,27 +21,8 @@ export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId })
   const date = useMemo(() => dayjs(entry.timestamp).format('MM/DD'), [entry.timestamp])
   const { main, alt } = useMemo(() => mainAltUrl(entry.country, lang, entry.url), [entry.country, lang, entry.url])
   const countryDisplayName = useMemo(() => {
-    if (regionId === entry.country) return
     return t(entry.country)
-  }, [entry.country, t, regionId])
-
-  const renderSnippet = useCallback(() => {
-    if (entry.kind === 'Entry') {
-      return <>{entry.snippets[topic]}</>
-    }
-    if (entry.kind === 'EntryWithSearchSnippet') {
-      return (
-        <>
-          {entry.searchSnippet.map((tag, i) => (
-            <SnippetTagRenderer key={i} tag={tag} />
-          ))}
-        </>
-      )
-    }
-    return entry
-  }, [topic, entry])
-
-  const aboutRumor = useMemo(() => (entry.flags.aboutRumor ? t('false_rumor') : undefined), [entry.flags.aboutRumor, t])
+  }, [entry.country, t])
 
   const handleClickEdit = useCallback(
     (e: React.MouseEvent) => {
@@ -58,7 +36,6 @@ export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId })
   const renderIcon = useCallback(() => {
     return (
       <>
-        {entry.flags.positive ? <Icon.Positive /> : <Icon.Default />}
         {editMode && (
           <a href="#" onClick={handleClickEdit}>
             <Icon.Edit />
@@ -66,21 +43,19 @@ export const EntryContainer: React.FC<Props> = memo(({ entry, topic, regionId })
         )}
       </>
     )
-  }, [entry.flags.positive, editMode, handleClickEdit])
+  }, [editMode, handleClickEdit])
 
   return (
-    <EntryView
+    <GoodNewsEntryView
       title={entry.title}
       mainUrl={main}
       altUrl={alt}
       date={date}
       sourceName={entry.domainLabel}
       sourceUrl={entry.domainUrl}
-      renderSnippet={renderSnippet}
       country={countryDisplayName}
       renderIcon={renderIcon}
-      mark={aboutRumor}
     />
   )
 })
-EntryContainer.displayName = 'EntryContainer'
+GoodNewsEntryContainer.displayName = 'GoodNewsEntryContainer'

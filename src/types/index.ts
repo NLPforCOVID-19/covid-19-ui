@@ -42,7 +42,7 @@ export type TweetId = string
 
 interface EntryFlags {
   aboutRumor: boolean
-  useful: boolean
+  positive: boolean
 }
 
 export interface EntryFlagsEdit extends EntryFlags {
