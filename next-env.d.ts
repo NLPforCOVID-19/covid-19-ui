@@ -1,12 +1,6 @@
 /// <reference types="next" />
 /// <reference types="next/types/global" />
-interface Window {
-  gtag?: (type: 'config', id: string | undefined, data: { page_location: string }) => void
-}
+/// <reference types="next/image-types/global" />
 
-declare namespace NodeJS {
-  interface ProcessEnv {
-    readonly
-    readonly NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: string
-  }
-}
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
