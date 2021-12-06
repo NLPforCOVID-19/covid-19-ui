@@ -72,9 +72,9 @@ export const EditModal: React.FC<Props> = (props) => {
           />
           <Form.Check
             type="checkbox"
-            label="特に役に立つ"
-            checked={state.flags.useful}
-            onChange={(e) => dispatch({ type: 'useful', payload: (e.target as HTMLInputElement).checked })}
+            label="ポジティブ"
+            checked={state.flags.positive}
+            onChange={(e) => dispatch({ type: 'positive', payload: (e.target as HTMLInputElement).checked })}
             inline
           />
           <Form.Check
@@ -135,15 +135,6 @@ export const EditModal: React.FC<Props> = (props) => {
               </Form.Check.Label>
             </Form.Check>
           ))}
-        </Form.Group>
-        <Form.Group>
-          <Form.Check
-            type="checkbox"
-            label="Positive News"
-            checked={state.flags.positive}
-            onChange={(e) => dispatch({ type: 'positive', payload: (e.target as HTMLInputElement).checked })}
-            inline
-          />
         </Form.Group>
         <hr />
         <Form.Group>
