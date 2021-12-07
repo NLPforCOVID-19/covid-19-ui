@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="139.17073mm"
-   height="29.221056mm"
-   viewBox="0 0 139.17073 29.221056"
+   width="125.24487mm"
+   height="28.988432mm"
+   viewBox="0 0 125.24488 28.988432"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.4785879"
-     inkscape:cx="175.4064"
-     inkscape:cy="-25.8247"
+     inkscape:zoom="1.6328077"
+     inkscape:cx="68.633022"
+     inkscape:cy="70.244882"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -58,88 +58,73 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-30.207465,-55.532129)">
-    <ellipse
-       style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.264583"
-       id="path10"
-       cx="42.035164"
-       cy="68.758186"
-       rx="10.327805"
-       ry="10.09336"
-       inkscape:export-xdpi="43.07"
-       inkscape:export-ydpi="43.07" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="36.975006"
-       y="73.381157"
-       id="text76"
-       inkscape:export-xdpi="43.07"
-       inkscape:export-ydpi="43.07"><tspan
-         sodipodi:role="line"
-         id="tspan74"
-         x="36.975006"
-         y="73.381157"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:0.264583">G</tspan></text>
-    <ellipse
-       style="fill:#ffcc00;fill-rule:evenodd;stroke-width:0.264583"
-       id="path10-2"
-       cx="57.363766"
-       cy="74.441269"
-       rx="10.327805"
-       ry="10.09336" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="51.968746"
-       y="79.06424"
-       id="text76-9"><tspan
-         sodipodi:role="line"
-         id="tspan102"
+     transform="translate(-44.133328,-55.764753)">
+    <g
+       id="g912"
+       transform="translate(-0.63736507,-7.0318373)">
+      <ellipse
+         style="fill:#88aa00;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+         id="path10-2"
+         cx="57.363766"
+         cy="74.441269"
+         rx="10.327805"
+         ry="10.09336" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
          x="51.968746"
-         y="79.06424">O</tspan></text>
+         y="79.070442"
+         id="text76-9"><tspan
+           sodipodi:role="line"
+           id="tspan907"
+           x="51.968746"
+           y="79.070442">H</tspan></text>
+    </g>
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.264583"
+       style="fill:#ffc155;fill-rule:evenodd;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:1"
        id="path10-2-3"
-       cx="72.692368"
-       cy="68.758186"
+       cx="72.583122"
+       cy="69.903625"
        rx="10.327805"
        ry="10.09336"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="67.297348"
-       y="73.381157"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+       x="67.188103"
+       y="74.526596"
        id="text76-9-8"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07"><tspan
          sodipodi:role="line"
          id="tspan102-7"
-         x="67.297348"
-         y="73.381157">O</tspan></text>
-    <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.264583"
-       id="path10-2-3-8"
-       cx="88.020973"
-       cy="74.441269"
-       rx="10.327805"
-       ry="10.09336"
-       inkscape:export-xdpi="43.07"
-       inkscape:export-ydpi="43.07" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="82.498833"
-       y="79.070442"
-       id="text76-9-0"
-       inkscape:export-xdpi="43.07"
-       inkscape:export-ydpi="43.07"><tspan
-         sodipodi:role="line"
-         id="tspan140"
-         x="82.498833"
-         y="79.070442">D</tspan></text>
+         x="67.188103"
+         y="74.526596">O</tspan></text>
+    <g
+       id="g922">
+      <ellipse
+         style="fill:#ff0000;fill-rule:evenodd;stroke-width:0.264583"
+         id="path10-2-3-8"
+         cx="88.020973"
+         cy="74.441269"
+         rx="10.327805"
+         ry="10.09336"
+         inkscape:export-xdpi="43.07"
+         inkscape:export-ydpi="43.07" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="83.692558"
+         y="79.070442"
+         id="text76-9-0"
+         inkscape:export-xdpi="43.07"
+         inkscape:export-ydpi="43.07"><tspan
+           sodipodi:role="line"
+           id="tspan82"
+           x="83.692558"
+           y="79.070442">T</tspan></text>
+    </g>
     <ellipse
        style="fill:#ff9955;fill-rule:evenodd;stroke-width:0.264583"
        id="path10-20"
@@ -425,8 +410,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.0412172"
        id="path10-3"
-       cx="34.516548"
-       cy="57.689659"
+       cx="47.128155"
+       cy="59.182549"
        rx="1.6088856"
        ry="1.5723634"
        inkscape:export-xdpi="43.07"
@@ -434,8 +419,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.0233077"
        id="path10-3-7"
-       cx="31.7621"
-       cy="60.062183"
+       cx="45.206169"
+       cy="62.283112"
        rx="0.90979898"
        ry="0.88914621"
        inkscape:export-xdpi="43.07"
@@ -443,8 +428,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.0109719"
        id="path10-3-7-4"
-       cx="30.635746"
-       cy="62.243603"
+       cx="45.602276"
+       cy="64.325485"
        rx="0.42828104"
        ry="0.4185589"
        inkscape:export-xdpi="43.07"
@@ -452,8 +437,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.0233077"
        id="path10-3-7-3"
-       cx="38.781708"
-       cy="57.291145"
+       cx="49.963661"
+       cy="57.485493"
        rx="0.90979898"
        ry="0.88914621"
        inkscape:export-xdpi="43.07"
@@ -461,8 +446,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1"
-       cx="33.645821"
-       cy="60.14888"
+       cx="46.736252"
+       cy="61.666592"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
@@ -470,8 +455,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1-4"
-       cx="32.207581"
-       cy="56.449219"
+       cx="44.370972"
+       cy="56.787533"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
@@ -479,8 +464,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1-1"
-       cx="38.021366"
-       cy="58.507584"
+       cx="49.554268"
+       cy="59.062916"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
@@ -488,8 +473,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1-2"
-       cx="36.684883"
-       cy="55.764378"
+       cx="48.438602"
+       cy="56.760071"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
@@ -497,8 +482,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1-0"
-       cx="37.867188"
-       cy="55.794014"
+       cx="51.759792"
+       cy="57.787613"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
@@ -506,8 +491,8 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1-43"
-       cx="30.956038"
-       cy="66.423729"
+       cx="45.485031"
+       cy="67.195877"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
@@ -515,68 +500,68 @@
     <ellipse
        style="fill:#88aa00;fill-rule:evenodd;stroke-width:0.00608805"
        id="path10-3-7-4-1-14"
-       cx="30.548254"
-       cy="64.368111"
+       cx="45.012936"
+       cy="65.821602"
        rx="0.23764323"
        ry="0.23224863"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.0155126"
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0155126"
        id="path10-2-3-3"
-       cx="64.308456"
-       cy="60.336185"
+       cx="67.763885"
+       cy="59.107655"
        rx="0.60552484"
        ry="0.59177923"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.0105576"
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0105576"
        id="path10-2-3-3-8"
-       cx="63.840527"
-       cy="61.688065"
+       cx="67.295952"
+       cy="60.377716"
        rx="0.41211087"
        ry="0.40275583"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.00654754"
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00654754"
        id="path10-2-3-3-8-1"
-       cx="62.666992"
-       cy="61.506641"
+       cx="66.172707"
+       cy="60.604206"
        rx="0.25558007"
        ry="0.24977833"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.00259926"
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
        id="path10-2-3-3-8-1-7"
-       cx="62.708405"
-       cy="63.231575"
+       cx="65.875221"
+       cy="61.618809"
        rx="0.10146102"
        ry="0.099157833"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.00259926"
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
        id="path10-2-3-3-8-1-7-5"
-       cx="66.412056"
-       cy="59.191631"
+       cx="69.224373"
+       cy="59.34713"
        rx="0.10146102"
        ry="0.099157833"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#ff2a2a;fill-rule:evenodd;stroke-width:0.00259926"
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
        id="path10-2-3-3-8-1-7-5-4"
-       cx="65.283897"
-       cy="59.438408"
+       cx="68.754959"
+       cy="59.926365"
        rx="0.10146102"
        ry="0.099157833"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.0218327"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0218327"
        id="path10-2-3-8-64"
        cx="93.164551"
        cy="63.488037"
@@ -585,7 +570,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.0218327"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0218327"
        id="path10-2-3-8-64-9"
        cx="95.595573"
        cy="83.426918"
@@ -594,7 +579,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.0109009"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0109009"
        id="path10-2-3-8-64-9-5"
        cx="93.924492"
        cy="84.337334"
@@ -603,7 +588,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.0109009"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0109009"
        id="path10-2-3-8-64-9-5-8"
        cx="91.282494"
        cy="63.816689"
@@ -612,7 +597,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0"
        cx="96.261086"
        cy="82.095581"
@@ -621,7 +606,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1"
        cx="99.238571"
        cy="83.144386"
@@ -630,16 +615,16 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#9955ff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1-0"
-       cx="160.71648"
-       cy="57.405518"
+       cx="161.3243"
+       cy="61.793556"
        rx="0.21602541"
        ry="0.21112156"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1-02"
        cx="97.270737"
        cy="83.319595"
@@ -648,7 +633,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1-5"
        cx="93.830162"
        cy="65.108139"
@@ -657,7 +642,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1-9"
        cx="98.259598"
        cy="65.699455"
@@ -666,7 +651,7 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1-8"
        cx="97.739815"
        cy="66.379272"
@@ -675,12 +660,93 @@
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
     <ellipse
-       style="fill:#5599ff;fill-rule:evenodd;stroke-width:0.00553423"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00553423"
        id="path10-2-3-8-64-9-5-8-0-1-4"
        cx="98.601028"
        cy="68.7108"
        rx="0.21602541"
        ry="0.21112156"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
+       id="path10-2-3-3-8-1-7-5-0"
+       cx="70.618896"
+       cy="59.45026"
+       rx="0.10146102"
+       ry="0.099157833"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
+       id="path10-2-3-3-8-1-7-5-3"
+       cx="69.986473"
+       cy="59.37841"
+       rx="0.10146102"
+       ry="0.099157833"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0155126"
+       id="path10-2-3-3-6"
+       cx="63.955856"
+       cy="77.145744"
+       rx="0.60552484"
+       ry="0.59177923"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.0105576"
+       id="path10-2-3-3-8-10"
+       cx="64.954727"
+       cy="78.028603"
+       rx="0.41211087"
+       ry="0.40275583"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00654754"
+       id="path10-2-3-3-8-1-6"
+       cx="63.558136"
+       cy="76.020081"
+       rx="0.25558007"
+       ry="0.24977833"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
+       id="path10-2-3-3-8-1-7-5-32"
+       cx="62.835575"
+       cy="76.424019"
+       rx="0.10146102"
+       ry="0.099157833"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
+       id="path10-2-3-3-8-1-7-5-4-0"
+       cx="62.63026"
+       cy="76.951996"
+       rx="0.10146102"
+       ry="0.099157833"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
+       id="path10-2-3-3-8-1-7-5-0-6"
+       cx="66.410156"
+       cy="78.884338"
+       rx="0.10146102"
+       ry="0.099157833"
+       inkscape:export-xdpi="43.07"
+       inkscape:export-ydpi="43.07" />
+    <ellipse
+       style="fill:#ffc155;fill-opacity:1;fill-rule:evenodd;stroke-width:0.00259926"
+       id="path10-2-3-3-8-1-7-5-3-1"
+       cx="65.821304"
+       cy="78.201866"
+       rx="0.10146102"
+       ry="0.099157833"
        inkscape:export-xdpi="43.07"
        inkscape:export-ydpi="43.07" />
   </g>
