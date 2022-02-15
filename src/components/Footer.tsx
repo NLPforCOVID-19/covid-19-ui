@@ -43,6 +43,11 @@ export const Footer = () => {
             <a href="https://mt-auto-minhon-mlt.ucri.jgn-x.jp" className="text-muted">
               みんなの自動翻訳 (NICT).
             </a>
+            Supported by{' '}
+            <a href="https://ischools.org">
+              <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/ischools_logo.png`} />
+            </a>{' '}
+            COVID-19 Communications Project.
           </Col>
         </Row>
         <Row className="mt-2">
