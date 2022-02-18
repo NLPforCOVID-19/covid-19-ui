@@ -41,7 +41,7 @@ export const Footer = () => {
             </a>
             . Powered by{' '}
             <a href="https://mt-auto-minhon-mlt.ucri.jgn-x.jp" className="text-muted">
-              みんなの自動翻訳 (NICT).
+              みんなの自動翻訳 (NICT). &nbsp;
             </a>
             Supported by{' '}
             <a href="https://ischools.org">
